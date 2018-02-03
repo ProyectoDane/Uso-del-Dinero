@@ -43,7 +43,7 @@ captures/
 # Keystore files
 *.jks
 
-# Android Studio 3 Default
+# Android Studio Default
 .gradle
 /local.properties
 /.idea/workspace.xml
