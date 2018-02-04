@@ -64,5 +64,4 @@ freeline/
 freeline_project_description.json
 
 # Temp files
-.gitignore~
-Dockerfile~
+*~
