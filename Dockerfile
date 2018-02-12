@@ -44,14 +44,16 @@ RUN dpkg --add-architecture i386 \
     && apt-get update \
     && apt-get install -y libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
 
-# TODO: Usar si hace falta
 # Copio los directorios del repositorio
-# COPY ./ /home
+COPY ./ /home
 
-# TODO: Cambiar al directorio adecuado
-# Defino el directorio para correr
-# WORKDIR /home
+# Inicio el build gradle
+RUN cd /home \
+    && ./gradlew clean \
+    && ./gradlew assembleRelease
+
+# Defino el directorio de trabajo
+WORKDIR /home
 
 # Defino el comando estándar
 CMD ["bash"]
-
