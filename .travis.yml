@@ -1,0 +1,35 @@
+###########################################
+##  .travis.yml para el build de la app  ##
+##  Basado en Android SDK Tools 26.0.2   ##
+###########################################
+
+# Uso Android como plataforma
+language: android
+
+# Configuracion Android
+android:
+  # Agrego los componentes de Android ("tools" se repite para tener la version mas nueva de Android SDK tools)
+  components:
+    - tools
+    - platform-tools
+    - tools
+
+    # Version de BuildTools usadas en el proyecto
+    - build-tools-26.0.2
+
+    # Version SDK usada para compilar el proyecto
+    - android-26
+
+# Comando para correr el build gradle
+script: ./gradlew assembleRelease
+
+# Solo realizo build sobre los branches elegidos
+branches:
+  only:
+    - master
+    - develop
+
+# Notifico a Slack los informes de Travis CI
+notifications:
+#  slack: dane-usodeldinero:DQtYNj7eZzusZLfSgXB9ddrU
+
