@@ -28,7 +28,7 @@ script: ./gradlew assembleRelease
 branches:
   only:
     - master
-    - develop
+#    - develop
 
 # Notifico a Slack los informes de Travis CI
 notifications:
