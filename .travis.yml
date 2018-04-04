@@ -32,5 +32,5 @@ branches:
 
 # Notifico a Slack los informes de Travis CI
 notifications:
-#  slack: dane-usodeldinero:DQtYNj7eZzusZLfSgXB9ddrU
+   slack: dane-usodeldinero:nFFvyuNO6BPjM5YK95miXz2c
 
