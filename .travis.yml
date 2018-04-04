@@ -1,6 +1,6 @@
 ###########################################
 ##  .travis.yml para el build de la app  ##
-##  Basado en Android SDK Tools 26.0.2   ##
+##  Basado en Android SDK Tools 27.0.3   ##
 ###########################################
 
 # Uso Android como plataforma
@@ -16,6 +16,7 @@ android:
 
     # Version de BuildTools usadas en el proyecto
     - build-tools-26.0.2
+    - build-tools-27.0.3
 
     # Version SDK usada para compilar el proyecto
     - android-26
