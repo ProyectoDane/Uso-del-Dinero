@@ -7,12 +7,28 @@
     tools:context="proyectodane.usodeldinero.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¡Hola Mundo!"
+        android:layout_width="553dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="76dp"
+        android:text="@string/dinero"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/dinero" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="392dp"
+        android:layout_height="96dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginStart="284dp"
+        android:onClick="testMessage"
+        android:text="@string/comprar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
