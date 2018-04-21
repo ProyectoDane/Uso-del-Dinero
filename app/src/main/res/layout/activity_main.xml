@@ -7,6 +7,7 @@
     tools:context="proyectodane.usodeldinero.MainActivity">
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="553dp"
         android:layout_height="59dp"
         android:layout_marginStart="204dp"
@@ -24,11 +25,24 @@
         android:layout_height="96dp"
         android:layout_marginBottom="100dp"
         android:layout_marginStart="284dp"
-        android:onClick="testMessage"
+        android:onClick="sendMessage"
         android:text="@string/comprar"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="553dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="176dp"
+        android:ems="10"
+        android:hint="@string/dinero"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
