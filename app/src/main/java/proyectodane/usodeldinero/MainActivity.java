@@ -16,10 +16,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    /** Envía a la pantalla de compra al presionar el botón */
-    public void sendToPurchase(View view) {
-       // Intent intent = new Intent(this, PurchaseActivity.class);
-       // startActivity(intent);
+    /** Envía a la pantalla de ingreso de importe de productos al presionar el botón */
+    public void sendToBasket(View view) {
+        Intent intent = new Intent(this, BasketActivity.class);
+        startActivity(intent);
     }
 
 
