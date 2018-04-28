@@ -7,14 +7,18 @@
     tools:context="proyectodane.usodeldinero.MainActivity">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="553dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="204dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/textView1"
+        android:layout_width="215dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:text="@string/dinero"
         android:textAlignment="center"
         android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/dinero" />
@@ -23,26 +27,33 @@
         android:id="@+id/button"
         android:layout_width="392dp"
         android:layout_height="96dp"
-        android:layout_marginBottom="64dp"
-        android:layout_marginStart="284dp"
-        android:onClick="sendMessage"
+        android:layout_marginBottom="32dp"
+        android:onClick="sendToPurchase"
         android:text="@string/comprar"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="553dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="196dp"
-        android:layout_marginTop="96dp"
-        android:ems="10"
-        android:hint="@string/dinero"
-        android:inputType="textPersonName"
-        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="337dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/pesos_20"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView1"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
