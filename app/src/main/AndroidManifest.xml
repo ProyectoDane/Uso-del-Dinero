@@ -20,10 +20,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".BasketActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape"></activity>
+            android:screenOrientation="userLandscape">
+        </activity>
+
+        <activity
+            android:name=".OrderTotalActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="userLandscape">
+        </activity>
+
+        <activity android:name=".PayPurchaseActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="userLandscape">
+        </activity>
+
     </application>
 
 </manifest>

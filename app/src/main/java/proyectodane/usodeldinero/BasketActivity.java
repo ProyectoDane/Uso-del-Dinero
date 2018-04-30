@@ -59,9 +59,9 @@ public class BasketActivity extends AppCompatActivity {
 
     /** Envía a la pantalla de confirmación de compra */
     public void sendToOrderTotal(View view) {
-        /*Intent intent = new Intent(this, OrderTotalActivity.class);
-        intent.putExtra(getString(R.string.tag_total_value), d_total);
-        startActivity(intent);*/
+        Intent intent = new Intent(this, OrderTotalActivity.class);
+        intent.putExtra(getString(R.string.tag_total_value), String.valueOf(d_total));
+        startActivity(intent);
     }
 
 }
