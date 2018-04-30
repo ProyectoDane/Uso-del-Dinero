@@ -59,8 +59,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="521dp"
-        android:layout_height="143dp"
+        android:layout_width="515dp"
+        android:layout_height="126dp"
         android:contentDescription="@string/pesos_20"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"

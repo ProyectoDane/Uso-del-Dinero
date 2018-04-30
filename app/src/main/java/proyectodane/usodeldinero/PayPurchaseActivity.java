@@ -17,7 +17,7 @@ public class PayPurchaseActivity extends AppCompatActivity {
         // Obtengo el intent que inició el activity y extraigo el valor del total
         Intent intent = getIntent();
         st_total = intent.getStringExtra(getString(R.string.tag_total_value));
-
+        // TODO: Luego se usa el total para calcular el vuelto que debo recibir
     }
 
     /** Envía a la pantalla principal */
