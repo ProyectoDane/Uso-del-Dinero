@@ -1,7 +1,21 @@
 <resources>
     <string name="app_name">Uso del Dinero</string>
-    <string name="dinero">DINERO:</string>
-    <string name="comprar">COMPRAR</string>
+    <string name="empty_string"></string>
+
+    <string name="tag_total_value">valor_total</string>
+
+    <string name="saved_money">DINERO AHORRADO: </string>
+    <string name="buy">COMPRAR</string>
     <string name="pesos_20">$20,00</string>
+    <string name="enter_value">INGRESAR PRECIO</string>
+    <string name="add_product">AGREGAR</string>
+    <string name="total_value">VALOR TOTAL: $</string>
+    <string name="total_value_zero">VALOR TOTAL: $0.0</string>
+    <string name="cancel">CANCELAR</string>
+    <string name="pay">PAGAR</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>
