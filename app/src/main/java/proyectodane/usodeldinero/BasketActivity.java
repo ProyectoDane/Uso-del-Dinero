@@ -52,13 +52,12 @@ public class BasketActivity extends AppCompatActivity {
         textView.setText(st_total);
 
         // Blanquea el valor a ingresar en la vista
-        TextView editText = findViewById(R.id.editText);
-        editText.setText(getString(R.string.empty_string));
+        productValue.setText(getString(R.string.empty_string));
 
     }
 
 
-    /** Envía a la pantalla principal */
+    /** Envía a la pantalla de confirmación de compra */
     public void sendToOrderTotal(View view) {
         /*Intent intent = new Intent(this, OrderTotalActivity.class);
         intent.putExtra(getString(R.string.tag_total_value), d_total);
