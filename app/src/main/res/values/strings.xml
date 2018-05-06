@@ -20,6 +20,11 @@
     <string name="payment_of_the_purchase">PAGO DE LA COMPRA</string>
     <string name="finish_purchase">TERMINAR COMPRA</string>
 
+
+
+    <string name="im_an_image_no"> =D  Soy la imagen Nº </string>
+    <string name="index">Índice</string>
+
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
