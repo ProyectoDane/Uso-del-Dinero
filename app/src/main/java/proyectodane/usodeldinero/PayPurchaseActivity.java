@@ -1,14 +1,16 @@
 package proyectodane.usodeldinero;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class PayPurchaseActivity extends AppCompatActivity {
-
 
     /**
      * Valor total de la compra
@@ -26,6 +28,13 @@ public class PayPurchaseActivity extends AppCompatActivity {
      */
     private PagerAdapter mPagerAdapter;
 
+    /**
+     * Un LinearLayout que representa la fila de puntos la cual indica la posición relativa de
+     * la imagen y la cantidad total de imágenes del ViewPager.
+     */
+    LinearLayout sliderDotsPanel;
+    private int dotsCount;
+    private ImageView[] dots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,59 @@ public class PayPurchaseActivity extends AppCompatActivity {
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+
+        // Instancia un LinearLayout, para representar los puntos debajo de las imágenes
+        sliderDotsPanel = (LinearLayout) findViewById(R.id.SliderDots);
+
+        // Setea la cantidad de puntos y el arreglo de ImageView para cada uno de ellos
+        dotsCount = mPagerAdapter.getCount();
+        dots = new ImageView[dotsCount];
+
+        // Carga la imagen para cada punto en el estado inicial
+        for(int i = 0; i < dotsCount; i++){
+
+            // Instancia el ImageView y setea la imagen
+            dots[i] = new ImageView(this);
+            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
+
+            // Prepara los parámetros de la imagen
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(8, 0, 8, 0);
+
+            // Setea los parámetros de la imagen
+            sliderDotsPanel.addView(dots[i], params);
+        }
+
+        // En el estado inicial, el primer punto será el seleccionado. Seteo la imagen.
+        dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+
+        // Agrego un listener que será invocado cuando la imagen cambie y actualizará las imágenes de los puntos
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                /* "This method will be invoked when the current page is scrolled, either as part of a
+                programmatically initiated smooth scroll or a user initiated touch scroll." */
+            }
+
+            @Override  // Cuando una nueva imagen es seleccionada, actualizo las imágenes de los puntos
+            public void onPageSelected(int position) {
+
+                // Actualizo las imágenes de los puntos inactivos
+                for(int i = 0; i< dotsCount; i++){
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
+                }
+
+                // Actualizo la imagen del punto activo
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                /* "Called when the scroll state changes" */
+            }
+        });
 
     }
 
