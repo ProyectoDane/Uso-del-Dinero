@@ -123,6 +123,7 @@ public class PayPurchaseActivity extends AppCompatActivity {
         /*Intent intent = new Intent(this, ControlChangeActivity.class);
         intent.putExtra(getString(R.string.tag_total_value),st_total);
         startActivity(intent);*/
+
     }
 
 
