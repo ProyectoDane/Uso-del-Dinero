@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 public class ScreenSlidePageFragment extends Fragment {
 
@@ -21,11 +21,9 @@ public class ScreenSlidePageFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_screen_slide_page, container, false);
 
-        // TODO: Acá en vez de ser in textView, se cambiaría por una imagen, la cual cambiaria su nombre según diga el bundle
-        // Le cambio los datos al textView según el parámetro recibido en el Bundle
-        View tv = rootView.findViewById(R.id.textView11);
-        String text = getActivity().getResources().getString(R.string.im_an_image_no);
-        ((TextView)tv).setText( text + index);
+        // Le cambio los datos al ImageView según el parámetro recibido en el Bundle
+        View iv = rootView.findViewById(R.id.imageView11);
+        ((ImageView)iv).setBackgroundResource(R.drawable.p20f);
 
         return rootView;
     }
