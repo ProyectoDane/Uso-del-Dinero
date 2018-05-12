@@ -118,14 +118,11 @@ public class PayPurchaseActivity extends AppCompatActivity {
      *  Envía a la pantalla de control de vuelto
      **/
     public void sendToControlChange(View view) {
-        this.sendToMain(view); //TODO: borrar esta línea y descomentar las líneas del final al crear "ControlChangeActivity"
-
-        /*Intent intent = new Intent(this, ControlChangeActivity.class);
+        Intent intent = new Intent(this, ControlChangeActivity.class);
         intent.putExtra(getString(R.string.tag_total_value),st_total);
-        startActivity(intent);*/
+        startActivity(intent);
 
     }
-
 
     @Override
     public void onBackPressed() {
