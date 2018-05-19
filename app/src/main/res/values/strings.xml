@@ -19,10 +19,14 @@
     <string name="pay_purchase">PAGAR COMPRA</string>
     <string name="payment_of_the_purchase">PAGO DE LA COMPRA</string>
     <string name="finish_purchase">TERMINAR COMPRA</string>
+    <string name="change_amount">VUELTO TOTAL: </string>
+    <string name="add_to_change">AGREGAR AL CAMBIO</string>
+    <string name="accept_change">ACEPTAR CAMBIO</string>
 
 
     <string name="im_an_image_no"> =D  Soy la imagen Nº </string>
     <string name="index">Índice</string>
+
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>

@@ -119,9 +119,8 @@ public class PayPurchaseActivity extends AppCompatActivity {
      **/
     public void sendToControlChange(View view) {
         Intent intent = new Intent(this, ControlChangeActivity.class);
-        intent.putExtra(getString(R.string.tag_total_value),st_total);
+        intent.putExtra(getString(R.string.tag_total_value),st_total); // TODO: Enviar el cambio (importe) que debo recibir
         startActivity(intent);
-
     }
 
     @Override
