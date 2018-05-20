@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class ControlChangeActivity extends AppCompatActivity {
 
@@ -16,7 +17,18 @@ public class ControlChangeActivity extends AppCompatActivity {
     // TODO: Abajo aparecen los botones para agregar el billete/moneda que se muestra y otro botón para aceptar el vuelto
     // TODO: Se debe controlar que el vuelto se encuentre OK. Acá se podría habilitar recién ahí el botón de aceptar vuelto...
     // TODO: ... Y también en ese momento deshabilitar el botón de agregar billete
-    // TODO: Ver si se agrega un botón para cancelar todo
+    // TODO: Ver si se agrega un botón para cancelar todo (Ir a la pantalla anterior o poner en 0 el contador de vuelto)
+
+
+    /**
+     * Vuelto total de la compra
+     */
+    String st_total_change;
+
+    /**
+     * Vuelto recibido de la compra
+     */
+    String st_received_change;
 
     /**
      * El widget pager, maneja la animación y permite deslizar horizontalmente para acceder
@@ -41,6 +53,11 @@ public class ControlChangeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_change);
+
+        // Obtengo el intent que inició el activity, extraigo el valor del cambio total e inicio el vuelto recibido en 0
+        Intent intent = getIntent();
+        st_total_change = intent.getStringExtra(getString(R.string.tag_total_change));
+        st_received_change = getString(R.string.value_0);
 
         // Instancia un ViewPager y un PagerAdapter, para deslizar las imágenes
         mPager = (ViewPager) findViewById(R.id.pager_change);
@@ -100,6 +117,11 @@ public class ControlChangeActivity extends AppCompatActivity {
             }
         });
 
+        // Actualizo el texto del importe recibido
+        TextView textView = findViewById(R.id.textView5);
+        st_received_change = getString(R.string.change_amount) + getString(R.string.value_0);
+        textView.setText(st_received_change);
+
     }
 
     /**
@@ -111,11 +133,12 @@ public class ControlChangeActivity extends AppCompatActivity {
     }
 
     /**
-     *  Envía a la pantalla de control de vuelto
+     *  Envía a la pantalla de finalización de la compra
      **/
     public void sendToFinalizePurchase(View view) {
+        // TODO: Implementar en R2
         /*Intent intent = new Intent(this, FinalizePurchaseActivity.class);
-        intent.putExtra(getString(R.string.tag_total_value),st_total); // TODO: Enviar el vuelto, detallando cada billete
+        intent.putExtra(getString(R.string.tag_total_value),st_total);
         startActivity(intent);*/
     }
 
@@ -129,6 +152,13 @@ public class ControlChangeActivity extends AppCompatActivity {
             // Si es otra imagen que no sea la primera uso el "back" para volver atrás una imagen
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
+    }
+
+    public void addToChange(View view){
+        // Actualizo el texto del importe recibido
+        TextView textView = findViewById(R.id.textView5);
+        st_received_change = getString(R.string.change_amount) + getString(R.string.value_10); // TODO: cargar según billete elegido
+        textView.setText(st_received_change);
     }
 
 }

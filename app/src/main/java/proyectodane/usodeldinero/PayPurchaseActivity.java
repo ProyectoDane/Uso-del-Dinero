@@ -18,6 +18,11 @@ public class PayPurchaseActivity extends AppCompatActivity {
     String st_total;
 
     /**
+     * Vuelto total de la compra
+     */
+    String st_change;
+
+    /**
      * El widget pager, maneja la animación y permite deslizar horizontalmente para acceder
      * a las imágenes anteriores y siguientes.
      */
@@ -118,8 +123,10 @@ public class PayPurchaseActivity extends AppCompatActivity {
      *  Envía a la pantalla de control de vuelto
      **/
     public void sendToControlChange(View view) {
+        // TODO: Primero verificar con si el vuelto es 0, ya que en ese caso no hace falta controlar el vuelto
+        st_change = getString(R.string.value_10); // TODO: Reemplazar por la linea que calcula el vuelto
         Intent intent = new Intent(this, ControlChangeActivity.class);
-        intent.putExtra(getString(R.string.tag_total_value),st_total); // TODO: Enviar el cambio (importe) que debo recibir
+        intent.putExtra(getString(R.string.tag_total_change),st_change); // TODO: Enviar el cambio (importe) que debo recibir
         startActivity(intent);
     }
 
@@ -134,5 +141,7 @@ public class PayPurchaseActivity extends AppCompatActivity {
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
     }
+
+    // TODO: Crear acá también sendToFinalizePurchase(), para los casos donde el vuelto es 0
 
 }

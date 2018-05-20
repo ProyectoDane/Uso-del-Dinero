@@ -39,7 +39,7 @@
         <activity android:name=".ControlChangeActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="userLandscape"> </activity>
-        
+
     </application>
 
 </manifest>
