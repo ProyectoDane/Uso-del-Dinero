@@ -9,18 +9,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-public class PayPurchaseActivity extends AppCompatActivity {
+public class ControlChangeActivity extends AppCompatActivity {
 
-    /**
-     * Valor total de la compra
-     */
-    String st_total;
+    // TODO: Pantalla parecida a PayPurchaseActivity, pero aquí muestro una vez, todos los billetes
+    // TODO: Abajo aparecen los botones para agregar el billete/moneda que se muestra y otro botón para aceptar el vuelto
+    // TODO: Se debe controlar que el vuelto se encuentre OK. Acá se podría habilitar recién ahí el botón de aceptar vuelto...
+    // TODO: ... Y también en ese momento deshabilitar el botón de agregar billete
+    // TODO: Ver si se agrega un botón para cancelar todo (Ir a la pantalla anterior o poner en 0 el contador de vuelto)
+
 
     /**
      * Vuelto total de la compra
      */
-    String st_change;
+    String st_total_change;
+
+    /**
+     * Vuelto recibido de la compra
+     */
+    String st_received_change;
 
     /**
      * El widget pager, maneja la animación y permite deslizar horizontalmente para acceder
@@ -44,20 +52,20 @@ public class PayPurchaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pay_purchase);
+        setContentView(R.layout.activity_control_change);
 
-        // Obtengo el intent que inició el activity y extraigo el valor del total
+        // Obtengo el intent que inició el activity, extraigo el valor del cambio total e inicio el vuelto recibido en 0
         Intent intent = getIntent();
-        st_total = intent.getStringExtra(getString(R.string.tag_total_value));
-        // TODO: Luego se usa el total para calcular el vuelto que debo recibir
+        st_total_change = intent.getStringExtra(getString(R.string.tag_total_change));
+        st_received_change = getString(R.string.value_0);
 
         // Instancia un ViewPager y un PagerAdapter, para deslizar las imágenes
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = (ViewPager) findViewById(R.id.pager_change);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
         // Instancia un LinearLayout, para representar los puntos debajo de las imágenes
-        sliderDotsPanel = (LinearLayout) findViewById(R.id.SliderDots);
+        sliderDotsPanel = (LinearLayout) findViewById(R.id.SliderDots_change);
 
         // Setea la cantidad de puntos y el arreglo de ImageView para cada uno de ellos
         dotsCount = mPagerAdapter.getCount();
@@ -109,6 +117,11 @@ public class PayPurchaseActivity extends AppCompatActivity {
             }
         });
 
+        // Actualizo el texto del importe recibido
+        TextView textView = findViewById(R.id.textView5);
+        st_received_change = getString(R.string.change_amount) + getString(R.string.value_0);
+        textView.setText(st_received_change);
+
     }
 
     /**
@@ -120,14 +133,13 @@ public class PayPurchaseActivity extends AppCompatActivity {
     }
 
     /**
-     *  Envía a la pantalla de control de vuelto
+     *  Envía a la pantalla de finalización de la compra
      **/
-    public void sendToControlChange(View view) {
-        // TODO: Primero verificar con si el vuelto es 0, ya que en ese caso no hace falta controlar el vuelto
-        st_change = getString(R.string.value_10); // TODO: Reemplazar por la linea que calcula el vuelto
-        Intent intent = new Intent(this, ControlChangeActivity.class);
-        intent.putExtra(getString(R.string.tag_total_change),st_change); // TODO: Enviar el cambio (importe) que debo recibir
-        startActivity(intent);
+    public void sendToFinalizePurchase(View view) {
+        // TODO: Implementar en R2
+        /*Intent intent = new Intent(this, FinalizePurchaseActivity.class);
+        intent.putExtra(getString(R.string.tag_total_value),st_total);
+        startActivity(intent);*/
     }
 
     @Override
@@ -142,6 +154,11 @@ public class PayPurchaseActivity extends AppCompatActivity {
         }
     }
 
-    // TODO: Crear acá también sendToFinalizePurchase(), para los casos donde el vuelto es 0
+    public void addToChange(View view){
+        // Actualizo el texto del importe recibido
+        TextView textView = findViewById(R.id.textView5);
+        st_received_change = getString(R.string.change_amount) + getString(R.string.value_10); // TODO: cargar según billete elegido
+        textView.setText(st_received_change);
+    }
 
 }

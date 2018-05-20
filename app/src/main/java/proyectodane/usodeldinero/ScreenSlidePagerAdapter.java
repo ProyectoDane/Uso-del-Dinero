@@ -29,7 +29,6 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
     // Entonces creo un vector que tenga los ID que representen cada billete: [p50,p20,p10,p10]
     // Y luego dentro de getItem devuelvo el ID correspondiente según la posición en el vector que se encuentre
 
-
     @Override
     public Fragment getItem(int position) {
 

@@ -3,10 +3,14 @@
     <string name="empty_string"></string>
 
     <string name="tag_total_value">valor_total</string>
+    <string name="tag_total_change">cambio_total</string>
 
-    <string name="saved_money">DINERO AHORRADO: </string>
+    <string name="saved_money">DINERO AHORRADO: $</string>
+    <string name="saved_money_pesos_20">DINERO AHORRADO: $20.00</string>
     <string name="buy">COMPRAR</string>
-    <string name="pesos_20">$20,00</string>
+    <string name="value_0">0.00</string>
+    <string name="value_10">10.00</string>
+    <string name="value_20">20.00</string>
     <string name="enter_value">INGRESAR PRECIO</string>
     <string name="add_product">AGREGAR</string>
     <string name="total_value">VALOR TOTAL: $</string>
@@ -19,12 +23,13 @@
     <string name="pay_purchase">PAGAR COMPRA</string>
     <string name="payment_of_the_purchase">PAGO DE LA COMPRA</string>
     <string name="finish_purchase">TERMINAR COMPRA</string>
-
+    <string name="change_amount">VUELTO TOTAL: $</string>
+    <string name="add_to_change">AGREGAR AL CAMBIO</string>
+    <string name="accept_change">ACEPTAR CAMBIO</string>
 
 
     <string name="im_an_image_no"> =D  Soy la imagen Nº </string>
     <string name="index">Índice</string>
-
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
