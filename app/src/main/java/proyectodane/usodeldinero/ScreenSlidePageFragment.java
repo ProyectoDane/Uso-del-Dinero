@@ -23,7 +23,7 @@ public class ScreenSlidePageFragment extends Fragment {
 
         // Le cambio los datos al ImageView según el parámetro recibido en el Bundle
         View iv = rootView.findViewById(R.id.imageView11);
-        ((ImageView)iv).setBackgroundResource(R.drawable.p20f);
+        ((ImageView)iv).setBackgroundResource(R.drawable.p20f);// TODO: Tomar el valor dado por el bundle
 
         return rootView;
     }

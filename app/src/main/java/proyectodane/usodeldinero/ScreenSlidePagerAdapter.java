@@ -19,15 +19,13 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 
     public ScreenSlidePagerAdapter(FragmentManager fm) {
         super(fm);
+
     }
 
-    // TODO: Tengo que recibir el valor total de la compra y obtener los billetes que tengo en la billetera
+    // TODO: Tengo que recibir el listado (ya calculado) de los billetes/monedas a mostrar
 
-    // TODO: Aquí tengo que calcular el listado de billetes que uso para pagar
-    // Por ejemplo si pago $90, calculo a partir de lo que tengo en la billetera y...
-    // ...obtengo como resultado: $50, $20, $10, $10
-    // Entonces creo un vector que tenga los ID que representen cada billete: [p50,p20,p10,p10]
-    // Y luego dentro de getItem devuelvo el ID correspondiente según la posición en el vector que se encuentre
+    // TODO: Tengo cargar un arraylist con todos los fragmentos (ya creados y con los bundle cargados) que voy a usar.
+    // Luego, cada vez que se llama el getItem() se le brinda el fragment desde ese arrayList
 
     @Override
     public Fragment getItem(int position) {

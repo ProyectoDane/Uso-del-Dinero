@@ -51,6 +51,13 @@ public class PayPurchaseActivity extends AppCompatActivity {
         st_total = intent.getStringExtra(getString(R.string.tag_total_value));
         // TODO: Luego se usa el total para calcular el vuelto que debo recibir
 
+        // TODO: Aquí tengo que calcular el listado de billetes que uso para pagar y su respectivo vuelto
+        // Por ejemplo si pago $90, calculo a partir de lo que tengo en la billetera y...
+        // ...obtengo como resultado: $50, $20, $10, $10
+        // Entonces creo un vector que tenga los ID que representen cada billete: [p50,p20,p10,p10]
+        // Y luego dentro de getItem devuelvo el ID correspondiente según la posición en el vector que se encuentre
+
+
         // Instancia un ViewPager y un PagerAdapter, para deslizar las imágenes
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
