@@ -173,11 +173,26 @@ public class ControlChangeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *  Actualizo el valor del vuelto recibido
+     **/
     public void addToChange(View view){
         // Actualizo el texto del importe recibido
         TextView textView = findViewById(R.id.textView5);
         st_received_change = getString(R.string.change_amount) + getString(R.string.value_10); // TODO: cargar según billete elegido
+
+        // Si el vuelto es el total, lo informo
+        if(changeOK()) st_received_change = st_received_change + " " + getString(R.string.change_OK); // TODO: Se podría inhabilitar el botón de "agregar al vuelto"
+
+        // Muestro el nuevo valor
         textView.setText(st_received_change);
+    }
+
+    /**
+     *  Verifico si el vuelto recibido es igual al vuelto total
+     **/
+    private boolean changeOK(){
+        return true; // TODO: Verificar si el vuelto recibido es igual al vuelto total
     }
 
 
