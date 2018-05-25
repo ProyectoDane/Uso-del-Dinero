@@ -32,6 +32,8 @@
     <string name="add_to_change">AGREGAR AL VUELTO</string>
     <string name="accept_change">ACEPTAR VUELTO</string>
     <string name="change_OK"> - VUELTO CORRECTO</string>
+    <string name="change_received_purchase_finished">VUELTO RECIBIDO - COMPRA FINALIZADA</string>
+    <string name="dont_save_change">NO GUARDAR VUELTO</string>
 
 
     <string name="im_an_image_no"> =D  Soy la imagen Nº </string>

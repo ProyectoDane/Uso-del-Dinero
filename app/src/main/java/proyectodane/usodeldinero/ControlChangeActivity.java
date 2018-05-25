@@ -156,9 +156,9 @@ public class ControlChangeActivity extends AppCompatActivity {
      **/
     public void sendToFinalizePurchase(View view) {
         // TODO: Implementar en R2
-        /*Intent intent = new Intent(this, FinalizePurchaseActivity.class);
-        intent.putExtra(getString(R.string.tag_total_value),st_total);
-        startActivity(intent);*/
+        Intent intent = new Intent(this, FinalizePurchaseActivity.class);
+        intent.putExtra(getString(R.string.tag_total_value),st_received_change);
+        startActivity(intent);
     }
 
     @Override
