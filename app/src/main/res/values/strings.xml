@@ -4,6 +4,11 @@
 
     <string name="tag_total_value">valor_total</string>
     <string name="tag_total_change">cambio_total</string>
+    <string name="tag_money_value_name">nombre_valor_moneda</string>
+    <string name="tag_p10f">p10f</string>
+    <string name="tag_p20f">p20f</string>
+    <string name="tag_drawable">drawable</string>
+
 
     <string name="saved_money">DINERO AHORRADO: $</string>
     <string name="saved_money_pesos_20">DINERO AHORRADO: $20.00</string>

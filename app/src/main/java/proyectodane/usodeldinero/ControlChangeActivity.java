@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ControlChangeActivity extends AppCompatActivity {
 
     // TODO: Pantalla parecida a PayPurchaseActivity, pero aquí muestro una vez, todos los billetes
@@ -49,6 +51,17 @@ public class ControlChangeActivity extends AppCompatActivity {
     private int dotsCount;
     private ImageView[] dots;
 
+    /**
+     * ArrayList con todos los valores de billetes/monedas existentes
+     */
+    private ArrayList<String> moneyValueNames;
+
+    /**
+     * ArrayList con todos los Fragment instanciados, de billetes/monedas existentes
+     */
+    private ArrayList<ScreenSlidePageFragment> fragments;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +72,15 @@ public class ControlChangeActivity extends AppCompatActivity {
         st_total_change = intent.getStringExtra(getString(R.string.tag_total_change));
         st_received_change = getString(R.string.value_0);
 
+        // Calculo todos los valores a usar para pagar
+        moneyValueNames = calculateMoneyValueNames();
+
+        // Cargo todos los Fragment que alimentarán al PagerAdapter
+        fragments = buildFragments();
+
         // Instancia un ViewPager y un PagerAdapter, para deslizar las imágenes
         mPager = (ViewPager) findViewById(R.id.pager_change);
-        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(),fragments);
         mPager.setAdapter(mPagerAdapter);
 
         // Instancia un LinearLayout, para representar los puntos debajo de las imágenes
@@ -160,5 +179,48 @@ public class ControlChangeActivity extends AppCompatActivity {
         st_received_change = getString(R.string.change_amount) + getString(R.string.value_10); // TODO: cargar según billete elegido
         textView.setText(st_received_change);
     }
+
+
+    /**
+     * Creo la lista de valores a partir de todos billetes/monedas existentes
+     * */
+    private ArrayList<String> calculateMoneyValueNames(){
+
+        // Instancio la lista de valores
+        ArrayList<String> valueNames = new ArrayList<String>();
+
+        // TODO: Aquí tengo que cargar todos los billetes y monedas existentes
+        // Cargo la lista de valores
+        valueNames.add(getString(R.string.tag_p10f));
+        valueNames.add(getString(R.string.tag_p10f));
+
+        return valueNames;
+    }
+
+
+    /**
+     * Creo la lista de Fragment a partir de todos los valores de billetes/monedas de moneyValueNames
+     * */
+    private ArrayList<ScreenSlidePageFragment> buildFragments() {
+
+        // Instancio la lista de Fragment
+        ArrayList<ScreenSlidePageFragment> frags = new ArrayList<ScreenSlidePageFragment>();
+
+        // Cargo la lista de Fragment
+        for(int i = 0; i<moneyValueNames.size(); i++) {
+
+            // Instancio el Fragment
+            ScreenSlidePageFragment frag = new ScreenSlidePageFragment();
+
+            // Creo un bundle para pasarle el ID del billete/moneda como argumento
+            Bundle args = new Bundle();
+            args.putString(getString(R.string.tag_money_value_name),moneyValueNames.get(i));
+            frag.setArguments(args);
+            frags.add(frag);
+        }
+
+        return frags;
+    }
+
 
 }

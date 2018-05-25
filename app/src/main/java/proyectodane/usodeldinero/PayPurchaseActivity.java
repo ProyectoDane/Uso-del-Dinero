@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+
 public class PayPurchaseActivity extends AppCompatActivity {
 
     /**
@@ -41,6 +43,17 @@ public class PayPurchaseActivity extends AppCompatActivity {
     private int dotsCount;
     private ImageView[] dots;
 
+    /**
+     * ArrayList con todos los valores de billetes/monedas calculados para dar el pago
+     */
+    private ArrayList<String> moneyValueNames;
+
+    /**
+     * ArrayList con todos los Fragment instanciados, de billetes/monedas calculados para dar el pago
+     */
+    private ArrayList<ScreenSlidePageFragment> fragments;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,16 +64,15 @@ public class PayPurchaseActivity extends AppCompatActivity {
         st_total = intent.getStringExtra(getString(R.string.tag_total_value));
         // TODO: Luego se usa el total para calcular el vuelto que debo recibir
 
-        // TODO: Aquí tengo que calcular el listado de billetes que uso para pagar y su respectivo vuelto
-        // Por ejemplo si pago $90, calculo a partir de lo que tengo en la billetera y...
-        // ...obtengo como resultado: $50, $20, $10, $10
-        // Entonces creo un vector que tenga los ID que representen cada billete: [p50,p20,p10,p10]
-        // Y luego dentro de getItem devuelvo el ID correspondiente según la posición en el vector que se encuentre
+        // Calculo todos los valores a usar para pagar
+        moneyValueNames = calculateMoneyValueNames();
 
+        // Cargo todos los Fragment que alimentarán al PagerAdapter
+        fragments = buildFragments();
 
         // Instancia un ViewPager y un PagerAdapter, para deslizar las imágenes
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(),fragments);
         mPager.setAdapter(mPagerAdapter);
 
         // Instancia un LinearLayout, para representar los puntos debajo de las imágenes
@@ -148,6 +160,53 @@ public class PayPurchaseActivity extends AppCompatActivity {
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
     }
+
+
+    /**
+     * Creo la lista de valores a usar para el pago, a partir de todos billetes/monedas guardados en la billetera
+     * */
+    private ArrayList<String> calculateMoneyValueNames(){
+
+        // Instancio la lista de valores
+        ArrayList<String> valueNames = new ArrayList<String>();
+
+
+        // TODO: Aquí tengo que calcular el listado de billetes que uso para pagar y su respectivo vuelto
+        // TODO: Por ejemplo si pago $90, calculo a partir de lo que tengo en la billetera y...
+        // TODO: ...obtengo como resultado: $50, $20, $10, $10. Entonces creo un vector que tenga los ID que representen cada billete: [p50,p20,p10,p10]
+        // Cargo la lista de valores
+        valueNames.add(getString(R.string.tag_p20f)); // TODO: Reemplazar por implementación definitiva
+        valueNames.add(getString(R.string.tag_p20f));
+
+        return valueNames;
+    }
+
+
+    /**
+     * Creo la lista de Fragment a partir de todos los valores de billetes/monedas de moneyValueNames
+     * */
+    private ArrayList<ScreenSlidePageFragment> buildFragments() {
+
+        // Instancio la lista de Fragment
+        ArrayList<ScreenSlidePageFragment> frags = new ArrayList<ScreenSlidePageFragment>();
+
+        // Cargo la lista de Fragment
+        for(int i = 0; i<moneyValueNames.size(); i++) {
+
+            // Instancio el Fragment
+            ScreenSlidePageFragment frag = new ScreenSlidePageFragment();
+
+            // Creo un bundle para pasarle el ID del billete/moneda como argumento
+            Bundle args = new Bundle();
+            args.putString(getString(R.string.tag_money_value_name),moneyValueNames.get(i));
+            frag.setArguments(args);
+            frags.add(frag);
+        }
+
+        return frags;
+    }
+
+
 
     // TODO: Crear acá también sendToFinalizePurchase(), para los casos donde el vuelto es 0
 
