@@ -16,10 +16,6 @@ import java.util.ArrayList;
 
 public class ControlChangeActivity extends AppCompatActivity {
 
-    // TODO: Pantalla parecida a PayPurchaseActivity, pero aquí muestro una vez, todos los billetes
-    // TODO: Abajo aparecen los botones para agregar el billete/moneda que se muestra y otro botón para aceptar el vuelto
-    // TODO: Se debe controlar que el vuelto se encuentre OK. Acá se podría habilitar recién ahí el botón de aceptar vuelto...
-    // TODO: ... Y también en ese momento deshabilitar el botón de agregar billete
     // TODO: Ver si se agrega un botón para cancelar todo (Ir a la pantalla anterior o poner en 0 el contador de vuelto)
 
     /**
@@ -155,7 +151,7 @@ public class ControlChangeActivity extends AppCompatActivity {
      *  Envía a la pantalla de finalización de la compra
      **/
     public void sendToFinalizePurchase(View view) {
-        // TODO: Implementar en R2
+        // TODO: Implementar en R3. Se debe mandar un listado con todos los billetes recibidos (cambio)
         Intent intent = new Intent(this, FinalizePurchaseActivity.class);
         intent.putExtra(getString(R.string.tag_total_value),st_received_change);
         startActivity(intent);

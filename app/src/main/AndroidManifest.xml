@@ -20,11 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".BasketActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="userLandscape">
-
         </activity>
 
         <activity
