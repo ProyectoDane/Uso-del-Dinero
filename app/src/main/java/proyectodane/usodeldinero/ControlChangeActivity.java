@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,7 +21,6 @@ public class ControlChangeActivity extends AppCompatActivity {
     // TODO: Se debe controlar que el vuelto se encuentre OK. Acá se podría habilitar recién ahí el botón de aceptar vuelto...
     // TODO: ... Y también en ese momento deshabilitar el botón de agregar billete
     // TODO: Ver si se agrega un botón para cancelar todo (Ir a la pantalla anterior o poner en 0 el contador de vuelto)
-
 
     /**
      * Vuelto total de la compra
@@ -156,9 +156,9 @@ public class ControlChangeActivity extends AppCompatActivity {
      **/
     public void sendToFinalizePurchase(View view) {
         // TODO: Implementar en R2
-        /*Intent intent = new Intent(this, FinalizePurchaseActivity.class);
-        intent.putExtra(getString(R.string.tag_total_value),st_total);
-        startActivity(intent);*/
+        Intent intent = new Intent(this, FinalizePurchaseActivity.class);
+        intent.putExtra(getString(R.string.tag_total_value),st_received_change);
+        startActivity(intent);
     }
 
     @Override
@@ -192,7 +192,13 @@ public class ControlChangeActivity extends AppCompatActivity {
      *  Verifico si el vuelto recibido es igual al vuelto total
      **/
     private boolean changeOK(){
-        return true; // TODO: Verificar si el vuelto recibido es igual al vuelto total
+
+        // TODO: Verificar si el vuelto recibido es igual al vuelto total
+
+        // Si el total es mayor a cero, habilito el botón para pagar
+        Button acceptChangeButton = (Button) findViewById(R.id.button10);
+        if (true) acceptChangeButton.setEnabled(true);
+        return true;
     }
 
 

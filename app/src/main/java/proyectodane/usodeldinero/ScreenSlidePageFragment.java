@@ -15,8 +15,7 @@ public class ScreenSlidePageFragment extends Fragment {
 
         // Obtengo el valor pasado a través de Bundle
         Bundle args = getArguments();
-        // TODO: Ver nombre definitivo del valor por defecto, luego quitar esta línea
-        String st_money_value_name = args.getString(getString(R.string.tag_money_value_name), getString(R.string.tag_p20f));
+        String st_money_value_name = args.getString(getString(R.string.tag_money_value_name), getString(R.string.tag_question_mark));
 
         // Asigno el View
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page, container, false);

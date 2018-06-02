@@ -4,18 +4,21 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class BasketActivity extends AppCompatActivity {
 
     Double d_total;
+    EditText productValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
         d_total = 0.0;
+        productValue = (EditText) findViewById(R.id.editText); // Obtiene el ID del EditText del valor ingresado
     }
 
 
@@ -23,6 +26,7 @@ public class BasketActivity extends AppCompatActivity {
     public void sendToMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+
     }
 
     /** Suma el valor ingresado al total */
@@ -32,13 +36,14 @@ public class BasketActivity extends AppCompatActivity {
         Double d_value;
 
         // Obtiene el valor ingresado, comprobando el formato válido
-        EditText productValue = (EditText) findViewById(R.id.editText);
-            try {
-                d_value = Double.valueOf(productValue.getText().toString());
-            } catch (NumberFormatException e) {
-                d_value = 0.0;
-            }
+        try {
+            d_value = Double.valueOf(productValue.getText().toString());
+        } catch (NumberFormatException e) {
+            d_value = 0.0;
+        }
 
+        // TODO: Ver el redondeo o truncamiento que se hace al ingresar importes. Ver si limito la cantidad de dígitos enteros
+        // TODO: Ideal -> Solo permitir hasta 2 decimales, y una cantidad máxima de N enteros.
         // Suma el valor al total anterior, redondeando para obtener hasta 2 decimales
         d_value = Math.floor(d_value * 100) / 100;
         d_total = d_total + d_value;
@@ -54,14 +59,23 @@ public class BasketActivity extends AppCompatActivity {
         // Blanquea el valor a ingresar en la vista
         productValue.setText(getString(R.string.empty_string));
 
+        // Si el total es mayor a cero, habilito el botón para pagar
+        Button payButton = (Button) findViewById(R.id.button3);
+        if (d_total > 0.0) payButton.setEnabled(true);
+
     }
 
 
-    /** Envía a la pantalla de confirmación de compra */
+    /** Envía a la pantalla de confirmación de compra
+     * */
     public void sendToOrderTotal(View view) {
+        // Blanquea el valor a ingresar al irse de la vista, en caso de que haya quedado un valor a ingresar
+        if (!(productValue.getText().toString().isEmpty())) productValue.setText(getString(R.string.empty_string));
+
         Intent intent = new Intent(this, OrderTotalActivity.class);
         intent.putExtra(getString(R.string.tag_total_value), String.valueOf(d_total));
         startActivity(intent);
     }
+
 
 }

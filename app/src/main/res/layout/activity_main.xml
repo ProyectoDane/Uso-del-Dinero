@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:onClick="sendToBasket"
-        android:text="@string/buy"
+        android:text="@string/start_purchase"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textSize="36sp"
         android:textStyle="bold"

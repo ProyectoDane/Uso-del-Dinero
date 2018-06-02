@@ -44,7 +44,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:onClick="sendToControlChange"
-        android:text="@string/finish_purchase"
+        android:text="@string/purchase_payed"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
