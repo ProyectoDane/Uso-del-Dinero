@@ -193,11 +193,15 @@ public class ControlChangeActivity extends AppCompatActivity {
      **/
     private boolean changeOK(){
 
-        // TODO: Verificar si el vuelto recibido es igual al vuelto total
+        // TODO: Implementar verificando si el vuelto recibido es igual (o mayor) al vuelto total
 
         // Si el total es mayor a cero, habilito el botón para pagar
         Button acceptChangeButton = (Button) findViewById(R.id.button10);
-        if (true) acceptChangeButton.setEnabled(true);
+        Button addToChangeButton = (Button) findViewById(R.id.button9);
+        if (true){
+            acceptChangeButton.setEnabled(true);
+            addToChangeButton.setEnabled(false);
+        }
         return true;
     }
 
