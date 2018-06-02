@@ -19,7 +19,6 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
      */
     private ArrayList<ScreenSlidePageFragment> fragments;
 
-    // TODO: Tengo que recibir el listado (ya calculado) de los billetes/monedas a mostrar
     public ScreenSlidePagerAdapter(FragmentManager fm,ArrayList<ScreenSlidePageFragment> frags) {
         super(fm);
         fragments = frags;

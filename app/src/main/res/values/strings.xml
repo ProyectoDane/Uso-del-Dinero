@@ -8,11 +8,13 @@
     <string name="tag_p10f">p10f</string>
     <string name="tag_p20f">p20f</string>
     <string name="tag_drawable">drawable</string>
+    <string name="tag_question_mark">question_mark</string>
 
 
     <string name="saved_money">DINERO AHORRADO: $</string>
     <string name="saved_money_pesos_20">DINERO AHORRADO: $20.00</string>
     <string name="buy">COMPRAR</string>
+    <string name="start_purchase">INICIAR COMPRA</string>
     <string name="value_0">0.00</string>
     <string name="value_10">10.00</string>
     <string name="value_20">20.00</string>
@@ -26,8 +28,9 @@
     <string name="total_purchase_pesos_20">COMPRA TOTAL: $20.00</string>
     <string name="cancel_purchase">CANCELAR COMPRA</string>
     <string name="pay_purchase">PAGAR COMPRA</string>
+    <string name="purchase_payed">COMPRA PAGADA</string>
     <string name="payment_of_the_purchase">PAGO DE LA COMPRA</string>
-    <string name="finish_purchase">TERMINAR COMPRA</string>
+    <string name="confirm_purchase">CONFIRMAR COMPRA</string>
     <string name="change_amount">VUELTO TOTAL: $</string>
     <string name="add_to_change">AGREGAR AL VUELTO</string>
     <string name="accept_change">ACEPTAR VUELTO</string>
