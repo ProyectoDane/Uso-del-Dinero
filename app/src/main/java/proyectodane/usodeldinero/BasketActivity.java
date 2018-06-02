@@ -94,7 +94,7 @@ public class BasketActivity extends AppCompatActivity {
     /** Envía a la pantalla de confirmación de compra
      * */
     public void sendToOrderTotal(View view) {
-        // Blanquea el valor a ingresar al irse de la vista, en caso de que haya quedado un valor a ingresar
+        // En caso de que haya quedado un valor a ingresar, blanquea el valor al irse de la vista
         if (!(et_productValue.getText().toString().isEmpty())) et_productValue.setText(getString(R.string.empty_string));
 
         Intent intent = new Intent(this, OrderTotalActivity.class);

@@ -37,6 +37,7 @@
     <string name="change_OK"> - VUELTO CORRECTO</string>
     <string name="change_received_purchase_finished">VUELTO RECIBIDO - COMPRA FINALIZADA</string>
     <string name="dont_save_change">NO GUARDAR VUELTO</string>
+    <string name="save_change">GUARDAR VUELTO</string>
     <string name="insufficient_funds">DINERO INSUFICIENTE PARA AGREGAR ESTE PRODUCTO</string>
 
 

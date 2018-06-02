@@ -17,7 +17,7 @@ public class PayPurchaseActivity extends AppCompatActivity {
     /**
      * Valor total de la compra
      */
-    String st_total;
+    String st_totalPurchase;
 
     /**
      * Vuelto total de la compra
@@ -61,7 +61,7 @@ public class PayPurchaseActivity extends AppCompatActivity {
 
         // Obtengo el intent que inició el activity y extraigo el valor del total
         Intent intent = getIntent();
-        st_total = intent.getStringExtra(getString(R.string.tag_total_value));
+        st_totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
         // TODO: Luego se usa el total para calcular el vuelto que debo recibir
 
         // Calculo todos los valores a usar para pagar
@@ -143,6 +143,8 @@ public class PayPurchaseActivity extends AppCompatActivity {
      **/
     public void sendToControlChange(View view) {
         // TODO: Primero verificar con si el vuelto es 0, ya que en ese caso no hace falta controlar el vuelto
+        // TODO: Crear acá también un sendToFinalizePurchase(), para los casos donde el vuelto es 0 (Con un listado de billetes vacío)
+
         st_change = getString(R.string.value_10); // TODO: Reemplazar por la linea que calcula el vuelto
         Intent intent = new Intent(this, ControlChangeActivity.class);
         intent.putExtra(getString(R.string.tag_total_change),st_change); // TODO: Enviar el cambio (importe) que debo recibir
@@ -205,9 +207,5 @@ public class PayPurchaseActivity extends AppCompatActivity {
 
         return frags;
     }
-
-
-
-    // TODO: Crear acá también sendToFinalizePurchase(), para los casos donde el vuelto es 0
 
 }

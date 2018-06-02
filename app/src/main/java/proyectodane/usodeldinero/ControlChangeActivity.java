@@ -151,7 +151,7 @@ public class ControlChangeActivity extends AppCompatActivity {
      *  Envía a la pantalla de finalización de la compra
      **/
     public void sendToFinalizePurchase(View view) {
-        // TODO: Implementar en R2
+        // TODO: Implementar en R3. Se debe mandar un listado con todos los billetes recibidos (cambio)
         Intent intent = new Intent(this, FinalizePurchaseActivity.class);
         intent.putExtra(getString(R.string.tag_total_value),st_received_change);
         startActivity(intent);
