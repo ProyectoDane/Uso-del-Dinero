@@ -7,22 +7,30 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PayPurchaseActivity extends AppCompatActivity {
+public class ControlChangeActivity extends AppCompatActivity {
 
-    /**
-     * Valor total de la compra
-     */
-    String st_total;
+    // TODO: Pantalla parecida a PayPurchaseActivity, pero aquí muestro una vez, todos los billetes
+    // TODO: Abajo aparecen los botones para agregar el billete/moneda que se muestra y otro botón para aceptar el vuelto
+    // TODO: Se debe controlar que el vuelto se encuentre OK. Acá se podría habilitar recién ahí el botón de aceptar vuelto...
+    // TODO: ... Y también en ese momento deshabilitar el botón de agregar billete
+    // TODO: Ver si se agrega un botón para cancelar todo (Ir a la pantalla anterior o poner en 0 el contador de vuelto)
 
     /**
      * Vuelto total de la compra
      */
-    String st_change;
+    String st_total_change;
+
+    /**
+     * Vuelto recibido de la compra
+     */
+    String st_received_change;
 
     /**
      * El widget pager, maneja la animación y permite deslizar horizontalmente para acceder
@@ -44,12 +52,12 @@ public class PayPurchaseActivity extends AppCompatActivity {
     private ImageView[] dots;
 
     /**
-     * ArrayList con todos los valores de billetes/monedas calculados para dar el pago
+     * ArrayList con todos los valores de billetes/monedas existentes
      */
     private ArrayList<String> moneyValueNames;
 
     /**
-     * ArrayList con todos los Fragment instanciados, de billetes/monedas calculados para dar el pago
+     * ArrayList con todos los Fragment instanciados, de billetes/monedas existentes
      */
     private ArrayList<ScreenSlidePageFragment> fragments;
 
@@ -57,12 +65,12 @@ public class PayPurchaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pay_purchase);
+        setContentView(R.layout.activity_control_change);
 
-        // Obtengo el intent que inició el activity y extraigo el valor del total
+        // Obtengo el intent que inició el activity, extraigo el valor del cambio total e inicio el vuelto recibido en 0
         Intent intent = getIntent();
-        st_total = intent.getStringExtra(getString(R.string.tag_total_value));
-        // TODO: Luego se usa el total para calcular el vuelto que debo recibir
+        st_total_change = intent.getStringExtra(getString(R.string.tag_total_change));
+        st_received_change = getString(R.string.value_0);
 
         // Calculo todos los valores a usar para pagar
         moneyValueNames = calculateMoneyValueNames();
@@ -71,12 +79,12 @@ public class PayPurchaseActivity extends AppCompatActivity {
         fragments = buildFragments();
 
         // Instancia un ViewPager y un PagerAdapter, para deslizar las imágenes
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = (ViewPager) findViewById(R.id.pager_change);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(),fragments);
         mPager.setAdapter(mPagerAdapter);
 
         // Instancia un LinearLayout, para representar los puntos debajo de las imágenes
-        sliderDotsPanel = (LinearLayout) findViewById(R.id.SliderDots);
+        sliderDotsPanel = (LinearLayout) findViewById(R.id.SliderDots_change);
 
         // Setea la cantidad de puntos y el arreglo de ImageView para cada uno de ellos
         dotsCount = mPagerAdapter.getCount();
@@ -128,6 +136,11 @@ public class PayPurchaseActivity extends AppCompatActivity {
             }
         });
 
+        // Actualizo el texto del importe recibido
+        TextView textView = findViewById(R.id.textView5);
+        st_received_change = getString(R.string.change_amount) + getString(R.string.value_0);
+        textView.setText(st_received_change);
+
     }
 
     /**
@@ -139,13 +152,12 @@ public class PayPurchaseActivity extends AppCompatActivity {
     }
 
     /**
-     *  Envía a la pantalla de control de vuelto
+     *  Envía a la pantalla de finalización de la compra
      **/
-    public void sendToControlChange(View view) {
-        // TODO: Primero verificar con si el vuelto es 0, ya que en ese caso no hace falta controlar el vuelto
-        st_change = getString(R.string.value_10); // TODO: Reemplazar por la linea que calcula el vuelto
-        Intent intent = new Intent(this, ControlChangeActivity.class);
-        intent.putExtra(getString(R.string.tag_total_change),st_change); // TODO: Enviar el cambio (importe) que debo recibir
+    public void sendToFinalizePurchase(View view) {
+        // TODO: Implementar en R2
+        Intent intent = new Intent(this, FinalizePurchaseActivity.class);
+        intent.putExtra(getString(R.string.tag_total_value),st_received_change);
         startActivity(intent);
     }
 
@@ -161,22 +173,47 @@ public class PayPurchaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *  Actualizo el valor del vuelto recibido
+     **/
+    public void addToChange(View view){
+        // Actualizo el texto del importe recibido
+        TextView textView = findViewById(R.id.textView5);
+        st_received_change = getString(R.string.change_amount) + getString(R.string.value_10); // TODO: cargar según billete elegido
+
+        // Si el vuelto es el total, lo informo
+        if(changeOK()) st_received_change = st_received_change + " " + getString(R.string.change_OK); // TODO: Se podría inhabilitar el botón de "agregar al vuelto"
+
+        // Muestro el nuevo valor
+        textView.setText(st_received_change);
+    }
 
     /**
-     * Creo la lista de valores a usar para el pago, a partir de todos billetes/monedas guardados en la billetera
+     *  Verifico si el vuelto recibido es igual al vuelto total
+     **/
+    private boolean changeOK(){
+
+        // TODO: Verificar si el vuelto recibido es igual al vuelto total
+
+        // Si el total es mayor a cero, habilito el botón para pagar
+        Button acceptChangeButton = (Button) findViewById(R.id.button10);
+        if (true) acceptChangeButton.setEnabled(true);
+        return true;
+    }
+
+
+    /**
+     * Creo la lista de valores a partir de todos billetes/monedas existentes
      * */
     private ArrayList<String> calculateMoneyValueNames(){
 
         // Instancio la lista de valores
         ArrayList<String> valueNames = new ArrayList<String>();
 
-
-        // TODO: Aquí tengo que calcular el listado de billetes que uso para pagar y su respectivo vuelto
-        // TODO: Por ejemplo si pago $90, calculo a partir de lo que tengo en la billetera y...
-        // TODO: ...obtengo como resultado: $50, $20, $10, $10. Entonces creo un vector que tenga los ID que representen cada billete: [p50,p20,p10,p10]
+        // TODO: Aquí tengo que cargar todos los billetes y monedas existentes
         // Cargo la lista de valores
-        valueNames.add(getString(R.string.tag_p20f)); // TODO: Reemplazar por implementación definitiva
-        valueNames.add(getString(R.string.tag_p20f));
+        valueNames.add(getString(R.string.tag_p10f));
+        valueNames.add(getString(R.string.tag_p10f));
 
         return valueNames;
     }
@@ -206,8 +243,5 @@ public class PayPurchaseActivity extends AppCompatActivity {
         return frags;
     }
 
-
-
-    // TODO: Crear acá también sendToFinalizePurchase(), para los casos donde el vuelto es 0
 
 }

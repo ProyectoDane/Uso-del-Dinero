@@ -15,15 +15,17 @@ public class ScreenSlidePageFragment extends Fragment {
 
         // Obtengo el valor pasado a través de Bundle
         Bundle args = getArguments();
-        String index = args.getString("index", "0");
+        String st_money_value_name = args.getString(getString(R.string.tag_money_value_name), getString(R.string.tag_question_mark));
 
         // Asigno el View
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_screen_slide_page, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page, container, false);
 
-        // Le cambio los datos al ImageView según el parámetro recibido en el Bundle
+        // Preparo el ID correspondiente a la imagen que quiero cargar en el ImageView
+        int resId = getResources().getIdentifier(st_money_value_name,getString(R.string.tag_drawable),getActivity().getPackageName());
+
+        // Cambio los datos al ImageView para que cargue la imagen nueva
         View iv = rootView.findViewById(R.id.imageView11);
-        ((ImageView)iv).setBackgroundResource(R.drawable.p20f);
+        ((ImageView)iv).setBackgroundResource(resId);
 
         return rootView;
     }
