@@ -208,4 +208,16 @@ public class PayPurchaseActivity extends AppCompatActivity {
         return frags;
     }
 
+    /**
+     *  Envía a la pantalla de finalización de la compra (para los casos donde el vuelto es nulo)
+     **/
+    public void sendToFinalizePurchase(View view) {
+        // TODO: Implementar en R3. Se debe mandar un listado vacío, ya que el vuelto es nulo
+        Intent intent = new Intent(this, FinalizePurchaseActivity.class);
+        ArrayList<String> al_receivedChange = new ArrayList<String>(); //
+        intent.putStringArrayListExtra(getString(R.string.received_change),al_receivedChange);
+        startActivity(intent);
+    }
+
+
 }
