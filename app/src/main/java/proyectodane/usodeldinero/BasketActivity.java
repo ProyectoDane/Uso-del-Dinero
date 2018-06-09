@@ -55,18 +55,15 @@ public class BasketActivity extends AppCompatActivity {
             d_newValue = 0.0;
         }
 
-        // TODO: Ver el redondeo o truncamiento que se hace al ingresar importes, y si limito la cantidad de dígitos enteros
-        // TODO: Ideal -> Solo permitir hasta 2 decimales, y una cantidad máxima de N enteros.
+        // TODO: Ver si se puede restringir el valor a una cantidad máxima de N enteros.
 
         // Suma el valor al total anterior, redondeando para obtener hasta 2 decimales
         d_newValue = Math.floor(d_newValue * 100) / 100;
         Double d_newTotal = d_total + d_newValue;
         d_newTotal = Math.floor(d_newTotal * 100) / 100;
 
-        // TODO: Calcular si el total en la billetera alcanza para pagar la compra
-        // Si el total en la billetera no alcanza para pagar la compra total,
-        // descarto el producto que se está por agregar y aviso que el dinero es insuficiente.
-        // Caso contrario, agrego el importe al total de la compra
+        // Si el total en la billetera no alcanza para pagar la compra total, descarto el producto que se está por agregar
+        // y aviso que el dinero es insuficiente. Caso contrario, agrego el importe al total de la compra
         if (d_newTotal>d_walletTotal){
             Snackbar.make(findViewById(R.id.myCoordinatorLayout),R.string.insufficient_funds,Snackbar.LENGTH_LONG).show();
         } else {
