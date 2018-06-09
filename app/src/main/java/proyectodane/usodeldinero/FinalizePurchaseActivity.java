@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class FinalizePurchaseActivity extends AppCompatActivity {
 
     /**
-     * Vuelto recibido de la compra
+     * Vuelto recibido de la compra, en forma de listado de String
      */
-    String st_received_change;
+    ArrayList<String> al_receivedChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +20,9 @@ public class FinalizePurchaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finalize_purchase);
 
         // TODO: Implementar en R3. Se debe recibir un listado con todos los billetes recibidos (cambio)
-        // Obtengo el intent que inició el activity, extraigo el valor de los billetes recibidos (cambio)
+        // Obtengo el intent que inició el activity, extraigo el listado de los billetes recibidos (cambio)
         Intent intent = getIntent();
-        st_received_change = intent.getStringExtra(getString(R.string.tag_total_change));
+        al_receivedChange = intent.getStringArrayListExtra(getString(R.string.received_change));
 
         // TODO: Si recibo un listado vacío quiere decir que no tenía que recibir cambio (pago justo)
         // TODO: Entonces debo cambiar el mensaje del textView2 Sacando "Vuelto recibido"...

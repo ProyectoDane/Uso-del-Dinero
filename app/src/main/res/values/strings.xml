@@ -39,6 +39,7 @@
     <string name="dont_save_change">NO GUARDAR VUELTO</string>
     <string name="save_change">GUARDAR VUELTO</string>
     <string name="insufficient_funds">DINERO INSUFICIENTE PARA AGREGAR ESTE PRODUCTO</string>
+    <string name="received_change">VUELTO RECIBIDO</string>
 
 
     <string name="im_an_image_no"> =D  Soy la imagen Nº </string>
