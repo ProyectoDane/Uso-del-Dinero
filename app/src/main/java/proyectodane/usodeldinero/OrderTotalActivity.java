@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 public class OrderTotalActivity extends AppCompatActivity {
 
+    /**
+     * Valor total de la compra
+    */
     String st_total;
 
     @Override
