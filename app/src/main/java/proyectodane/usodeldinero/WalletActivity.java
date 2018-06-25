@@ -7,26 +7,28 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ControlChangeActivity extends AppCompatActivity {
-
-    // TODO: Ver si se agrega un botón para cancelar todo (Ir a la pantalla anterior o poner en 0 el contador de vuelto)
+public class WalletActivity extends AppCompatActivity {
 
     /**
-     * Vuelto total de la compra
+     * Importe total a de la billetera, sin sumar la carga
      */
-    String st_total_change;
+    String st_total_wallet;
 
     /**
-     * Vuelto recibido de la compra
+     * Importe total a cargar
      */
-    String st_received_change;
+    String st_total_load;
+
+    /**
+     * ArrayList con todos los valores de billetes/monedas a cargar en la billetera
+     */
+    private ArrayList<String> loadMoneyValueNames;
 
     /**
      * El widget pager, maneja la animación y permite deslizar horizontalmente para acceder
@@ -61,12 +63,7 @@ public class ControlChangeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_control_change);
-
-        // Obtengo el intent que inició el activity, extraigo el valor del cambio total e inicio el vuelto recibido en 0
-        Intent intent = getIntent();
-        st_total_change = intent.getStringExtra(getString(R.string.tag_total_change));
-        st_received_change = getString(R.string.value_0);
+        setContentView(R.layout.activity_wallet);
 
         // Calculo todos los valores a usar para pagar
         moneyValueNames = calculateMoneyValueNames();
@@ -75,12 +72,12 @@ public class ControlChangeActivity extends AppCompatActivity {
         fragments = buildFragments();
 
         // Instancia un ViewPager y un PagerAdapter, para deslizar las imágenes
-        mPager = (ViewPager) findViewById(R.id.pager_change);
+        mPager = (ViewPager) findViewById(R.id.pager_wallet);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(),fragments);
         mPager.setAdapter(mPagerAdapter);
 
         // Instancia un LinearLayout, para representar los puntos debajo de las imágenes
-        sliderDotsPanel = (LinearLayout) findViewById(R.id.SliderDots_change);
+        sliderDotsPanel = (LinearLayout) findViewById(R.id.SliderDots_wallet);
 
         // Setea la cantidad de puntos y el arreglo de ImageView para cada uno de ellos
         dotsCount = mPagerAdapter.getCount();
@@ -132,11 +129,13 @@ public class ControlChangeActivity extends AppCompatActivity {
             }
         });
 
-        // Actualizo el texto del importe recibido
-        TextView textView = findViewById(R.id.textView5);
-        st_received_change = getString(R.string.change_amount) + getString(R.string.value_0);
-        textView.setText(st_received_change);
+    }
 
+    /**
+     * Cancela la carga en la billetera
+     * */
+    public void cancelLoad(View view) {
+        sendToMain(view);
     }
 
     /**
@@ -145,63 +144,8 @@ public class ControlChangeActivity extends AppCompatActivity {
     public void sendToMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+
     }
-
-    /**
-     *  Envía a la pantalla de finalización de la compra
-     **/
-    public void sendToFinalizePurchase(View view) {
-        // TODO: Implementar en R3. Se debe mandar un listado con todos los billetes recibidos (cambio)
-        Intent intent = new Intent(this, FinalizePurchaseActivity.class);
-        ArrayList<String> al_receivedChange = new ArrayList<String>();
-        intent.putStringArrayListExtra(getString(R.string.received_change),al_receivedChange);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
-            // Si el usuario se encuentra en la primer imagen y presiona el botón "back"
-            // no permito que se vaya a otra pantalla, para evitar el error
-            // de presionar ese botón por equivocación.
-        } else {
-            // Si es otra imagen que no sea la primera uso el "back" para volver atrás una imagen
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-        }
-    }
-
-    /**
-     *  Actualizo el valor del vuelto recibido
-     **/
-    public void addToChange(View view){
-        // Actualizo el texto del importe recibido
-        TextView textView = findViewById(R.id.textView5);
-        st_received_change = getString(R.string.change_amount) + getString(R.string.value_10); // TODO: cargar según billete elegido
-
-        // Si el vuelto es el total, lo informo
-        if(changeOK()) st_received_change = st_received_change + " " + getString(R.string.change_OK); // TODO: Se podría inhabilitar el botón de "agregar al vuelto"
-
-        // Muestro el nuevo valor
-        textView.setText(st_received_change);
-    }
-
-    /**
-     *  Verifico si el vuelto recibido es igual al vuelto total
-     **/
-    private boolean changeOK(){
-
-        // TODO: Implementar verificando si el vuelto recibido es igual (o mayor) al vuelto total
-
-        // Si el total es mayor a cero, habilito el botón para pagar
-        Button acceptChangeButton = (Button) findViewById(R.id.button10);
-        Button addToChangeButton = (Button) findViewById(R.id.button9);
-        if (true){
-            acceptChangeButton.setEnabled(true);
-            addToChangeButton.setEnabled(false);
-        }
-        return true;
-    }
-
 
     /**
      * Creo la lista de valores a partir de todos billetes/monedas existentes
@@ -214,7 +158,7 @@ public class ControlChangeActivity extends AppCompatActivity {
         // TODO: Aquí tengo que cargar todos los billetes y monedas existentes
         // Cargo la lista de valores
         valueNames.add(getString(R.string.tag_p10f));
-        //valueNames.add(getString(R.string.tag_p10f));
+        valueNames.add(getString(R.string.tag_p20f));
 
         return valueNames;
     }
