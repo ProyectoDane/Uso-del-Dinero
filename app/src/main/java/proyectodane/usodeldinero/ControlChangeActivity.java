@@ -214,7 +214,7 @@ public class ControlChangeActivity extends AppCompatActivity {
         // TODO: Aquí tengo que cargar todos los billetes y monedas existentes
         // Cargo la lista de valores
         valueNames.add(getString(R.string.tag_p10f));
-        valueNames.add(getString(R.string.tag_p10f));
+        //valueNames.add(getString(R.string.tag_p10f));
 
         return valueNames;
     }
