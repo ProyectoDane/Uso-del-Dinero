@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -157,8 +156,18 @@ public class WalletActivity extends AppCompatActivity {
 
         // TODO: Aquí tengo que cargar todos los billetes y monedas existentes
         // Cargo la lista de valores
-        valueNames.add(getString(R.string.tag_p10f));
-        valueNames.add(getString(R.string.tag_p20f));
+        valueNames.add(getString(R.string.tag_p5));
+        valueNames.add(getString(R.string.tag_p5b));
+        valueNames.add(getString(R.string.tag_p10));
+        valueNames.add(getString(R.string.tag_p10b));
+        valueNames.add(getString(R.string.tag_p20));
+        valueNames.add(getString(R.string.tag_p20b));
+        valueNames.add(getString(R.string.tag_p50));
+        valueNames.add(getString(R.string.tag_p50b));
+        valueNames.add(getString(R.string.tag_p100));
+        valueNames.add(getString(R.string.tag_p100b));
+        valueNames.add(getString(R.string.tag_p200));
+        valueNames.add(getString(R.string.tag_p500));
 
         return valueNames;
     }
