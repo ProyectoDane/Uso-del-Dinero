@@ -169,7 +169,7 @@ public class WalletActivity extends AppCompatActivity {
         valueNames.add(getString(R.string.tag_p200));
         valueNames.add(getString(R.string.tag_p500));
         valueNames.add(getString(R.string.tag_p1000));
-        
+
         return valueNames;
     }
 
