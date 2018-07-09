@@ -2,6 +2,9 @@
     <string name="app_name">Uso del Dinero</string>
     <string name="empty_string"></string>
 
+    <string name="valid_currency_shared_preferences_file_name">VALID_CURRENCY</string>
+    <string name="currency_in_wallet_shared_preferences_file_name">CURRENCY_IN_WALLET</string>
+
     <string name="tag_total_value">valor_total</string>
     <string name="tag_total_change">cambio_total</string>
     <string name="tag_money_value_name">nombre_valor_moneda</string>
