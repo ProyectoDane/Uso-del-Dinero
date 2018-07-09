@@ -2,6 +2,8 @@ package proyectodane.usodeldinero;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import java.util.Iterator;
 import java.util.Map;
 
 public class WalletManager {
@@ -51,8 +53,13 @@ public class WalletManager {
         editor.clear();
         editor.apply();
 
-        // Agrego el nuevo contenido
         // TODO: Recorrer el Map entero y cargar todos los datos con editor (con "editor.putString()")
+        // Agrego el contenido del Map
+        for (Map.Entry<String,String> entry : validCurrencyMap.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            editor.putString(key,value);
+        }
         editor.apply();
     }
 
@@ -68,17 +75,22 @@ public class WalletManager {
     /**
      * Persisto el Map con cada uno de los billetes/monedas guardados en la billetera.
      * */
-    public void setCurrencyInWallet(Context context, Map <String,String> validCurrencyMap){
+    public void setCurrencyInWallet(Context context, Map <String,String> currencyInWalletMap){
         String currencyInWalletFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
-        validCurrency = context.getSharedPreferences(currencyInWalletFileName,0);
-        SharedPreferences.Editor editor = validCurrency.edit();
+        currencyInWallet = context.getSharedPreferences(currencyInWalletFileName,0);
+        SharedPreferences.Editor editor = currencyInWallet.edit();
 
         // Borro contenido anterior
         editor.clear();
         editor.apply();
 
-        // Agrego el nuevo contenido
         // TODO: Recorrer el Map entero y cargar todos los datos con editor (con "editor.putString()")
+        // Agrego el contenido del Map
+        for (Map.Entry<String,String> entry : currencyInWalletMap.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            editor.putString(key,value);
+        }
         editor.apply();
     }
 
