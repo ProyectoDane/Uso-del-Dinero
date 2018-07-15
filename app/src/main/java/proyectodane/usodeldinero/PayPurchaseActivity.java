@@ -177,8 +177,8 @@ public class PayPurchaseActivity extends AppCompatActivity {
         // TODO: Por ejemplo si pago $90, calculo a partir de lo que tengo en la billetera y...
         // TODO: ...obtengo como resultado: $50, $20, $10, $10. Entonces creo un vector que tenga los ID que representen cada billete: [p50,p20,p10,p10]
         // Cargo la lista de valores
-        valueNames.add(getString(R.string.tag_p20f)); // TODO: Reemplazar por implementación definitiva
-        valueNames.add(getString(R.string.tag_p20f));
+        valueNames.add(getString(R.string.tag_p20)); // TODO: Reemplazar por implementación definitiva
+        valueNames.add(getString(R.string.tag_p20));
 
         return valueNames;
     }

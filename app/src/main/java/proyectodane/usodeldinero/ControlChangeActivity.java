@@ -211,10 +211,21 @@ public class ControlChangeActivity extends AppCompatActivity {
         // Instancio la lista de valores
         ArrayList<String> valueNames = new ArrayList<String>();
 
-        // TODO: Aquí tengo que cargar todos los billetes y monedas existentes
+        // TODO: Aquí tengo que cargar todos los billetes y monedas existentes (Desde la base de datos)
         // Cargo la lista de valores
-        valueNames.add(getString(R.string.tag_p10f));
-        //valueNames.add(getString(R.string.tag_p10f));
+        valueNames.add(getString(R.string.tag_p5));
+        valueNames.add(getString(R.string.tag_p5b));
+        valueNames.add(getString(R.string.tag_p10));
+        valueNames.add(getString(R.string.tag_p10b));
+        valueNames.add(getString(R.string.tag_p20));
+        valueNames.add(getString(R.string.tag_p20b));
+        valueNames.add(getString(R.string.tag_p50));
+        valueNames.add(getString(R.string.tag_p50b));
+        valueNames.add(getString(R.string.tag_p100));
+        valueNames.add(getString(R.string.tag_p100b));
+        valueNames.add(getString(R.string.tag_p200));
+        valueNames.add(getString(R.string.tag_p500));
+        valueNames.add(getString(R.string.tag_p1000));
 
         return valueNames;
     }

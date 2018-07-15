@@ -41,7 +41,8 @@ public class BasketActivity extends AppCompatActivity {
 
     }
 
-    /** Suma el valor ingresado al total
+    /**
+     * Suma el valor ingresado al total
      * */
     public void addToTotal(View view) {
 
