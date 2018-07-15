@@ -157,7 +157,7 @@ public class WalletActivity extends AppCompatActivity {
         // Instancio la lista de valores
         ArrayList<String> valueNames = new ArrayList<String>();
 
-        // TODO: Aquí tengo que cargar todos los billetes y monedas existentes
+        // TODO: Aquí tengo que cargar todos los billetes y monedas existentes (Desde la base de datos)
         // Cargo la lista de valores
         valueNames = temp_arrayGeneratorFromWalletManager();
 /*      valueNames.add(getString(R.string.tag_p5));

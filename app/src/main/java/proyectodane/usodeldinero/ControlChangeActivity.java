@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ControlChangeActivity extends AppCompatActivity {
 
@@ -213,7 +215,8 @@ public class ControlChangeActivity extends AppCompatActivity {
 
         // TODO: Aquí tengo que cargar todos los billetes y monedas existentes (Desde la base de datos)
         // Cargo la lista de valores
-        valueNames.add(getString(R.string.tag_p5));
+        valueNames = temp_arrayGeneratorFromWalletManager();
+/*      valueNames.add(getString(R.string.tag_p5));
         valueNames.add(getString(R.string.tag_p5b));
         valueNames.add(getString(R.string.tag_p10));
         valueNames.add(getString(R.string.tag_p10b));
@@ -225,7 +228,8 @@ public class ControlChangeActivity extends AppCompatActivity {
         valueNames.add(getString(R.string.tag_p100b));
         valueNames.add(getString(R.string.tag_p200));
         valueNames.add(getString(R.string.tag_p500));
-        valueNames.add(getString(R.string.tag_p1000));
+        valueNames.add(getString(R.string.tag_p1000));*/
+
 
         return valueNames;
     }
@@ -255,5 +259,37 @@ public class ControlChangeActivity extends AppCompatActivity {
         return frags;
     }
 
+    // TODO: Borrar luego de probar. Solo test.
+    private ArrayList<String> temp_arrayGeneratorFromWalletManager(){
 
+        // Creo un Map con valores a guardar en wl WalletManager
+        Map<String,String> tempMapSave = new HashMap<String,String>();
+        tempMapSave.put(getString(R.string.tag_p5),"5");
+        tempMapSave.put(getString(R.string.tag_p5b),"5");
+        tempMapSave.put(getString(R.string.tag_p10),"10");
+        tempMapSave.put(getString(R.string.tag_p10b),"10");
+        tempMapSave.put(getString(R.string.tag_p20),"20");
+        tempMapSave.put(getString(R.string.tag_p20b),"20");
+        tempMapSave.put(getString(R.string.tag_p50),"50");
+        tempMapSave.put(getString(R.string.tag_p50b),"50");
+        tempMapSave.put(getString(R.string.tag_p100),"100");
+        tempMapSave.put(getString(R.string.tag_p100b),"100");
+        tempMapSave.put(getString(R.string.tag_p200),"200");
+        tempMapSave.put(getString(R.string.tag_p500),"500");
+        tempMapSave.put(getString(R.string.tag_p1000),"1000");
+
+        // Guardo los valores del Map
+        WalletManager.getInstance().setCurrencyInWallet(this,tempMapSave);
+
+        // Cargo los valores recién guardados en otro Map
+        Map<String,String> tempMapLoad = WalletManager.getInstance().getCurrencyInWallet(this);
+
+        // Paso los valores cargados a un ArrayList
+        ArrayList<String> list = new ArrayList<String>();
+        for (Map.Entry<String,String> entry : tempMapLoad.entrySet()) {
+            list.add(entry.getKey());
+        }
+
+        return list;
+    }
 }
