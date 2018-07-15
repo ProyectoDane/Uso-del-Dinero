@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -233,6 +234,9 @@ public class WalletActivity extends AppCompatActivity {
         for (Map.Entry<String,String> entry : tempMapLoad.entrySet()) {
             list.add(entry.getKey());
         }
+
+        // Pruebo ordenar los elementos de la lista
+        Collections.sort(list);
 
         return list;
     }
