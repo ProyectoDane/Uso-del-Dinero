@@ -15,6 +15,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    @Override
+    public void onBackPressed() {
+        //TODO: Ver si lo dejo sin que salga de la app, o si la cierro
+    }
+
     /**
      * Envía a la pantalla de ingreso de importe de productos al presionar el botón
      **/
