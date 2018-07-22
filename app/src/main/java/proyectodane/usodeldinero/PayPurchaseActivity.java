@@ -15,12 +15,12 @@ public class PayPurchaseActivity extends AppCompatActivity {
     /**
      * Valor total de la compra
      */
-    String st_totalPurchase;
+    private String st_totalPurchase;
 
     /**
      * Vuelto total de la compra
      */
-    String st_change;
+    private String st_change;
 
     /**
      * ArrayList con todos los valores de billetes/monedas calculados para dar el pago

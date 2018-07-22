@@ -14,14 +14,14 @@ public class WalletManager {
      * Las imágenes relacionadas con cada billete/moneda tendrán el mismo nombre que su ID.
      * Key: ID moneda (String)  Value: Valor de la moneda (String)
      * */
-    SharedPreferences validCurrency;
+    private SharedPreferences validCurrency;
 
     /**
      * Cada uno de los billetes/monedas guardados en la billetera.
      * Las imágenes relacionadas con cada billete/moneda tendrán el mismo nombre que su ID.
      * Key: ID moneda (String)  Value: Valor de la moneda (String).
      * */
-    SharedPreferences currencyInWallet;
+    private SharedPreferences currencyInWallet;
 
 
     // Uso singleton
@@ -51,7 +51,6 @@ public class WalletManager {
         editor.clear();
         editor.apply();
 
-        // TODO: Recorrer el Map entero y cargar todos los datos con editor (con "editor.putString()")
         // Agrego el contenido del Map
         for (Map.Entry<String,String> entry : validCurrencyMap.entrySet()) {
             String key = entry.getKey();
@@ -82,7 +81,6 @@ public class WalletManager {
         editor.clear();
         editor.apply();
 
-        // TODO: Recorrer el Map entero y cargar todos los datos con editor (con "editor.putString()")
         // Agrego el contenido del Map
         for (Map.Entry<String,String> entry : currencyInWalletMap.entrySet()) {
             String key = entry.getKey();

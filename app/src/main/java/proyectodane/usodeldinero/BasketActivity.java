@@ -11,17 +11,20 @@ import android.widget.TextView;
 
 public class BasketActivity extends AppCompatActivity {
 
-    /** Valor total guardado en la billetera
+    /**
+     * Valor total guardado en la billetera
      * */
-    Double d_walletTotal;
+    private Double d_walletTotal;
 
-    /** Valor total de la compra
+    /**
+     * Valor total de la compra
      * */
-    Double d_total;
+    private Double d_total;
 
-    /** EditText que registra los valores ingresados por producto
+    /**
+     * EditText que registra los valores ingresados por producto
      * */
-    EditText et_productValue;
+    private EditText et_productValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

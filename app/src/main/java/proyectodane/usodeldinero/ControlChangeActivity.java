@@ -21,12 +21,12 @@ public class ControlChangeActivity extends AppCompatActivity {
     /**
      * Vuelto total de la compra
      */
-    String st_total_change;
+    private String st_total_change;
 
     /**
      * Vuelto recibido de la compra
      */
-    String st_received_change;
+    private String st_received_change;
 
     /**
      * ArrayList con todos los valores de billetes/monedas existentes
@@ -147,10 +147,10 @@ public class ControlChangeActivity extends AppCompatActivity {
         tempMapSave.put(getString(R.string.tag_p1000),"1000");
 
         // Guardo los valores del Map
-        WalletManager.getInstance().setCurrencyInWallet(this,tempMapSave);
+        WalletManager.getInstance().setValidCurrency(this,tempMapSave);
 
         // Cargo los valores recién guardados, en otro Map
-        Map<String,String> tempMapLoad = WalletManager.getInstance().getCurrencyInWallet(this);
+        Map<String,String> tempMapLoad = WalletManager.getInstance().getValidCurrency(this);
 
         // Paso los valores cargados del Map a un ArrayList
         ArrayList<String> list = new ArrayList<String>();

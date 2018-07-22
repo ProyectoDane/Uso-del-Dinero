@@ -17,12 +17,12 @@ public class WalletActivity extends AppCompatActivity {
     /**
      * Importe total a de la billetera, sin sumar la carga
      */
-    String st_total_wallet;
+    private String st_total_wallet;
 
     /**
      * Importe total a cargar
      */
-    String st_total_load;
+    private String st_total_load;
 
     /**
      * ArrayList con todos los valores de billetes/monedas a cargar en la billetera
@@ -107,10 +107,10 @@ public class WalletActivity extends AppCompatActivity {
         tempMapSave.put(getString(R.string.tag_p1000),"1000");
 
         // Guardo los valores del Map
-        WalletManager.getInstance().setCurrencyInWallet(this,tempMapSave);
+        WalletManager.getInstance().setValidCurrency(this,tempMapSave);
 
         // Cargo los valores recién guardados, en otro Map
-        Map<String,String> tempMapLoad = WalletManager.getInstance().getCurrencyInWallet(this);
+        Map<String,String> tempMapLoad = WalletManager.getInstance().getValidCurrency(this);
 
         // Paso los valores cargados del Map a un ArrayList
         ArrayList<String> list = new ArrayList<String>();

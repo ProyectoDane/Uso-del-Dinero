@@ -11,7 +11,7 @@ public class OrderTotalActivity extends AppCompatActivity {
     /**
      * Valor total de la compra
     */
-    String st_total;
+    private String st_total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
