@@ -88,14 +88,7 @@ public class ControlChangeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (imageSlideManager.getCurrentItem() == 0) {
-            // Si el usuario se encuentra en la primer imagen y presiona el botón "back"
-            // no permito que se vaya a otra pantalla, para evitar el error
-            // de presionar ese botón por equivocación.
-        } else {
-            // Si es otra imagen que no sea la primera uso el "back" para volver atrás una imagen
-            imageSlideManager.setCurrentItem(imageSlideManager.getCurrentItem()-1);
-        }
+        imageSlideManager.defaultOnBackPressed();
     }
 
     /**

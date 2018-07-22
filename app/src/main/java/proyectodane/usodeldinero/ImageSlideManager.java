@@ -133,18 +133,17 @@ public class ImageSlideManager {
     }
 
     /**
-     * Wrapper de viewPager.getCurrentItem
+     * Comportamiento por defecto cuando se presiona "back"
      * */
-    public int getCurrentItem(){
-        return viewPager.getCurrentItem();
+    public void defaultOnBackPressed(){
+        if (viewPager.getCurrentItem() == 0) {
+            // Si el usuario se encuentra en la primer imagen y presiona el botón "back"
+            // no permito que se vaya a otra pantalla, para evitar el error
+            // de presionar ese botón por equivocación.
+        } else {
+            // Si es otra imagen que no sea la primera uso el "back" para volver atrás una imagen
+            viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+        }
     }
-
-    /**
-     * Wrapper de viewPager.getCurrentItem
-     * */
-    public void setCurrentItem(int item){
-        viewPager.setCurrentItem(item);
-    }
-
 
 }

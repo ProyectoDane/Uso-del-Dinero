@@ -54,7 +54,7 @@
         app:layout_constraintStart_toEndOf="@+id/button7" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+        android:id="@+id/pager_pay"
         android:layout_width="500dp"
         android:layout_height="210dp"
         app:layout_constraintBottom_toTopOf="@+id/button7"
@@ -64,16 +64,16 @@
         app:layout_constraintVertical_bias="0.502" />
 
     <LinearLayout
-        android:id="@+id/SliderDots"
+        android:id="@+id/SliderDots_pay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pager"
+        android:layout_below="@+id/pager_pay"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pager" />
+        app:layout_constraintTop_toBottomOf="@+id/pager_pay" />
 
 </android.support.constraint.ConstraintLayout>

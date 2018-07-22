@@ -62,6 +62,11 @@ public class WalletActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        imageSlideManager.defaultOnBackPressed();
+    }
+
     /**
      * Cancela la carga en la billetera
      * */
