@@ -81,7 +81,6 @@ public class WalletActivity extends AppCompatActivity {
     /**
      * Creo la lista de valores a partir de todos billetes/monedas existentes
      * */
-
     private ArrayList<String> obtainMoneyValueNames(){
 
         // Todo: Reemplazar esta forma de carga con la definitiva
