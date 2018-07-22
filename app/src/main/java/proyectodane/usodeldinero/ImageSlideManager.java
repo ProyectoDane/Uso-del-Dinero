@@ -10,24 +10,28 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import java.util.ArrayList;
 
+
+/**
+ * Clase que representa un slide de imágenes con un indicador de cantidad dibujado por puntos
+ */
 public class ImageSlideManager {
 
     /**
      * El widget pager, maneja la animación y permite deslizar horizontalmente para acceder
      * a las imágenes anteriores y siguientes.
      */
-    private ViewPager mPager;
+    private ViewPager viewPager;
 
     /**
      * El pager adapter, provee las páginas al ViewPager.
      */
-    private PagerAdapter mPagerAdapter;
+    private PagerAdapter pagerAdapter;
 
     /**
      * Un LinearLayout que representa la fila de puntos la cual indica la posición relativa de
      * la imagen y la cantidad total de imágenes del ViewPager.
      */
-    LinearLayout sliderDotsPanel;
+    private LinearLayout sliderDotsPanel;
     private int dotsCount;
     private ImageView[] dots;
 
@@ -43,15 +47,15 @@ public class ImageSlideManager {
         fragments = buildFragments(activityContext,listImageNames);
 
         // Instancio el ViewPager y el PagerAdapter, para deslizar las imágenes
-        mPager = viewPagerSelected; //TODO: El que llame al constructor debe poner (Ej. de WalletActivity): (ViewPager) findViewById(R.id.pager_wallet);
-        mPagerAdapter = new ScreenSlidePagerAdapter(fragmentManagerSelected,fragments); //TODO: El que llame al constructor debe poner "getSupportFragmentManager()"
-        mPager.setAdapter(mPagerAdapter);
+        viewPager = viewPagerSelected; //TODO: El que llame al constructor debe poner (Ej. de WalletActivity): (ViewPager) findViewById(R.id.pager_wallet);
+        pagerAdapter = new ScreenSlidePagerAdapter(fragmentManagerSelected,fragments); //TODO: El que llame al constructor debe poner "getSupportFragmentManager()"
+        viewPager.setAdapter(pagerAdapter);
 
         // Instancio un LinearLayout, para representar los puntos debajo de las imágenes
         sliderDotsPanel = linearLayoutSelected; //TODO: El que llame al constructor debe poner (Ej. de WalletActivity): (LinearLayout) findViewById(R.id.SliderDots_wallet);
 
         // Seteo la cantidad de puntos (imágenes) y el arreglo de ImageView para luego instanciar a cada uno de ellos
-        dotsCount = mPagerAdapter.getCount();
+        dotsCount = pagerAdapter.getCount();
         dots = new ImageView[dotsCount];
 
         // Cargo la imagen para cada punto en el estado inicial
@@ -73,7 +77,7 @@ public class ImageSlideManager {
         dots[0].setImageDrawable(drawableActiveDot); //TODO: El que llame al constructor debe poner "ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot)"
 
         // Agrego un listener que será invocado cuando la imagen cambie y actualizará las imágenes de los puntos
-        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -103,7 +107,6 @@ public class ImageSlideManager {
 
     }
 
-
     /**
      * Creo la lista de Fragment a partir de todos los valores pasados en el argumento
      * */
@@ -127,6 +130,20 @@ public class ImageSlideManager {
         }
 
         return frags;
+    }
+
+    /**
+     * Wrapper de viewPager.getCurrentItem
+     * */
+    public int getCurrentItem(){
+        return viewPager.getCurrentItem();
+    }
+
+    /**
+     * Wrapper de viewPager.getCurrentItem
+     * */
+    public void setCurrentItem(int item){
+        viewPager.setCurrentItem(item);
     }
 
 
