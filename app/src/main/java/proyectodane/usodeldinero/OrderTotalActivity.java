@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 public class OrderTotalActivity extends AppCompatActivity {
 
+    /**
+     * Valor total de la compra
+    */
     String st_total;
 
     @Override
@@ -19,22 +22,24 @@ public class OrderTotalActivity extends AppCompatActivity {
         Intent intent = getIntent();
         st_total = intent.getStringExtra(getString(R.string.tag_total_value));
 
-        // TODO: Para futuras actualizaciones, borrar esta línea
-        st_total = getString(R.string.total_purchase_pesos_20);
-
-        // Capturo el TextView and coloco el texto indicando el total
+        // Capturo el TextView y coloco el texto indicando el total
         TextView textView = findViewById(R.id.textView3);
-        textView.setText(st_total);
+        String st_textToShow = getString(R.string.total_purchase) + st_total;
+        textView.setText(st_textToShow);
 
     }
 
-    /** Envía a la pantalla principal */
+    /**
+     * Envía a la pantalla principal
+     **/
     public void sendToMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    /** Envía a la pantalla de pago de la compra */
+    /**
+     * Envía a la pantalla de pago de la compra
+     **/
     public void sendToPayPurchase(View view) {
         Intent intent = new Intent(this, PayPurchaseActivity.class);
         intent.putExtra(getString(R.string.tag_total_value),st_total);

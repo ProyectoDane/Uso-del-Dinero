@@ -2,11 +2,36 @@
     <string name="app_name">Uso del Dinero</string>
     <string name="empty_string"></string>
 
-    <string name="tag_total_value">valor_total</string>
+    <string name="valid_currency_shared_preferences_file_name">VALID_CURRENCY</string>
+    <string name="currency_in_wallet_shared_preferences_file_name">CURRENCY_IN_WALLET</string>
 
-    <string name="saved_money">DINERO AHORRADO: </string>
+    <string name="tag_total_value">valor_total</string>
+    <string name="tag_total_change">cambio_total</string>
+    <string name="tag_money_value_name">nombre_valor_moneda</string>
+    <string name="tag_p5">img_01_p5</string>
+    <string name="tag_p5b">img_02_p5b</string>
+    <string name="tag_p10">img_03_p10</string>
+    <string name="tag_p10b">img_04_p10b</string>
+    <string name="tag_p20">img_05_p20</string>
+    <string name="tag_p20b">img_06_p20b</string>
+    <string name="tag_p50">img_07_p50</string>
+    <string name="tag_p50b">img_08_p50b</string>
+    <string name="tag_p100">img_09_p100</string>
+    <string name="tag_p100b">img_10_p100b</string>
+    <string name="tag_p200">img_11_p200</string>
+    <string name="tag_p500">img_12_p500</string>
+    <string name="tag_p1000">img_13_p1000</string>
+    <string name="tag_drawable">drawable</string>
+    <string name="tag_question_mark">question_mark</string>
+
+
+    <string name="saved_money">DINERO AHORRADO: $</string>
+    <string name="saved_money_pesos_20">DINERO AHORRADO: $20.00</string>
     <string name="buy">COMPRAR</string>
-    <string name="pesos_20">$20,00</string>
+    <string name="start_purchase">INICIAR COMPRA</string>
+    <string name="value_0">0.00</string>
+    <string name="value_10">10.00</string>
+    <string name="value_20">20.00</string>
     <string name="enter_value">INGRESAR PRECIO</string>
     <string name="add_product">AGREGAR</string>
     <string name="total_value">VALOR TOTAL: $</string>
@@ -17,13 +42,30 @@
     <string name="total_purchase_pesos_20">COMPRA TOTAL: $20.00</string>
     <string name="cancel_purchase">CANCELAR COMPRA</string>
     <string name="pay_purchase">PAGAR COMPRA</string>
+    <string name="purchase_payed">COMPRA PAGADA</string>
     <string name="payment_of_the_purchase">PAGO DE LA COMPRA</string>
-    <string name="finish_purchase">TERMINAR COMPRA</string>
+    <string name="confirm_purchase">CONFIRMAR COMPRA</string>
+    <string name="change_amount">VUELTO TOTAL: $</string>
+    <string name="add_to_change">AGREGAR AL VUELTO</string>
+    <string name="accept_change">ACEPTAR VUELTO</string>
+    <string name="change_OK"> - VUELTO CORRECTO</string>
+    <string name="change_received_purchase_finished">VUELTO RECIBIDO - COMPRA FINALIZADA</string>
+    <string name="dont_save_change">NO GUARDAR VUELTO</string>
+    <string name="save_change">GUARDAR VUELTO</string>
+    <string name="insufficient_funds">DINERO INSUFICIENTE PARA AGREGAR ESTE PRODUCTO</string>
+    <string name="received_change">VUELTO RECIBIDO</string>
+    <string name="load_and_total_wallet_preview">CARGA: $ - TOTAL EN BILLETERA: $</string>
+    <string name="load_money_sign">CARGA: $ </string>
+    <string name="total_in_wallet"> - TOTAL EN BILLETERA: $</string>
+    <string name="cancel_load">CANCELAR CARGA</string>
+    <string name="add">AGREGAR</string>
+    <string name="save_in_wallet">GUARDAR EN BILLETERA</string>
+    <string name="load_wallet">CARGAR BILLETERA</string>
 
 
-
-    <string name="im_an_image_no"> =D  Soy la imagen Nº </string>
+    <string name="im_an_image_no"> --  Soy la imagen Nº </string>
     <string name="index">Índice</string>
+    <string name="test_text">TEXTO DE PRUEBA</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
