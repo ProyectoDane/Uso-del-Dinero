@@ -47,12 +47,12 @@ public class ImageSlideManager {
         fragments = buildFragments(activityContext,listImageNames);
 
         // Instancio el ViewPager y el PagerAdapter, para deslizar las imágenes
-        viewPager = viewPagerSelected; //TODO: El que llame al constructor debe poner (Ej. de WalletActivity): (ViewPager) findViewById(R.id.pager_wallet);
-        pagerAdapter = new ScreenSlidePagerAdapter(fragmentManagerSelected,fragments); //TODO: El que llame al constructor debe poner "getSupportFragmentManager()"
+        viewPager = viewPagerSelected;
+        pagerAdapter = new ScreenSlidePagerAdapter(fragmentManagerSelected,fragments);
         viewPager.setAdapter(pagerAdapter);
 
         // Instancio un LinearLayout, para representar los puntos debajo de las imágenes
-        sliderDotsPanel = linearLayoutSelected; //TODO: El que llame al constructor debe poner (Ej. de WalletActivity): (LinearLayout) findViewById(R.id.SliderDots_wallet);
+        sliderDotsPanel = linearLayoutSelected;
 
         // Seteo la cantidad de puntos (imágenes) y el arreglo de ImageView para luego instanciar a cada uno de ellos
         dotsCount = pagerAdapter.getCount();
@@ -62,8 +62,8 @@ public class ImageSlideManager {
         for(int i = 0; i < dotsCount; i++){
 
             // Instancia el ImageView y setea la imagen
-            dots[i] = new ImageView(activityContext);//TODO: El que llame al constructor debe poner "this"
-            dots[i].setImageDrawable(drawableNonActiveDot); //TODO: El que llame al constructor debe poner "ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot)"
+            dots[i] = new ImageView(activityContext);
+            dots[i].setImageDrawable(drawableNonActiveDot);
 
             // Prepara los parámetros de la imagen
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -74,7 +74,7 @@ public class ImageSlideManager {
         }
 
         // En el estado inicial, el primer punto será el seleccionado. Seteo la imagen.
-        dots[0].setImageDrawable(drawableActiveDot); //TODO: El que llame al constructor debe poner "ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot)"
+        dots[0].setImageDrawable(drawableActiveDot);
 
         // Agrego un listener que será invocado cuando la imagen cambie y actualizará las imágenes de los puntos
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -95,7 +95,6 @@ public class ImageSlideManager {
 
                 // Actualizo la imagen del punto activo
                 dots[position].setImageDrawable(drawableActiveDot);
-                                                //variable is accessed from within inner class, needs to be declared final
             }
 
             @Override

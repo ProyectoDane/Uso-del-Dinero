@@ -2,8 +2,6 @@ package proyectodane.usodeldinero;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import java.util.Iterator;
 import java.util.Map;
 
 public class WalletManager {
