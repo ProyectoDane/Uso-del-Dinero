@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.design.widget.CoordinatorLayout
+<android.support.design.widget.CoordinatorLayout xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/myCoordinatorLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -93,6 +93,7 @@
             android:ems="10"
             android:hint="@string/enter_value"
             android:inputType="numberDecimal"
+            android:maxLength="10"
             android:textAlignment="textStart"
             android:textSize="36sp"
             android:textStyle="bold"

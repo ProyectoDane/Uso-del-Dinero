@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import java.util.ArrayList;
 
 public class PayPurchaseActivity extends AppCompatActivity {
@@ -86,7 +85,6 @@ public class PayPurchaseActivity extends AppCompatActivity {
         imageSlideManager.defaultOnBackPressed();
     }
 
-
     /**
      * Creo la lista de valores a usar para el pago, a partir de todos billetes/monedas guardados en la billetera
      * */
@@ -104,31 +102,6 @@ public class PayPurchaseActivity extends AppCompatActivity {
         valueNames.add(getString(R.string.tag_p20));
 
         return valueNames;
-    }
-
-
-    /**
-     * Creo la lista de Fragment a partir de todos los valores de billetes/monedas de moneyValueNames
-     * */
-    private ArrayList<ScreenSlidePageFragment> buildFragments() {
-
-        // Instancio la lista de Fragment
-        ArrayList<ScreenSlidePageFragment> frags = new ArrayList<ScreenSlidePageFragment>();
-
-        // Cargo la lista de Fragment
-        for(int i = 0; i<moneyValueNames.size(); i++) {
-
-            // Instancio el Fragment
-            ScreenSlidePageFragment frag = new ScreenSlidePageFragment();
-
-            // Creo un bundle para pasarle el ID del billete/moneda como argumento
-            Bundle args = new Bundle();
-            args.putString(getString(R.string.tag_money_value_name),moneyValueNames.get(i));
-            frag.setArguments(args);
-            frags.add(frag);
-        }
-
-        return frags;
     }
 
     /**
