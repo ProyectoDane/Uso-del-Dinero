@@ -119,7 +119,7 @@ public class WalletActivity extends AppCompatActivity {
         }
 
         // Pruebo ordenar los elementos de la lista
-        Collections.sort(list); // TODO: verificar luego con la nueva codificación de nombres de imágenes
+        Collections.sort(list); // TODO: el orden se debe realizar en base a los valores de las monedas (en formato float)
 
         return list;
     }
