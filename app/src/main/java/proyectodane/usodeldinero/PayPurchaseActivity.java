@@ -31,6 +31,11 @@ public class PayPurchaseActivity extends AppCompatActivity {
      */
     private ImageSlideManager imageSlideManager;
 
+    /**
+     * Instancia de WalletManager
+     */
+    private static final WalletManager wm = WalletManager.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +48,7 @@ public class PayPurchaseActivity extends AppCompatActivity {
         // TODO: Luego se usa el total para calcular el vuelto que debo recibir
 
         // Calculo todos los valores a usar para pagar
-        moneyValueNames = obtainMoneyValueNames();
+        moneyValueNames = wm.obtainMoneyValueNamesOfPayment(this,st_totalPurchase);
 
         // Cargo el slide de imágenes y puntos indicadores
         // Parámetros:  + (1)Contexto
@@ -83,25 +88,6 @@ public class PayPurchaseActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         imageSlideManager.defaultOnBackPressed();
-    }
-
-    /**
-     * Creo la lista de valores a usar para el pago, a partir de todos billetes/monedas guardados en la billetera
-     * */
-    private ArrayList<String> obtainMoneyValueNames(){
-
-        // Instancio la lista de valores
-        ArrayList<String> valueNames = new ArrayList<String>();
-
-
-        // TODO: Aquí tengo que calcular el listado de billetes que uso para pagar y su respectivo vuelto
-        // TODO: Por ejemplo si pago $90, calculo a partir de lo que tengo en la billetera y...
-        // TODO: ...obtengo como resultado: $50, $20, $10, $10. Entonces creo un vector que tenga los ID que representen cada billete: [img_07_p50,img_05_p20,img_03_p10,img_03_p10]
-        // Cargo la lista de valores
-        valueNames.add(getString(R.string.tag_p20)); // TODO: Reemplazar por implementación definitiva
-        valueNames.add(getString(R.string.tag_p20));
-
-        return valueNames;
     }
 
     /**

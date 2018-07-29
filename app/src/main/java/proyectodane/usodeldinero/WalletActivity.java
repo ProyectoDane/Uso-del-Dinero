@@ -39,6 +39,10 @@ public class WalletActivity extends AppCompatActivity {
      */
     private ImageSlideManager imageSlideManager;
 
+    /**
+     * Instancia de WalletManager
+     */
+    private static final WalletManager wm = WalletManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,7 @@ public class WalletActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wallet);
 
         // Calculo todos los valores a usar para pagar
-        moneyValueNames = obtainMoneyValueNames();
+        moneyValueNames = wm.obtainMoneyValueNamesOfValidCurrency(this);
 
         // Cargo el slide de imágenes y puntos indicadores
         // Parámetros:  + (1)Contexto
@@ -81,47 +85,6 @@ public class WalletActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
-    }
-
-    /**
-     * Creo la lista de valores a partir de todos billetes/monedas existentes
-     * */
-    private ArrayList<String> obtainMoneyValueNames(){
-
-        // Todo: Reemplazar esta forma de carga con la definitiva
-
-        // Creo un Map con valores a guardar en el WalletManager
-        Map<String,String> tempMapSave = new HashMap<String,String>();
-        tempMapSave.put(getString(R.string.tag_p5),"5");
-        tempMapSave.put(getString(R.string.tag_p5b),"5");
-        tempMapSave.put(getString(R.string.tag_p10),"10");
-        tempMapSave.put(getString(R.string.tag_p10b),"10");
-        tempMapSave.put(getString(R.string.tag_p20),"20");
-        tempMapSave.put(getString(R.string.tag_p20b),"20");
-        tempMapSave.put(getString(R.string.tag_p50),"50");
-        tempMapSave.put(getString(R.string.tag_p50b),"50");
-        tempMapSave.put(getString(R.string.tag_p100),"100");
-        tempMapSave.put(getString(R.string.tag_p100b),"100");
-        tempMapSave.put(getString(R.string.tag_p200),"200");
-        tempMapSave.put(getString(R.string.tag_p500),"500");
-        tempMapSave.put(getString(R.string.tag_p1000),"1000");
-
-        // Guardo los valores del Map
-        WalletManager.getInstance().setValidCurrency(this,tempMapSave);
-
-        // Cargo los valores recién guardados, en otro Map
-        Map<String,String> tempMapLoad = WalletManager.getInstance().getValidCurrency(this);
-
-        // Paso los valores cargados del Map a un ArrayList
-        ArrayList<String> list = new ArrayList<String>();
-        for (Map.Entry<String,String> entry : tempMapLoad.entrySet()) {
-            list.add(entry.getKey());
-        }
-
-        // Pruebo ordenar los elementos de la lista
-        Collections.sort(list); // TODO: el orden se debe realizar en base a los valores de las monedas (en formato float)
-
-        return list;
     }
 
 }
