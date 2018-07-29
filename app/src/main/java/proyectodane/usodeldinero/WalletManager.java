@@ -253,10 +253,84 @@ public class WalletManager {
         return valueNames;
     }
 
+    //TODO: Implementar: Devolver los billetes/moneda que hay en billetera (CurrencyInWallet)
+    /**
+     * Creo la lista de nombres de las imágenes de los valores actualmente en la billetera
+     * a partir de todos billetes/monedas guardados en la billetera
+     * */
+    public ArrayList<String> obtainMoneyValueNamesInWallet(Context context){
 
-    // TODO: Implementar Método: Devolver importe de vuelto esperado, dado un pago realizado
+        // Instancio la lista de valores
+        ArrayList<String> valueNames = new ArrayList<String>();
 
 
-    // TODO: Implementar Método: Guardar ArrayList de billetes/monedas en billetera, dado un vuelto recibido
+        return valueNames;
+    }
+
+
+    /**
+     * Guardo en la billetera la lista de nombres de las imágenes
+     * de los valores recibidos como vuelto
+     * */
+    public void saveChangeInWallet(ArrayList<String> listOfNames){
+
+    // TODO: Implementar: Guardar ArrayList de billetes/monedas en billetera, dado un vuelto recibido
+
+    }
+
+
+    /**
+     * Devuelvo true si corresponde recibir vuelto, en base al importe que se tiene que pagar
+     * y en base a los billetes/monedas que serán usados para el pago (guardados en la billetera)
+     * */
+    public boolean isChangeExpected(String valueToPay){
+
+        boolean isChangeExpected = true;
+
+        // TODO: Implementar Método: Devolver si corresponde recibir vuelto
+
+        return isChangeExpected;
+    }
+
+
+    /**
+     * Guardo un nuevo billete/moneda vigente para ser usado luego como moneda nueva
+     * de la billetera
+     * */
+    public void addNewCurrency(String idCurrency, String currencyValue){
+
+        // TODO: Implementar Método: Agregar nuevo billete/moneda (Input: ID_moneda (Str), Valor en $ (Str) )
+
+    }
+
+    /**
+     * Borro un billete/moneda vigente, el cual dejará de ser usado como moneda de pago
+     * de la billetera
+     * */
+    public void deleteExistingCurrency(String idCurrency){
+
+        // TODO: Implementar Método: Borrar billete/moneda actual (Input: ID_moneda (Str))
+
+    }
+
+    /**
+     * Agrego un billete/moneda a la billetera
+     * */
+    public void addCurrencyInWallet(String idCurrency){
+
+        // TODO: Implementar Método: Guardar un billete/moneda en billetera (Input: ID_moneda (Str))
+
+    }
+
+    /**
+     * Quito un billete/moneda de la billetera
+     * */
+    public void removeCurrencyFromWallet(String idCurrency){
+
+        // TODO: Implementar Método: Sacar un billete/moneda de billetera (Input: ID_moneda (Str))
+
+    }
+
+
 }
 
