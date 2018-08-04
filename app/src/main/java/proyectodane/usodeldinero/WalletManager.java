@@ -144,15 +144,35 @@ public class WalletManager {
         boolean isGreater = false;
 
         // Instancio los BigDecimal
-        BigDecimal bd_value = new BigDecimal(valueA);
-        BigDecimal bd_total = new BigDecimal(valueB);
+        BigDecimal bd_value_a = new BigDecimal(valueA);
+        BigDecimal bd_value_b = new BigDecimal(valueB);
 
-        //Comparo los valores: Devuelve 1 si "bd_value" > "bd_total" )
-        if (bd_value.compareTo(bd_total) == 1) {
+        //Comparo los valores: Devuelve 1 si "valueA" > "valueB" )
+        if (bd_value_a.compareTo(bd_value_b) == 1) {
             isGreater = true;
         }
 
         return isGreater;
+    }
+
+    /**
+     * Verdadero si el valueA (con formato numérico de importe) es igual o mayor
+     * que el valueB (con formato numérico de importe)
+     * */
+    private boolean isValueAGreaterOrEqualThanValueB(String valueA, String valueB) {
+
+        boolean isGreaterOrEqual = false;
+
+        // Instancio los BigDecimal
+        BigDecimal bd_value_a = new BigDecimal(valueA);
+        BigDecimal bd_value_b = new BigDecimal(valueB);
+
+        //Comparo los valores: Devuelve 1 si "valueA" > "valueB" )
+        if ( (bd_value_a.compareTo(bd_value_b) == 0) || (bd_value_a.compareTo(bd_value_b) == 1) ) {
+            isGreaterOrEqual = true;
+        }
+
+        return isGreaterOrEqual;
     }
 
     /**
@@ -264,9 +284,27 @@ public class WalletManager {
         ArrayList<String> valueNames = new ArrayList<String>();
 
 
+        // Cargo la lista de valores
+        valueNames.add(context.getString(R.string.tag_p20));
+        valueNames.add(context.getString(R.string.tag_p20));
+
         return valueNames;
     }
 
+
+
+    /**
+     * Obtengo el saldo total actual en la billetera
+     * */
+    public String obtainTotalCreditInWallet(Context context){
+
+        // Instancio la lista de valores
+        String st_total = context.getString(R.string.value_40);
+
+        //TODO: Implementar: Recorrer todos los valores en la billetera y sumar sus valores, luego devolver el valor total
+
+        return st_total;
+    }
 
     /**
      * Guardo en la billetera la lista de nombres de las imágenes
@@ -276,6 +314,29 @@ public class WalletManager {
 
     // TODO: Implementar: Guardar ArrayList de billetes/monedas en billetera, dado un vuelto recibido
 
+    }
+
+
+    /**
+     * Devuelvo el importe de vuelto que debería recibir, en base al importe que se tiene que pagar
+     * y en base a los billetes/monedas que serán usados para el pago (guardados en la billetera)
+     * */
+    public String expectedChangeValue(String valueToPay, Context context){
+
+        String expectedChange = context.getString(R.string.value_10);
+
+        // TODO: Implementar Método: Devolver el importe de vuelto esperado
+
+        return expectedChange;
+    }
+
+
+    /**
+     * Devuelvo true si el valor del vuelto recibido es igual o mayor al vuelto esperado,
+     * en base al vuelto recibido y al vuelto esperado
+     * */
+    public boolean isTotalChangeReceivedOk(String changeReceived, String changeExpected){
+        return isValueAGreaterOrEqualThanValueB(changeReceived,changeExpected);
     }
 
 

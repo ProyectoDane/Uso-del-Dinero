@@ -15,7 +15,7 @@ public class BasketActivity extends AppCompatActivity {
     /**
      * Valor total de la compra
      * */
-    private String st_total;
+    private String st_total_purchase;
 
     /**
      * EditText que registra los valores ingresados por producto
@@ -34,7 +34,7 @@ public class BasketActivity extends AppCompatActivity {
         setContentView(R.layout.activity_basket);
 
         // Al iniciar, seteo el total en cero
-        st_total = getString(R.string.value_0);
+        st_total_purchase = getString(R.string.value_0);
 
         // Obtiene el ID del EditText del valor ingresado
         et_productValue = (EditText) findViewById(R.id.editText);
@@ -63,7 +63,7 @@ public class BasketActivity extends AppCompatActivity {
         }
 
         // Suma el nuevo valor al total (redondeando [FLOOR] para obtener hasta 2 decimales)
-        String st_newTotal = wm.addValues(st_total,st_newValue);
+        String st_newTotal = wm.addValues(st_total_purchase,st_newValue);
 
         // Si el total en la billetera no alcanza para pagar la compra total...
         if ( wm.isGreaterThanTotalWallet(st_newTotal) ) {
@@ -74,11 +74,11 @@ public class BasketActivity extends AppCompatActivity {
         } else {
 
             // Si alcanza, agrego el importe al total de la compra
-            st_total = st_newTotal;
+            st_total_purchase = st_newTotal;
 
             // Actualiza el valor total actual en la vista
             TextView textView = findViewById(R.id.textView);
-            textView.setText(getString(R.string.total_value) + st_total);
+            textView.setText(getString(R.string.total_value) + st_total_purchase);
         }
 
         // Blanquea el valor a ingresar en la vista
@@ -86,7 +86,7 @@ public class BasketActivity extends AppCompatActivity {
 
         // Si el total es mayor a cero, habilito el botón para pagar
         Button payButton = (Button) findViewById(R.id.button3);
-        if (wm.isGreaterThanValueCero(st_total)) {
+        if (wm.isGreaterThanValueCero(st_total_purchase)) {
             payButton.setEnabled(true);
         }
 
@@ -100,7 +100,7 @@ public class BasketActivity extends AppCompatActivity {
         if (!(et_productValue.getText().toString().isEmpty())) et_productValue.setText(getString(R.string.empty_string));
 
         Intent intent = new Intent(this, OrderTotalActivity.class);
-        intent.putExtra(getString(R.string.tag_total_value), String.valueOf(st_total));
+        intent.putExtra(getString(R.string.tag_total_value), String.valueOf(st_total_purchase));
         startActivity(intent);
     }
 
