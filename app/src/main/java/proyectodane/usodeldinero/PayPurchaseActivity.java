@@ -45,7 +45,6 @@ public class PayPurchaseActivity extends AppCompatActivity {
         // Obtengo el intent que inició el activity y extraigo el valor del total
         Intent intent = getIntent();
         st_totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
-        // TODO: Luego se usa el total para calcular el vuelto que debo recibir
 
         // Calculo todos los valores a usar para pagar
         moneyValueNames = wm.obtainMoneyValueNamesOfPayment(this,st_totalPurchase);
@@ -76,13 +75,15 @@ public class PayPurchaseActivity extends AppCompatActivity {
      *  Envía a la pantalla de control de vuelto
      **/
     public void sendToControlChange(View view) {
-        // TODO: Primero verificar con si el vuelto es 0, ya que en ese caso no hace falta controlar el vuelto
-        // TODO: Crear acá también un sendToFinalizePurchase(), para los casos donde el vuelto es 0 (Con un listado de billetes vacío)
 
-        st_change = getString(R.string.value_10); // TODO: Reemplazar por la linea que calcula el vuelto
-        Intent intent = new Intent(this, ControlChangeActivity.class);
-        intent.putExtra(getString(R.string.tag_total_change),st_change); // TODO: Enviar el cambio (importe) que debo recibir
-        startActivity(intent);
+        if ( wm.isChangeExpected(st_totalPurchase) ) {
+            Intent intent = new Intent(this, ControlChangeActivity.class);
+            intent.putExtra(getString(R.string.tag_total_value),st_totalPurchase);
+            startActivity(intent);
+        } else {
+            sendToFinalizePurchase(view);
+        }
+
     }
 
     @Override
@@ -94,9 +95,11 @@ public class PayPurchaseActivity extends AppCompatActivity {
      *  Envía a la pantalla de finalización de la compra (para los casos donde el vuelto es nulo)
      **/
     public void sendToFinalizePurchase(View view) {
-        // TODO: Implementar en R3. Se debe mandar un listado vacío, ya que el vuelto es nulo
         Intent intent = new Intent(this, FinalizePurchaseActivity.class);
-        ArrayList<String> al_receivedChange = new ArrayList<String>(); //
+
+        // Creo un array vacío (que representa un vuelto nulo)
+        ArrayList<String> al_receivedChange = new ArrayList<String>();
+
         intent.putStringArrayListExtra(getString(R.string.received_change),al_receivedChange);
         startActivity(intent);
     }

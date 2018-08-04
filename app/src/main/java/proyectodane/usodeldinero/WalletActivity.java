@@ -30,19 +30,10 @@ public class WalletActivity extends AppCompatActivity {
     private ArrayList<String> loadMoneyValueNames;
 
     /**
-     * ArrayList con todos los valores de billetes/monedas existentes
-     */
-    private ArrayList<String> moneyValueNames;
-
-    /**
      * Clase que se encarga de manejar lo referido al slide de imágenes y puntos
      */
     private ImageSlideManager imageSlideManager;
 
-    /**
-     * Instancia de WalletManager
-     */
-    private static final WalletManager wm = WalletManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +41,7 @@ public class WalletActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wallet);
 
         // Calculo todos los valores a usar para pagar
-        moneyValueNames = wm.obtainMoneyValueNamesOfValidCurrency(this);
+        ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfValidCurrency(this);
 
         // Cargo el slide de imágenes y puntos indicadores
         // Parámetros:  + (1)Contexto
