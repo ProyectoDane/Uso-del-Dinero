@@ -69,7 +69,7 @@ public class BasketActivity extends AppCompatActivity {
         if ( wm.isGreaterThanTotalWallet(st_newTotal) ) {
 
             // Aviso que el dinero es insuficiente y descarto la suma
-            Snackbar.make(findViewById(R.id.myCoordinatorLayout),R.string.insufficient_funds,Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.coordinatorLayout_Basquet),R.string.insufficient_funds,Snackbar.LENGTH_LONG).show();
 
         } else {
 

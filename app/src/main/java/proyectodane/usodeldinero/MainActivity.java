@@ -1,12 +1,15 @@
 package proyectodane.usodeldinero;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 
@@ -58,5 +61,30 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Muestra el texto de ayuda para este activity
+     **/
+    public void showHelp(View view) {
+        //Snackbar.make(findViewById(R.id.coordinatorLayout_Main),R.string.help_text_main,Snackbar.LENGTH_LONG).show(); // TODO: Versión original, borrar luego de implementar la nueva versión
+
+        // Creo el Snackbar
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.coordinatorLayout_Main),R.string.help_text_main,Snackbar.LENGTH_LONG);
+
+        // Agrego un botón al Snackbar
+        snackbar.setAction("Listo",new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Acá se inicia la acción al presionar el botón del Snackbar
+            }
+        });
+
+        // Obtengo el view del Snackbar para luego setear la cantidad máxima de líneas de texto permitidas
+        View snackBarView = snackbar.getView();
+        TextView snackBarTextView = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_text);
+        snackBarTextView.setMaxLines(4);
+
+        // Muestro el Snackbar
+        snackbar.show();
+    }
 
 }

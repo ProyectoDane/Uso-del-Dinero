@@ -50,6 +50,10 @@
     <string name="value_40">40.00</string>
 
 
+    <!-- Identificadores funcionales al código - [Main]  -->
+    <string name="help_text_main">Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main, Texto de ayuda para el activity main</string>
+
+
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
     <string name="value_0">0.00</string>
     <string name="value_10">10.00</string>
@@ -101,7 +105,7 @@
     <string name="cancel_purchase">CANCELAR COMPRA</string>
     <string name="purchase_payed">COMPRA PAGADA</string>
     <string name="payment_of_the_purchase">PAGO DE LA COMPRA</string>
-
+    <string name="help">AYUDA</string>
 
 
     <!-- ************************************************************* -->
