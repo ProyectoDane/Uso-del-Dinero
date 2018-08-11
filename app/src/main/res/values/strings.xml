@@ -35,6 +35,8 @@
     <!-- Identificadores funcionales al código - [ControlChange]  -->
     <string name="change_OK"> - VUELTO CORRECTO</string>
     <string name="change_amount">VUELTO TOTAL: $</string>
+    <string name="help_text_control_change">AYUDA:\n[VUELTO TOTAL] Indica el todo el vuelto recibido.\n[Imágenes de billetes y monedas] Se muestran todos los valores para seleccionar el vuelto que se recibe.\n[AGREGAR VUELTO] Agrega el valor mostrado en imagen al vuelto y lo suma al acumulado.\n[ACEPTAR VUELTO] Confirma la recepción del vuelto y envía a la pantalla de finalización.</string>
+
 
     <!-- Identificadores funcionales al código - Bundle (Paso de parámetros ente activities) -->
     <string name="tag_total_value">valor_total</string>
