@@ -29,6 +29,7 @@
     <string name="value_20">20.00</string>
     <string name="total_value">VALOR TOTAL: $</string>
     <string name="insufficient_funds">DINERO INSUFICIENTE PARA AGREGAR ESTE PRODUCTO</string>
+    <string name="help_text_basket">AYUDA:\n(1) Usar [INGRESAR PRECIO] para ingresar el valor del producto.\n(2) Luego tocar [AGREGAR] para sumarlo a la compra.\n(3) Reiterar (1) y (2) para comprar varios productos.\n[VALOR TOTAL] Muestra el valor de todos los productos acumulados.\n[CANCELAR] Anula la compra y vuelve a la vista de la billetera.\n[COMPRAR] Envía a la pantalla de confirmación de la compra.</string>
 
 
     <!-- Identificadores funcionales al código - [ControlChange]  -->
