@@ -99,8 +99,8 @@
             android:onClick="showHelp"
             android:text="@string/help"
             android:textAlignment="center"
+            android:textAllCaps="false"
             android:textSize="24sp"
-            android:textStyle="bold|italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

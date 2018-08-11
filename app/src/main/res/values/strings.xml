@@ -51,7 +51,7 @@
 
 
     <!-- Identificadores funcionales al código - [Main]  -->
-    <string name="help_text_main">Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main,Texto de ayuda para el activity main, Texto de ayuda para el activity main</string>
+    <string name="help_text_main">AYUDA:\n(1) "DINERO AHORRADO" muestra todo el ahorro en la billetera.\n(2) Se muestran imágenes de todos los billetes y monedas que contiene.\n(3) CARGAR BILLETERA" permite agregar nuevos billetes y monedas.\n(4) "INICIAR COMPRA" permite comprar productos.</string>
 
 
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
