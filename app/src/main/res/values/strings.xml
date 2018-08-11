@@ -48,10 +48,11 @@
 
     <!-- Identificadores funcionales al código - [WalletManager]  -->
     <string name="value_40">40.00</string>
+    <string name="help_text_wallet">AYUDA:\n[CARGA] Indica el dinero que se va a agregar a la billetera.\n[TOTAL EN BILLETERA] Muestra el dinero total si realizo la carga.\n[Imágenes de billetes y monedas] Se muestran todos los valores a elegir para la carga.\n[CANCELAR CARGA] Anula la carga y vuelve a la vista de la billetera.\n[AGREGAR] Carga el billete o moneda actualmente mostrado en imagen.\n[GUARDAR EN BILLETERA] Ingresa en la billetera todos los billetes y monedas cargados.</string>
 
 
     <!-- Identificadores funcionales al código - [Main]  -->
-    <string name="help_text_main">AYUDA:\n(1) "DINERO AHORRADO" muestra todo el ahorro en la billetera.\n(2) Se muestran imágenes de todos los billetes y monedas que contiene.\n(3) CARGAR BILLETERA" permite agregar nuevos billetes y monedas.\n(4) "INICIAR COMPRA" permite comprar productos.</string>
+    <string name="help_text_main">AYUDA:\n[DINERO AHORRADO] Muestra todo el ahorro en la billetera.\n[Imágenes de billetes y monedas] Se muestran todos los valores que contiene la billetera.\n[CARGAR BILLETERA] Permite agregar nuevos billetes y monedas.\n[INICIAR COMPRA] Permite comprar productos.</string>
 
 
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
