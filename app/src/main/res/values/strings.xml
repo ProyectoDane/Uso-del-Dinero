@@ -20,7 +20,7 @@
     <!-- ************************************* -->
 
 
-    <!-- Identificadores funcionales al código - [Basket]  -->
+    <!-- Identificadores funcionales al código - [Basket] TODO: Ver si se borra esta línea -->
     <string name="saved_money">DINERO AHORRADO: $</string>
 
 
@@ -55,6 +55,9 @@
     <!-- Identificadores funcionales al código - [Main]  -->
     <string name="help_text_main">AYUDA:\n[DINERO AHORRADO] Muestra todo el ahorro en la billetera.\n[Imágenes de billetes y monedas] Se muestran todos los valores que contiene la billetera.\n[CARGAR BILLETERA] Permite agregar nuevos billetes y monedas.\n[INICIAR COMPRA] Permite comprar productos.</string>
 
+
+    <!-- Identificadores funcionales al código - [PayPurchase]  -->
+    <string name="help_text_pay_purchase">AYUDA:\n[Imágenes de billetes y monedas] Se muestran todos los valores a retirar de la billetera para el pago.\n[CANCELAR COMPRA] Anula la carga y vuelve a la vista de la billetera.\n[COMPRA PAGADA] Confirma el pago y envía a la pantalla de recepción de vuelto (si es necesario).</string>
 
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
     <string name="value_0">0.00</string>
