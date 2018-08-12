@@ -20,7 +20,7 @@
     <!-- ************************************* -->
 
 
-    <!-- Identificadores funcionales al código - [Basket]  -->
+    <!-- Identificadores funcionales al código - [Basket] TODO: Ver si se borra esta línea -->
     <string name="saved_money">DINERO AHORRADO: $</string>
 
 
@@ -29,11 +29,14 @@
     <string name="value_20">20.00</string>
     <string name="total_value">VALOR TOTAL: $</string>
     <string name="insufficient_funds">DINERO INSUFICIENTE PARA AGREGAR ESTE PRODUCTO</string>
+    <string name="help_text_basket">AYUDA:\n(1) Usar [INGRESAR PRECIO] para ingresar el valor del producto.\n(2) Luego tocar [AGREGAR] para sumarlo a la compra.\n(3) Reiterar (1) y (2) para comprar varios productos.\n[VALOR TOTAL] Muestra el valor de todos los productos acumulados.\n[CANCELAR] Anula la compra y vuelve a la vista de la billetera.\n[COMPRAR] Envía a la pantalla de confirmación de la compra.</string>
 
 
     <!-- Identificadores funcionales al código - [ControlChange]  -->
     <string name="change_OK"> - VUELTO CORRECTO</string>
     <string name="change_amount">VUELTO TOTAL: $</string>
+    <string name="help_text_control_change">AYUDA:\n[VUELTO TOTAL] Indica el todo el vuelto recibido.\n[Imágenes de billetes y monedas] Se muestran todos los valores para seleccionar el vuelto que se recibe.\n[AGREGAR VUELTO] Agrega el valor mostrado en imagen al vuelto y lo suma al acumulado.\n[ACEPTAR VUELTO] Confirma la recepción del vuelto y envía a la pantalla de finalización.</string>
+
 
     <!-- Identificadores funcionales al código - Bundle (Paso de parámetros ente activities) -->
     <string name="tag_total_value">valor_total</string>
@@ -48,7 +51,15 @@
 
     <!-- Identificadores funcionales al código - [WalletManager]  -->
     <string name="value_40">40.00</string>
+    <string name="help_text_wallet">AYUDA:\n[CARGA] Indica el dinero que se va a agregar a la billetera.\n[TOTAL EN BILLETERA] Muestra el dinero total si realizo la carga.\n[Imágenes de billetes y monedas] Se muestran todos los valores a elegir para la carga.\n[CANCELAR CARGA] Anula la carga y vuelve a la vista de la billetera.\n[AGREGAR] Carga el billete o moneda actualmente mostrado en imagen.\n[GUARDAR EN BILLETERA] Ingresa en la billetera todos los billetes y monedas cargados.</string>
 
+
+    <!-- Identificadores funcionales al código - [Main]  -->
+    <string name="help_text_main">AYUDA:\n[DINERO AHORRADO] Muestra todo el ahorro en la billetera.\n[Imágenes de billetes y monedas] Se muestran todos los valores que contiene la billetera.\n[CARGAR BILLETERA] Permite agregar nuevos billetes y monedas.\n[INICIAR COMPRA] Permite comprar productos.</string>
+
+
+    <!-- Identificadores funcionales al código - [PayPurchase]  -->
+    <string name="help_text_pay_purchase">AYUDA:\n[Imágenes de billetes y monedas] Se muestran todos los valores a retirar de la billetera para el pago.\n[CANCELAR COMPRA] Anula la carga y vuelve a la vista de la billetera.\n[COMPRA PAGADA] Confirma el pago y envía a la pantalla de recepción de vuelto (si es necesario).</string>
 
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
     <string name="value_0">0.00</string>
@@ -101,7 +112,7 @@
     <string name="cancel_purchase">CANCELAR COMPRA</string>
     <string name="purchase_payed">COMPRA PAGADA</string>
     <string name="payment_of_the_purchase">PAGO DE LA COMPRA</string>
-
+    <string name="help">AYUDA</string>
 
 
     <!-- ************************************************************* -->

@@ -140,4 +140,14 @@ public class ControlChangeActivity extends AppCompatActivity {
         return changeOk;
     }
 
+
+    /**
+     * Muestra el texto de ayuda para este activity
+     **/
+    public void showHelp(View view) {
+        SnackBarManager sb = new SnackBarManager();
+        sb.showTextIndefiniteOnClickActionDisabled(this,view,findViewById(R.id.coordinatorLayout_ControlChange),getString(R.string.help_text_control_change),10);
+    }
+
+
 }

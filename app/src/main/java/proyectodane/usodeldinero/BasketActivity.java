@@ -69,7 +69,7 @@ public class BasketActivity extends AppCompatActivity {
         if ( wm.isGreaterThanTotalWallet(st_newTotal) ) {
 
             // Aviso que el dinero es insuficiente y descarto la suma
-            Snackbar.make(findViewById(R.id.myCoordinatorLayout),R.string.insufficient_funds,Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.coordinatorLayout_Basquet),R.string.insufficient_funds,Snackbar.LENGTH_LONG).show();
 
         } else {
 
@@ -111,5 +111,12 @@ public class BasketActivity extends AppCompatActivity {
         et_productValue.setText(getString(R.string.empty_string));
     }
 
+    /**
+     * Muestra el texto de ayuda para este activity
+     **/
+    public void showHelp(View view) {
+        SnackBarManager sb = new SnackBarManager();
+        sb.showTextIndefiniteOnClickActionDisabled(this,view,findViewById(R.id.coordinatorLayout_Basquet),getString(R.string.help_text_basket),7);
+    }
 
 }

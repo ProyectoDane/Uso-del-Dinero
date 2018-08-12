@@ -105,4 +105,12 @@ public class PayPurchaseActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Muestra el texto de ayuda para este activity
+     **/
+    public void showHelp(View view) {
+        SnackBarManager sb = new SnackBarManager();
+        sb.showTextIndefiniteOnClickActionDisabled(this,view,findViewById(R.id.coordinatorLayout_PayPurchase),getString(R.string.help_text_pay_purchase),10);
+    }
+
 }
