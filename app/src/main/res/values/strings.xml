@@ -26,7 +26,6 @@
 
     <!-- Identificadores funcionales al código - [Basket]  -->
     <string name="empty_string"></string>
-    <string name="value_20">20.00</string>
     <string name="total_value">VALOR TOTAL: $</string>
     <string name="insufficient_funds">DINERO INSUFICIENTE PARA AGREGAR ESTE PRODUCTO</string>
     <string name="help_text_basket">AYUDA:\n(1) Usar [INGRESAR PRECIO] para ingresar el valor del producto.\n(2) Luego tocar [AGREGAR] para sumarlo a la compra.\n(3) Reiterar (1) y (2) para comprar varios productos.\n[VALOR TOTAL] Muestra el valor de todos los productos acumulados.\n[CANCELAR] Anula la compra y vuelve a la vista de la billetera.\n[COMPRAR] Envía a la pantalla de confirmación de la compra.</string>
@@ -62,7 +61,6 @@
     <string name="help_text_pay_purchase">AYUDA:\n[Imágenes de billetes y monedas] Se muestran todos los valores a retirar de la billetera para el pago.\n[CANCELAR COMPRA] Anula la carga y vuelve a la vista de la billetera.\n[COMPRA PAGADA] Confirma el pago y envía a la pantalla de recepción de vuelto (si es necesario).</string>
 
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
-    <string name="value_0">0.00</string>
     <string name="value_10">10.00</string>
 
 
@@ -103,6 +101,8 @@
 
     <!-- ID de los textos de componentes de las activities - [Wallet]  -->
     <string name="load_and_total_wallet_preview">CARGA: $ - TOTAL EN BILLETERA: $</string>
+    <string name="load_cash_sign">CARGA: $</string>
+    <string name="total_cash_sign">TOTAL EN BILLETERA: $</string>
     <string name="cancel_load">CANCELAR CARGA</string>
     <string name="add">AGREGAR</string>
     <string name="save_in_wallet">GUARDAR EN BILLETERA</string>
@@ -119,7 +119,8 @@
     <!-- ID de los textos de componentes de las activities y en código -->
     <!-- ************************************************************* -->
     <string name="total_purchase">COMPRA TOTAL: $</string>
-
+    <string name="value_0">0.00</string>
+    <string name="value_20">20.00</string>
 
 
     <!-- TODO: Quitar al final del desarrollo -->

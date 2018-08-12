@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,14 +17,14 @@ import java.util.Map;
 public class WalletActivity extends AppCompatActivity {
 
     /**
-     * Importe total a de la billetera, sin sumar la carga
+     * Importe total a de la billetera, con la suma de la carga
      */
-    private String st_total_wallet;
+    private String st_total;
 
     /**
-     * Importe total a cargar
+     * Importe a cargar
      */
-    private String st_total_load;
+    private String st_subtotal;
 
     /**
      * ArrayList con todos los valores de billetes/monedas a cargar en la billetera
@@ -39,6 +41,11 @@ public class WalletActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallet);
+
+        // Actualizo el valor del total e inicio el subtotal en cero
+        st_subtotal = getString(R.string.value_0);
+        st_total = getString(R.string.value_20); // TODO: Actualizar con el valor de la billetera (WalletManager)
+        refreshSubtotalAndTotal(st_subtotal,st_total);
 
         // Calculo todos los valores a usar para pagar
         ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfValidCurrency(this);
@@ -84,6 +91,14 @@ public class WalletActivity extends AppCompatActivity {
     public void showHelp(View view) {
         SnackBarManager sb = new SnackBarManager();
         sb.showTextIndefiniteOnClickActionDisabled(this,view,findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.help_text_wallet),7);
+    }
+
+    /**
+     * Actualiza el valor de la carga y del total
+     **/
+    public void refreshSubtotalAndTotal(String subtotal, String total) {
+        TextView textView = findViewById(R.id.textView6);
+        textView.setText(getString(R.string.load_cash_sign) + subtotal + " - " + getString(R.string.total_cash_sign) + total);
     }
 
 }
