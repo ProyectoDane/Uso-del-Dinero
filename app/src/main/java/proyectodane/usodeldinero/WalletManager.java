@@ -16,6 +16,7 @@ public class WalletManager {
     private static final WalletManager ourInstance = new WalletManager();
 
     /**
+     * Archivo que contiene:
      * Valores de los billetes/monedas vigentes en circulación.
      * Las imágenes relacionadas con cada billete/moneda tendrán el mismo nombre que su ID.
      * Key: ID moneda (String)  Value: Valor de la moneda (String)
@@ -23,6 +24,7 @@ public class WalletManager {
     private SharedPreferences validCurrency;
 
     /**
+     * Archivo que contiene:
      * Cada uno de los billetes/monedas guardados en la billetera.
      * Las imágenes relacionadas con cada billete/moneda tendrán el mismo nombre que su ID.
      * Key: ID moneda (String)  Value: Valor de la moneda (String).
@@ -35,6 +37,13 @@ public class WalletManager {
     public static WalletManager getInstance() {
         return ourInstance;
     }
+
+
+
+    //****************************************
+    //* Métodos de carga y guardado privados *
+    //****************************************
+
 
     /**
      * Obtengo un Map con los valores de los billetes/monedas vigentes en circulación.
@@ -96,6 +105,71 @@ public class WalletManager {
         editor.apply();
     }
 
+
+
+
+    //****************************************
+    //* Métodos de carga y guardado públicos *
+    //****************************************
+
+
+    // *** Alta y Baja de nuevos valores ***
+
+    // TODO: Implementar Método: Agregar nuevo billete/moneda (Input: ID_moneda (Str), Valor en $ (Str) )
+    /**
+     * Guardo un nuevo billete/moneda vigente para ser usado luego como moneda nueva
+     * de la billetera
+     * */
+    public void addNewCurrency(String idCurrency, String currencyValue){
+
+    }
+
+
+    // TODO: Implementar Método: Borrar billete/moneda actual (Input: ID_moneda (Str))
+    /**
+     * Borro un billete/moneda vigente, el cual dejará de ser usado como moneda de pago
+     * de la billetera
+     * */
+    public void deleteExistingCurrency(String idCurrency){
+
+    }
+
+
+
+    // *** Manejo de los valores actuales en la billetera ***
+
+
+    // TODO: Implementar Método: Guardar un billete/moneda en billetera (Input: ID_moneda (Str))
+    /**
+     * Agrego un billete/moneda a la billetera
+     * */
+    public void addCurrencyInWallet(String idCurrency){
+
+    }
+
+
+    // TODO: Implementar Método: Sacar un billete/moneda de billetera (Input: ID_moneda (Str))
+    /**
+     * Quito un billete/moneda de la billetera
+     * */
+    public void removeCurrencyFromWallet(String idCurrency){
+
+    }
+
+
+    // TODO: Implementar Método: Sacar todo de la billetera
+    /**
+     * Quito todos los valores existentes en la billetera, la vacío.
+     * */
+    private void removeAllCurrencyFromWallet(){
+
+    }
+
+
+
+    // *** Formato de valores en String ***
+
+
     /**
      * Verdadero si el String tiene formato numérico de importe válido
      * */
@@ -112,28 +186,10 @@ public class WalletManager {
         return isValid;
     }
 
-    /**
-     * Verdadero si el val (con formato numérico de importe) es mas grande
-     * que el valor de importe total actual de la billetera
-     * */
-    public boolean isGreaterThanTotalWallet(String val) {
 
-        boolean isGreater = false;
 
-        //TODO: Cargar el valor real de la billetera
-        String st_totalWallet = "20.00";
+    // *** Comparación de valores ***
 
-        // Instancio los BigDecimal
-        BigDecimal bd_value = new BigDecimal(val);
-        BigDecimal bd_total = new BigDecimal(st_totalWallet);
-
-        //Comparo los valores: Devuelve 1 si "bd_value" > "bd_total" )
-        if (bd_value.compareTo(bd_total) == 1) {
-            isGreater = true;
-        }
-
-        return isGreater;
-    }
 
     /**
      * Verdadero si el valueA (con formato numérico de importe) es mas grande
@@ -155,6 +211,16 @@ public class WalletManager {
         return isGreater;
     }
 
+
+    /**
+     * Verdadero si el val (con formato numérico de importe) es mas grande
+     * que el valor de importe total actual de la billetera
+     * */
+    public boolean isGreaterThanTotalWallet(String val) {
+        return isValueAGreaterThanValueB(val,obtainTotalCreditInWallet());
+    }
+
+
     /**
      * Verdadero si el valueA (con formato numérico de importe) es igual o mayor
      * que el valueB (con formato numérico de importe)
@@ -175,6 +241,7 @@ public class WalletManager {
         return isGreaterOrEqual;
     }
 
+
     /**
      * Verdadero si el value (con formato numérico de importe) es mas grande
      * que el valor *Cero* (con formato numérico de importe)
@@ -183,11 +250,14 @@ public class WalletManager {
         return isValueAGreaterThanValueB(value,BigDecimal.ZERO.toPlainString());
     }
 
+
+    // *** Operaciones matemáticas con valores ***
+
     /**
      * Sumo dos valores: val_1 y val_2 (con formato numérico de importe)
      * Y devuelvo un string con el resultado (con formato numérico de importe), el cual
      * tiene como formato establecido un máximo de 2 dígitos decimales,
-     * redondeando hacia abajo (truncando) en los casos donde sea necesario
+     * redondeando hacia abajo (truncado) en los casos donde sea necesario
      * */
     public String addValues(String val_1, String val_2){
 
@@ -207,14 +277,16 @@ public class WalletManager {
     }
 
 
-    //TODO: Sacar el context como parámetro solicitado, una vez implementada la forma definitiva
+
+    // *** Lectura de datos - Funcionales a las activities***
+
+
+    // Todo: Reemplazar esta forma de carga con la definitiva
     /**
      * Creo la lista de nombres de las imágenes de los valores
      * a partir de todos billetes/monedas existentes
      * */
     public ArrayList<String> obtainMoneyValueNamesOfValidCurrency(Context context){
-
-        // Todo: Reemplazar esta forma de carga con la definitiva
 
         // Creo un Map con valores a guardar en el WalletManager
         Map<String,String> tempMapSave = new HashMap<String,String>();
@@ -250,6 +322,7 @@ public class WalletManager {
         return list;
     }
 
+
     //TODO: Reemplazar por implementación definitiva
     //TODO: Sacar el context como parámetro solicitado, una vez implementada la forma definitiva
     /**
@@ -273,6 +346,7 @@ public class WalletManager {
         return valueNames;
     }
 
+
     //TODO: Implementar: Devolver los billetes/moneda que hay en billetera (CurrencyInWallet)
     /**
      * Creo la lista de nombres de las imágenes de los valores actualmente en la billetera
@@ -292,31 +366,31 @@ public class WalletManager {
     }
 
 
-
+    //TODO: Implementar: Recorrer todos los valores en la billetera y sumar sus valores, luego devolver el valor total
     /**
      * Obtengo el saldo total actual en la billetera
      * */
-    public String obtainTotalCreditInWallet(Context context){
+    public String obtainTotalCreditInWallet(){
 
-        // Instancio la lista de valores
-        String st_total = context.getString(R.string.value_40);
-
-        //TODO: Implementar: Recorrer todos los valores en la billetera y sumar sus valores, luego devolver el valor total
+        String st_total = "20.00";
 
         return st_total;
     }
 
+    //TODO: Implementar: Buscar con el ID entre todos los valores existentes y devolver el valor del mismo
     /**
-     * Guardo en la billetera la lista de nombres de las imágenes
-     * de los valores recibidos como vuelto
+     * Obtengo el saldo total actual en la billetera
      * */
-    public void saveChangeInWallet(ArrayList<String> listOfNames){
+    public String obtainValueFormID(String valueID){
 
-    // TODO: Implementar: Guardar ArrayList de billetes/monedas en billetera, dado un vuelto recibido
+        String st_total = "10.00";
 
+        return st_total;
     }
 
 
+
+    // TODO: Implementar Método: Devolver el importe de vuelto esperado
     /**
      * Devuelvo el importe de vuelto que debería recibir, en base al importe que se tiene que pagar
      * y en base a los billetes/monedas que serán usados para el pago (guardados en la billetera)
@@ -324,8 +398,6 @@ public class WalletManager {
     public String expectedChangeValue(String valueToPay, Context context){
 
         String expectedChange = context.getString(R.string.value_10);
-
-        // TODO: Implementar Método: Devolver el importe de vuelto esperado
 
         return expectedChange;
     }
@@ -340,6 +412,7 @@ public class WalletManager {
     }
 
 
+    // TODO: Implementar Método: Devolver si corresponde recibir vuelto
     /**
      * Devuelvo true si corresponde recibir vuelto, en base al importe que se tiene que pagar
      * y en base a los billetes/monedas que serán usados para el pago (guardados en la billetera)
@@ -348,49 +421,24 @@ public class WalletManager {
 
         boolean isChangeExpected = true;
 
-        // TODO: Implementar Método: Devolver si corresponde recibir vuelto
-
         return isChangeExpected;
     }
 
 
-    /**
-     * Guardo un nuevo billete/moneda vigente para ser usado luego como moneda nueva
-     * de la billetera
-     * */
-    public void addNewCurrency(String idCurrency, String currencyValue){
 
-        // TODO: Implementar Método: Agregar nuevo billete/moneda (Input: ID_moneda (Str), Valor en $ (Str) )
+    // *** Escritura de datos - Funcionales a las activities***
+
+
+    // TODO: Implementar: Guardar ArrayList de billetes/monedas en billetera, dado un vuelto recibido
+    /**
+     * Guardo en la billetera la lista de nombres de las imágenes
+     * de los valores recibidos como vuelto
+     * */
+    public void saveChangeInWallet(ArrayList<String> listOfNames){
+
 
     }
 
-    /**
-     * Borro un billete/moneda vigente, el cual dejará de ser usado como moneda de pago
-     * de la billetera
-     * */
-    public void deleteExistingCurrency(String idCurrency){
-
-        // TODO: Implementar Método: Borrar billete/moneda actual (Input: ID_moneda (Str))
-
-    }
-
-    /**
-     * Agrego un billete/moneda a la billetera
-     * */
-    public void addCurrencyInWallet(String idCurrency){
-
-        // TODO: Implementar Método: Guardar un billete/moneda en billetera (Input: ID_moneda (Str))
-
-    }
-
-    /**
-     * Quito un billete/moneda de la billetera
-     * */
-    public void removeCurrencyFromWallet(String idCurrency){
-
-        // TODO: Implementar Método: Sacar un billete/moneda de billetera (Input: ID_moneda (Str))
-
-    }
 
 
 }

@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
      **/
     public void showHelp(View view) {
         SnackBarManager sb = new SnackBarManager();
-        sb.showTextIndefiniteOnClickActionDisabled(this,view,findViewById(R.id.coordinatorLayout_Main),getString(R.string.help_text_main),5);
+        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_Main),getString(R.string.help_text_main),5);
     }
 
 }

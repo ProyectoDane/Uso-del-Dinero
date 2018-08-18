@@ -11,12 +11,12 @@ public class SnackBarManager {
 
     /**
      * Muestra el texto de ayuda en un Snackbar para este activity
-     * Con duración ilimitada y con botón el cual no tiene acción asociada
+     * Con duración determinada por parámetro y con botón el cual no tiene acción asociada
      **/
-    public void showTextIndefiniteOnClickActionDisabled(Context context, View view, View snackbarView, String textMsg, int maxLines) {
+    private void showTextOnClickActionDisabled(View snackbarView, String textMsg, int maxLines, int duration) {
 
         // Creo el Snackbar, el cual se mostrará indefinidamente en el tiempo
-        Snackbar snackbar = Snackbar.make(snackbarView,textMsg,Snackbar.LENGTH_INDEFINITE);
+        Snackbar snackbar = Snackbar.make(snackbarView,textMsg,duration);
 
         // Agrego un botón dentro del Snackbar
         snackbar.setAction("Listo",new View.OnClickListener() {
@@ -34,5 +34,23 @@ public class SnackBarManager {
         // Muestro el Snackbar
         snackbar.show();
     }
+
+    /**
+     * Muestra el texto de ayuda en un Snackbar para este activity
+     * Con duración ilimitada y con botón el cual no tiene acción asociada
+     **/
+    public void showTextIndefiniteOnClickActionDisabled(View snackbarView, String textMsg, int maxLines) {
+        showTextOnClickActionDisabled(snackbarView,textMsg,maxLines,Snackbar.LENGTH_INDEFINITE);
+    }
+
+    /**
+     * Muestra el texto de ayuda en un Snackbar para este activity
+     * Con duración corta de tiempo y con botón el cual no tiene acción asociada
+     **/
+    public void showTextShortOnClickActionDisabled(View snackbarView, String textMsg, int maxLines) {
+        showTextOnClickActionDisabled(snackbarView,textMsg,maxLines,Snackbar.LENGTH_SHORT);
+    }
+
+
 
 }
