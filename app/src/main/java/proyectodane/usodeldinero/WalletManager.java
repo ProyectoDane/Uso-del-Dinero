@@ -341,7 +341,6 @@ public class WalletManager {
         // TODO: ...que tenga los ID que representen cada billete: [img_07_p50,img_05_p20,img_03_p10,img_03_p10]
         // Cargo la lista de valores
         valueNames.add(context.getString(R.string.tag_p20));
-        valueNames.add(context.getString(R.string.tag_p20));
 
         return valueNames;
     }
@@ -359,7 +358,6 @@ public class WalletManager {
 
 
         // Cargo la lista de valores
-        valueNames.add(context.getString(R.string.tag_p20));
         valueNames.add(context.getString(R.string.tag_p20));
 
         return valueNames;
