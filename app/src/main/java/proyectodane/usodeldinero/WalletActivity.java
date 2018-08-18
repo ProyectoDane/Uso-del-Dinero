@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,14 +17,14 @@ import java.util.Map;
 public class WalletActivity extends AppCompatActivity {
 
     /**
-     * Importe total a de la billetera, sin sumar la carga
+     * Importe total a de la billetera, con la suma de la carga
      */
-    private String st_total_wallet;
+    private String st_total;
 
     /**
-     * Importe total a cargar
+     * Importe a cargar
      */
-    private String st_total_load;
+    private String st_subtotal;
 
     /**
      * ArrayList con todos los valores de billetes/monedas a cargar en la billetera
@@ -34,14 +36,23 @@ public class WalletActivity extends AppCompatActivity {
      */
     private ImageSlideManager imageSlideManager;
 
+    /**
+     * Instancia de WalletManager
+     */
+    private static final WalletManager wm = WalletManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallet);
 
+        // Actualizo el valor del total e inicio el subtotal en cero
+        st_subtotal = getString(R.string.value_0);
+        st_total = getString(R.string.value_20); // TODO: Actualizar con el valor de la billetera (WalletManager)
+        refreshSubtotalAndTotal();
+
         // Calculo todos los valores a usar para pagar
-        ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfValidCurrency(this);
+        ArrayList<String> moneyValueNames = wm.obtainMoneyValueNamesOfValidCurrency(this);
 
         // Cargo el slide de imágenes y puntos indicadores
         // Parámetros:  + (1)Contexto
@@ -85,5 +96,22 @@ public class WalletActivity extends AppCompatActivity {
         SnackBarManager sb = new SnackBarManager();
         sb.showTextIndefiniteOnClickActionDisabled(this,view,findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.help_text_wallet),7);
     }
+
+    /**
+     * Actualiza el valor de la carga y del total
+     **/
+    public void refreshSubtotalAndTotal() {
+        TextView textView = findViewById(R.id.textView6);
+        textView.setText(getString(R.string.load_cash_sign) + st_subtotal + " - " + getString(R.string.total_cash_sign) + st_total);
+    }
+
+/*
+    public void addValueToSubtotal (View view) {
+        String st_value = getString(R.string.value_10); //TODO: Implementar la carga del valor a través de la selección de la imagen actualmente mostrada
+        st_subtotal = wm.addValues(st_value,st_subtotal);
+        refreshSubtotalAndTotal();
+    }
+*/
+
 
 }
