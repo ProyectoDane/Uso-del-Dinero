@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.design.widget.CoordinatorLayout xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinatorLayout_ControlChange"
+    android:id="@+id/coordinatorLayout_Wallet"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -12,16 +12,16 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ControlChangeActivity">
+        tools:context=".WalletActivity">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
-            android:text="@string/change_amount_zero"
+            android:text="@string/load_and_total_wallet_preview"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -29,68 +29,83 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/button12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginStart="32dp"
-            android:onClick="addToChange"
-            android:text="@string/add_to_change"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:onClick="cancelLoad"
+            android:text="@string/cancel_load"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button10"
+            app:layout_constraintEnd_toStartOf="@+id/button14"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/button14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginStart="32dp"
-            android:enabled="false"
-            android:onClick="sendToFinalizePurchase"
-            android:text="@string/accept_change"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:onClick="addValueToSubtotal"
+            android:text="@string/add"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button13"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button12" />
+
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/save_in_wallet"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button9" />
+            app:layout_constraintStart_toEndOf="@+id/button14" />
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/pager_change"
+            android:id="@+id/pager_wallet"
             android:layout_width="500dp"
             android:layout_height="210dp"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/button9"
+            app:layout_constraintBottom_toTopOf="@+id/button12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView6"
             app:layout_constraintVertical_bias="0.502" />
 
         <LinearLayout
-            android:id="@+id/SliderDots_change"
+            android:id="@+id/SliderDots_wallet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/pager_change"
+            android:layout_below="@+id/pager_wallet"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/button9"
+            app:layout_constraintBottom_toTopOf="@+id/button12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pager_change" />
+            app:layout_constraintTop_toBottomOf="@+id/pager_wallet" />
 
         <Button
-            android:id="@+id/button20"
+            android:id="@+id/button17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -101,8 +116,7 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.498" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

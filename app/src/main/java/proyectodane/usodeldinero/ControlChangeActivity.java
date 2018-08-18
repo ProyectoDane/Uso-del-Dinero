@@ -2,16 +2,13 @@ package proyectodane.usodeldinero;
 
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 public class ControlChangeActivity extends AppCompatActivity {
@@ -19,43 +16,34 @@ public class ControlChangeActivity extends AppCompatActivity {
     // TODO: Ver si se agrega un botón para cancelar todo (Ir a la pantalla anterior o poner en 0 el contador de vuelto)
 
     /**
-     * Vuelto total de la compra
+     * Valor total de la compra
      */
-    String st_total_change;
+    private String st_totalPurchase;
 
     /**
-     * Vuelto recibido de la compra
+     * Vuelto total de la compra, esperado
      */
-    String st_received_change;
+    private String st_changeExpected;
 
     /**
-     * El widget pager, maneja la animación y permite deslizar horizontalmente para acceder
-     * a las imágenes anteriores y siguientes.
+     * Vuelto recibido de la compra (importe)
      */
-    private ViewPager mPager;
+    private String st_receivedChange;
 
     /**
-     * El pager adapter, provee las páginas al ViewPager.
+     * Vuelto recibido de la compra (todos los ID de cada uno de los valores)
      */
-    private PagerAdapter mPagerAdapter;
+    private ArrayList<String> al_receivedChange;
 
     /**
-     * Un LinearLayout que representa la fila de puntos la cual indica la posición relativa de
-     * la imagen y la cantidad total de imágenes del ViewPager.
+     * Clase que se encarga de manejar lo referido al slide de imágenes y puntos
      */
-    LinearLayout sliderDotsPanel;
-    private int dotsCount;
-    private ImageView[] dots;
+    private ImageSlideManager imageSlideManager;
 
     /**
-     * ArrayList con todos los valores de billetes/monedas existentes
+     * Instancia de WalletManager
      */
-    private ArrayList<String> moneyValueNames;
-
-    /**
-     * ArrayList con todos los Fragment instanciados, de billetes/monedas existentes
-     */
-    private ArrayList<ScreenSlidePageFragment> fragments;
+    private static final WalletManager wm = WalletManager.getInstance();
 
 
     @Override
@@ -63,79 +51,26 @@ public class ControlChangeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_change);
 
-        // Obtengo el intent que inició el activity, extraigo el valor del cambio total e inicio el vuelto recibido en 0
+        // Obtengo el intent que inició el activity, extraigo el valor del pago total e inicio el vuelto recibido en 0
         Intent intent = getIntent();
-        st_total_change = intent.getStringExtra(getString(R.string.tag_total_change));
-        st_received_change = getString(R.string.value_0);
+        st_totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
+        st_changeExpected = wm.expectedChangeValue(st_totalPurchase,this);
+        st_receivedChange = getString(R.string.value_0);
 
-        // Calculo todos los valores a usar para pagar
-        moneyValueNames = calculateMoneyValueNames();
+        // ArrayList con todos los valores de billetes/monedas existentes. Calculo todos los valores a usar para pagar
+        ArrayList<String> moneyValueNames = wm.getInstance().obtainMoneyValueNamesOfValidCurrency(this);
 
-        // Cargo todos los Fragment que alimentarán al PagerAdapter
-        fragments = buildFragments();
-
-        // Instancia un ViewPager y un PagerAdapter, para deslizar las imágenes
-        mPager = (ViewPager) findViewById(R.id.pager_change);
-        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(),fragments);
-        mPager.setAdapter(mPagerAdapter);
-
-        // Instancia un LinearLayout, para representar los puntos debajo de las imágenes
-        sliderDotsPanel = (LinearLayout) findViewById(R.id.SliderDots_change);
-
-        // Setea la cantidad de puntos y el arreglo de ImageView para cada uno de ellos
-        dotsCount = mPagerAdapter.getCount();
-        dots = new ImageView[dotsCount];
-
-        // Carga la imagen para cada punto en el estado inicial
-        for(int i = 0; i < dotsCount; i++){
-
-            // Instancia el ImageView y setea la imagen
-            dots[i] = new ImageView(this);
-            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
-
-            // Prepara los parámetros de la imagen
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(8, 0, 8, 0);
-
-            // Setea los parámetros de la imagen
-            sliderDotsPanel.addView(dots[i], params);
-        }
-
-        // En el estado inicial, el primer punto será el seleccionado. Seteo la imagen.
-        dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
-
-        // Agrego un listener que será invocado cuando la imagen cambie y actualizará las imágenes de los puntos
-        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                /* "This method will be invoked when the current page is scrolled, either as part of a
-                programmatically initiated smooth scroll or a user initiated touch scroll." */
-            }
-
-            @Override  // Cuando una nueva imagen es seleccionada, actualizo las imágenes de los puntos
-            public void onPageSelected(int position) {
-
-                // Actualizo las imágenes de los puntos inactivos
-                for(int i = 0; i< dotsCount; i++){
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
-                }
-
-                // Actualizo la imagen del punto activo
-                dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                /* "Called when the scroll state changes" */
-            }
-        });
-
-        // Actualizo el texto del importe recibido
-        TextView textView = findViewById(R.id.textView5);
-        st_received_change = getString(R.string.change_amount) + getString(R.string.value_0);
-        textView.setText(st_received_change);
+        // Cargo el slide de imágenes y puntos indicadores
+        // Parámetros:  + (1)Contexto
+        //              + (2)ViewPager con su (3)FragmentManager y sus (4)moneyValueNames (nombres de las imágenes)
+        //              + (5)LinearLayout y sus (6)(7)imágenes representando al punto
+        imageSlideManager = new ImageSlideManager(this,
+                (ViewPager) findViewById(R.id.pager_change),
+                getSupportFragmentManager(),
+                moneyValueNames,
+                (LinearLayout) findViewById(R.id.SliderDots_change),
+                ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot),
+                ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
 
     }
 
@@ -151,97 +86,68 @@ public class ControlChangeActivity extends AppCompatActivity {
      *  Envía a la pantalla de finalización de la compra
      **/
     public void sendToFinalizePurchase(View view) {
-        // TODO: Implementar en R3. Se debe mandar un listado con todos los billetes recibidos (cambio)
         Intent intent = new Intent(this, FinalizePurchaseActivity.class);
-        ArrayList<String> al_receivedChange = new ArrayList<String>();
+        al_receivedChange = new ArrayList<String>(); al_receivedChange.add(getString(R.string.value_10)); // TODO: Implementar en R4. Se debe cargar un listado con todos los billetes recibidos (cambio). Borrar el "new"
         intent.putStringArrayListExtra(getString(R.string.received_change),al_receivedChange);
+        intent.putExtra(getString(R.string.tag_total_value),st_totalPurchase);
         startActivity(intent);
     }
 
     @Override
     public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
-            // Si el usuario se encuentra en la primer imagen y presiona el botón "back"
-            // no permito que se vaya a otra pantalla, para evitar el error
-            // de presionar ese botón por equivocación.
-        } else {
-            // Si es otra imagen que no sea la primera uso el "back" para volver atrás una imagen
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-        }
+        imageSlideManager.defaultOnBackPressed();
     }
 
     /**
      *  Actualizo el valor del vuelto recibido
      **/
     public void addToChange(View view){
+
+        // TODO: Implementar en R4. Se debe guardar en un listado cada ID de billete/moneda recibido (cambio). Uso de al_receivedChange
+
+        // Sumo al cambio recibido
+        st_receivedChange = wm.addValues(st_receivedChange,getString(R.string.value_10)); // TODO: Sumar según billete elegido, sacar el "R.string.value_10"
+
         // Actualizo el texto del importe recibido
         TextView textView = findViewById(R.id.textView5);
-        st_received_change = getString(R.string.change_amount) + getString(R.string.value_10); // TODO: cargar según billete elegido
+        String st_textViewValue = getString(R.string.change_amount) + st_receivedChange;
 
         // Si el vuelto es el total, lo informo
-        if(changeOK()) st_received_change = st_received_change + " " + getString(R.string.change_OK); // TODO: Se podría inhabilitar el botón de "agregar al vuelto"
+        if(isChangeOK()) {
+            st_textViewValue = st_textViewValue + " " + getString(R.string.change_OK);
+        }
 
-        // Muestro el nuevo valor
-        textView.setText(st_received_change);
+        // Reflejo el cambio en el TextView
+        textView.setText(st_textViewValue);
+
     }
 
     /**
      *  Verifico si el vuelto recibido es igual al vuelto total
+     *  y actualizo la hablitación de botones en base al resultado
      **/
-    private boolean changeOK(){
+    private boolean isChangeOK(){
 
-        // TODO: Implementar verificando si el vuelto recibido es igual (o mayor) al vuelto total
-
-        // Si el total es mayor a cero, habilito el botón para pagar
         Button acceptChangeButton = (Button) findViewById(R.id.button10);
         Button addToChangeButton = (Button) findViewById(R.id.button9);
-        if (true){
+        boolean changeOk = wm.isTotalChangeReceivedOk(st_receivedChange, st_changeExpected);
+        //boolean changeOk = true; // TODO: Cambiar por: wm.isTotalChangeReceivedOk(st_receivedChange,st_changeExpected);
+
+        if (changeOk) {
             acceptChangeButton.setEnabled(true);
             addToChangeButton.setEnabled(false);
         }
-        return true;
+
+        return changeOk;
     }
 
 
     /**
-     * Creo la lista de valores a partir de todos billetes/monedas existentes
-     * */
-    private ArrayList<String> calculateMoneyValueNames(){
-
-        // Instancio la lista de valores
-        ArrayList<String> valueNames = new ArrayList<String>();
-
-        // TODO: Aquí tengo que cargar todos los billetes y monedas existentes
-        // Cargo la lista de valores
-        valueNames.add(getString(R.string.tag_p10f));
-        valueNames.add(getString(R.string.tag_p10f));
-
-        return valueNames;
-    }
-
-
-    /**
-     * Creo la lista de Fragment a partir de todos los valores de billetes/monedas de moneyValueNames
-     * */
-    private ArrayList<ScreenSlidePageFragment> buildFragments() {
-
-        // Instancio la lista de Fragment
-        ArrayList<ScreenSlidePageFragment> frags = new ArrayList<ScreenSlidePageFragment>();
-
-        // Cargo la lista de Fragment
-        for(int i = 0; i<moneyValueNames.size(); i++) {
-
-            // Instancio el Fragment
-            ScreenSlidePageFragment frag = new ScreenSlidePageFragment();
-
-            // Creo un bundle para pasarle el ID del billete/moneda como argumento
-            Bundle args = new Bundle();
-            args.putString(getString(R.string.tag_money_value_name),moneyValueNames.get(i));
-            frag.setArguments(args);
-            frags.add(frag);
-        }
-
-        return frags;
+     * Muestra el texto de ayuda para este activity
+     **/
+    public void showHelp(View view) {
+        SnackBarManager sb = new SnackBarManager();
+        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_ControlChange),getString(R.string.help_text_control_change),10);
     }
 
 

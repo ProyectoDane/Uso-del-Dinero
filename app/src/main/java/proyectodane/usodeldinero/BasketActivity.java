@@ -9,81 +9,86 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
 public class BasketActivity extends AppCompatActivity {
 
-    /** Valor total guardado en la billetera
+    /**
+     * Valor total de la compra
      * */
-    Double d_walletTotal;
+    private String st_total_purchase;
 
-    /** Valor total de la compra
+    /**
+     * EditText que registra los valores ingresados por producto
      * */
-    Double d_total;
+    private EditText et_productValue;
 
-    /** EditText que registra los valores ingresados por producto
-     * */
-    EditText et_productValue;
+    /**
+     * Instancia de WalletManager
+     */
+    private static final WalletManager wm = WalletManager.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
-        d_total = 0.0;
-        et_productValue = (EditText) findViewById(R.id.editText); // Obtiene el ID del EditText del valor ingresado
-        d_walletTotal = 20.0; // TODO: Cargar el valor real de la billetera
+
+        // Al iniciar, seteo el total en cero
+        st_total_purchase = getString(R.string.value_0);
+
+        // Obtiene el ID del EditText del valor ingresado
+        et_productValue = (EditText) findViewById(R.id.editText);
     }
 
-
-    /** Envía a la pantalla principal
+    /**
+     * Envía a la pantalla principal
      * */
     public void sendToMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-
     }
 
-    /** Suma el valor ingresado al total
+    /**
+     * Suma el valor ingresado al total
      * */
     public void addToTotal(View view) {
 
-        String st_total;
-        Double d_newValue;
+        // Obtiene el nuevo valor ingresado
+        String st_newValue = et_productValue.getText().toString();
 
-        // Obtiene el valor ingresado, comprobando el formato válido
-        try {
-            d_newValue = Double.valueOf(et_productValue.getText().toString());
-        } catch (NumberFormatException e) {
-            d_newValue = 0.0;
+        // Verifico si tiene formato numérico inválido
+        if ( !(wm.isFloatFormatValid(st_newValue)) ) {
+            resetEditTextValue();
+            return;
         }
 
-        // TODO: Ver si se puede restringir el valor a una cantidad máxima de N enteros.
+        // Suma el nuevo valor al total (redondeando [FLOOR] para obtener hasta 2 decimales)
+        String st_newTotal = wm.addValues(st_total_purchase,st_newValue);
 
-        // Suma el valor al total anterior, redondeando para obtener hasta 2 decimales
-        d_newValue = Math.floor(d_newValue * 100) / 100;
-        Double d_newTotal = d_total + d_newValue;
-        d_newTotal = Math.floor(d_newTotal * 100) / 100;
+        // Si el total en la billetera no alcanza para pagar la compra total...
+        if ( wm.isGreaterThanTotalWallet(st_newTotal) ) {
 
-        // Si el total en la billetera no alcanza para pagar la compra total, descarto el producto que se está por agregar
-        // y aviso que el dinero es insuficiente. Caso contrario, agrego el importe al total de la compra
-        if (d_newTotal>d_walletTotal){
-            Snackbar.make(findViewById(R.id.myCoordinatorLayout),R.string.insufficient_funds,Snackbar.LENGTH_LONG).show();
+            // Aviso que el dinero es insuficiente y descarto la suma
+            Snackbar.make(findViewById(R.id.coordinatorLayout_Basquet),R.string.insufficient_funds,Snackbar.LENGTH_LONG).show();
+
         } else {
-            d_total = d_newTotal;
 
-            // Convierte el valor a string
-            st_total = getString(R.string.total_value) + String.valueOf(d_total); // Agrego el texto completo
+            // Si alcanza, agrego el importe al total de la compra
+            st_total_purchase = st_newTotal;
 
             // Actualiza el valor total actual en la vista
             TextView textView = findViewById(R.id.textView);
-            textView.setText(st_total);
-
+            textView.setText(getString(R.string.total_value) + st_total_purchase);
         }
 
         // Blanquea el valor a ingresar en la vista
-        et_productValue.setText(getString(R.string.empty_string));
+        resetEditTextValue();
 
         // Si el total es mayor a cero, habilito el botón para pagar
         Button payButton = (Button) findViewById(R.id.button3);
-        if (d_total > 0.0) payButton.setEnabled(true);
+        if (wm.isGreaterThanValueCero(st_total_purchase)) {
+            payButton.setEnabled(true);
+        }
 
     }
 
@@ -95,9 +100,23 @@ public class BasketActivity extends AppCompatActivity {
         if (!(et_productValue.getText().toString().isEmpty())) et_productValue.setText(getString(R.string.empty_string));
 
         Intent intent = new Intent(this, OrderTotalActivity.class);
-        intent.putExtra(getString(R.string.tag_total_value), String.valueOf(d_total));
+        intent.putExtra(getString(R.string.tag_total_value), String.valueOf(st_total_purchase));
         startActivity(intent);
     }
 
+    /**
+    * Blanquea el valor a ingresar en la vista del EditText
+    **/
+    private void resetEditTextValue(){
+        et_productValue.setText(getString(R.string.empty_string));
+    }
+
+    /**
+     * Muestra el texto de ayuda para este activity
+     **/
+    public void showHelp(View view) {
+        SnackBarManager sb = new SnackBarManager();
+        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_Basquet),getString(R.string.help_text_basket),7);
+    }
 
 }
