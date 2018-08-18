@@ -50,7 +50,7 @@
 
     <!-- Identificadores funcionales al código - [Wallet]  -->
     <string name="value_40">40.00</string>
-    <string name="help_text_wallet">AYUDA:\n[CARGA] Indica el dinero que se va a agregar a la billetera.\n[TOTAL EN BILLETERA] Muestra el dinero total si realizo la carga.\n[Imágenes de billetes y monedas] Se muestran todos los valores a elegir para la carga.\n[CANCELAR] Anula la carga y vuelve a la vista de la billetera.\n[AGREGAR] Carga el billete o moneda actualmente mostrado en imagen.\n[GUARDAR EN BILLETERA] Ingresa en la billetera todos los billetes y monedas cargados.</string>
+    <string name="help_text_wallet">AYUDA:\n[CARGA] Indica el dinero que se va a agregar a la billetera.\n[TOTAL EN BILLETERA] Muestra el dinero total si realizo la carga.\n[Imágenes de billetes y monedas] Se muestran todos los valores a elegir para la carga.\n[CANCELAR] Anula la carga y vuelve a la vista de la billetera.\n[AGREGAR] Carga el billete o moneda actualmente mostrado en imagen.\n[GUARDAR Y FINALIZAR] Ingresa en la billetera todos los valores cargados, volviendo a la vista principal.</string>
     <string name="value_selected_for_load">Valor seleccionado para cargar: $</string>
 
 
@@ -106,7 +106,7 @@
     <string name="total_cash_sign">TOTAL EN BILLETERA: $</string>
     <string name="cancel_load">CANCELAR</string>
     <string name="add">AGREGAR</string>
-    <string name="save_in_wallet">GUARDAR EN BILLETERA</string>
+    <string name="save_in_wallet">GUARDAR Y FINALIZAR</string>
 
 
     <!-- ID de los textos de componentes de las activities - [Varias Activities]  -->
