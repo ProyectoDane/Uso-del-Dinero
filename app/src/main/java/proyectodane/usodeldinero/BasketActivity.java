@@ -116,7 +116,7 @@ public class BasketActivity extends AppCompatActivity {
      **/
     public void showHelp(View view) {
         SnackBarManager sb = new SnackBarManager();
-        sb.showTextIndefiniteOnClickActionDisabled(this,view,findViewById(R.id.coordinatorLayout_Basquet),getString(R.string.help_text_basket),7);
+        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_Basquet),getString(R.string.help_text_basket),7);
     }
 
 }

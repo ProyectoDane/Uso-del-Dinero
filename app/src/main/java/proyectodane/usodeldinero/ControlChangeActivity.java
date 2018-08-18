@@ -23,12 +23,12 @@ public class ControlChangeActivity extends AppCompatActivity {
     /**
      * Vuelto total de la compra, esperado
      */
-    private String st_change_expected;
+    private String st_changeExpected;
 
     /**
      * Vuelto recibido de la compra (importe)
      */
-    private String st_received_change;
+    private String st_receivedChange;
 
     /**
      * Vuelto recibido de la compra (todos los ID de cada uno de los valores)
@@ -54,8 +54,8 @@ public class ControlChangeActivity extends AppCompatActivity {
         // Obtengo el intent que inició el activity, extraigo el valor del pago total e inicio el vuelto recibido en 0
         Intent intent = getIntent();
         st_totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
-        st_change_expected = wm.expectedChangeValue(st_totalPurchase,this);
-        st_received_change = getString(R.string.value_0);
+        st_changeExpected = wm.expectedChangeValue(st_totalPurchase,this);
+        st_receivedChange = getString(R.string.value_0);
 
         // ArrayList con todos los valores de billetes/monedas existentes. Calculo todos los valores a usar para pagar
         ArrayList<String> moneyValueNames = wm.getInstance().obtainMoneyValueNamesOfValidCurrency(this);
@@ -87,7 +87,7 @@ public class ControlChangeActivity extends AppCompatActivity {
      **/
     public void sendToFinalizePurchase(View view) {
         Intent intent = new Intent(this, FinalizePurchaseActivity.class);
-        al_receivedChange = new ArrayList<String>(); al_receivedChange.add(getString(R.string.value_10)); // TODO: Implementar en R3. Se debe cargar un listado con todos los billetes recibidos (cambio). Borrar el "new"
+        al_receivedChange = new ArrayList<String>(); al_receivedChange.add(getString(R.string.value_10)); // TODO: Implementar en R4. Se debe cargar un listado con todos los billetes recibidos (cambio). Borrar el "new"
         intent.putStringArrayListExtra(getString(R.string.received_change),al_receivedChange);
         intent.putExtra(getString(R.string.tag_total_value),st_totalPurchase);
         startActivity(intent);
@@ -103,14 +103,14 @@ public class ControlChangeActivity extends AppCompatActivity {
      **/
     public void addToChange(View view){
 
-        // TODO: Implementar en R3. Se debe guardar en un listado cada ID de billete/moneda recibido (cambio)
+        // TODO: Implementar en R4. Se debe guardar en un listado cada ID de billete/moneda recibido (cambio). Uso de al_receivedChange
 
         // Sumo al cambio recibido
-        st_received_change = wm.addValues(st_received_change,getString(R.string.value_10)); // TODO: Sumar según billete elegido, sacar el "R.string.value_10"
+        st_receivedChange = wm.addValues(st_receivedChange,getString(R.string.value_10)); // TODO: Sumar según billete elegido, sacar el "R.string.value_10"
 
         // Actualizo el texto del importe recibido
         TextView textView = findViewById(R.id.textView5);
-        String st_textViewValue = getString(R.string.change_amount) + st_received_change;
+        String st_textViewValue = getString(R.string.change_amount) + st_receivedChange;
 
         // Si el vuelto es el total, lo informo
         if(isChangeOK()) {
@@ -130,7 +130,8 @@ public class ControlChangeActivity extends AppCompatActivity {
 
         Button acceptChangeButton = (Button) findViewById(R.id.button10);
         Button addToChangeButton = (Button) findViewById(R.id.button9);
-        boolean changeOk = true; // TODO: Cambiar por: wm.isTotalChangeReceivedOk(st_received_change,st_change_expected);
+        boolean changeOk = wm.isTotalChangeReceivedOk(st_receivedChange, st_changeExpected);
+        //boolean changeOk = true; // TODO: Cambiar por: wm.isTotalChangeReceivedOk(st_receivedChange,st_changeExpected);
 
         if (changeOk) {
             acceptChangeButton.setEnabled(true);
@@ -146,7 +147,7 @@ public class ControlChangeActivity extends AppCompatActivity {
      **/
     public void showHelp(View view) {
         SnackBarManager sb = new SnackBarManager();
-        sb.showTextIndefiniteOnClickActionDisabled(this,view,findViewById(R.id.coordinatorLayout_ControlChange),getString(R.string.help_text_control_change),10);
+        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_ControlChange),getString(R.string.help_text_control_change),10);
     }
 
 
