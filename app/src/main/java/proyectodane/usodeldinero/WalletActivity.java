@@ -36,6 +36,10 @@ public class WalletActivity extends AppCompatActivity {
      */
     private ImageSlideManager imageSlideManager;
 
+    /**
+     * Instancia de WalletManager
+     */
+    private static final WalletManager wm = WalletManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +49,10 @@ public class WalletActivity extends AppCompatActivity {
         // Actualizo el valor del total e inicio el subtotal en cero
         st_subtotal = getString(R.string.value_0);
         st_total = getString(R.string.value_20); // TODO: Actualizar con el valor de la billetera (WalletManager)
-        refreshSubtotalAndTotal(st_subtotal,st_total);
+        refreshSubtotalAndTotal();
 
         // Calculo todos los valores a usar para pagar
-        ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfValidCurrency(this);
+        ArrayList<String> moneyValueNames = wm.obtainMoneyValueNamesOfValidCurrency(this);
 
         // Cargo el slide de imágenes y puntos indicadores
         // Parámetros:  + (1)Contexto
@@ -96,9 +100,18 @@ public class WalletActivity extends AppCompatActivity {
     /**
      * Actualiza el valor de la carga y del total
      **/
-    public void refreshSubtotalAndTotal(String subtotal, String total) {
+    public void refreshSubtotalAndTotal() {
         TextView textView = findViewById(R.id.textView6);
-        textView.setText(getString(R.string.load_cash_sign) + subtotal + " - " + getString(R.string.total_cash_sign) + total);
+        textView.setText(getString(R.string.load_cash_sign) + st_subtotal + " - " + getString(R.string.total_cash_sign) + st_total);
     }
+
+/*
+    public void addValueToSubtotal (View view) {
+        String st_value = getString(R.string.value_10); //TODO: Implementar la carga del valor a través de la selección de la imagen actualmente mostrada
+        st_subtotal = wm.addValues(st_value,st_subtotal);
+        refreshSubtotalAndTotal();
+    }
+*/
+
 
 }

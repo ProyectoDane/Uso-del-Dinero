@@ -52,6 +52,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:onClick="addValueToSubtotal"
             android:text="@string/add"
             android:textAlignment="center"
             android:textSize="24sp"
