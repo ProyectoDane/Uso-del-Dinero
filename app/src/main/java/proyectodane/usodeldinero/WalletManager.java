@@ -55,25 +55,19 @@ public class WalletManager {
     }
 
     /**
-     * Persisto el Map con los valores de los billetes/monedas vigentes en circulación.
+     * Persisto el Map con un nuevo valor de billete/moneda vigente en circulación.
      * */
-    private void setValidCurrency(Context context, Map <String,String> validCurrencyMap){
+    private void setValidCurrency(Context context,String currencyID, String currencyValue){
         String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
         validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
         SharedPreferences.Editor editor = validCurrency.edit();
 
-        // Borro contenido anterior
-        editor.clear();
+        // Agrego el contenido en el archivo
+        editor.putString(currencyID,currencyValue);
         editor.apply();
 
-        // Agrego el contenido del Map
-        for (Map.Entry<String,String> entry : validCurrencyMap.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            editor.putString(key,value);
-        }
-        editor.apply();
     }
+
 
     /**
      * Obtengo un Map con cada uno de los billetes/monedas guardados en la billetera.
@@ -84,6 +78,7 @@ public class WalletManager {
         return (Map<String,String>)currencyInWallet.getAll();
     }
 
+    //TODO: Revisar junto con "setValidCurrency()"
     /**
      * Persisto el Map con cada uno de los billetes/monedas guardados en la billetera.
      * */
@@ -281,42 +276,14 @@ public class WalletManager {
     // *** Lectura de datos - Funcionales a las activities***
 
 
-    // Todo: Reemplazar esta forma de carga con la definitiva
+    // TODO: Implementar el ordenado en base a los valores de los billetes/monedas. Verificar so esta es la implementación definitiva
     /**
      * Creo la lista de nombres de las imágenes de los valores
      * a partir de todos billetes/monedas existentes
      * */
     public ArrayList<String> obtainMoneyValueNamesOfValidCurrency(Context context){
 
-        // Creo un Map con valores a guardar en el WalletManager
-        Map<String,String> tempMapSave = new HashMap<String,String>();
-        tempMapSave.put(context.getString(R.string.tag_p5),"5");
-        tempMapSave.put(context.getString(R.string.tag_p5b),"5");
-        tempMapSave.put(context.getString(R.string.tag_p10),"10");
-        tempMapSave.put(context.getString(R.string.tag_p10b),"10");
-        tempMapSave.put(context.getString(R.string.tag_p20),"20");
-        tempMapSave.put(context.getString(R.string.tag_p20b),"20");
-        tempMapSave.put(context.getString(R.string.tag_p50),"50");
-        tempMapSave.put(context.getString(R.string.tag_p50b),"50");
-        tempMapSave.put(context.getString(R.string.tag_p100),"100");
-        tempMapSave.put(context.getString(R.string.tag_p100b),"100");
-        tempMapSave.put(context.getString(R.string.tag_p200),"200");
-        tempMapSave.put(context.getString(R.string.tag_p500),"500");
-        tempMapSave.put(context.getString(R.string.tag_p1000),"1000");
-        tempMapSave.put(context.getString(R.string.tag_c5),"0.05");
-        tempMapSave.put(context.getString(R.string.tag_c10),"0.10");
-        tempMapSave.put(context.getString(R.string.tag_c25),"0.25");
-        tempMapSave.put(context.getString(R.string.tag_c50),"0.50");
-        tempMapSave.put(context.getString(R.string.tag_p1),"1");
-        tempMapSave.put(context.getString(R.string.tag_p1_b),"1");
-        tempMapSave.put(context.getString(R.string.tag_p2),"2");
-        tempMapSave.put(context.getString(R.string.tag_p5_b),"5");
-
-
-        // Guardo los valores del Map
-        setValidCurrency(context,tempMapSave);
-
-        // Cargo los valores recién guardados, en otro Map
+        // Cargo todos los valores existentes
         Map<String,String> tempMapLoad = getValidCurrency(context);
 
         // Paso los valores cargados del Map a un ArrayList
@@ -326,7 +293,7 @@ public class WalletManager {
         }
 
         // Pruebo ordenar los elementos de la lista
-        Collections.sort(list); // TODO: Implementar el ordenado en base a los valores de los billetes/monedas
+        Collections.sort(list);
 
         return list;
     }
@@ -445,6 +412,53 @@ public class WalletManager {
 
 
     }
+
+
+    // *** TEMPORALES *** //TODO: Ver si tienen utilidad o se borran definitivamente
+
+
+    /**
+     * Borro el contenido entero del archivo de valores vigentes en circulación.
+     * */
+    private void deleteAllValidCurrency(Context context){
+        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
+        validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
+        SharedPreferences.Editor editor = validCurrency.edit();
+
+        // Borro contenido anterior
+        editor.clear();
+        editor.apply();
+
+    }
+
+    /**
+     * Guardo los valores vigentes en circulación a mano, en el archivo pertinente
+     * */
+    public void saveValidCurrencyManually(Context context){
+        setValidCurrency(context,context.getString(R.string.tag_p5),"5");
+        setValidCurrency(context,context.getString(R.string.tag_p5b),"5");
+        setValidCurrency(context,context.getString(R.string.tag_p10),"10");
+        setValidCurrency(context,context.getString(R.string.tag_p10b),"10");
+        setValidCurrency(context,context.getString(R.string.tag_p20),"20");
+        setValidCurrency(context,context.getString(R.string.tag_p20b),"20");
+        setValidCurrency(context,context.getString(R.string.tag_p50),"50");
+        setValidCurrency(context,context.getString(R.string.tag_p50b),"50");
+        setValidCurrency(context,context.getString(R.string.tag_p100),"100");
+        setValidCurrency(context,context.getString(R.string.tag_p100b),"100");
+        setValidCurrency(context,context.getString(R.string.tag_p200),"200");
+        setValidCurrency(context,context.getString(R.string.tag_p500),"500");
+        setValidCurrency(context,context.getString(R.string.tag_p1000),"1000");
+        setValidCurrency(context,context.getString(R.string.tag_c5),"0.05");
+        setValidCurrency(context,context.getString(R.string.tag_c10),"0.10");
+        setValidCurrency(context,context.getString(R.string.tag_c25),"0.25");
+        setValidCurrency(context,context.getString(R.string.tag_c50),"0.50");
+        setValidCurrency(context,context.getString(R.string.tag_p1),"1");
+        setValidCurrency(context,context.getString(R.string.tag_p1_b),"1");
+        setValidCurrency(context,context.getString(R.string.tag_p2),"2");
+        setValidCurrency(context,context.getString(R.string.tag_p5_b),"5");
+    }
+
+
 
 
 

@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
                 (LinearLayout) findViewById(R.id.SliderDots_main),
                 ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot),
                 ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
+
+        // TODO: ***TEMPORAL*** - Borrar luego de la implementación final
+        WalletManager.getInstance().saveValidCurrencyManually(this); // Ingreso valores a mano
     }
 
     @Override
