@@ -146,9 +146,8 @@
     <string name="tag_c25">img_16_c25</string>
     <string name="tag_c50">img_17_c50</string>
     <string name="tag_p1">img_18_p1</string>
-    <string name="tag_p2">img_19_p2</string>
-
-
-
+    <string name="tag_p1_b">img_19_p1</string>
+    <string name="tag_p2">img_20_p2</string>
+    <string name="tag_p5_b">img_21_p5</string>
 
 </resources>

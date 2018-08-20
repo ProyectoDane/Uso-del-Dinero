@@ -308,8 +308,9 @@ public class WalletManager {
         tempMapSave.put(context.getString(R.string.tag_c25),"0.25");
         tempMapSave.put(context.getString(R.string.tag_c50),"0.50");
         tempMapSave.put(context.getString(R.string.tag_p1),"1");
+        tempMapSave.put(context.getString(R.string.tag_p1_b),"1");
         tempMapSave.put(context.getString(R.string.tag_p2),"2");
-
+        tempMapSave.put(context.getString(R.string.tag_p5_b),"5");
 
 
         // Guardo los valores del Map
