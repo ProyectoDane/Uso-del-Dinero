@@ -141,6 +141,13 @@
     <string name="tag_p200">img_11_p200</string>
     <string name="tag_p500">img_12_p500</string>
     <string name="tag_p1000">img_13_p1000</string>
+    <string name="tag_c5">img_14_c5</string>
+    <string name="tag_c10">img_15_c10</string>
+    <string name="tag_c25">img_16_c25</string>
+    <string name="tag_c50">img_17_c50</string>
+    <string name="tag_p1">img_18_p1</string>
+    <string name="tag_p2">img_19_p2</string>
+
 
 
 

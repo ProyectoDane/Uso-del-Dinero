@@ -303,6 +303,14 @@ public class WalletManager {
         tempMapSave.put(context.getString(R.string.tag_p200),"200");
         tempMapSave.put(context.getString(R.string.tag_p500),"500");
         tempMapSave.put(context.getString(R.string.tag_p1000),"1000");
+        tempMapSave.put(context.getString(R.string.tag_c5),"0.05");
+        tempMapSave.put(context.getString(R.string.tag_c10),"0.10");
+        tempMapSave.put(context.getString(R.string.tag_c25),"0.25");
+        tempMapSave.put(context.getString(R.string.tag_c50),"0.50");
+        tempMapSave.put(context.getString(R.string.tag_p1),"1");
+        tempMapSave.put(context.getString(R.string.tag_p2),"2");
+
+
 
         // Guardo los valores del Map
         setValidCurrency(context,tempMapSave);
