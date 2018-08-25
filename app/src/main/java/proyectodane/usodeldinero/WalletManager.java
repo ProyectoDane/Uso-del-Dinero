@@ -2,11 +2,13 @@ package proyectodane.usodeldinero;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Pair;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -276,26 +278,59 @@ public class WalletManager {
     // *** Lectura de datos - Funcionales a las activities***
 
 
-    // TODO: Implementar el ordenado en base a los valores de los billetes/monedas. Verificar so esta es la implementación definitiva
     /**
-     * Creo la lista de nombres de las imágenes de los valores
-     * a partir de todos billetes/monedas existentes
+     * Creo la lista de nombres de las imágenes de los valores a partir de todos billetes/monedas existentes,
+     * ordenados por valor en dinero y luego por ID
      * */
     public ArrayList<String> obtainMoneyValueNamesOfValidCurrency(Context context){
 
         // Cargo todos los valores existentes
         Map<String,String> tempMapLoad = getValidCurrency(context);
 
-        // Paso los valores cargados del Map a un ArrayList
-        ArrayList<String> list = new ArrayList<String>();
+        // Paso los pares de valores a un ArrayList, para ser ordenados
+        ArrayList< Pair <String,String> > pairList = new ArrayList<Pair <String,String>>();
         for (Map.Entry<String,String> entry : tempMapLoad.entrySet()) {
-            list.add(entry.getKey());
+            Pair <String,String> pair = new Pair <String,String>(entry.getKey(),entry.getValue());
+            pairList.add(pair);
+
         }
 
-        // Pruebo ordenar los elementos de la lista
-        Collections.sort(list);
+        // Ordeno los pares de la lista, primero por valor y luego por ID
+        Collections.sort(pairList, new Comparator<Pair<String, String>>() {
+            @Override
+            public int compare(Pair <String,String> p1, Pair <String,String> p2) {
 
-        return list;
+                // Obtengo los ID de los valores
+                String st_id_p1 = p1.first;
+                String st_id_p2 = p2.first;
+
+                // Obtengo los valores en dinero a formato BigDecimal
+                BigDecimal bd_value_p1 = new BigDecimal(p1.second);
+                BigDecimal bd_value_p2 = new BigDecimal(p2.second);
+
+                // Verifico si los valores en dinero son distintos
+                if( bd_value_p1.compareTo(bd_value_p2) != 0 ){
+
+                    // Si son distintos, devuelvo la comparación entre valores en dinero
+                    return bd_value_p1.compareTo(bd_value_p2);
+
+                } else {
+
+                    // Si son iguales, devuelvo la comparación (String) entre los ID de los respectivos valores
+                    return st_id_p1.compareTo(st_id_p2);
+
+                }
+
+            }
+        });
+
+        // Obtengo la lista de los ID, ya ordenados
+        ArrayList<String> orderedList = new ArrayList<String>();
+        for (Pair <String,String> item : pairList) {
+            orderedList.add(item.first);
+        }
+
+        return orderedList;
     }
 
 
@@ -434,7 +469,9 @@ public class WalletManager {
     /**
      * Guardo los valores vigentes en circulación a mano, en el archivo pertinente
      * */
-    public void saveValidCurrencyManually(Context context){
+    public void initializeValidCurrencyManually(Context context){
+
+        deleteAllValidCurrency(context);
         setValidCurrency(context,context.getString(R.string.tag_p5),"5");
         setValidCurrency(context,context.getString(R.string.tag_p5b),"5");
         setValidCurrency(context,context.getString(R.string.tag_p10),"10");
