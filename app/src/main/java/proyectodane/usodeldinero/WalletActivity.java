@@ -136,5 +136,4 @@ public class WalletActivity extends AppCompatActivity {
         sb.showTextShortOnClickActionDisabled(findViewById(R.id.coordinatorLayout_Wallet),st_snackBarText,2);
     }
 
-
 }

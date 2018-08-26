@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
 
         // TODO: ***TEMPORAL*** - Borrar luego de la implementación final
-        WalletManager.getInstance().saveValidCurrencyManually(this); // Ingreso valores a mano
+        WalletManager.getInstance().initializeValidCurrencyManually(this); // Ingreso valores a mano
     }
 
     @Override

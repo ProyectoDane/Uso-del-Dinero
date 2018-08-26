@@ -99,7 +99,7 @@ public class ImageSlideManager {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                /* "Called when the scroll state changes" */
+                /* "Llamado cuando el Scroll cambia de posición" */
             }
         });
 
