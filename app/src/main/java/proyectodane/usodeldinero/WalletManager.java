@@ -103,6 +103,56 @@ public class WalletManager {
     }
 
 
+    // *** Auxiliares privados***
+
+
+    /**
+     * A partir de un map con ID y valores de billetes/monedas, devuelvo en un ArrayList los ID ordenados
+     * por su valor correspondiente
+     * */
+    private ArrayList<String> orderMapOfValues(Map <String,String> mapIdValue){
+
+        // Paso los pares de valores a un ArrayList, para ser ordenados
+        ArrayList< Pair <String,String> > pairList = new ArrayList<Pair <String,String>>();
+        for (Map.Entry<String,String> entry : mapIdValue.entrySet()) {
+            Pair <String,String> pair = new Pair <String,String>(entry.getKey(),entry.getValue());
+            pairList.add(pair);
+
+        }
+
+        // Ordeno los pares de la lista, primero tipo (billete o moneda) y luego por valor
+        Collections.sort(pairList, new Comparator<Pair<String, String>>() {
+            @Override
+            public int compare(Pair <String,String> p1, Pair <String,String> p2) {
+
+                // Obtengo los ID de los valores
+                String st_id_p1 = p1.first;
+                String st_id_p2 = p2.first;
+
+                // Obtengo los valores en dinero a formato BigDecimal
+                BigDecimal bd_value_p1 = new BigDecimal(p1.second);
+                BigDecimal bd_value_p2 = new BigDecimal(p2.second);
+
+                // Ordeno primero por tipo y luego por valor
+                int idTypeComparision = (st_id_p1.substring(0,2)).compareTo(st_id_p2.substring(0,2));
+                if( idTypeComparision != 0 ){
+                  return idTypeComparision;
+                } else {
+                  return bd_value_p1.compareTo(bd_value_p2);
+                }
+
+            }
+        });
+
+        // Obtengo la lista de los ID, ya ordenados
+        ArrayList<String> orderedList = new ArrayList<String>();
+        for (Pair <String,String> item : pairList) {
+            orderedList.add(item.first);
+        }
+
+        return orderedList;
+    }
+
 
 
     //****************************************
@@ -283,54 +333,7 @@ public class WalletManager {
      * ordenados por valor en dinero y luego por ID
      * */
     public ArrayList<String> obtainMoneyValueNamesOfValidCurrency(Context context){
-
-        // Cargo todos los valores existentes
-        Map<String,String> tempMapLoad = getValidCurrency(context);
-
-        // Paso los pares de valores a un ArrayList, para ser ordenados
-        ArrayList< Pair <String,String> > pairList = new ArrayList<Pair <String,String>>();
-        for (Map.Entry<String,String> entry : tempMapLoad.entrySet()) {
-            Pair <String,String> pair = new Pair <String,String>(entry.getKey(),entry.getValue());
-            pairList.add(pair);
-
-        }
-
-        // Ordeno los pares de la lista, primero por valor y luego por ID
-        Collections.sort(pairList, new Comparator<Pair<String, String>>() {
-            @Override
-            public int compare(Pair <String,String> p1, Pair <String,String> p2) {
-
-                // Obtengo los ID de los valores
-                String st_id_p1 = p1.first;
-                String st_id_p2 = p2.first;
-
-                // Obtengo los valores en dinero a formato BigDecimal
-                BigDecimal bd_value_p1 = new BigDecimal(p1.second);
-                BigDecimal bd_value_p2 = new BigDecimal(p2.second);
-
-                // Verifico si los valores en dinero son distintos
-                if( bd_value_p1.compareTo(bd_value_p2) != 0 ){
-
-                    // Si son distintos, devuelvo la comparación entre valores en dinero
-                    return bd_value_p1.compareTo(bd_value_p2);
-
-                } else {
-
-                    // Si son iguales, devuelvo la comparación (String) entre los ID de los respectivos valores
-                    return st_id_p1.compareTo(st_id_p2);
-
-                }
-
-            }
-        });
-
-        // Obtengo la lista de los ID, ya ordenados
-        ArrayList<String> orderedList = new ArrayList<String>();
-        for (Pair <String,String> item : pairList) {
-            orderedList.add(item.first);
-        }
-
-        return orderedList;
+        return orderMapOfValues(getValidCurrency(context));
     }
 
 
@@ -447,6 +450,7 @@ public class WalletManager {
 
 
     }
+
 
 
     // *** TEMPORALES *** //TODO: Ver si tienen utilidad o se borran definitivamente
