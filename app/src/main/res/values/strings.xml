@@ -79,6 +79,7 @@
 
     <!-- ID de los textos de componentes de las activities - [Main]  -->
     <string name="saved_money_pesos_20">DINERO AHORRADO: $20.00</string>
+    <string name="saved_money_pesos">DINERO AHORRADO: $</string>
     <string name="start_purchase">INICIAR COMPRA</string>
     <string name="load_wallet">CARGAR BILLETERA</string>
 

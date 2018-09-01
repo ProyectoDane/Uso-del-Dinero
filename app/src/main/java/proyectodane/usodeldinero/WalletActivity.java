@@ -53,7 +53,7 @@ public class WalletActivity extends AppCompatActivity {
 
         // Actualizo el valor del total, inicio el subtotal en cero y muestro en pantalla
         st_subtotal = getString(R.string.value_0);
-        st_total = wm.obtainTotalCreditInWallet();
+        st_total = wm.obtainTotalCreditInWallet(this);
         refreshSubtotalAndTotal();
 
         // Inicio el SnackBarManager para luego crear mensajes emergentes
@@ -123,7 +123,7 @@ public class WalletActivity extends AppCompatActivity {
         String st_valueID = getString(R.string.tag_p10); //TODO: Implementar la carga del valor a través de la selección de la imagen actualmente mostrada. (Por ahora siempre suma 10 pesos)
 
         // Obtengo el valor monetario a partir del ID
-        String st_value = wm.obtainValueFormID(st_valueID);
+        String st_value = wm.obtainValueFormID(this,st_valueID);
 
         // Agrego el ID a la lista para la futura carga, sumo el valor al subtotal y total para luego mostrarlo
         newLoadMoneyValueNames.add(st_valueID);

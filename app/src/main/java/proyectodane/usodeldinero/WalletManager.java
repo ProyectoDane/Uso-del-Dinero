@@ -29,7 +29,7 @@ public class WalletManager {
      * Archivo que contiene:
      * Cada uno de los billetes/monedas guardados en la billetera.
      * Las imágenes relacionadas con cada billete/moneda tendrán el mismo nombre que su ID.
-     * Key: ID moneda (String)  Value: Valor de la moneda (String).
+     * Key: ID moneda (String)  Value: Cantidad de unidades de esa moneda (String).
      * */
     private SharedPreferences currencyInWallet;
 
@@ -57,7 +57,7 @@ public class WalletManager {
     }
 
     /**
-     * Persisto el Map con un nuevo valor de billete/moneda vigente en circulación.
+     * Persisto en el archivo con un nuevo valor de billete/moneda vigente en circulación.
      * */
     private void setValidCurrency(Context context,String currencyID, String currencyValue){
         String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
@@ -80,25 +80,19 @@ public class WalletManager {
         return (Map<String,String>)currencyInWallet.getAll();
     }
 
-    //TODO: Revisar junto con "setValidCurrency()"
     /**
-     * Persisto el Map con cada uno de los billetes/monedas guardados en la billetera.
+     * Persisto en el archivo con un nuevo valor de billete/moneda guardado en billetera.
      * */
-    private void setCurrencyInWallet(Context context, Map <String,String> currencyInWalletMap){
+    private void setCurrencyInWallet(Context context, String currencyID){
         String currencyInWalletFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
         currencyInWallet = context.getSharedPreferences(currencyInWalletFileName,0);
         SharedPreferences.Editor editor = currencyInWallet.edit();
 
-        // Borro contenido anterior
-        editor.clear();
-        editor.apply();
+        BigDecimal actualValue = new BigDecimal(obtainQuantityFromCurrencyInWallet(context,currencyID));
+        BigDecimal newValue = actualValue.add(BigDecimal.ONE);
 
-        // Agrego el contenido del Map
-        for (Map.Entry<String,String> entry : currencyInWalletMap.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            editor.putString(key,value);
-        }
+        // Agrego el contenido en el archivo
+        editor.putString(currencyID,newValue.toPlainString());
         editor.apply();
     }
 
@@ -154,6 +148,32 @@ public class WalletManager {
     }
 
 
+    /**
+     * Devuelvo la cantidad de veces que aparece un valor dado un ID de moneda, en base a lo
+     * guardado en el archivo de billetes/monedas en la billetera
+     * */
+    private String obtainQuantityFromCurrencyInWallet(Context context, String currencyID){
+        Map <String,String> currencyInWalletMap = getCurrencyInWallet(context);
+
+        for (Map.Entry<String,String> entry : currencyInWalletMap.entrySet()) {
+            if (currencyID.equals(entry.getKey())) {
+                return entry.getValue();
+            }
+        }
+
+        return BigDecimal.ZERO.toPlainString();
+    }
+
+
+    // TODO: Implementar Método: Sacar todo de la billetera. (VER SI SIRVE)
+    /**
+     * Quito todos los valores existentes en la billetera, la vacío.
+     * */
+    private void removeAllCurrencyFromWallet(){
+
+    }
+
+
 
     //****************************************
     //* Métodos de carga y guardado públicos *
@@ -186,12 +206,11 @@ public class WalletManager {
     // *** Manejo de los valores actuales en la billetera ***
 
 
-    // TODO: Implementar Método: Guardar un billete/moneda en billetera (Input: ID_moneda (Str))
     /**
      * Agrego un billete/moneda a la billetera
      * */
-    public void addCurrencyInWallet(String idCurrency){
-
+    public void addCurrencyInWallet(Context context, String idCurrency){
+        setCurrencyInWallet(context,idCurrency);
     }
 
 
@@ -200,15 +219,6 @@ public class WalletManager {
      * Quito un billete/moneda de la billetera
      * */
     public void removeCurrencyFromWallet(String idCurrency){
-
-    }
-
-
-    // TODO: Implementar Método: Sacar todo de la billetera
-    /**
-     * Quito todos los valores existentes en la billetera, la vacío.
-     * */
-    private void removeAllCurrencyFromWallet(){
 
     }
 
@@ -263,8 +273,8 @@ public class WalletManager {
      * Verdadero si el val (con formato numérico de importe) es mas grande
      * que el valor de importe total actual de la billetera
      * */
-    public boolean isGreaterThanTotalWallet(String val) {
-        return isValueAGreaterThanValueB(val,obtainTotalCreditInWallet());
+    public boolean isGreaterThanTotalWallet(Context context, String val) {
+        return isValueAGreaterThanValueB(val,obtainTotalCreditInWallet(context));
     }
 
 
@@ -360,44 +370,83 @@ public class WalletManager {
     }
 
 
-    //TODO: Implementar: Devolver los billetes/moneda que hay en billetera (CurrencyInWallet)
     /**
      * Creo la lista de nombres de las imágenes de los valores actualmente en la billetera
      * a partir de todos billetes/monedas guardados en la billetera
      * */
     public ArrayList<String> obtainMoneyValueNamesInWallet(Context context){
 
-        // Instancio la lista de valores
-        ArrayList<String> valueNames = new ArrayList<String>();
+        // Obtengo el Map con ID y cantidad de veces que aparece el ID en la billetera
+        Map <String,String> mapIdQuantity = getCurrencyInWallet(context);
 
+        // Creo y cargo un Map con ID y valor correspondiente, para luego ser ordenado
+        Map <String,String> mapIdValue = new HashMap <String,String>();
+        for (Map.Entry<String,String> entry : mapIdQuantity.entrySet()) {
+            mapIdValue.put(entry.getKey(),obtainValueFormID(context,entry.getKey()));
+        }
 
-        // Cargo la lista de valores
-        valueNames.add(context.getString(R.string.tag_p20));
+        // Obtengo los ID ordenados
+        ArrayList<String> listOfID = orderMapOfValues(mapIdValue);
 
-        return valueNames;
+        // Creo y cargo un ArrayList con todos los ID y la cantidad de veces que aparecen en la billetera
+        ArrayList<String> listInWallet = new ArrayList<String>();
+        for(String currentID : listOfID) {
+
+            // Asigno la cantidad de veces que aparece un ID
+            String quantity = BigDecimal.ZERO.toPlainString();
+            for (Map.Entry<String,String> entry : mapIdQuantity.entrySet()) {
+                if (currentID.equals(entry.getKey())) {
+                    quantity = entry.getValue();
+                }
+            }
+
+            // Cargo el ArrayList de acuerdo a la cantidad de veces que aparece un ID
+            BigDecimal bdQuantity = new BigDecimal(quantity);
+            int intQuantity = bdQuantity.intValue();
+            for(int i=0; i<intQuantity; i++) {
+                listInWallet.add(currentID);
+            }
+
+        }
+
+        return listInWallet;
     }
 
 
-    //TODO: Implementar: Recorrer todos los valores en la billetera y sumar sus valores, luego devolver el valor total
     /**
      * Obtengo el saldo total actual en la billetera
      * */
-    public String obtainTotalCreditInWallet(){
+    public String obtainTotalCreditInWallet(Context context){
 
-        String st_total = "20.00";
+        String total = BigDecimal.ZERO.toPlainString();
 
-        return st_total;
+        // Recorro el ArrayList sumando todos los valores de cada billete/moneda
+        ArrayList<String> idInWallet = obtainMoneyValueNamesInWallet(context);
+        for(String currentID : idInWallet) {
+            String newValue = obtainValueFormID(context,currentID);
+            total = addValues(total,newValue);
+        }
+
+        return total;
     }
 
-    //TODO: Implementar: Buscar con el ID entre todos los valores existentes y devolver el valor del mismo
+
     /**
-     * Obtengo el saldo total actual en la billetera
+     * Obtengo el valor de un billete/moneda a partir de su ID.
+     * Si el ID no existe, devuelve valor cero
      * */
-    public String obtainValueFormID(String valueID){
+    public String obtainValueFormID(Context context, String valueID){
 
-        String st_total = "10.00";
+        Map <String,String> validCurrency = getValidCurrency(context);
 
-        return st_total;
+        for (Map.Entry<String,String> entry : validCurrency.entrySet()) {
+            if (valueID.equals(entry.getKey())) {
+                return entry.getValue();
+            }
+        }
+
+        return BigDecimal.ZERO.toPlainString();
+
     }
 
 
@@ -471,6 +520,20 @@ public class WalletManager {
     }
 
     /**
+     * Borro el contenido entero del archivo de valores en la billetera.
+     * */
+    private void deleteAllCurrencyInWallet(Context context){
+        String validCurrencyFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
+        currencyInWallet = context.getSharedPreferences(validCurrencyFileName,0);
+        SharedPreferences.Editor editor = currencyInWallet.edit();
+
+        // Borro contenido anterior
+        editor.clear();
+        editor.apply();
+
+    }
+
+    /**
      * Guardo los valores vigentes en circulación a mano, en el archivo pertinente
      * */
     public void initializeValidCurrencyManually(Context context){
@@ -500,7 +563,13 @@ public class WalletManager {
     }
 
 
-
+    /**
+     * Guardo los valores en billetera "a mano", en el archivo pertinente
+     * */
+    public void initializeWalletManually(Context context) {
+        deleteAllCurrencyInWallet(context);
+        setCurrencyInWallet(context,context.getString(R.string.tag_p20));
+    }
 
 
 }
