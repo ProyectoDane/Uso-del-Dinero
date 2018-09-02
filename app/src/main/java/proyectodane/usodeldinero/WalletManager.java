@@ -252,7 +252,7 @@ public class WalletManager {
      * Verdadero si el valueA (con formato numérico de importe) es mas grande
      * que el valueB (con formato numérico de importe)
      * */
-    private boolean isValueAGreaterThanValueB(String valueA, String valueB) {
+    public boolean isValueAGreaterThanValueB(String valueA, String valueB) {
 
         boolean isGreater = false;
 
@@ -282,7 +282,7 @@ public class WalletManager {
      * Verdadero si el valueA (con formato numérico de importe) es igual o mayor
      * que el valueB (con formato numérico de importe)
      * */
-    private boolean isValueAGreaterOrEqualThanValueB(String valueA, String valueB) {
+    public boolean isValueAGreaterOrEqualThanValueB(String valueA, String valueB) {
 
         boolean isGreaterOrEqual = false;
 
@@ -333,6 +333,29 @@ public class WalletManager {
         return result.toPlainString();
     }
 
+
+    /**
+     * Resto dos valores: val_1 y val_2 (con formato numérico de importe)
+     * Y devuelvo un string con el resultado (con formato numérico de importe), el cual
+     * tiene como formato establecido un máximo de 2 dígitos decimales,
+     * redondeando hacia abajo (truncado) en los casos donde sea necesario
+     * */
+    public String subtractValues(String val_1, String val_2){
+
+        // Instancio los BigDecimal
+        BigDecimal bd_v1 = new BigDecimal(val_1);
+        BigDecimal bd_v2 = new BigDecimal(val_2);
+
+        // Formato: Dejo (a lo sumo) dos decimales del número ingresado, truncando el resto
+        bd_v1 = bd_v1.setScale(2, RoundingMode.FLOOR);
+        bd_v2 = bd_v2.setScale(2, RoundingMode.FLOOR);
+
+        // Sumo los valores
+        BigDecimal result = bd_v1.subtract(bd_v2);
+
+        // devuelvo el resultado en un String
+        return result.toPlainString();
+    }
 
 
     // *** Lectura de datos - Funcionales a las activities***
