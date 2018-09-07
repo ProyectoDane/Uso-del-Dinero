@@ -3,7 +3,6 @@ package proyectodane.usodeldinero;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Pair;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -173,6 +172,49 @@ public class WalletManager {
 
     }
 
+
+    /**
+     * Carga en un ArrayList todos los ID correspondientes a los valores de la billetera que se usarán para el pago
+     * */
+    private ArrayList<String> loadValueToIDInWallet(ArrayList<String> valuesIDInWallet, ArrayList<String> valuesInWallet, ArrayList<String> valuesToPay){
+
+        // Creo el listado de ID resultantes
+        ArrayList<String> valueIDToPay = new ArrayList<String>();
+
+        // Preparo un Array de pares para trabajar con el ID y su valor
+        ArrayList< Pair <String,String> > pairWallet = new ArrayList<Pair <String,String>>();
+        for (int i = 0; i < valuesIDInWallet.size(); i++){
+            Pair <String,String> pair = new Pair <String,String>(valuesIDInWallet.get(i),valuesInWallet.get(i));
+            pairWallet.add(pair);
+        }
+
+        // Recorro todos los valores a usar para el pago y obtengo su ID
+		for(String currentValueToPay : valuesToPay) {
+            String result = popFromStringPair(pairWallet,currentValueToPay);
+            if( !result.equals("") ){
+                valueIDToPay.add(result);
+            }
+		}
+
+        return valueIDToPay;
+    }
+
+
+    /**
+     * Busca y devuelve un valor String de un array de Pair según el <value>, si lo encuentra lo quita del mismo (Saca el Pair)
+     * */
+    private String popFromStringPair(ArrayList< Pair <String,String> > pairWallet, String value){
+
+        for (int i = 0; i < pairWallet.size(); i++) {
+            if( value.equals(pairWallet.get(i).second) ){
+                String result = pairWallet.get(i).first;
+                pairWallet.remove(i);
+                return result;
+            }
+        }
+
+        return "";
+    }
 
 
     //****************************************
@@ -370,26 +412,31 @@ public class WalletManager {
     }
 
 
-    //TODO: Reemplazar por implementación definitiva
-    //TODO: Sacar el context como parámetro solicitado, una vez implementada la forma definitiva
     /**
      * Creo la lista de nombres de las imágenes de los valores a usar para el pago
      * a partir de todos billetes/monedas guardados en la billetera y del valor del importe a pagar
      * */
     public ArrayList<String> obtainMoneyValueNamesOfPayment(Context context, String valueToPay){
 
-        // Instancio la lista de valores
-        ArrayList<String> valueNames = new ArrayList<String>();
+        // Instancio la lista de ID de los billetes/monedas en la billetera
+        ArrayList<String> valuesIDInWallet = obtainMoneyValueNamesInWallet(context);
 
+        // Cargo un ArrayList con los valores de los billetes/monedas en la billetera
+        ArrayList<String> valuesInWallet = new ArrayList<String>();
+        for(String currentID : valuesIDInWallet) {
+            valuesInWallet.add(obtainValueFormID(context,currentID));
+        }
 
-        // TODO: Aquí tengo que calcular el listado de billetes que uso para pagar y su respectivo vuelto
-        // TODO: Por ejemplo si pago $90, calculo a partir de lo que tengo en la billetera y...
-        // TODO: ...obtengo como resultado: $50, $20, $10, $10. Entonces creo un vector...
-        // TODO: ...que tenga los ID que representen cada billete: [img_07_p50,img_05_p20,img_03_p10,img_03_p10]
-        // Cargo la lista de valores
-        valueNames.add(context.getString(R.string.tag_p20));
+        // Calculo el pago a partir de los valores en la billetera y del monto a pagar, en un nuevo ArrayList
+        ArrayList<String> valuesInWalletCopy = new ArrayList<String>(valuesInWallet);
+        ArrayList<String> valuesToPay = new ArrayList<String>();
+        PayManager pm = new PayManager();
+        pm.obtainPayment(valueToPay,valuesInWalletCopy,valuesToPay);
 
-        return valueNames;
+        // Obtengo el ID de cada uno de los valores a usar para pagar
+        ArrayList<String> valueIDToPay = loadValueToIDInWallet(valuesIDInWallet,valuesInWallet,valuesToPay);
+
+        return valueIDToPay;
     }
 
 
@@ -592,6 +639,7 @@ public class WalletManager {
     public void initializeWalletManually(Context context) {
         deleteAllCurrencyInWallet(context);
         setCurrencyInWallet(context,context.getString(R.string.tag_p20));
+
     }
 
 

@@ -22,8 +22,6 @@ public class MainActivity extends AppCompatActivity {
         WalletManager.getInstance().initializeWalletManually(this); // Cargo billetera a mano
         // TODO: ***TEMPORAL*** - Borrar luego de la implementación final
 
-
-
         // Agrego "Splash Screen"
         setTheme(R.style.AppTheme);
 

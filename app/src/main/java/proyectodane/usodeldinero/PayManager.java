@@ -9,7 +9,12 @@ public class PayManager {
      */
     private static final WalletManager wm = WalletManager.getInstance();
 
-    public void pay(String paymentValue, ArrayList<String> wallet, ArrayList<String> payment){
+
+    /**
+     * Calcula de forma los valores a utilizar para un importe de pago dado. A partir de los valores en la billetera.
+     * Se modifica <wallet> y <payment> en la operación.
+     ***/
+    public void obtainPayment(String paymentValue, ArrayList<String> wallet, ArrayList<String> payment){
 
         // Compruebo que la billetera no se encuentre vacía
         if(wallet.isEmpty()) return; //TODO: Ver si queda
@@ -37,7 +42,7 @@ public class PayManager {
         payment.add(optimal);
 
         // Saco los billetes que pueda haber, mas grandes que el óptimo ya que no se usaran para este pago
-        //deleteValuesGraterThanReference(optimal,wallet); //TODO: Confirmar que no se usa
+        //deleteValuesGraterThanReference(optimal,wallet); //TODO: Confirmar que no se usa, ya que los billetes mas grandes no van a ser tomados como óptimos
 
         // Si el óptimo no alcanza para pagar, busco otro valor mas para el pago, de forma recursiva
         if ( wm.isValueAGreaterThanValueB(paymentValue,optimal) ){
@@ -57,7 +62,7 @@ public class PayManager {
     * el valor mas grande de la lista.
     * Siempre recibe wallet con al menos un valor
     * */
-    public String optimalValue(String payment, ArrayList<String> wallet){
+    private String optimalValue(String payment, ArrayList<String> wallet){
         String previous = wallet.get(0);
         String current = wallet.get(0);
 
