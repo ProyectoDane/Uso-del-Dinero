@@ -66,7 +66,7 @@ public class BasketActivity extends AppCompatActivity {
         String st_newTotal = wm.addValues(st_total_purchase,st_newValue);
 
         // Si el total en la billetera no alcanza para pagar la compra total...
-        if ( wm.isGreaterThanTotalWallet(st_newTotal) ) {
+        if ( wm.isGreaterThanTotalWallet(this,st_newTotal) ) {
 
             // Aviso que el dinero es insuficiente y descarto la suma
             Snackbar.make(findViewById(R.id.coordinatorLayout_Basquet),R.string.insufficient_funds,Snackbar.LENGTH_LONG).show();
