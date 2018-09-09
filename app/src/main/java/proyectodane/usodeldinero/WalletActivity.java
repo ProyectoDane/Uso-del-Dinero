@@ -121,6 +121,8 @@ public class WalletActivity extends AppCompatActivity {
 
         // Obtengo el ID del valor elegido
         String st_valueID = getString(R.string.tag_p10); //TODO: Implementar la carga del valor a través de la selección de la imagen actualmente mostrada. (Por ahora siempre suma 10 pesos)
+        // String st_valueID = imageSlideManager.getActualValueID();
+
 
         // Obtengo el valor monetario a partir del ID
         String st_value = wm.obtainValueFormID(this,st_valueID);
