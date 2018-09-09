@@ -112,17 +112,14 @@ public class WalletActivity extends AppCompatActivity {
         textView.setText(getString(R.string.load_cash_sign) + st_subtotal + " - " + getString(R.string.total_cash_sign) + st_total);
     }
 
+    // TODO: Ver si se agrega una cantidad límite de valores a ingresar en la billetera (Físicamente no se pueden poner infinitos billetes y/o monedas)
     /**
      * Sumo el valor seleccionado al subtotal de carga en billetera
      **/
     public void addValueToSubtotal (View view) {
 
-        // TODO: Ver si se agrega una cantidad límite de valores a ingresar en la billetera (Físicamente no se pueden poner infinitos billetes y/o monedas)
-
         // Obtengo el ID del valor elegido
-        String st_valueID = getString(R.string.tag_p10); //TODO: Implementar la carga del valor a través de la selección de la imagen actualmente mostrada. (Por ahora siempre suma 10 pesos)
-        // String st_valueID = imageSlideManager.getActualValueID();
-
+         String st_valueID = imageSlideManager.getActualValueID();
 
         // Obtengo el valor monetario a partir del ID
         String st_value = wm.obtainValueFormID(this,st_valueID);
