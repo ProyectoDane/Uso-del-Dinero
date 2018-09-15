@@ -119,7 +119,7 @@ public class WalletActivity extends AppCompatActivity {
     public void addValueToSubtotal (View view) {
 
         // Obtengo el ID del valor elegido
-         String st_valueID = imageSlideManager.getActualValueID();
+        String st_valueID = imageSlideManager.getActualValueID();
 
         // Obtengo el valor monetario a partir del ID
         String st_value = wm.obtainValueFormID(this,st_valueID);
@@ -133,6 +133,15 @@ public class WalletActivity extends AppCompatActivity {
         // Creo el mensaje para notificar el valor seleccionado a sumar a la billetera y lo muestro
         String st_snackBarText = getString(R.string.value_selected_for_load) + st_value;
         sb.showTextShortOnClickActionDisabled(findViewById(R.id.coordinatorLayout_Wallet),st_snackBarText,2);
+    }
+
+    public void addValuesToWallet (View view){
+
+        for(String currentNewLoadMoneyValueName : newLoadMoneyValueNames) {
+            wm.addCurrencyInWallet(this,currentNewLoadMoneyValueName);
+        }
+
+        sendToMain(view);
     }
 
 }

@@ -54,7 +54,7 @@ public class ControlChangeActivity extends AppCompatActivity {
         // Obtengo el intent que inició el activity, extraigo el valor del pago total e inicio el vuelto recibido en 0
         Intent intent = getIntent();
         st_totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
-        st_changeExpected = wm.expectedChangeValue(st_totalPurchase,this);
+        st_changeExpected = wm.expectedChangeValue(this,st_totalPurchase);
         st_receivedChange = getString(R.string.value_0);
 
         // ArrayList con todos los valores de billetes/monedas existentes. Calculo todos los valores a usar para pagar
@@ -103,10 +103,18 @@ public class ControlChangeActivity extends AppCompatActivity {
      **/
     public void addToChange(View view){
 
-        // TODO: Implementar en R4. Se debe guardar en un listado cada ID de billete/moneda recibido (cambio). Uso de al_receivedChange
+        // TODO: Implementar en R4. Se debe guardar en un listado cada ID de billete/moneda recibido (cambio). Uso de al_receivedChange.add();
 
         // Sumo al cambio recibido
-        st_receivedChange = wm.addValues(st_receivedChange,getString(R.string.value_10)); // TODO: Sumar según billete elegido, sacar el "R.string.value_10"
+        st_receivedChange = wm.addValues(st_receivedChange,getString(R.string.value_10));
+        // TODO: Sumar según billete elegido, sacar el "R.string.value_10"
+        /* //TODO: Uso de...
+       // Obtengo el ID del valor elegido
+        String st_valueID = imageSlideManager.getActualValueID();
+
+        // Obtengo el valor monetario a partir del ID
+        String st_value = wm.obtainValueFormID(this,st_valueID);*/
+
 
         // Actualizo el texto del importe recibido
         TextView textView = findViewById(R.id.textView5);
@@ -124,14 +132,13 @@ public class ControlChangeActivity extends AppCompatActivity {
 
     /**
      *  Verifico si el vuelto recibido es igual al vuelto total
-     *  y actualizo la hablitación de botones en base al resultado
+     *  y actualizo la habilitación de botones en base al resultado
      **/
     private boolean isChangeOK(){
 
         Button acceptChangeButton = (Button) findViewById(R.id.button10);
         Button addToChangeButton = (Button) findViewById(R.id.button9);
         boolean changeOk = wm.isTotalChangeReceivedOk(st_receivedChange, st_changeExpected);
-        //boolean changeOk = true; // TODO: Cambiar por: wm.isTotalChangeReceivedOk(st_receivedChange,st_changeExpected);
 
         if (changeOk) {
             acceptChangeButton.setEnabled(true);

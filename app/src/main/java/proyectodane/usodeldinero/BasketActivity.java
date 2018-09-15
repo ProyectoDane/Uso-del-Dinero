@@ -86,7 +86,7 @@ public class BasketActivity extends AppCompatActivity {
 
         // Si el total es mayor a cero, habilito el botón para pagar
         Button payButton = (Button) findViewById(R.id.button3);
-        if (wm.isGreaterThanValueCero(st_total_purchase)) {
+        if (wm.isGreaterThanValueZero(st_total_purchase)) {
             payButton.setEnabled(true);
         }
 

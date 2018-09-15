@@ -11,13 +11,14 @@ public class PayManager {
 
 
     /**
-     * Calcula de forma los valores a utilizar para un importe de pago dado. A partir de los valores en la billetera.
+     * Calcula los valores a utilizar como pago, para un importe de pago dado. A partir de los valores en la billetera.
+     * Todos los valores String son tomados como importes en formato decimal.
      * Se modifica <wallet> y <payment> en la operación.
      ***/
     public void obtainPayment(String paymentValue, ArrayList<String> wallet, ArrayList<String> payment){
 
         // Compruebo que la billetera no se encuentre vacía
-        if(wallet.isEmpty()) return; //TODO: Ver si queda
+        if(wallet.isEmpty()) return;
 
         // Inicializo el vector de pago
         payment.clear();

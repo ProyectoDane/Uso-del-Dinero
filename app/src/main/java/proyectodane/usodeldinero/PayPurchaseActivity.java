@@ -72,11 +72,12 @@ public class PayPurchaseActivity extends AppCompatActivity {
     }
 
     /**
-     *  Envía a la pantalla de control de vuelto
+     *  Envía a la pantalla de control de vuelto.
+     *  Si no corresponde vuelto, envía directamente a finalizar
      **/
     public void sendToControlChange(View view) {
 
-        if ( wm.isChangeExpected(st_totalPurchase) ) {
+        if ( wm.isChangeExpected(this,st_totalPurchase) ) {
             Intent intent = new Intent(this, ControlChangeActivity.class);
             intent.putExtra(getString(R.string.tag_total_value),st_totalPurchase);
             startActivity(intent);
@@ -98,9 +99,10 @@ public class PayPurchaseActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FinalizePurchaseActivity.class);
 
         // Creo un array vacío (que representa un vuelto nulo)
-        ArrayList<String> al_receivedChange = new ArrayList<String>();
+        ArrayList<String> al_receivedChangeEmpty = new ArrayList<String>();
 
-        intent.putStringArrayListExtra(getString(R.string.received_change),al_receivedChange);
+        intent.putStringArrayListExtra(getString(R.string.received_change),al_receivedChangeEmpty);
+        intent.putExtra(getString(R.string.tag_total_value),st_totalPurchase);
         startActivity(intent);
     }
 

@@ -20,10 +20,6 @@
     <!-- ************************************* -->
 
 
-    <!-- Identificadores funcionales al código - [Basket] TODO: Ver si se borra esta línea -->
-    <string name="saved_money">DINERO AHORRADO: $</string>
-
-
     <!-- Identificadores funcionales al código - [Basket]  -->
     <string name="empty_string"></string>
     <string name="total_value">VALOR TOTAL: $</string>
