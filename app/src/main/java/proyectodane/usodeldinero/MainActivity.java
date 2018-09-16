@@ -8,18 +8,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
-
 public class MainActivity extends AppCompatActivity {
+
+    /**
+     * Instancia de WalletManager
+     */
+    private static final WalletManager wm = WalletManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         // TODO: ***TEMPORAL*** - Borrar luego de la implementación final
-        WalletManager.getInstance().initializeValidCurrencyManually(this); // Ingreso valores a mano
-        WalletManager.getInstance().initializeWalletManually(this); // Cargo billetera a mano
+        wm.getInstance().initializeWalletManually(this); // Cargo billetera a mano
         // TODO: ***TEMPORAL*** - Borrar luego de la implementación final
 
         // Agrego "Splash Screen"
@@ -28,11 +30,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Verifico inicialización de archivo de valores
+        wm.checkFirstRun(this);
+
         // Calculo todos los valores en la billetera a mostrar
-        ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesInWallet(this);
+        ArrayList<String> moneyValueNames = wm.getInstance().obtainMoneyValueNamesInWallet(this);
 
         // Actualizo el valor del total en billetera
-        refreshTotal(WalletManager.getInstance().obtainTotalCreditInWallet(this));
+        refreshTotal(wm.getInstance().obtainTotalCreditInWallet(this));
 
         // Clase que se encarga de manejar lo referido al slide de imágenes y puntos
         // Parámetros:  + (1)Contexto
@@ -45,12 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 (LinearLayout) findViewById(R.id.SliderDots_main),
                 ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot),
                 ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        //TODO: Ver si lo dejo sin que salga de la app, o si la cierro
     }
 
     /**

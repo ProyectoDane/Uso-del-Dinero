@@ -93,7 +93,8 @@ public class BasketActivity extends AppCompatActivity {
     }
 
 
-    /** Envía a la pantalla de confirmación de compra
+    /**
+     * Envía a la pantalla de confirmación de compra
      * */
     public void sendToOrderTotal(View view) {
         // En caso de que haya quedado un valor a ingresar, blanquea el valor al irse de la vista

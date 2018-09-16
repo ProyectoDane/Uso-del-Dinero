@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 public class WalletActivity extends AppCompatActivity {
@@ -94,7 +93,6 @@ public class WalletActivity extends AppCompatActivity {
     public void sendToMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-
     }
 
     /**
@@ -135,8 +133,13 @@ public class WalletActivity extends AppCompatActivity {
         sb.showTextShortOnClickActionDisabled(findViewById(R.id.coordinatorLayout_Wallet),st_snackBarText,2);
     }
 
+
+    /**
+     * Agrega la carga de dinero seleccionada en la billetera y luego envía a la pantalla principal
+     * */
     public void addValuesToWallet (View view){
 
+        // Guardo todos los valores seleccionados hasta el momento
         for(String currentNewLoadMoneyValueName : newLoadMoneyValueNames) {
             wm.addCurrencyInWallet(this,currentNewLoadMoneyValueName);
         }

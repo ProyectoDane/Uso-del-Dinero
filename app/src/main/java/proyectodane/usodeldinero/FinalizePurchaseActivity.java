@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import java.util.ArrayList;
 
 public class FinalizePurchaseActivity extends AppCompatActivity {
@@ -19,7 +18,6 @@ public class FinalizePurchaseActivity extends AppCompatActivity {
      * Vuelto recibido de la compra, en forma de listado de String
      */
     private ArrayList<String> al_receivedChange;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

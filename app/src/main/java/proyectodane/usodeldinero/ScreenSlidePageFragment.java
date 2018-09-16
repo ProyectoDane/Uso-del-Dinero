@@ -10,7 +10,7 @@ import android.widget.ImageView;
 public class ScreenSlidePageFragment extends Fragment {
 
     /**
-     * Guarda el valor del ID de la imagen correspondiente al Fragment
+     * Guarda el valor del ID de la imagen correspondiente al Fragment.
      * */
     private String st_money_value_name;
 

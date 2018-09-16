@@ -32,7 +32,6 @@ public class WalletManager {
      * */
     private SharedPreferences currencyInWallet;
 
-
     // Uso singleton
     private WalletManager() { }
     public static WalletManager getInstance() {
@@ -70,6 +69,25 @@ public class WalletManager {
     }
 
     //TODO: Implementar baja de valores en circulación (Release 5)
+
+    /**
+     * Consulto si es la primera vez que se inicializa el archivo de valores.
+     * Devuelve false si ya fue consultado anteriormente, y true si nunca fue consultado
+     * Si devuelve true, se guarda en el archivo el uso por primera vez
+     * */
+    private boolean isThisTheFirstTimeAccess(Context context){
+        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
+        validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
+
+        if(validCurrency.getBoolean(context.getString(R.string.first_time_access), true)) {
+            SharedPreferences.Editor editor = validCurrency.edit();
+            editor.putBoolean(context.getString(R.string.first_time_access), false);
+            editor.apply();
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * Obtengo un Map con cada uno de los billetes/monedas guardados en la billetera.
@@ -116,6 +134,7 @@ public class WalletManager {
         editor.putString(currencyID,newValue.toPlainString());
         editor.apply();
     }
+
 
 
     // *** Auxiliares privados***
@@ -309,7 +328,6 @@ public class WalletManager {
      * */
     public void saveChangeInWallet(ArrayList<String> listOfNames){
 
-
     }
 
 
@@ -329,6 +347,16 @@ public class WalletManager {
         removeCurrencyInWallet(context,idCurrency);
     }
 
+
+    /**
+     * Consulto si es la primera vez que se inicializa el archivo de valores.
+     * Si es la primera vez, cargo los valores de los billetes/monedas vigentes en circulación por defecto
+     * */
+    public void checkFirstRun(Context context){
+        if(isThisTheFirstTimeAccess(context)){
+            initializeValidCurrencyManually(context);
+        }
+    }
 
 
     // *** Formato de valores en String ***

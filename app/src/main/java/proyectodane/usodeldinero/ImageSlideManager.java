@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import java.util.ArrayList;
 
-
 /**
  * Clase que representa un slide de imágenes con un indicador de cantidad dibujado por puntos
  */
@@ -39,7 +38,6 @@ public class ImageSlideManager {
      * ArrayList con todos los Fragment instanciados, de cada imagen
      */
     private ArrayList<ScreenSlidePageFragment> fragments;
-
 
     /**
      * ScreenSlidePageFragment actual seleccionado por el usuario
@@ -112,7 +110,7 @@ public class ImageSlideManager {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                /* "Llamado cuando el Scroll cambia de posición" */
+                /* Llamado cuando el Scroll cambia de posición (Sin uso actualmente) */
             }
         });
 

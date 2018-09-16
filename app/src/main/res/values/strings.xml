@@ -61,6 +61,7 @@
     <!-- Identificadores funcionales al código - [WalletManager]  -->
     <string name="type_1">t1</string>
     <string name="type_2">t2</string>
+    <string name="first_time_access">firstTimeAccess</string>
 
 
     <!-- Identificadores funcionales al código - [Varias Activities]  -->

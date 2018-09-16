@@ -13,8 +13,6 @@ import java.util.ArrayList;
 
 public class ControlChangeActivity extends AppCompatActivity {
 
-    // TODO: Ver si se agrega un botón para cancelar todo (Ir a la pantalla anterior o poner en 0 el contador de vuelto)
-
     /**
      * Valor total de la compra
      */
@@ -71,7 +69,6 @@ public class ControlChangeActivity extends AppCompatActivity {
                 (LinearLayout) findViewById(R.id.SliderDots_change),
                 ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot),
                 ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
-
     }
 
     /**
@@ -148,7 +145,6 @@ public class ControlChangeActivity extends AppCompatActivity {
         return changeOk;
     }
 
-
     /**
      * Muestra el texto de ayuda para este activity
      **/
@@ -156,6 +152,5 @@ public class ControlChangeActivity extends AppCompatActivity {
         SnackBarManager sb = new SnackBarManager();
         sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_ControlChange),getString(R.string.help_text_control_change),10);
     }
-
 
 }

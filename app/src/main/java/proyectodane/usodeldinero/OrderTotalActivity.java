@@ -11,7 +11,7 @@ public class OrderTotalActivity extends AppCompatActivity {
     /**
      * Valor total de la compra
     */
-    private String st_total;
+    private String total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +20,11 @@ public class OrderTotalActivity extends AppCompatActivity {
 
         // Obtengo el intent que inició el activity y extraigo el valor del total
         Intent intent = getIntent();
-        st_total = intent.getStringExtra(getString(R.string.tag_total_value));
+        total = intent.getStringExtra(getString(R.string.tag_total_value));
 
         // Capturo el TextView y coloco el texto indicando el total
         TextView textView = findViewById(R.id.textView3);
-        String st_textToShow = getString(R.string.total_purchase) + st_total;
+        String st_textToShow = getString(R.string.total_purchase) + total;
         textView.setText(st_textToShow);
 
     }
@@ -42,7 +42,7 @@ public class OrderTotalActivity extends AppCompatActivity {
      **/
     public void sendToPayPurchase(View view) {
         Intent intent = new Intent(this, PayPurchaseActivity.class);
-        intent.putExtra(getString(R.string.tag_total_value),st_total);
+        intent.putExtra(getString(R.string.tag_total_value), total);
         startActivity(intent);
     }
 
