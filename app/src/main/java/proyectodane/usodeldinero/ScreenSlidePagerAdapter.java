@@ -31,4 +31,5 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return fragments.size();
     }
+
 }

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 public class WalletActivity extends AppCompatActivity {
@@ -94,7 +93,6 @@ public class WalletActivity extends AppCompatActivity {
     public void sendToMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-
     }
 
     /**
@@ -119,7 +117,7 @@ public class WalletActivity extends AppCompatActivity {
     public void addValueToSubtotal (View view) {
 
         // Obtengo el ID del valor elegido
-         String st_valueID = imageSlideManager.getActualValueID();
+        String st_valueID = imageSlideManager.getActualValueID();
 
         // Obtengo el valor monetario a partir del ID
         String st_value = wm.obtainValueFormID(this,st_valueID);
@@ -133,6 +131,20 @@ public class WalletActivity extends AppCompatActivity {
         // Creo el mensaje para notificar el valor seleccionado a sumar a la billetera y lo muestro
         String st_snackBarText = getString(R.string.value_selected_for_load) + st_value;
         sb.showTextShortOnClickActionDisabled(findViewById(R.id.coordinatorLayout_Wallet),st_snackBarText,2);
+    }
+
+
+    /**
+     * Agrega la carga de dinero seleccionada en la billetera y luego envía a la pantalla principal
+     * */
+    public void addValuesToWallet (View view){
+
+        // Guardo todos los valores seleccionados hasta el momento
+        for(String currentNewLoadMoneyValueName : newLoadMoneyValueNames) {
+            wm.addCurrencyInWallet(this,currentNewLoadMoneyValueName);
+        }
+
+        sendToMain(view);
     }
 
 }

@@ -86,14 +86,15 @@ public class BasketActivity extends AppCompatActivity {
 
         // Si el total es mayor a cero, habilito el botón para pagar
         Button payButton = (Button) findViewById(R.id.button3);
-        if (wm.isGreaterThanValueCero(st_total_purchase)) {
+        if (wm.isGreaterThanValueZero(st_total_purchase)) {
             payButton.setEnabled(true);
         }
 
     }
 
 
-    /** Envía a la pantalla de confirmación de compra
+    /**
+     * Envía a la pantalla de confirmación de compra
      * */
     public void sendToOrderTotal(View view) {
         // En caso de que haya quedado un valor a ingresar, blanquea el valor al irse de la vista

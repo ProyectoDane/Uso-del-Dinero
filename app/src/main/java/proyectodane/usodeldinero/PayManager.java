@@ -9,15 +9,15 @@ public class PayManager {
      */
     private static final WalletManager wm = WalletManager.getInstance();
 
-
     /**
-     * Calcula de forma los valores a utilizar para un importe de pago dado. A partir de los valores en la billetera.
+     * Calcula los valores a utilizar como pago, para un importe de pago dado. A partir de los valores en la billetera.
+     * Todos los valores String son tomados como importes en formato decimal.
      * Se modifica <wallet> y <payment> en la operación.
      ***/
     public void obtainPayment(String paymentValue, ArrayList<String> wallet, ArrayList<String> payment){
 
         // Compruebo que la billetera no se encuentre vacía
-        if(wallet.isEmpty()) return; //TODO: Ver si queda
+        if(wallet.isEmpty()) return;
 
         // Inicializo el vector de pago
         payment.clear();
@@ -26,7 +26,6 @@ public class PayManager {
         recursivePay(paymentValue,wallet,payment);
 
     }
-
 
     /**
      * Calcula de forma recursiva los valores a utilizar para un importe de pago dado.
@@ -52,10 +51,7 @@ public class PayManager {
             // Si el óptimo alcanza para el pago, finalizo el cálculo del mismo
             return;
         }
-
-
     }
-
 
     /**
     * Devuelve el valor que pueda usarse para pagar, de denominación mas bajo, o en su defecto
@@ -69,7 +65,7 @@ public class PayManager {
         for(String value : wallet) {
             current = value;
 
-            // Si el valor de pago es mayor o igual al del valor actual, corto el ciclo
+            // Si el valor de pago es mayor o igual al del valor actual, voy a cortar el ciclo...
             if ( wm.isValueAGreaterOrEqualThanValueB(payment,current) ){
 
                 // Si son iguales, devuelvo el valor actual
@@ -83,18 +79,16 @@ public class PayManager {
             }
 
             previous = current;
-
         }
 
         return current;
 
     }
 
-
-    // TODO: Confirmar que no se usa y borrarlo
-    /**
+/*    // TODO: Confirmar que no se usa y borrarlo
+    *//**
      * Descarta todos los valores del ArrayList mayores al valor de referencia
-     * */
+     * *//*
     private void deleteValuesGraterThanReference(String reference, ArrayList<String> list){
 
         ArrayList<String> deleteList = new ArrayList<String>();
@@ -110,11 +104,6 @@ public class PayManager {
         for (String deleteItem : deleteList) {
             list.remove(deleteItem);
         }
-
-
-    }
-
-
-
+    }*/
 
 }

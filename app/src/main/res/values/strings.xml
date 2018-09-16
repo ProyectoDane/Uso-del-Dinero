@@ -20,10 +20,6 @@
     <!-- ************************************* -->
 
 
-    <!-- Identificadores funcionales al código - [Basket] TODO: Ver si se borra esta línea -->
-    <string name="saved_money">DINERO AHORRADO: $</string>
-
-
     <!-- Identificadores funcionales al código - [Basket]  -->
     <string name="empty_string"></string>
     <string name="total_value">VALOR TOTAL: $</string>
@@ -65,6 +61,7 @@
     <!-- Identificadores funcionales al código - [WalletManager]  -->
     <string name="type_1">t1</string>
     <string name="type_2">t2</string>
+    <string name="first_time_access">firstTimeAccess</string>
 
 
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
