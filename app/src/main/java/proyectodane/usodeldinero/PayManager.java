@@ -12,6 +12,7 @@ public class PayManager {
     /**
      * Calcula los valores a utilizar como pago, para un importe de pago dado. A partir de los valores en la billetera.
      * Todos los valores String son tomados como importes en formato decimal.
+     * El ArrayList <wallet> debe estar ordenado en forma ascendente
      * Se modifica <wallet> y <payment> en la operación.
      ***/
     public void obtainPayment(String paymentValue, ArrayList<String> wallet, ArrayList<String> payment){

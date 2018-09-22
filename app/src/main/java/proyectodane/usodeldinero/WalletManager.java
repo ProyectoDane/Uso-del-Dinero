@@ -114,7 +114,6 @@ public class WalletManager {
         editor.apply();
     }
 
-
     /**
      * Modifico en el archivo con una nueva cantidad de valores de billete/moneda guardado en billetera (Disminuyo el contador del ID en 1)
      * */
@@ -189,6 +188,27 @@ public class WalletManager {
 
 
     /**
+     * Ordeno un ArrayList de valores de billetes/monedas en forma descendente
+     * */
+    private void orderListOfValuesDescending(ArrayList <String> listOfValues){
+
+        Collections.sort(listOfValues, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+
+                // Obtengo los valores en dinero a formato BigDecimal
+                BigDecimal bd_value_s1 = new BigDecimal(s1);
+                BigDecimal bd_value_s2 = new BigDecimal(s2);
+
+                // Invierto el orden a descendente, cambiando el resultado de la comparación
+                return (-1) * bd_value_s1.compareTo(bd_value_s2);
+            }
+        });
+
+    }
+
+
+    /**
      * Devuelvo la cantidad de veces que aparece un valor dado un ID de moneda, en base a lo
      * guardado en el archivo de billetes/monedas en la billetera
      * */
@@ -225,13 +245,13 @@ public class WalletManager {
 
         // Calculo el pago a partir de los valores en la billetera y del monto a pagar, en un nuevo ArrayList
         ArrayList<String> valuesInWalletCopy = new ArrayList<String>(valuesInWallet);
+        orderListOfValuesDescending(valuesInWalletCopy);
         ArrayList<String> valuesToPay = new ArrayList<String>();
         PayManager pm = new PayManager();
         pm.obtainPayment(valueToPay,valuesInWalletCopy,valuesToPay);
 
         return valuesToPay;
     }
-
 
 
     // TODO: (Ver si es necesario) Implementar Método: Sacar todo de la billetera.
@@ -320,13 +340,16 @@ public class WalletManager {
 
     // * Manejo de los valores actuales en la billetera *
 
-    // TODO: Usarlo en la implementación del activity FinalizePurchase (Para guardar el cambio recibido)
-    // TODO: Implementar: Guardar ArrayList de billetes/monedas en billetera, dado un vuelto recibido
+
     /**
-     * Guardo en la billetera la lista de nombres de las imágenes
+     * Guardo en la billetera la lista de nombres de las imágenes (ID)
      * de los valores recibidos como vuelto
      * */
-    public void saveChangeInWallet(ArrayList<String> listOfNames){
+    public void saveChangeInWallet(Context context, ArrayList<String> listOfID){
+
+        for(String currentID : listOfID) {
+            setCurrencyInWallet(context,currentID);
+        }
 
     }
 
@@ -339,12 +362,19 @@ public class WalletManager {
     }
 
 
-    // TODO: Usarlo en la implementación del activity FinalizePurchase (Para sacar los valores con que se pagó)
     /**
      * Quito un billete/moneda de la billetera
      * */
-    public void removeFromWalletCurrencyUsedToPay(Context context, String idCurrency){
-        removeCurrencyInWallet(context,idCurrency);
+    public void removeFromWalletCurrencyUsedToPay(Context context, String totalPurchaseValue){
+
+        //Cargo la lista con los ID usados para el pago
+        ArrayList<String> listOfValueID = obtainMoneyValueNamesOfPayment(context,totalPurchaseValue);
+
+        // Remuevo todos los valores de la billetera
+        for(String currentValueID : listOfValueID) {
+            removeCurrencyInWallet(context,currentValueID);
+        }
+
     }
 
 

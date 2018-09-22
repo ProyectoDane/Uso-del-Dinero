@@ -26,11 +26,6 @@ public class PayPurchaseActivity extends AppCompatActivity {
      */
     private ImageSlideManager imageSlideManager;
 
-    /**
-     * Instancia de WalletManager
-     */
-    private static final WalletManager wm = WalletManager.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +36,7 @@ public class PayPurchaseActivity extends AppCompatActivity {
         totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
 
         // Calculo todos los valores a usar para pagar
-        moneyValueNames = wm.obtainMoneyValueNamesOfPayment(this, totalPurchase);
+        moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfPayment(this, totalPurchase);
 
         // Cargo el slide de imágenes y puntos indicadores
         // Parámetros:  + (1)Contexto
@@ -70,7 +65,7 @@ public class PayPurchaseActivity extends AppCompatActivity {
      **/
     public void sendToControlChange(View view) {
 
-        if ( wm.isChangeExpected(this, totalPurchase) ) {
+        if ( WalletManager.getInstance().isChangeExpected(this, totalPurchase) ) {
             Intent intent = new Intent(this, ControlChangeActivity.class);
             intent.putExtra(getString(R.string.tag_total_value), totalPurchase);
             startActivity(intent);

@@ -33,11 +33,6 @@ public class WalletActivity extends AppCompatActivity {
     private ImageSlideManager imageSlideManager;
 
     /**
-     * Instancia de WalletManager
-     */
-    private static final WalletManager wm = WalletManager.getInstance();
-
-    /**
      * Clase que se encarga de manejar los mensajes emergentes
      */
     private SnackBarManager sb;
@@ -52,14 +47,14 @@ public class WalletActivity extends AppCompatActivity {
 
         // Actualizo el valor del total, inicio el subtotal en cero y muestro en pantalla
         st_subtotal = getString(R.string.value_0);
-        st_total = wm.obtainTotalCreditInWallet(this);
+        st_total = WalletManager.getInstance().obtainTotalCreditInWallet(this);
         refreshSubtotalAndTotal();
 
         // Inicio el SnackBarManager para luego crear mensajes emergentes
         sb = new SnackBarManager();
 
         // Obtengo todos los valores a mostrar para la carga de la billetera
-        ArrayList<String> moneyValueNames = wm.obtainMoneyValueNamesOfValidCurrency(this);
+        ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfValidCurrency(this);
 
         // Cargo el slide de imágenes y puntos indicadores
         // Parámetros:  + (1)Contexto
@@ -120,12 +115,12 @@ public class WalletActivity extends AppCompatActivity {
         String st_valueID = imageSlideManager.getActualValueID();
 
         // Obtengo el valor monetario a partir del ID
-        String st_value = wm.obtainValueFormID(this,st_valueID);
+        String st_value = WalletManager.getInstance().obtainValueFormID(this,st_valueID);
 
         // Agrego el ID a la lista para la futura carga, sumo el valor al subtotal y total para luego mostrarlo
         newLoadMoneyValueNames.add(st_valueID);
-        st_subtotal = wm.addValues(st_value,st_subtotal);
-        st_total = wm.addValues(st_value,st_total);
+        st_subtotal = WalletManager.getInstance().addValues(st_value,st_subtotal);
+        st_total = WalletManager.getInstance().addValues(st_value,st_total);
         refreshSubtotalAndTotal();
 
         // Creo el mensaje para notificar el valor seleccionado a sumar a la billetera y lo muestro
@@ -140,7 +135,7 @@ public class WalletActivity extends AppCompatActivity {
 
         // Guardo todos los valores seleccionados
         for(String currentNewLoadMoneyValueName : newLoadMoneyValueNames) {
-            wm.addCurrencyInWallet(this,currentNewLoadMoneyValueName);
+            WalletManager.getInstance().addCurrencyInWallet(this,currentNewLoadMoneyValueName);
         }
 
         sendToMain(view);

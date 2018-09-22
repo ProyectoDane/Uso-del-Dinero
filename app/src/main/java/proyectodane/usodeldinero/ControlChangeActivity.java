@@ -38,11 +38,6 @@ public class ControlChangeActivity extends AppCompatActivity {
      */
     private ImageSlideManager imageSlideManager;
 
-    /**
-     * Instancia de WalletManager
-     */
-    private static final WalletManager wm = WalletManager.getInstance();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +47,12 @@ public class ControlChangeActivity extends AppCompatActivity {
         // Obtengo el intent que inició el activity, extraigo el valor del pago total e inicio las variables del vuelto
         Intent intent = getIntent();
         st_totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
-        st_changeExpected = wm.expectedChangeValue(this,st_totalPurchase);
+        st_changeExpected = WalletManager.getInstance().expectedChangeValue(this,st_totalPurchase);
         st_receivedChangeValue = getString(R.string.value_0);
         al_receivedChange = new ArrayList<String>();
 
         // ArrayList con todos los valores de billetes/monedas existentes. Calculo todos los valores a usar para pagar
-        ArrayList<String> moneyValueNames = wm.getInstance().obtainMoneyValueNamesOfValidCurrency(this);
+        ArrayList<String> moneyValueNames = WalletManager.getInstance().getInstance().obtainMoneyValueNamesOfValidCurrency(this);
 
         // Cargo el slide de imágenes y puntos indicadores
         // Parámetros:  + (1)Contexto
@@ -105,8 +100,8 @@ public class ControlChangeActivity extends AppCompatActivity {
         al_receivedChange.add(st_valueID);
 
         // Obtengo el valor monetario a partir del ID y lo sumo al vuelto actual
-        String st_value = wm.obtainValueFormID(this,st_valueID);
-        st_receivedChangeValue = wm.addValues(st_receivedChangeValue,st_value);
+        String st_value = WalletManager.getInstance().obtainValueFormID(this,st_valueID);
+        st_receivedChangeValue = WalletManager.getInstance().addValues(st_receivedChangeValue,st_value);
 
         // Actualizo el texto del importe recibido
         TextView textView = findViewById(R.id.textView5);
@@ -130,7 +125,7 @@ public class ControlChangeActivity extends AppCompatActivity {
 
         Button acceptChangeButton = (Button) findViewById(R.id.button10);
         Button addToChangeButton = (Button) findViewById(R.id.button9);
-        boolean changeOk = wm.isTotalChangeReceivedOk(st_receivedChangeValue, st_changeExpected);
+        boolean changeOk = WalletManager.getInstance().isTotalChangeReceivedOk(st_receivedChangeValue, st_changeExpected);
 
         if (changeOk) {
             acceptChangeButton.setEnabled(true);

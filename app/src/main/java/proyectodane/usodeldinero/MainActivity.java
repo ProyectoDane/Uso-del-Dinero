@@ -12,16 +12,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    /**
-     * Instancia de WalletManager
-     */
-    private static final WalletManager wm = WalletManager.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         // TODO: ***TEMPORAL*** - Borrar luego de la implementación final
-        wm.getInstance().initializeWalletManually(this); // Cargo billetera a mano
+        WalletManager.getInstance().initializeWalletManually(this); // Cargo billetera a mano
         // TODO: ***TEMPORAL*** - Borrar luego de la implementación final
 
         // Agrego "Splash Screen"
@@ -31,13 +26,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Verifico inicialización de archivo de valores
-        wm.checkFirstRun(this);
+        WalletManager.getInstance().checkFirstRun(this);
 
         // Calculo todos los valores en la billetera a mostrar
-        ArrayList<String> moneyValueNames = wm.getInstance().obtainMoneyValueNamesInWallet(this);
+        ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesInWallet(this);
 
         // Actualizo el valor del total en billetera
-        refreshTotal(wm.getInstance().obtainTotalCreditInWallet(this));
+        refreshTotal(WalletManager.getInstance().obtainTotalCreditInWallet(this));
 
         // Clase que se encarga de manejar lo referido al slide de imágenes y puntos
         // Parámetros:  + (1)Contexto
@@ -81,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
      **/
     public void refreshTotal(String newTotal) {
         TextView textView = findViewById(R.id.textView1);
-        textView.setText(getString(R.string.saved_money_pesos) + newTotal);
+        String newText = getString(R.string.saved_money_pesos) + newTotal;
+        textView.setText(newText);
     }
 
 }
