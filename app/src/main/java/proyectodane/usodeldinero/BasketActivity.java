@@ -22,12 +22,6 @@ public class BasketActivity extends AppCompatActivity {
      * */
     private EditText et_productValue;
 
-    /**
-     * Instancia de WalletManager
-     */
-    private static final WalletManager wm = WalletManager.getInstance();
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,16 +51,16 @@ public class BasketActivity extends AppCompatActivity {
         String st_newValue = et_productValue.getText().toString();
 
         // Verifico si tiene formato numérico inválido
-        if ( !(wm.isFloatFormatValid(st_newValue)) ) {
+        if ( !(WalletManager.getInstance().isFloatFormatValid(st_newValue)) ) {
             resetEditTextValue();
             return;
         }
 
         // Suma el nuevo valor al total (redondeando [FLOOR] para obtener hasta 2 decimales)
-        String st_newTotal = wm.addValues(st_total_purchase,st_newValue);
+        String st_newTotal = WalletManager.getInstance().addValues(st_total_purchase,st_newValue);
 
         // Si el total en la billetera no alcanza para pagar la compra total...
-        if ( wm.isGreaterThanTotalWallet(this,st_newTotal) ) {
+        if ( WalletManager.getInstance().isGreaterThanTotalWallet(this,st_newTotal) ) {
 
             // Aviso que el dinero es insuficiente y descarto la suma
             Snackbar.make(findViewById(R.id.coordinatorLayout_Basquet),R.string.insufficient_funds,Snackbar.LENGTH_LONG).show();
@@ -86,7 +80,7 @@ public class BasketActivity extends AppCompatActivity {
 
         // Si el total es mayor a cero, habilito el botón para pagar
         Button payButton = (Button) findViewById(R.id.button3);
-        if (wm.isGreaterThanValueZero(st_total_purchase)) {
+        if (WalletManager.getInstance().isGreaterThanValueZero(st_total_purchase)) {
             payButton.setEnabled(true);
         }
 

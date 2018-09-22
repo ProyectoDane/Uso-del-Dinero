@@ -64,6 +64,10 @@
     <string name="first_time_access">firstTimeAccess</string>
 
 
+    <!-- Identificadores funcionales al código - [FinalizePurchase]  -->
+    <string name="finalize_purchase">Finalizar Compra</string>
+    <string name="no_change_received">Compra sin vuelto</string>
+
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
     <string name="value_10">10.00</string>
 
