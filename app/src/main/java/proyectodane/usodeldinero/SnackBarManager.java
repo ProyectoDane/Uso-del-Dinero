@@ -1,6 +1,5 @@
 package proyectodane.usodeldinero;
 
-import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
@@ -50,7 +49,5 @@ public class SnackBarManager {
     public void showTextShortOnClickActionDisabled(View snackbarView, String textMsg, int maxLines) {
         showTextOnClickActionDisabled(snackbarView,textMsg,maxLines,Snackbar.LENGTH_SHORT);
     }
-
-
 
 }

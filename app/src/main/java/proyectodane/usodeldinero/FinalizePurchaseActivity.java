@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import java.util.ArrayList;
 
 public class FinalizePurchaseActivity extends AppCompatActivity {
@@ -20,7 +19,6 @@ public class FinalizePurchaseActivity extends AppCompatActivity {
      */
     private ArrayList<String> al_receivedChange;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +29,18 @@ public class FinalizePurchaseActivity extends AppCompatActivity {
         al_receivedChange = intent.getStringArrayListExtra(getString(R.string.received_change));
         st_totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
 
-        // Si no recibí vuelto dejo inhabilitado el botón de "Guardar vuelto"
+        // Si no recibí vuelto, cambio el comportamiento de los botones
         if (al_receivedChange.isEmpty()) {
+
+            // Dejo inhabilitado el botón de "Guardar vuelto" y aclaro que no hubo vuelto
             Button saveToWalletButton = (Button) findViewById(R.id.button13);
             saveToWalletButton.setEnabled(false);
+            saveToWalletButton.setText(getString(R.string.no_change_received));
+
+            // Pongo un nuevo texto para finalizar la compra
+            Button doNotSaveToWalletButton = (Button) findViewById(R.id.button11);
+            doNotSaveToWalletButton.setText(getString(R.string.finalize_purchase));
+
         }
 
     }
@@ -56,7 +62,7 @@ public class FinalizePurchaseActivity extends AppCompatActivity {
      * Concreta el pago, descartando los valores correspondientes de la billetera y regresa a la pantalla principal
      * */
     public void doNotSaveToWallet(View view) {
-        // TODO: Aquí se debe concretar el pago (Quitar los valores de la billetera desde el WalletManager)
+        WalletManager.getInstance().removeFromWalletCurrencyUsedToPay(this,st_totalPurchase);
         sendToMain(view);
     }
 
@@ -65,8 +71,8 @@ public class FinalizePurchaseActivity extends AppCompatActivity {
      * guarda todos los valores recibidos en concepto de vuelto y regresa a la pantalla principal
      * */
     public void saveToWallet(View view) {
-        // TODO: Aquí se debe concretar el pago (Quitar los valores de la billetera desde el WalletManager)
-        // TODO: Aquí se deben guardar todos los billetes recibidos (vuelto)
+        WalletManager.getInstance().removeFromWalletCurrencyUsedToPay(this,st_totalPurchase);
+        WalletManager.getInstance().saveChangeInWallet(this,al_receivedChange);
         sendToMain(view);
     }
 

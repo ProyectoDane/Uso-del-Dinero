@@ -14,12 +14,7 @@ public class PayPurchaseActivity extends AppCompatActivity {
     /**
      * Valor total de la compra
      */
-    private String st_totalPurchase;
-
-    /**
-     * Vuelto total de la compra
-     */
-    private String st_change;
+    private String totalPurchase;
 
     /**
      * ArrayList con todos los valores de billetes/monedas calculados para dar el pago
@@ -31,12 +26,6 @@ public class PayPurchaseActivity extends AppCompatActivity {
      */
     private ImageSlideManager imageSlideManager;
 
-    /**
-     * Instancia de WalletManager
-     */
-    private static final WalletManager wm = WalletManager.getInstance();
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +33,10 @@ public class PayPurchaseActivity extends AppCompatActivity {
 
         // Obtengo el intent que inició el activity y extraigo el valor del total
         Intent intent = getIntent();
-        st_totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
+        totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
 
         // Calculo todos los valores a usar para pagar
-        moneyValueNames = wm.obtainMoneyValueNamesOfPayment(this,st_totalPurchase);
+        moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfPayment(this, totalPurchase);
 
         // Cargo el slide de imágenes y puntos indicadores
         // Parámetros:  + (1)Contexto
@@ -60,7 +49,6 @@ public class PayPurchaseActivity extends AppCompatActivity {
                 (LinearLayout) findViewById(R.id.SliderDots_pay),
                 ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot),
                 ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
-
     }
 
     /**
@@ -72,13 +60,14 @@ public class PayPurchaseActivity extends AppCompatActivity {
     }
 
     /**
-     *  Envía a la pantalla de control de vuelto
+     *  Envía a la pantalla de control de vuelto.
+     *  Si no corresponde vuelto, envía directamente a finalizar
      **/
     public void sendToControlChange(View view) {
 
-        if ( wm.isChangeExpected(st_totalPurchase) ) {
+        if ( WalletManager.getInstance().isChangeExpected(this, totalPurchase) ) {
             Intent intent = new Intent(this, ControlChangeActivity.class);
-            intent.putExtra(getString(R.string.tag_total_value),st_totalPurchase);
+            intent.putExtra(getString(R.string.tag_total_value), totalPurchase);
             startActivity(intent);
         } else {
             sendToFinalizePurchase(view);
@@ -97,13 +86,12 @@ public class PayPurchaseActivity extends AppCompatActivity {
     public void sendToFinalizePurchase(View view) {
         Intent intent = new Intent(this, FinalizePurchaseActivity.class);
 
-        // Creo un array vacío (que representa un vuelto nulo)
-        ArrayList<String> al_receivedChange = new ArrayList<String>();
-
-        intent.putStringArrayListExtra(getString(R.string.received_change),al_receivedChange);
+        // Creo y envío un array vacío (que representa un vuelto nulo)
+        ArrayList<String> al_receivedChangeEmpty = new ArrayList<String>();
+        intent.putStringArrayListExtra(getString(R.string.received_change),al_receivedChangeEmpty);
+        intent.putExtra(getString(R.string.tag_total_value), totalPurchase);
         startActivity(intent);
     }
-
 
     /**
      * Muestra el texto de ayuda para este activity

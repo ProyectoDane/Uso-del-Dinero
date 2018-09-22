@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import java.util.ArrayList;
 
-
 /**
  * Clase que representa un slide de imágenes con un indicador de cantidad dibujado por puntos
  */
@@ -40,6 +39,11 @@ public class ImageSlideManager {
      */
     private ArrayList<ScreenSlidePageFragment> fragments;
 
+    /**
+     * ScreenSlidePageFragment actual seleccionado por el usuario
+     */
+    private ScreenSlidePageFragment actualPageFragment;
+
 
     public ImageSlideManager(Context activityContext, ViewPager viewPagerSelected, FragmentManager fragmentManagerSelected, ArrayList<String> listImageNames, LinearLayout linearLayoutSelected, final Drawable drawableActiveDot, final Drawable drawableNonActiveDot){
 
@@ -50,6 +54,9 @@ public class ImageSlideManager {
         viewPager = viewPagerSelected;
         pagerAdapter = new ScreenSlidePagerAdapter(fragmentManagerSelected,fragments);
         viewPager.setAdapter(pagerAdapter);
+
+        // En el estado inicial, la primer imagen será la seleccionada. Elijo el fragment.
+        actualPageFragment = (ScreenSlidePageFragment)((ScreenSlidePagerAdapter)pagerAdapter).getItem(0);
 
         // Instancio un LinearLayout, para representar los puntos debajo de las imágenes
         sliderDotsPanel = linearLayoutSelected;
@@ -65,11 +72,11 @@ public class ImageSlideManager {
             dots[i] = new ImageView(activityContext);
             dots[i].setImageDrawable(drawableNonActiveDot);
 
-            // Prepara los parámetros de la imagen
+            // Prepara los parámetros de la imagen de los puntos
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(8, 0, 8, 0);
 
-            // Setea los parámetros de la imagen
+            // Setea los parámetros de la imagen de los puntos
             sliderDotsPanel.addView(dots[i], params);
         }
 
@@ -81,8 +88,8 @@ public class ImageSlideManager {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                /* "This method will be invoked when the current page is scrolled, either as part of a
-                programmatically initiated smooth scroll or a user initiated touch scroll." */
+                /* "Este método será invocado cuando la imagen actual es deslizada, aunque sea realizado
+                 por código o con touch del usuario" */
             }
 
             @Override  // Cuando una nueva imagen es seleccionada, actualizo las imágenes de los puntos
@@ -95,11 +102,15 @@ public class ImageSlideManager {
 
                 // Actualizo la imagen del punto activo
                 dots[position].setImageDrawable(drawableActiveDot);
+
+                // Actualizo el fragmento actual al seleccionar uno nuevo
+                actualPageFragment = (ScreenSlidePageFragment)((ScreenSlidePagerAdapter)pagerAdapter).getItem(position);
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                /* "Called when the scroll state changes" */
+                /* Llamado cuando el Scroll cambia de posición (Sin uso actualmente) */
             }
         });
 
@@ -143,6 +154,14 @@ public class ImageSlideManager {
             // Si es otra imagen que no sea la primera uso el "back" para volver atrás una imagen
             viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
         }
+    }
+
+    /**
+     * Obtengo el ID de la imagen seleccionada.
+     * El mismo debe ser llamado solamente cuando el fragmento actual ya se encuentra en el view (en vista)
+     * */
+    public String getActualValueID(){
+        return actualPageFragment.getValueID();
     }
 
 }

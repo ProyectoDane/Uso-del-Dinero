@@ -20,10 +20,6 @@
     <!-- ************************************* -->
 
 
-    <!-- Identificadores funcionales al código - [Basket] TODO: Ver si se borra esta línea -->
-    <string name="saved_money">DINERO AHORRADO: $</string>
-
-
     <!-- Identificadores funcionales al código - [Basket]  -->
     <string name="empty_string"></string>
     <string name="total_value">VALOR TOTAL: $</string>
@@ -61,6 +57,17 @@
     <!-- Identificadores funcionales al código - [PayPurchase]  -->
     <string name="help_text_pay_purchase">AYUDA:\n[Imágenes de billetes y monedas] Se muestran todos los valores a retirar de la billetera para el pago.\n[CANCELAR COMPRA] Anula la carga y vuelve a la vista de la billetera.\n[COMPRA PAGADA] Confirma el pago y envía a la pantalla de recepción de vuelto (si es necesario).</string>
 
+
+    <!-- Identificadores funcionales al código - [WalletManager]  -->
+    <string name="type_1">t1</string>
+    <string name="type_2">t2</string>
+    <string name="first_time_access">firstTimeAccess</string>
+
+
+    <!-- Identificadores funcionales al código - [FinalizePurchase]  -->
+    <string name="finalize_purchase">Finalizar Compra</string>
+    <string name="no_change_received">Compra sin vuelto</string>
+
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
     <string name="value_10">10.00</string>
 
@@ -73,6 +80,7 @@
 
     <!-- ID de los textos de componentes de las activities - [Main]  -->
     <string name="saved_money_pesos_20">DINERO AHORRADO: $20.00</string>
+    <string name="saved_money_pesos">DINERO AHORRADO: $</string>
     <string name="start_purchase">INICIAR COMPRA</string>
     <string name="load_wallet">CARGAR BILLETERA</string>
 
@@ -128,20 +136,26 @@
     <!-- *************************************************** -->
     <!-- Identificadores para nombres de archivo de billetes -->
     <!-- *************************************************** -->
-    <string name="tag_p5">img_01_p5</string>
-    <string name="tag_p5b">img_02_p5b</string>
-    <string name="tag_p10">img_03_p10</string>
-    <string name="tag_p10b">img_04_p10b</string>
-    <string name="tag_p20">img_05_p20</string>
-    <string name="tag_p20b">img_06_p20b</string>
-    <string name="tag_p50">img_07_p50</string>
-    <string name="tag_p50b">img_08_p50b</string>
-    <string name="tag_p100">img_09_p100</string>
-    <string name="tag_p100b">img_10_p100b</string>
-    <string name="tag_p200">img_11_p200</string>
-    <string name="tag_p500">img_12_p500</string>
-    <string name="tag_p1000">img_13_p1000</string>
-
-
+    <string name="tag_p5">t1_img_01_p5</string>
+    <string name="tag_p5b">t1_img_02_p5b</string>
+    <string name="tag_p10">t1_img_03_p10</string>
+    <string name="tag_p10b">t1_img_04_p10b</string>
+    <string name="tag_p20">t1_img_05_p20</string>
+    <string name="tag_p20b">t1_img_06_p20b</string>
+    <string name="tag_p50">t1_img_07_p50</string>
+    <string name="tag_p50b">t1_img_08_p50b</string>
+    <string name="tag_p100">t1_img_09_p100</string>
+    <string name="tag_p100b">t1_img_10_p100b</string>
+    <string name="tag_p200">t1_img_11_p200</string>
+    <string name="tag_p500">t1_img_12_p500</string>
+    <string name="tag_p1000">t1_img_13_p1000</string>
+    <string name="tag_c5">t2_img_14_c5</string>
+    <string name="tag_c10">t2_img_15_c10</string>
+    <string name="tag_c25">t2_img_16_c25</string>
+    <string name="tag_c50">t2_img_17_c50</string>
+    <string name="tag_p1">t2_img_18_p1</string>
+    <string name="tag_p1_b">t2_img_19_p1</string>
+    <string name="tag_p2">t2_img_20_p2</string>
+    <string name="tag_p5_b">t2_img_21_p5</string>
 
 </resources>

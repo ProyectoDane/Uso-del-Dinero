@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 public class WalletActivity extends AppCompatActivity {
@@ -34,11 +33,6 @@ public class WalletActivity extends AppCompatActivity {
     private ImageSlideManager imageSlideManager;
 
     /**
-     * Instancia de WalletManager
-     */
-    private static final WalletManager wm = WalletManager.getInstance();
-
-    /**
      * Clase que se encarga de manejar los mensajes emergentes
      */
     private SnackBarManager sb;
@@ -53,14 +47,14 @@ public class WalletActivity extends AppCompatActivity {
 
         // Actualizo el valor del total, inicio el subtotal en cero y muestro en pantalla
         st_subtotal = getString(R.string.value_0);
-        st_total = wm.obtainTotalCreditInWallet();
+        st_total = WalletManager.getInstance().obtainTotalCreditInWallet(this);
         refreshSubtotalAndTotal();
 
         // Inicio el SnackBarManager para luego crear mensajes emergentes
         sb = new SnackBarManager();
 
         // Obtengo todos los valores a mostrar para la carga de la billetera
-        ArrayList<String> moneyValueNames = wm.obtainMoneyValueNamesOfValidCurrency(this);
+        ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfValidCurrency(this);
 
         // Cargo el slide de imágenes y puntos indicadores
         // Parámetros:  + (1)Contexto
@@ -94,7 +88,6 @@ public class WalletActivity extends AppCompatActivity {
     public void sendToMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-
     }
 
     /**
@@ -112,23 +105,22 @@ public class WalletActivity extends AppCompatActivity {
         textView.setText(getString(R.string.load_cash_sign) + st_subtotal + " - " + getString(R.string.total_cash_sign) + st_total);
     }
 
+    // TODO: Ver si se agrega una cantidad límite de valores a ingresar en la billetera (Físicamente no se pueden poner infinitos billetes y/o monedas)
     /**
      * Sumo el valor seleccionado al subtotal de carga en billetera
      **/
     public void addValueToSubtotal (View view) {
 
-        // TODO: Ver si se agrega una cantidad límite de valores a ingresar en la billetera (Físicamente no se pueden poner infinitos billetes y/o monedas)
-
         // Obtengo el ID del valor elegido
-        String st_valueID = getString(R.string.tag_p10); //TODO: Implementar la carga del valor a través de la selección de la imagen actualmente mostrada. (Por ahora siempre suma 10 pesos)
+        String st_valueID = imageSlideManager.getActualValueID();
 
         // Obtengo el valor monetario a partir del ID
-        String st_value = wm.obtainValueFormID(st_valueID);
+        String st_value = WalletManager.getInstance().obtainValueFormID(this,st_valueID);
 
         // Agrego el ID a la lista para la futura carga, sumo el valor al subtotal y total para luego mostrarlo
         newLoadMoneyValueNames.add(st_valueID);
-        st_subtotal = wm.addValues(st_value,st_subtotal);
-        st_total = wm.addValues(st_value,st_total);
+        st_subtotal = WalletManager.getInstance().addValues(st_value,st_subtotal);
+        st_total = WalletManager.getInstance().addValues(st_value,st_total);
         refreshSubtotalAndTotal();
 
         // Creo el mensaje para notificar el valor seleccionado a sumar a la billetera y lo muestro
@@ -136,5 +128,17 @@ public class WalletActivity extends AppCompatActivity {
         sb.showTextShortOnClickActionDisabled(findViewById(R.id.coordinatorLayout_Wallet),st_snackBarText,2);
     }
 
+    /**
+     * Agrega la carga de dinero seleccionada en la billetera y luego envía a la pantalla principal
+     * */
+    public void addValuesToWallet (View view){
+
+        // Guardo todos los valores seleccionados
+        for(String currentNewLoadMoneyValueName : newLoadMoneyValueNames) {
+            WalletManager.getInstance().addCurrencyInWallet(this,currentNewLoadMoneyValueName);
+        }
+
+        sendToMain(view);
+    }
 
 }
