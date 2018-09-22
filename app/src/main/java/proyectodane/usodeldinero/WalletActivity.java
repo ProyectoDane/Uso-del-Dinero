@@ -133,13 +133,12 @@ public class WalletActivity extends AppCompatActivity {
         sb.showTextShortOnClickActionDisabled(findViewById(R.id.coordinatorLayout_Wallet),st_snackBarText,2);
     }
 
-
     /**
      * Agrega la carga de dinero seleccionada en la billetera y luego envía a la pantalla principal
      * */
     public void addValuesToWallet (View view){
 
-        // Guardo todos los valores seleccionados hasta el momento
+        // Guardo todos los valores seleccionados
         for(String currentNewLoadMoneyValueName : newLoadMoneyValueNames) {
             wm.addCurrencyInWallet(this,currentNewLoadMoneyValueName);
         }

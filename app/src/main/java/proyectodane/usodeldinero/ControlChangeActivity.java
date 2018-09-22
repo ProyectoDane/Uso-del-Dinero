@@ -26,7 +26,7 @@ public class ControlChangeActivity extends AppCompatActivity {
     /**
      * Vuelto recibido de la compra (importe)
      */
-    private String st_receivedChange;
+    private String st_receivedChangeValue;
 
     /**
      * Vuelto recibido de la compra (todos los ID de cada uno de los valores)
@@ -49,11 +49,12 @@ public class ControlChangeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_change);
 
-        // Obtengo el intent que inició el activity, extraigo el valor del pago total e inicio el vuelto recibido en 0
+        // Obtengo el intent que inició el activity, extraigo el valor del pago total e inicio las variables del vuelto
         Intent intent = getIntent();
         st_totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
         st_changeExpected = wm.expectedChangeValue(this,st_totalPurchase);
-        st_receivedChange = getString(R.string.value_0);
+        st_receivedChangeValue = getString(R.string.value_0);
+        al_receivedChange = new ArrayList<String>();
 
         // ArrayList con todos los valores de billetes/monedas existentes. Calculo todos los valores a usar para pagar
         ArrayList<String> moneyValueNames = wm.getInstance().obtainMoneyValueNamesOfValidCurrency(this);
@@ -84,7 +85,6 @@ public class ControlChangeActivity extends AppCompatActivity {
      **/
     public void sendToFinalizePurchase(View view) {
         Intent intent = new Intent(this, FinalizePurchaseActivity.class);
-        al_receivedChange = new ArrayList<String>(); al_receivedChange.add(getString(R.string.value_10)); // TODO: Implementar en R4. Se debe cargar un listado con todos los billetes recibidos (cambio). Borrar el "new"
         intent.putStringArrayListExtra(getString(R.string.received_change),al_receivedChange);
         intent.putExtra(getString(R.string.tag_total_value),st_totalPurchase);
         startActivity(intent);
@@ -100,22 +100,17 @@ public class ControlChangeActivity extends AppCompatActivity {
      **/
     public void addToChange(View view){
 
-        // TODO: Implementar en R4. Se debe guardar en un listado cada ID de billete/moneda recibido (cambio). Uso de al_receivedChange.add();
-
-        // Sumo al cambio recibido
-        st_receivedChange = wm.addValues(st_receivedChange,getString(R.string.value_10));
-        // TODO: Sumar según billete elegido, sacar el "R.string.value_10"
-        /* //TODO: Uso de...
-       // Obtengo el ID del valor elegido
+        // Obtengo el ID del valor elegido y lo guardo en el ArrayList
         String st_valueID = imageSlideManager.getActualValueID();
+        al_receivedChange.add(st_valueID);
 
-        // Obtengo el valor monetario a partir del ID
-        String st_value = wm.obtainValueFormID(this,st_valueID);*/
-
+        // Obtengo el valor monetario a partir del ID y lo sumo al vuelto actual
+        String st_value = wm.obtainValueFormID(this,st_valueID);
+        st_receivedChangeValue = wm.addValues(st_receivedChangeValue,st_value);
 
         // Actualizo el texto del importe recibido
         TextView textView = findViewById(R.id.textView5);
-        String st_textViewValue = getString(R.string.change_amount) + st_receivedChange;
+        String st_textViewValue = getString(R.string.change_amount) + st_receivedChangeValue;
 
         // Si el vuelto es el total, lo informo
         if(isChangeOK()) {
@@ -135,7 +130,7 @@ public class ControlChangeActivity extends AppCompatActivity {
 
         Button acceptChangeButton = (Button) findViewById(R.id.button10);
         Button addToChangeButton = (Button) findViewById(R.id.button9);
-        boolean changeOk = wm.isTotalChangeReceivedOk(st_receivedChange, st_changeExpected);
+        boolean changeOk = wm.isTotalChangeReceivedOk(st_receivedChangeValue, st_changeExpected);
 
         if (changeOk) {
             acceptChangeButton.setEnabled(true);
