@@ -44,7 +44,8 @@
             android:name=".WalletActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="userLandscape" />
-        <activity android:name=".CurrencyConfigActivity"></activity>
+        <activity android:name=".CurrencyConfigActivity" />
+        <activity android:name=".NewCurrencyActivity"></activity>
     </application>
 
 </manifest>

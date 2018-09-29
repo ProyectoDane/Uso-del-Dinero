@@ -116,8 +116,17 @@
 
     <!-- ID de los textos de componentes de las activities - [CurrencyConfig]  -->
     <string name="currency_configuration">CONFIGURACIÓN DE VALORES</string>
-    <string name="new_currency">NUEVO VALOR</string>
     <string name="delete_currency">BORRAR VALOR</string>
+    <string name="new_currency">NUEVO VALOR</string>
+
+    <!-- ID de los textos de componentes de las activities - [NewCurrency]  -->
+    <string name="new_currency_load">CARGA DE NUEVO VALOR</string>
+    <string name="bill">BILLETE</string>
+    <string name="coin">MONEDA</string>
+    <string name="load_image">CARGAR IMAGEN</string>
+    <string name="image_not_loaded">IMAGEN NO CARGADA</string>
+    <string name="given_value">VALOR ASIGNADO</string>
+    <string name="load_new_value">CARGAR NUEVO VALOR</string>
 
 
     <!-- ID de los textos de componentes de las activities - [Varias Activities]  -->
