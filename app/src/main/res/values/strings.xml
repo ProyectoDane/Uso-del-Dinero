@@ -6,13 +6,11 @@
     <string name="app_name">Uso del Dinero</string>
 
 
-
     <!-- *************************************************** -->
     <!-- Nombres de archivos (persistencia) de la aplicación -->
     <!-- *************************************************** -->
     <string name="valid_currency_shared_preferences_file_name">VALID_CURRENCY</string>
     <string name="currency_in_wallet_shared_preferences_file_name">CURRENCY_IN_WALLET</string>
-
 
 
     <!-- ************************************* -->
@@ -72,7 +70,6 @@
     <string name="value_10">10.00</string>
 
 
-
     <!-- ************************************************* -->
     <!-- ID de los textos de componentes de las activities -->
     <!-- ************************************************* -->
@@ -115,6 +112,12 @@
     <string name="cancel_load">CANCELAR</string>
     <string name="add">AGREGAR</string>
     <string name="save_in_wallet">GUARDAR Y FINALIZAR</string>
+
+
+    <!-- ID de los textos de componentes de las activities - [CurrencyConfig]  -->
+    <string name="currency_configuration">CONFIGURACIÓN DE VALORES</string>
+    <string name="new_currency">NUEVO VALOR</string>
+    <string name="delete_currency">BORRAR VALOR</string>
 
 
     <!-- ID de los textos de componentes de las activities - [Varias Activities]  -->
