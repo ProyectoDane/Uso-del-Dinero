@@ -45,7 +45,8 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="userLandscape" />
         <activity android:name=".CurrencyConfigActivity" />
-        <activity android:name=".NewCurrencyActivity"></activity>
+        <activity android:name=".NewCurrencyActivity" />
+        <activity android:name=".DeleteCurrencyActivity"></activity>
     </application>
 
 </manifest>

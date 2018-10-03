@@ -129,6 +129,12 @@
     <string name="load_new_value">CARGAR NUEVO VALOR</string>
 
 
+    <!-- ID de los textos de componentes de las activities - [DeleteCurrency]  -->
+    <string name="delete_existing_currency">ELIMINAR VALOR EXISTENTE</string>
+    <string name="selected_value">VALOR SELECCIONADO</string>
+    <string name="select_value">SELECCIONAR VALOR</string>
+    <string name="confirm_delete">CONFIRMAR ELIMINADO</string>
+
     <!-- ID de los textos de componentes de las activities - [Varias Activities]  -->
     <string name="cancel_purchase">CANCELAR COMPRA</string>
     <string name="purchase_payed">COMPRA PAGADA</string>
@@ -169,5 +175,6 @@
     <string name="tag_p1_b">t2_img_19_p1</string>
     <string name="tag_p2">t2_img_20_p2</string>
     <string name="tag_p5_b">t2_img_21_p5</string>
+
 
 </resources>
