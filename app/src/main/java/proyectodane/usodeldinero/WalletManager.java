@@ -323,7 +323,7 @@ public class WalletManager {
      * de la billetera
      * */
     public void addNewCurrency(String idCurrency, String currencyValue){
-
+        // Usar setValidCurrency()
     }
 
 
@@ -333,7 +333,7 @@ public class WalletManager {
      * de la billetera
      * */
     public void deleteExistingCurrency(String idCurrency){
-
+        // Usar el método privado
     }
 
 

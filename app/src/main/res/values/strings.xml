@@ -66,6 +66,13 @@
     <string name="finalize_purchase">Finalizar Compra</string>
     <string name="no_change_received">Compra sin vuelto</string>
 
+
+    <!-- Identificadores funcionales al código - [NewCurrencyActivity]  -->
+    <string name="select_app">Seleccione la Aplicación</string>
+    <string name="error_img_not_found">Error: Imagen no encontrada</string>
+    <string name="error_img_not_selected">Error: Imagen no seleccionada</string>
+
+
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
     <string name="value_10">10.00</string>
 
@@ -112,6 +119,7 @@
     <string name="cancel_load">CANCELAR</string>
     <string name="add">AGREGAR</string>
     <string name="save_in_wallet">GUARDAR Y FINALIZAR</string>
+    <string name="wallet_configuration">CONFIGURAR</string>
 
 
     <!-- ID de los textos de componentes de las activities - [CurrencyConfig]  -->

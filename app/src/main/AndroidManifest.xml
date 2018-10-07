@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="proyectodane.usodeldinero">
 
+    <!-- Agregado para lectura de imágenes agregadas por el usuario para nuevos valores -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -44,7 +47,7 @@
             android:name=".WalletActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="userLandscape" />
-        <activity android:name=".CurrencyConfigActivity" />
+        <activity android:name=".ConfigurationActivity" />
         <activity android:name=".NewCurrencyActivity" />
         <activity android:name=".DeleteCurrencyActivity"></activity>
     </application>

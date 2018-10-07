@@ -141,4 +141,12 @@ public class WalletActivity extends AppCompatActivity {
         sendToMain(view);
     }
 
+    /**
+     * Envía a la pantalla de configuración
+     * */
+    public void sendToConfiguration(View view) {
+        Intent intent = new Intent(this, ConfigurationActivity.class);
+        startActivity(intent);
+    }
+
 }
