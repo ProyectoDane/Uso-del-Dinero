@@ -385,6 +385,7 @@ public class WalletManager {
     public void checkFirstRun(Context context){
         if(isThisTheFirstTimeAccess(context)){
             initializeValidCurrencyManually(context);
+            initializeFilesOfValidCurrencyManually(context);
         }
     }
 
@@ -683,34 +684,6 @@ public class WalletManager {
 
 
     /**
-     * Borro el contenido entero del archivo de valores vigentes en circulación.
-     * */
-    private void deleteAllValidCurrency(Context context){
-        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
-        validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
-        SharedPreferences.Editor editor = validCurrency.edit();
-
-        // Borro contenido anterior
-        editor.clear();
-        editor.apply();
-
-    }
-
-    /**
-     * Borro el contenido entero del archivo de valores en la billetera.
-     * */
-    private void deleteAllCurrencyInWallet(Context context){
-        String validCurrencyFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
-        currencyInWallet = context.getSharedPreferences(validCurrencyFileName,0);
-        SharedPreferences.Editor editor = currencyInWallet.edit();
-
-        // Borro contenido anterior
-        editor.clear();
-        editor.apply();
-
-    }
-
-    /**
      * Guardo los valores vigentes en circulación a mano, en el archivo pertinente
      * */
     public void initializeValidCurrencyManually(Context context){
@@ -740,6 +713,36 @@ public class WalletManager {
     }
 
     /**
+     * Guardo las imágenes por defecto en el almacenamiento interno
+     * */
+    public void initializeFilesOfValidCurrencyManually(Context context){
+
+        ImageManager im = new ImageManager();
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p5));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p5b));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p10));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p10b));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p20));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p20b));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p50));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p50b));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p100));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p100b));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p200));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p500));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p1000));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_c5));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_c10));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p5));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_c25));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_c50));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p1));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p1_b));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p2));
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p5_b));
+    }
+
+    /**
      * Guardo los valores en billetera "a mano", en el archivo pertinente
      * */
     public void initializeWalletManually(Context context) {
@@ -748,6 +751,33 @@ public class WalletManager {
 
     }
 
+    /**
+     * Borro el contenido entero del archivo de valores vigentes en circulación.
+     * */
+    private void deleteAllValidCurrency(Context context){
+        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
+        validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
+        SharedPreferences.Editor editor = validCurrency.edit();
+
+        // Borro contenido anterior
+        editor.clear();
+        editor.apply();
+
+    }
+
+    /**
+     * Borro el contenido entero del archivo de valores en la billetera.
+     * */
+    private void deleteAllCurrencyInWallet(Context context){
+        String validCurrencyFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
+        currencyInWallet = context.getSharedPreferences(validCurrencyFileName,0);
+        SharedPreferences.Editor editor = currencyInWallet.edit();
+
+        // Borro contenido anterior
+        editor.clear();
+        editor.apply();
+
+    }
 
 }
 
