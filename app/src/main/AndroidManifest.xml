@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="proyectodane.usodeldinero">
 
+    <!-- Agregado para lectura de imágenes agregadas por el usuario para nuevos valores -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,28 +26,30 @@
         <activity
             android:name=".BasketActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape"></activity>
+            android:screenOrientation="userLandscape" />
         <activity
             android:name=".OrderTotalActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape"></activity>
+            android:screenOrientation="userLandscape" />
         <activity
             android:name=".PayPurchaseActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape"></activity>
+            android:screenOrientation="userLandscape" />
         <activity
             android:name=".ControlChangeActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape"></activity>
+            android:screenOrientation="userLandscape" />
         <activity
             android:name=".FinalizePurchaseActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape"></activity>
-
-        <activity android:name=".WalletActivity"
+            android:screenOrientation="userLandscape" />
+        <activity
+            android:name=".WalletActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape"></activity>
-
+            android:screenOrientation="userLandscape" />
+        <activity android:name=".ConfigurationActivity" />
+        <activity android:name=".NewCurrencyActivity" />
+        <activity android:name=".DeleteCurrencyActivity"></activity>
     </application>
 
 </manifest>
