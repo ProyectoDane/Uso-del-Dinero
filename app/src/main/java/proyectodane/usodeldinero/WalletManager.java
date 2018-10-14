@@ -2,6 +2,7 @@ package proyectodane.usodeldinero;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.util.Pair;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -76,7 +77,7 @@ public class WalletManager {
      * Si devuelve true, se guarda en el archivo el uso por primera vez
      * */
     private boolean isThisTheFirstTimeAccess(Context context){
-        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
+        String validCurrencyFileName = context.getString(R.string.settings_shared_preferences_file_name);
         validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
 
         if(validCurrency.getBoolean(context.getString(R.string.first_time_access), true)) {
@@ -317,13 +318,12 @@ public class WalletManager {
 
     // * Alta y Baja de nuevos valores *
 
-    // TODO: Implementar Método en Release 5: Agregar nuevo billete/moneda (Input: ID_moneda (Str), Valor en $ (Str) )
     /**
      * Guardo un nuevo billete/moneda vigente para ser usado luego como moneda nueva
      * de la billetera
      * */
-    public void addNewCurrency(String idCurrency, String currencyValue){
-        // Usar setValidCurrency()
+    public void addNewCurrency(Context context, String idCurrency, String currencyValue){
+        setValidCurrency(context,idCurrency,currencyValue);
     }
 
 

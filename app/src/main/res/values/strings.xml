@@ -11,6 +11,7 @@
     <!-- *************************************************** -->
     <string name="valid_currency_shared_preferences_file_name">VALID_CURRENCY</string>
     <string name="currency_in_wallet_shared_preferences_file_name">CURRENCY_IN_WALLET</string>
+    <string name="settings_shared_preferences_file_name">SETTINGS</string>
 
 
     <!-- ************************************* -->
@@ -69,8 +70,11 @@
 
     <!-- Identificadores funcionales al código - [NewCurrencyActivity]  -->
     <string name="select_app">Seleccione la Aplicación</string>
-    <string name="error_img_not_found">Error: Imagen no encontrada</string>
-    <string name="error_img_not_selected">Error: Imagen no seleccionada</string>
+    <string name="error_img_not_found">ERROR: IMAGEN NO ENCONTRADA</string>
+    <string name="error_img_not_selected">ERROR: IMAGEN NO SELECCIONADA</string>
+    <string name="image_loaded">IMAGEN CARGADA OK</string>
+    <string name="enter_value">INGRESE VALOR</string>
+    <string name="error_value_not_selected">ERROR: VALOR SELECCIONADO</string>
 
 
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
@@ -91,7 +95,7 @@
 
     <!-- ID de los textos de componentes de las activities - [Basket]  -->
     <string name="buy">COMPRAR</string>
-    <string name="enter_value">INGRESAR PRECIO</string>
+    <string name="enter_price">INGRESAR PRECIO</string>
     <string name="add_product">AGREGAR</string>
     <string name="total_value_zero">VALOR TOTAL: $0.0</string>
     <string name="cancel">CANCELAR</string>
@@ -134,7 +138,7 @@
     <string name="load_image">CARGAR IMAGEN</string>
     <string name="image_not_loaded">IMAGEN NO CARGADA</string>
     <string name="given_value">VALOR ASIGNADO</string>
-    <string name="load_new_value">CARGAR NUEVO VALOR</string>
+    <string name="save_new_value">GUARDAR NUEVO VALOR</string>
 
 
     <!-- ID de los textos de componentes de las activities - [DeleteCurrency]  -->
