@@ -75,7 +75,9 @@
     <string name="image_loaded">IMAGEN CARGADA OK</string>
     <string name="enter_value">INGRESE VALOR</string>
     <string name="error_value_not_selected">ERROR: VALOR SELECCIONADO</string>
-
+    <string name="msg_value_saved">NUEVO VALOR GUARDADO. PRESIONE \"LISTO\" PARA VOLVER A LA PANTALLA PRINCIPAL</string>
+    <string name="exit">SALIR</string>
+    <string name="help_text_new_currency">AYUDA:\n[BILLETE/MONEDA] Se elige el tipo de valor.\n[CARGAR IMAGEN] Selecciona la imagen para el nuevo valor.\n[VALOR ASIGNADO] Se asigna el importe al nuevo valor.\n[SALIR] Vuelve a la pantalla principal.\n[GUARDAR NUEVO VALOR] Guarda el nuevo valor en la aplicación.</string>
 
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
     <string name="value_10">10.00</string>
