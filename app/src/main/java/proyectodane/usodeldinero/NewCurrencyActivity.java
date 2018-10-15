@@ -1,20 +1,16 @@
 package proyectodane.usodeldinero;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.media.ThumbnailUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -23,8 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.TextView;
-
 
 public class NewCurrencyActivity extends AppCompatActivity {
 
@@ -67,7 +61,6 @@ public class NewCurrencyActivity extends AppCompatActivity {
      * Alto de la vista previa de la imagen cargada
      ***/
     final int THUMBNAIL_SIZE_HEIGHT = 84;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -46,6 +46,7 @@
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
+        android:onClick="sendToDeleteCurrency"
         android:text="@string/delete_currency"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"

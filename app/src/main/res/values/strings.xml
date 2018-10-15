@@ -76,11 +76,17 @@
     <string name="enter_value">INGRESE VALOR</string>
     <string name="error_value_not_selected">ERROR: VALOR SELECCIONADO</string>
     <string name="msg_value_saved">NUEVO VALOR GUARDADO. PRESIONE \"LISTO\" PARA VOLVER A LA PANTALLA PRINCIPAL</string>
-    <string name="exit">SALIR</string>
     <string name="help_text_new_currency">AYUDA:\n[BILLETE/MONEDA] Se elige el tipo de valor.\n[CARGAR IMAGEN] Selecciona la imagen para el nuevo valor.\n[VALOR ASIGNADO] Se asigna el importe al nuevo valor.\n[SALIR] Vuelve a la pantalla principal.\n[GUARDAR NUEVO VALOR] Guarda el nuevo valor en la aplicación.</string>
+
+
+    <!-- Identificadores funcionales al código - [DeleteCurrencyActivity]  -->
+    <string name="value_selected">VALOR SELECCIONADO: $</string>
+    <string name="value_deleted">VALOR ELIMINADO. PRESIONE \"LISTO\" PARA VOLVER A LA PANTALLA PRINCIPAL</string>
+
 
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
     <string name="value_10">10.00</string>
+    <string name="exit">SALIR</string>
 
 
     <!-- ************************************************* -->
@@ -146,7 +152,7 @@
     <!-- ID de los textos de componentes de las activities - [DeleteCurrency]  -->
     <string name="delete_existing_currency">ELIMINAR VALOR EXISTENTE</string>
     <string name="selected_value">VALOR SELECCIONADO</string>
-    <string name="select_value">SELECCIONAR VALOR</string>
+    <string name="select_value">SELECCIONAR</string>
     <string name="confirm_delete">CONFIRMAR ELIMINADO</string>
 
     <!-- ID de los textos de componentes de las activities - [Varias Activities]  -->
