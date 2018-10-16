@@ -14,11 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        // TODO: ***TEMPORAL*** - Borrar luego de la implementación final
-        WalletManager.getInstance().initializeWalletManually(this); // Cargo billetera a mano
-        // TODO: ***TEMPORAL*** - Borrar luego de la implementación final
-
+        
         // Agrego "Splash Screen"
         setTheme(R.style.AppTheme);
 

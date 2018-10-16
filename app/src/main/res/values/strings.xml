@@ -80,8 +80,10 @@
 
 
     <!-- Identificadores funcionales al código - [DeleteCurrencyActivity]  -->
-    <string name="value_selected">VALOR SELECCIONADO: $</string>
-    <string name="value_deleted">VALOR ELIMINADO. PRESIONE \"LISTO\" PARA VOLVER A LA PANTALLA PRINCIPAL</string>
+    <string name="value_selected">SELECCIONADO: $</string>
+    <string name="msg_value_deleted">VALOR ELIMINADO. PRESIONE \"LISTO\" PARA VOLVER A LA PANTALLA PRINCIPAL</string>
+    <string name="error_on_file_delete">ERROR AL ELIMINAR EL VALOR</string>
+    <string name="help_text_delete_currency">AYUDA:\n[SALIR] Vuelve a la pantalla principal.\n[SELECCIONAR] Selecciona el valor a eliminar.\n[CONFIRMAR ELIMINADO] Borra el valor seleccionado.\n***NOTA***: Si existían billetes/monedas en la billetera del valor que se está borrando, los mismos también serán retirados. </string>
 
 
     <!-- Identificadores funcionales al código - [Varias Activities]  -->
@@ -150,8 +152,8 @@
 
 
     <!-- ID de los textos de componentes de las activities - [DeleteCurrency]  -->
-    <string name="delete_existing_currency">ELIMINAR VALOR EXISTENTE</string>
-    <string name="selected_value">VALOR SELECCIONADO</string>
+    <string name="delete_existing_currency">ELIMINAR VALOR</string>
+    <string name="selected_value">SELECCIONADO: -</string>
     <string name="select_value">SELECCIONAR</string>
     <string name="confirm_delete">CONFIRMAR ELIMINADO</string>
 
@@ -170,7 +172,6 @@
     <string name="value_20">20.00</string>
 
 
-    <!-- TODO: Quitar al final del desarrollo -->
     <!-- *************************************************** -->
     <!-- Identificadores para nombres de archivo de billetes -->
     <!-- *************************************************** -->

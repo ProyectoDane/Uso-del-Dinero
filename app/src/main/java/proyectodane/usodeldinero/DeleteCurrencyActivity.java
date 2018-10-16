@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,7 +29,6 @@ public class DeleteCurrencyActivity extends AppCompatActivity {
      * Importe del valor seleccionado
      */
     String st_value;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +73,15 @@ public class DeleteCurrencyActivity extends AppCompatActivity {
         SnackBarManager sb = new SnackBarManager();
         sb.showTextShortOnClickActionDisabled(findViewById(R.id.coordinatorLayout_deleteCurrency),getString(R.string.value_selected)+st_value,5);
 
+        // Actualizo el texto con el valor seleccionado
+        TextView textView = findViewById(R.id.textView13);
+        String text = getString(R.string.value_selected)+st_value;
+        textView.setText(text);
+
         // Habilito botón para eliminar el valor
         Button confirmButton = (Button) findViewById(R.id.button26);
         confirmButton.setEnabled(true);
+
     }
 
     /**
@@ -83,23 +89,39 @@ public class DeleteCurrencyActivity extends AppCompatActivity {
      **/
     public void deleteValue (View view) {
 
-        // Elimino el valor de los registros
+        // Elimino el valor del registro y también los posibles valores de este mismo tipo que pudieran existir en la billetera
+        WalletManager.getInstance().deleteExistingCurrency(this,st_valueID);
 
-
-        // Elimino el archivo de imagen TODO: Habilitar al finalizar
-/*        String pathToImage = getFilesDir() + "/" + st_valueID;
+        // Elimino el archivo de imagen
         File dir = getFilesDir();
         File file = new File(dir,st_valueID);
-        file.delete();*/
+        boolean deleteOK = file.delete();
 
-        // Inhabilito botón para eliminar el valor
+        // Inhabilito botón para seleccionar y eliminar el valor
+        Button selectButton = (Button) findViewById(R.id.button25);
+        selectButton.setEnabled(false);
         Button confirmButton = (Button) findViewById(R.id.button26);
         confirmButton.setEnabled(false);
 
+        // Informo sobre error, en caso de existir
+        if(!deleteOK){
+            SnackBarManager sb = new SnackBarManager();
+            sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_deleteCurrency),getString(R.string.error_on_file_delete),5);
+            return;
+        }
+
         // Envío mensaje de confirmación
         SnackBarManager sb = new SnackBarManager();
-        sb.showTextIndefiniteOnClickActionStartActivity(findViewById(R.id.coordinatorLayout_deleteCurrency),getString(R.string.msg_value_saved),5,MainActivity.class,this);
+        sb.showTextIndefiniteOnClickActionStartActivity(findViewById(R.id.coordinatorLayout_deleteCurrency),getString(R.string.msg_value_deleted),5,MainActivity.class,this);
 
+    }
+
+    /**
+     * Muestra el texto de ayuda para este activity
+     **/
+    public void showHelp(View view) {
+        SnackBarManager sb = new SnackBarManager();
+        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_deleteCurrency),getString(R.string.help_text_delete_currency),10);
     }
 
 }

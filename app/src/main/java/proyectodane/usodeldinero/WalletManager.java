@@ -69,7 +69,19 @@ public class WalletManager {
 
     }
 
-    //TODO: Implementar baja de valores en circulación (Release 5)
+    /**
+     * Elimino el registro de un valor, del archivo de valores actuales
+     * */
+    private void removeValidCurrency(Context context, String currencyID){
+        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
+        validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
+        SharedPreferences.Editor editor = validCurrency.edit();
+
+        // Borro el registro del archivo
+        editor.remove(currencyID);
+        editor.apply();
+    }
+
 
     /**
      * Consulto si es la primera vez que se inicializa el archivo de valores.
@@ -135,6 +147,18 @@ public class WalletManager {
         editor.apply();
     }
 
+    /**
+     * Elimino de la billetera el registro todos los billetes/monedas de un valor en especial
+     * */
+    private void removeAllOfSameCurrencyInWallet(Context context, String currencyID){
+        String currencyInWalletFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
+        currencyInWallet = context.getSharedPreferences(currencyInWalletFileName,0);
+        SharedPreferences.Editor editor = currencyInWallet.edit();
+
+        // Elimino el contenido del valor en el archivo
+        editor.remove(currencyID);
+        editor.apply();
+    }
 
 
     // *** Auxiliares privados***
@@ -327,13 +351,13 @@ public class WalletManager {
     }
 
 
-    // TODO: Implementar Método en Release 5: Borrar billete/moneda actual (Input: ID_moneda (Str))
     /**
      * Borro un billete/moneda vigente, el cual dejará de ser usado como moneda de pago
-     * de la billetera
+     * de la billetera. También borro todas las ocurrencias del valor dentro de la billetera.
      * */
-    public void deleteExistingCurrency(String idCurrency){
-        // Usar el método privado
+    public void deleteExistingCurrency(Context context, String idCurrency){
+        removeValidCurrency(context,idCurrency);
+        removeAllOfSameCurrencyInWallet(context,idCurrency);
     }
 
 
@@ -680,7 +704,7 @@ public class WalletManager {
 
 
 
-    // *** TEMPORALES *** //TODO: Ver si tienen utilidad o se borran definitivamente
+    // *** Auxiliares ***
 
 
     /**
@@ -718,6 +742,7 @@ public class WalletManager {
     public void initializeFilesOfValidCurrencyManually(Context context){
 
         ImageManager im = new ImageManager();
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_question_mark));
         im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p5));
         im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p5b));
         im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p10));
@@ -741,6 +766,9 @@ public class WalletManager {
         im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p2));
         im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p5_b));
     }
+
+
+    // *** TEMPORALES - Pueden ser borradas al finalizar la implementación ***
 
     /**
      * Guardo los valores en billetera "a mano", en el archivo pertinente

@@ -88,13 +88,14 @@ public class NewCurrencyActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             try {
+                // Cargo la imagen
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 Bitmap originalImage = BitmapFactory.decodeStream(imageStream);
                 selectedImage = Bitmap.createScaledBitmap(originalImage, IMAGE_SIZE_WIDTH, IMAGE_SIZE_HEIGHT, false);
                 imageLoaded = true;
 
-                // Cargo una imagen para que el usuario pueda verificar
+                // Cargo una miniatura para que el usuario pueda verificar la imagen seleccionada
                 Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(selectedImage,THUMBNAIL_SIZE_WIDTH, THUMBNAIL_SIZE_HEIGHT);
                 ImageView imageView;
                 imageView = (ImageView) findViewById(R.id.imageViewThumb);
@@ -102,13 +103,11 @@ public class NewCurrencyActivity extends AppCompatActivity {
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                // TODO: Habilitar al finalizar el layout
                 SnackBarManager sb = new SnackBarManager();
                 sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.error_img_not_found),5);
             }
 
         }else{
-            // TODO: Habilitar al finalizar el layout
             SnackBarManager sb = new SnackBarManager();
             sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.error_img_not_selected),5);
         }
@@ -121,7 +120,6 @@ public class NewCurrencyActivity extends AppCompatActivity {
 
         // Verifico si se encuentran los datos necesarios listos para guardar
         if(!imageLoaded) {
-            // TODO: Habilitar al finalizar el layout
             SnackBarManager sb = new SnackBarManager();
             sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.error_img_not_selected),5);
             return;
@@ -131,7 +129,6 @@ public class NewCurrencyActivity extends AppCompatActivity {
         EditText et_newValue = (EditText) findViewById(R.id.editText2);
         String st_newValue = et_newValue.getText().toString();
         if ( !(WalletManager.getInstance().isFloatFormatValid(st_newValue)) ) {
-            // TODO: Habilitar al finalizar el layout
             SnackBarManager sb = new SnackBarManager();
             sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.error_value_not_selected),5);
             return;
@@ -150,14 +147,9 @@ public class NewCurrencyActivity extends AppCompatActivity {
         // Guardo el nuevo valor en el registro de la billetera. Uso la suma de valores con "0" para asegurar el formato
         WalletManager.getInstance().addNewCurrency(this,fileName,WalletManager.getInstance().addValues(st_newValue,"0"));
 
-        // Cambio el comportamiento del botón salir
+        // Inhabilito el botón para guardar
         Button exitButton = (Button) findViewById(R.id.button24);
-        exitButton.setText(getString(R.string.exit));
-        exitButton.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                sendToMain(v);
-            }
-        });
+        exitButton.setEnabled(false);
 
         SnackBarManager sb = new SnackBarManager();
         sb.showTextIndefiniteOnClickActionStartActivity(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.msg_value_saved),5,MainActivity.class,this);
