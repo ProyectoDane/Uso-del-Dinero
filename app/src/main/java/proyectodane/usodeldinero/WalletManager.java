@@ -2,7 +2,6 @@ package proyectodane.usodeldinero;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.util.Pair;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -561,6 +560,12 @@ public class WalletManager {
         return orderMapOfValues(getValidCurrency(context));
     }
 
+    /**
+     * Devuelve true si solo existe --un solo valor-- de billete o moneda cargado
+     * */
+    public boolean isThereOnlyOneValidCurrency(Context context){
+        return (getValidCurrency(context).size()==1);
+    }
 
     /**
      * Creo la lista de ID de imágenes de los valores a usar para el pago
@@ -737,6 +742,20 @@ public class WalletManager {
     }
 
     /**
+     * Borro el contenido entero del archivo de valores vigentes en circulación.
+     * */
+    private void deleteAllValidCurrency(Context context){
+        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
+        validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
+        SharedPreferences.Editor editor = validCurrency.edit();
+
+        // Borro contenido anterior
+        editor.clear();
+        editor.apply();
+
+    }
+
+    /**
      * Guardo las imágenes por defecto en el almacenamiento interno
      * */
     public void initializeFilesOfValidCurrencyManually(Context context){
@@ -768,34 +787,28 @@ public class WalletManager {
     }
 
 
+
     // *** TEMPORALES - Pueden ser borradas al finalizar la implementación ***
 
-    /**
+/*
+
+    */
+/**
      * Guardo los valores en billetera "a mano", en el archivo pertinente
-     * */
+     * *//*
+
     public void initializeWalletManually(Context context) {
         deleteAllCurrencyInWallet(context);
         setCurrencyInWallet(context,context.getString(R.string.tag_p20));
 
     }
 
-    /**
-     * Borro el contenido entero del archivo de valores vigentes en circulación.
-     * */
-    private void deleteAllValidCurrency(Context context){
-        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
-        validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
-        SharedPreferences.Editor editor = validCurrency.edit();
 
-        // Borro contenido anterior
-        editor.clear();
-        editor.apply();
-
-    }
-
-    /**
+    */
+/**
      * Borro el contenido entero del archivo de valores en la billetera.
-     * */
+     * *//*
+
     private void deleteAllCurrencyInWallet(Context context){
         String validCurrencyFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
         currencyInWallet = context.getSharedPreferences(validCurrencyFileName,0);
@@ -806,6 +819,9 @@ public class WalletManager {
         editor.apply();
 
     }
+
+*/
+
 
 }
 
