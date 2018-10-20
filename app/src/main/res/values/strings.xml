@@ -66,6 +66,10 @@
     <string name="finalize_purchase">Finalizar Compra</string>
     <string name="no_change_received">Compra sin vuelto</string>
 
+    <!-- Identificadores funcionales al código - [Config]  -->
+    <string name="msg_confirm_wallet_empty">¿Está seguro de vaciar la billetera? Para vaciarla, presionar el botón \"CONFIRMAR VACIAR BILLETERA\"</string>
+    <string name="msg_wallet_emptied">Billetera vaciada.</string>
+
 
     <!-- Identificadores funcionales al código - [NewCurrencyActivity]  -->
     <string name="select_app">Seleccione la Aplicación</string>
@@ -76,7 +80,6 @@
     <string name="error_value_not_selected">ERROR: VALOR NO SELECCIONADO</string>
     <string name="msg_value_saved">NUEVO VALOR GUARDADO. PRESIONE \"LISTO\" PARA VOLVER A LA PANTALLA PRINCIPAL</string>
     <string name="help_text_new_currency">AYUDA:\n[BILLETE/MONEDA] Se elige el tipo de valor.\n[CARGAR IMAGEN] Selecciona la imagen para el nuevo valor.\n[VALOR ASIGNADO] Se asigna el importe al nuevo valor.\n[SALIR] Vuelve a la pantalla principal.\n[GUARDAR NUEVO VALOR] Guarda el nuevo valor en la aplicación.</string>
-
 
     <!-- Identificadores funcionales al código - [DeleteCurrencyActivity]  -->
     <string name="value_selected">SELECCIONADO: $</string>
@@ -134,10 +137,13 @@
     <string name="wallet_configuration">CONFIGURAR</string>
 
 
-    <!-- ID de los textos de componentes de las activities - [CurrencyConfig]  -->
+    <!-- ID de los textos de componentes de las activities - [Configuration]  -->
     <string name="currency_configuration">CONFIGURACIÓN DE VALORES</string>
     <string name="delete_currency">BORRAR VALOR</string>
     <string name="new_currency">NUEVO VALOR</string>
+    <string name="wallet_config">CONFIGURACIÓN DE BILLETERA</string>
+    <string name="empty_wallet">VACIAR BILLETERA</string>
+    <string name="confirm_empty_wallet">CONFIRMAR VACIAR BILLETERA</string>
 
     <!-- ID de los textos de componentes de las activities - [NewCurrency]  -->
     <string name="new_currency_load">CARGA DE NUEVO VALOR</string>

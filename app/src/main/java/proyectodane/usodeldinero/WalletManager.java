@@ -278,15 +278,6 @@ public class WalletManager {
     }
 
 
-    // TODO: (Ver si es necesario) Implementar Método: Sacar todo de la billetera.
-    /**
-     * Quito todos los valores existentes en la billetera, la vacío.
-     * */
-    private void removeAllCurrencyFromWallet(){
-
-    }
-
-
     /**
      * Carga en un ArrayList todos los ID correspondientes a los valores de la billetera que se usarán para el pago
      * */
@@ -410,6 +401,20 @@ public class WalletManager {
             initializeValidCurrencyManually(context);
             initializeFilesOfValidCurrencyManually(context);
         }
+    }
+
+
+    /**
+     * Quito todos los valores existentes en la billetera, quedando vacía.
+     * */
+    public void removeAllCurrencyFromWallet(Context context){
+        String validCurrencyFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
+        currencyInWallet = context.getSharedPreferences(validCurrencyFileName,0);
+        SharedPreferences.Editor editor = currencyInWallet.edit();
+
+        // Borro contenido anterior
+        editor.clear();
+        editor.apply();
     }
 
 
@@ -786,41 +791,6 @@ public class WalletManager {
         im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p5_b));
     }
 
-
-
-    // *** TEMPORALES - Pueden ser borradas al finalizar la implementación ***
-
-/*
-
-    */
-/**
-     * Guardo los valores en billetera "a mano", en el archivo pertinente
-     * *//*
-
-    public void initializeWalletManually(Context context) {
-        deleteAllCurrencyInWallet(context);
-        setCurrencyInWallet(context,context.getString(R.string.tag_p20));
-
-    }
-
-
-    */
-/**
-     * Borro el contenido entero del archivo de valores en la billetera.
-     * *//*
-
-    private void deleteAllCurrencyInWallet(Context context){
-        String validCurrencyFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
-        currencyInWallet = context.getSharedPreferences(validCurrencyFileName,0);
-        SharedPreferences.Editor editor = currencyInWallet.edit();
-
-        // Borro contenido anterior
-        editor.clear();
-        editor.apply();
-
-    }
-
-*/
 
 
 }
