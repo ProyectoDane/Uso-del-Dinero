@@ -1,5 +1,6 @@
 package proyectodane.usodeldinero;
 
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,17 +27,6 @@ public class ScreenSlidePageFragment extends Fragment {
         // Asigno el View
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page, container, false);
 
-        // TODO: Código viejo (se leían archivos de imágenes desde "res/drawable"), borrar luego de confirmar el nuevo código
-        /*
-        // Preparo el ID correspondiente a la imagen que quiero cargar en el ImageView
-        int resId = getResources().getIdentifier(st_money_value_name,getString(R.string.tag_drawable),getActivity().getPackageName());
-
-        // Cambio los datos al ImageView para que cargue la imagen nueva
-        View iv = rootView.findViewById(R.id.imageView11);
-        ((ImageView)iv).setBackgroundResource(resId);
-        */
-
-        // TODO: Nuevo código para leer desde almacenamiento interno, habilitar cuando las imágenes ya se encuentren guardadas en almacenamiento interno. getFilesDir() devuelve: "/data/user/0/proyectodane.usodeldinero/files"
         // Cambio los datos al ImageView para que cargue la imagen nueva
         View iv = rootView.findViewById(R.id.imageView11);
         String pathToImage = getContext().getFilesDir() + "/" + st_money_value_name;

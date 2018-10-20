@@ -50,4 +50,11 @@ public class ImageManager {
         return false;
     }
 
+    /**
+     * Guarda una imagen (En formato JPEG) en el almacenamiento interno
+     */
+    public boolean saveBitmapJPEGToFile(Context context, String fileName, Bitmap bm, int quality) {
+        return saveBitmapToFile(context,fileName,bm,Bitmap.CompressFormat.JPEG,quality);
+    }
+
 }

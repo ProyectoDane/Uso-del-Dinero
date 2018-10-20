@@ -18,14 +18,13 @@
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:text="@string/delete_existing_currency"
             android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView13"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/pager_deleteCurrency"
+            app:layout_constraintEnd_toStartOf="@+id/textView13"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,43 +33,45 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/selected_value"
             android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/pager_deleteCurrency"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintStart_toEndOf="@+id/textView12"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="informDelete"
             android:text="@string/select_value"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button26"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button30"
             app:layout_constraintTop_toBottomOf="@+id/SliderDots_deleteCurrency" />
 
         <Button
             android:id="@+id/button26"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
             android:enabled="false"
+            android:onClick="deleteValue"
             android:text="@string/confirm_delete"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button25"
-            app:layout_constraintTop_toBottomOf="@+id/pager_deleteCurrency"
-            app:layout_constraintVertical_bias="0.644" />
+            app:layout_constraintTop_toBottomOf="@+id/SliderDots_deleteCurrency" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager_deleteCurrency"
@@ -80,10 +81,9 @@
             android:layout_marginStart="32dp"
             app:layout_constraintBottom_toTopOf="@+id/button25"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView13"
-            app:layout_constraintVertical_bias="0.502" />
+            app:layout_constraintVertical_bias="0.205" />
 
         <LinearLayout
             android:id="@+id/SliderDots_deleteCurrency"
@@ -94,9 +94,34 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/button25"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pager_deleteCurrency" />
+
+        <Button
+            android:id="@+id/button30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="sendToMain"
+            android:text="@string/exit"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button25"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SliderDots_deleteCurrency" />
+
+        <Button
+            android:id="@+id/button31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:onClick="showHelp"
+            android:text="@string/help"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

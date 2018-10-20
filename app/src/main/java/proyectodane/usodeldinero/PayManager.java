@@ -41,9 +41,6 @@ public class PayManager {
         wallet.remove(optimal);
         payment.add(optimal);
 
-        // Saco los billetes que pueda haber, mas grandes que el óptimo ya que no se usaran para este pago
-        //deleteValuesGraterThanReference(optimal,wallet); //TODO: Confirmar que no se usa, ya que los billetes mas grandes no van a ser tomados como óptimos
-
         // Si el óptimo no alcanza para pagar, busco otro valor mas para el pago, de forma recursiva
         if ( wm.isValueAGreaterThanValueB(paymentValue,optimal) ){
             paymentValue = wm.subtractValues(paymentValue,optimal);
@@ -85,26 +82,5 @@ public class PayManager {
         return current;
 
     }
-
-/*    // TODO: Confirmar que no se usa y borrarlo
-    *//**
-     * Descarta todos los valores del ArrayList mayores al valor de referencia
-     * *//*
-    private void deleteValuesGraterThanReference(String reference, ArrayList<String> list){
-
-        ArrayList<String> deleteList = new ArrayList<String>();
-
-        // Reúno los valores a borrar
-        for (String value : list) {
-            if (wm.isValueAGreaterThanValueB(value,reference)) {
-                deleteList.add(value);
-            }
-        }
-
-        // Borro todos los valores
-        for (String deleteItem : deleteList) {
-            list.remove(deleteItem);
-        }
-    }*/
 
 }

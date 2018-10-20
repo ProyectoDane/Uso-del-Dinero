@@ -68,7 +68,19 @@ public class WalletManager {
 
     }
 
-    //TODO: Implementar baja de valores en circulación (Release 5)
+    /**
+     * Elimino el registro de un valor, del archivo de valores actuales
+     * */
+    private void removeValidCurrency(Context context, String currencyID){
+        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
+        validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
+        SharedPreferences.Editor editor = validCurrency.edit();
+
+        // Borro el registro del archivo
+        editor.remove(currencyID);
+        editor.apply();
+    }
+
 
     /**
      * Consulto si es la primera vez que se inicializa el archivo de valores.
@@ -76,7 +88,7 @@ public class WalletManager {
      * Si devuelve true, se guarda en el archivo el uso por primera vez
      * */
     private boolean isThisTheFirstTimeAccess(Context context){
-        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
+        String validCurrencyFileName = context.getString(R.string.settings_shared_preferences_file_name);
         validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
 
         if(validCurrency.getBoolean(context.getString(R.string.first_time_access), true)) {
@@ -134,6 +146,18 @@ public class WalletManager {
         editor.apply();
     }
 
+    /**
+     * Elimino de la billetera el registro todos los billetes/monedas de un valor en especial
+     * */
+    private void removeAllOfSameCurrencyInWallet(Context context, String currencyID){
+        String currencyInWalletFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
+        currencyInWallet = context.getSharedPreferences(currencyInWalletFileName,0);
+        SharedPreferences.Editor editor = currencyInWallet.edit();
+
+        // Elimino el contenido del valor en el archivo
+        editor.remove(currencyID);
+        editor.apply();
+    }
 
 
     // *** Auxiliares privados***
@@ -254,15 +278,6 @@ public class WalletManager {
     }
 
 
-    // TODO: (Ver si es necesario) Implementar Método: Sacar todo de la billetera.
-    /**
-     * Quito todos los valores existentes en la billetera, la vacío.
-     * */
-    private void removeAllCurrencyFromWallet(){
-
-    }
-
-
     /**
      * Carga en un ArrayList todos los ID correspondientes a los valores de la billetera que se usarán para el pago
      * */
@@ -317,23 +332,22 @@ public class WalletManager {
 
     // * Alta y Baja de nuevos valores *
 
-    // TODO: Implementar Método en Release 5: Agregar nuevo billete/moneda (Input: ID_moneda (Str), Valor en $ (Str) )
     /**
      * Guardo un nuevo billete/moneda vigente para ser usado luego como moneda nueva
      * de la billetera
      * */
-    public void addNewCurrency(String idCurrency, String currencyValue){
-        // Usar setValidCurrency()
+    public void addNewCurrency(Context context, String idCurrency, String currencyValue){
+        setValidCurrency(context,idCurrency,currencyValue);
     }
 
 
-    // TODO: Implementar Método en Release 5: Borrar billete/moneda actual (Input: ID_moneda (Str))
     /**
      * Borro un billete/moneda vigente, el cual dejará de ser usado como moneda de pago
-     * de la billetera
+     * de la billetera. También borro todas las ocurrencias del valor dentro de la billetera.
      * */
-    public void deleteExistingCurrency(String idCurrency){
-        // Usar el método privado
+    public void deleteExistingCurrency(Context context, String idCurrency){
+        removeValidCurrency(context,idCurrency);
+        removeAllOfSameCurrencyInWallet(context,idCurrency);
     }
 
 
@@ -387,6 +401,20 @@ public class WalletManager {
             initializeValidCurrencyManually(context);
             initializeFilesOfValidCurrencyManually(context);
         }
+    }
+
+
+    /**
+     * Quito todos los valores existentes en la billetera, quedando vacía.
+     * */
+    public void removeAllCurrencyFromWallet(Context context){
+        String validCurrencyFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
+        currencyInWallet = context.getSharedPreferences(validCurrencyFileName,0);
+        SharedPreferences.Editor editor = currencyInWallet.edit();
+
+        // Borro contenido anterior
+        editor.clear();
+        editor.apply();
     }
 
 
@@ -537,6 +565,12 @@ public class WalletManager {
         return orderMapOfValues(getValidCurrency(context));
     }
 
+    /**
+     * Devuelve true si solo existe --un solo valor-- de billete o moneda cargado
+     * */
+    public boolean isThereOnlyOneValidCurrency(Context context){
+        return (getValidCurrency(context).size()==1);
+    }
 
     /**
      * Creo la lista de ID de imágenes de los valores a usar para el pago
@@ -680,7 +714,7 @@ public class WalletManager {
 
 
 
-    // *** TEMPORALES *** //TODO: Ver si tienen utilidad o se borran definitivamente
+    // *** Auxiliares ***
 
 
     /**
@@ -713,11 +747,26 @@ public class WalletManager {
     }
 
     /**
+     * Borro el contenido entero del archivo de valores vigentes en circulación.
+     * */
+    private void deleteAllValidCurrency(Context context){
+        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
+        validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
+        SharedPreferences.Editor editor = validCurrency.edit();
+
+        // Borro contenido anterior
+        editor.clear();
+        editor.apply();
+
+    }
+
+    /**
      * Guardo las imágenes por defecto en el almacenamiento interno
      * */
     public void initializeFilesOfValidCurrencyManually(Context context){
 
         ImageManager im = new ImageManager();
+        im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_question_mark));
         im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p5));
         im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p5b));
         im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p10));
@@ -742,42 +791,7 @@ public class WalletManager {
         im.saveDefaultDrawableImageJPEGToInternalStorage(context,context.getString(R.string.tag_p5_b));
     }
 
-    /**
-     * Guardo los valores en billetera "a mano", en el archivo pertinente
-     * */
-    public void initializeWalletManually(Context context) {
-        deleteAllCurrencyInWallet(context);
-        setCurrencyInWallet(context,context.getString(R.string.tag_p20));
 
-    }
-
-    /**
-     * Borro el contenido entero del archivo de valores vigentes en circulación.
-     * */
-    private void deleteAllValidCurrency(Context context){
-        String validCurrencyFileName = context.getString(R.string.valid_currency_shared_preferences_file_name);
-        validCurrency = context.getSharedPreferences(validCurrencyFileName,0);
-        SharedPreferences.Editor editor = validCurrency.edit();
-
-        // Borro contenido anterior
-        editor.clear();
-        editor.apply();
-
-    }
-
-    /**
-     * Borro el contenido entero del archivo de valores en la billetera.
-     * */
-    private void deleteAllCurrencyInWallet(Context context){
-        String validCurrencyFileName = context.getString(R.string.currency_in_wallet_shared_preferences_file_name);
-        currencyInWallet = context.getSharedPreferences(validCurrencyFileName,0);
-        SharedPreferences.Editor editor = currencyInWallet.edit();
-
-        // Borro contenido anterior
-        editor.clear();
-        editor.apply();
-
-    }
 
 }
 
