@@ -6,13 +6,12 @@
     <string name="app_name">Uso del Dinero</string>
 
 
-
     <!-- *************************************************** -->
     <!-- Nombres de archivos (persistencia) de la aplicación -->
     <!-- *************************************************** -->
     <string name="valid_currency_shared_preferences_file_name">VALID_CURRENCY</string>
     <string name="currency_in_wallet_shared_preferences_file_name">CURRENCY_IN_WALLET</string>
-
+    <string name="settings_shared_preferences_file_name">SETTINGS</string>
 
 
     <!-- ************************************* -->
@@ -45,13 +44,12 @@
 
 
     <!-- Identificadores funcionales al código - [Wallet]  -->
-    <string name="value_40">40.00</string>
-    <string name="help_text_wallet">AYUDA:\n[CARGA] Indica el dinero que se va a agregar a la billetera.\n[TOTAL EN BILLETERA] Muestra el dinero total si realizo la carga.\n[Imágenes de billetes y monedas] Se muestran todos los valores a elegir para la carga.\n[CANCELAR] Anula la carga y vuelve a la vista de la billetera.\n[AGREGAR] Carga el billete o moneda actualmente mostrado en imagen.\n[GUARDAR Y FINALIZAR] Ingresa en la billetera todos los valores cargados, volviendo a la vista principal.</string>
+    <string name="help_text_wallet">AYUDA:\n[CARGA] Indica el dinero que se va a agregar a la billetera.\n[TOTAL EN BILLETERA] Muestra el dinero total si realizo la carga.\n[Imágenes de billetes y monedas] Se muestran todos los valores a elegir para la carga.\n[CANCELAR] Anula la carga y vuelve a la vista de la billetera.\n[AGREGAR] Carga el billete o moneda actualmente mostrado en imagen.\n[GUARDAR Y FINALIZAR] Ingresa en la billetera todos los valores cargados, volviendo a la vista principal.\n[CONFIGURAR] Permite agregar nuevos valores y eliminar los existentes.</string>
     <string name="value_selected_for_load">Valor seleccionado para cargar: $</string>
 
 
     <!-- Identificadores funcionales al código - [Main]  -->
-    <string name="help_text_main">AYUDA:\n[DINERO AHORRADO] Muestra todo el ahorro en la billetera.\n[Imágenes de billetes y monedas] Se muestran todos los valores que contiene la billetera.\n[CARGAR BILLETERA] Permite agregar nuevos billetes y monedas.\n[INICIAR COMPRA] Permite comprar productos.</string>
+    <string name="help_text_main">AYUDA:\n[DINERO AHORRADO] Muestra todo el ahorro en la billetera.\n[Imágenes de billetes y monedas] Se muestran todos los valores que contiene la billetera.\n[CARGAR BILLETERA] Permite agregar nuevos billetes y monedas a la billetera. También se pueden configurar nuevos valores y eliminar los existentes.\n[INICIAR COMPRA] Permite comprar productos.</string>
 
 
     <!-- Identificadores funcionales al código - [PayPurchase]  -->
@@ -68,9 +66,31 @@
     <string name="finalize_purchase">Finalizar Compra</string>
     <string name="no_change_received">Compra sin vuelto</string>
 
-    <!-- Identificadores funcionales al código - [Varias Activities]  -->
-    <string name="value_10">10.00</string>
+    <!-- Identificadores funcionales al código - [Config]  -->
+    <string name="msg_confirm_wallet_empty">¿Está seguro de vaciar la billetera? Para vaciarla, presionar el botón \"CONFIRMAR VACIAR BILLETERA\"</string>
+    <string name="msg_wallet_emptied">Billetera vaciada.</string>
 
+
+    <!-- Identificadores funcionales al código - [NewCurrencyActivity]  -->
+    <string name="select_app">Seleccione la Aplicación</string>
+    <string name="error_img_not_found">ERROR: IMAGEN NO ENCONTRADA</string>
+    <string name="error_img_not_selected">ERROR: IMAGEN NO SELECCIONADA</string>
+    <string name="image_loaded">IMAGEN CARGADA OK</string>
+    <string name="enter_value">INGRESE VALOR</string>
+    <string name="error_value_not_selected">ERROR: VALOR NO SELECCIONADO</string>
+    <string name="msg_value_saved">NUEVO VALOR GUARDADO. PRESIONE \"LISTO\" PARA VOLVER A LA PANTALLA PRINCIPAL</string>
+    <string name="help_text_new_currency">AYUDA:\n[BILLETE/MONEDA] Se elige el tipo de valor.\n[CARGAR IMAGEN] Selecciona la imagen para el nuevo valor.\n[VALOR ASIGNADO] Se asigna el importe al nuevo valor.\n[SALIR] Vuelve a la pantalla principal.\n[GUARDAR NUEVO VALOR] Guarda el nuevo valor en la aplicación.</string>
+
+    <!-- Identificadores funcionales al código - [DeleteCurrencyActivity]  -->
+    <string name="value_selected">SELECCIONADO: $</string>
+    <string name="msg_value_deleted">VALOR ELIMINADO. PRESIONE \"LISTO\" PARA VOLVER A LA PANTALLA PRINCIPAL</string>
+    <string name="error_on_file_delete">ERROR AL ELIMINAR EL VALOR</string>
+    <string name="help_text_delete_currency">AYUDA:\n[SALIR] Vuelve a la pantalla principal.\n[SELECCIONAR] Selecciona el valor a eliminar.\n[CONFIRMAR ELIMINADO] Borra el valor seleccionado.\n***NOTA***: Si existían billetes/monedas en la billetera del valor que se está borrando, los mismos también serán retirados. </string>
+    <string name="error_on_file_delete_last_value">ERROR AL ELIMINAR: ÉSTE ES EL ÚLTIMO VALOR, EL MISMO NO PUEDE SER ELIMINADO.</string>
+
+
+    <!-- Identificadores funcionales al código - [Varias Activities]  -->
+    <string name="exit">SALIR</string>
 
 
     <!-- ************************************************* -->
@@ -79,7 +99,6 @@
 
 
     <!-- ID de los textos de componentes de las activities - [Main]  -->
-    <string name="saved_money_pesos_20">DINERO AHORRADO: $20.00</string>
     <string name="saved_money_pesos">DINERO AHORRADO: $</string>
     <string name="start_purchase">INICIAR COMPRA</string>
     <string name="load_wallet">CARGAR BILLETERA</string>
@@ -87,7 +106,7 @@
 
     <!-- ID de los textos de componentes de las activities - [Basket]  -->
     <string name="buy">COMPRAR</string>
-    <string name="enter_value">INGRESAR PRECIO</string>
+    <string name="enter_price">INGRESAR PRECIO</string>
     <string name="add_product">AGREGAR</string>
     <string name="total_value_zero">VALOR TOTAL: $0.0</string>
     <string name="cancel">CANCELAR</string>
@@ -115,7 +134,31 @@
     <string name="cancel_load">CANCELAR</string>
     <string name="add">AGREGAR</string>
     <string name="save_in_wallet">GUARDAR Y FINALIZAR</string>
+    <string name="wallet_configuration">CONFIGURAR</string>
 
+
+    <!-- ID de los textos de componentes de las activities - [Configuration]  -->
+    <string name="currency_configuration">CONFIGURACIÓN DE VALORES</string>
+    <string name="delete_currency">BORRAR VALOR</string>
+    <string name="new_currency">NUEVO VALOR</string>
+    <string name="wallet_config">CONFIGURACIÓN DE BILLETERA</string>
+    <string name="empty_wallet">VACIAR BILLETERA</string>
+    <string name="confirm_empty_wallet">CONFIRMAR VACIAR BILLETERA</string>
+
+    <!-- ID de los textos de componentes de las activities - [NewCurrency]  -->
+    <string name="new_currency_load">CARGA DE NUEVO VALOR</string>
+    <string name="bill">BILLETE</string>
+    <string name="coin">MONEDA</string>
+    <string name="load_image">CARGAR IMAGEN</string>
+    <string name="given_value">VALOR ASIGNADO</string>
+    <string name="save_new_value">GUARDAR NUEVO VALOR</string>
+
+
+    <!-- ID de los textos de componentes de las activities - [DeleteCurrency]  -->
+    <string name="delete_existing_currency">ELIMINAR VALOR</string>
+    <string name="selected_value">SELECCIONADO: -</string>
+    <string name="select_value">SELECCIONAR</string>
+    <string name="confirm_delete">CONFIRMAR ELIMINADO</string>
 
     <!-- ID de los textos de componentes de las activities - [Varias Activities]  -->
     <string name="cancel_purchase">CANCELAR COMPRA</string>
@@ -132,7 +175,6 @@
     <string name="value_20">20.00</string>
 
 
-    <!-- TODO: Quitar al final del desarrollo -->
     <!-- *************************************************** -->
     <!-- Identificadores para nombres de archivo de billetes -->
     <!-- *************************************************** -->
@@ -157,5 +199,6 @@
     <string name="tag_p1_b">t2_img_19_p1</string>
     <string name="tag_p2">t2_img_20_p2</string>
     <string name="tag_p5_b">t2_img_21_p5</string>
+
 
 </resources>

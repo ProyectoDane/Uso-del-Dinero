@@ -55,9 +55,10 @@ public class ImageSlideManager {
         pagerAdapter = new ScreenSlidePagerAdapter(fragmentManagerSelected,fragments);
         viewPager.setAdapter(pagerAdapter);
 
-        // En el estado inicial, la primer imagen será la seleccionada. Elijo el fragment.
-        actualPageFragment = (ScreenSlidePageFragment)((ScreenSlidePagerAdapter)pagerAdapter).getItem(0);
-
+        // En el estado inicial, la primer imagen será la seleccionada (Si al menos tiene una imagen). Elijo el fragment.
+        if(pagerAdapter.getCount()>0) {
+            actualPageFragment = (ScreenSlidePageFragment) ((ScreenSlidePagerAdapter) pagerAdapter).getItem(0);
+        }
         // Instancio un LinearLayout, para representar los puntos debajo de las imágenes
         sliderDotsPanel = linearLayoutSelected;
 
@@ -80,8 +81,10 @@ public class ImageSlideManager {
             sliderDotsPanel.addView(dots[i], params);
         }
 
-        // En el estado inicial, el primer punto será el seleccionado. Seteo la imagen.
-        dots[0].setImageDrawable(drawableActiveDot);
+        // En el estado inicial, el primer punto será el seleccionado (Si al menos tiene una imagen). Seteo la imagen.
+        if(pagerAdapter.getCount()>0) {
+            dots[0].setImageDrawable(drawableActiveDot);
+        }
 
         // Agrego un listener que será invocado cuando la imagen cambie y actualizará las imágenes de los puntos
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

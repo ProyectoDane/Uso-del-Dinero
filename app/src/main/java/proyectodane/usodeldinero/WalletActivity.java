@@ -105,7 +105,6 @@ public class WalletActivity extends AppCompatActivity {
         textView.setText(getString(R.string.load_cash_sign) + st_subtotal + " - " + getString(R.string.total_cash_sign) + st_total);
     }
 
-    // TODO: Ver si se agrega una cantidad límite de valores a ingresar en la billetera (Físicamente no se pueden poner infinitos billetes y/o monedas)
     /**
      * Sumo el valor seleccionado al subtotal de carga en billetera
      **/
@@ -139,6 +138,14 @@ public class WalletActivity extends AppCompatActivity {
         }
 
         sendToMain(view);
+    }
+
+    /**
+     * Envía a la pantalla de configuración
+     * */
+    public void sendToConfiguration(View view) {
+        Intent intent = new Intent(this, ConfigurationActivity.class);
+        startActivity(intent);
     }
 
 }
