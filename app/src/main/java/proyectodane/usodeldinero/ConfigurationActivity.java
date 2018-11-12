@@ -44,7 +44,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
             // Envío mensaje de confirmación
             SnackBarManager sb = new SnackBarManager();
-            sb.showTextShortOnClickActionDisabled(findViewById(R.id.coordinatorLayout_config),getString(R.string.msg_confirm_wallet_empty),5);
+            sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_config),getString(R.string.msg_confirm_wallet_empty),5);
 
             // Cambio el texto del botón
             emptyWallet.setText(getString(R.string.confirm_empty_wallet));
@@ -58,7 +58,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
             // Envío mensaje de información
             SnackBarManager sb = new SnackBarManager();
-            sb.showTextShortOnClickActionDisabled(findViewById(R.id.coordinatorLayout_config),getString(R.string.msg_wallet_emptied),5);
+            sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_config),getString(R.string.msg_wallet_emptied),5);
 
             // Inhabilito el botón de vaciar billetera
             emptyWallet.setEnabled(false);
