@@ -1,10 +1,13 @@
 package proyectodane.usodeldinero;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.ThumbnailUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -43,14 +46,14 @@ public class NewCurrencyActivity extends AppCompatActivity {
     Bitmap selectedImage;
 
     /**
-     * Ancho de la vista previa de la imagen cargada
+     * Ancho de la imagen cargada
      ***/
-    final int IMAGE_SIZE_WIDTH = 1000;
+    final int DIP_IMAGE_SIZE_WIDTH = 500;
 
     /**
-     * Ancho de la vista previa de la imagen cargada
+     * Ancho de la imagen cargada
      ***/
-    final int IMAGE_SIZE_HEIGHT = 420;
+    final int DIP_IMAGE_SIZE_HEIGHT = 210;
 
     /**
      * Ancho de la vista previa de la imagen cargada
@@ -92,7 +95,7 @@ public class NewCurrencyActivity extends AppCompatActivity {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 Bitmap originalImage = BitmapFactory.decodeStream(imageStream);
-                selectedImage = Bitmap.createScaledBitmap(originalImage, IMAGE_SIZE_WIDTH, IMAGE_SIZE_HEIGHT, false);
+                selectedImage = Bitmap.createScaledBitmap(originalImage,(int)dipToPixels(this,DIP_IMAGE_SIZE_WIDTH),(int)dipToPixels(this,DIP_IMAGE_SIZE_HEIGHT),false);
                 imageLoaded = true;
 
                 // Cargo una miniatura para que el usuario pueda verificar la imagen seleccionada
@@ -180,6 +183,11 @@ public class NewCurrencyActivity extends AppCompatActivity {
     public void showHelp(View view) {
         SnackBarManager sb = new SnackBarManager();
         sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.help_text_new_currency),10);
+    }
+
+    public static float dipToPixels(Context context, float dipValue) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, displayMetrics);
     }
 
 }
