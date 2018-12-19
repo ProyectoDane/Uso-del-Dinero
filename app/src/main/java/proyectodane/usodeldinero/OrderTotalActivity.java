@@ -22,10 +22,13 @@ public class OrderTotalActivity extends AppCompatActivity {
         Intent intent = getIntent();
         total = intent.getStringExtra(getString(R.string.tag_total_value));
 
-        // Capturo el TextView y coloco el texto indicando el total
-        TextView textView = findViewById(R.id.textView3);
-        String st_textToShow = getString(R.string.total_purchase) + total;
-        textView.setText(st_textToShow);
+        // Capturo el TextView y coloco el texto indicando el total de compra y total ahorrado
+        TextView tv_purchase = findViewById(R.id.textView3);
+        TextView tv_wallet = findViewById(R.id.textView11);
+        String st_purchase = getString(R.string.total_purchase) + total;
+        String st_wallet = getString(R.string.saved_money_pesos) + WalletManager.getInstance().obtainTotalCreditInWallet(this);
+        tv_purchase.setText(st_purchase);
+        tv_wallet.setText(st_wallet);
 
     }
 

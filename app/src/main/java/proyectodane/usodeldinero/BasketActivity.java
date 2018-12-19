@@ -32,6 +32,9 @@ public class BasketActivity extends AppCompatActivity {
 
         // Obtiene el ID del EditText del valor ingresado
         et_productValue = (EditText) findViewById(R.id.editText);
+
+        // Obtengo el saldo en billetera
+        refreshTotalInWallet();
     }
 
     /**
@@ -72,7 +75,7 @@ public class BasketActivity extends AppCompatActivity {
 
             // Actualiza el valor total actual en la vista
             TextView textView = findViewById(R.id.textView);
-            textView.setText(getString(R.string.total_value) + st_total_purchase);
+            textView.setText(getString(R.string.total_purchase) + st_total_purchase);
         }
 
         // Blanquea el valor a ingresar en la vista
@@ -112,6 +115,15 @@ public class BasketActivity extends AppCompatActivity {
     public void showHelp(View view) {
         SnackBarManager sb = new SnackBarManager();
         sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_Basquet),getString(R.string.help_text_basket),7);
+    }
+
+    /**
+     * Actualiza el valor total ahorrado en la billetera
+     **/
+    public void refreshTotalInWallet() {
+        TextView textView = findViewById(R.id.textView14);
+        String newText = getString(R.string.saved_money_pesos) + WalletManager.getInstance().obtainTotalCreditInWallet(this);
+        textView.setText(newText);
     }
 
 }
