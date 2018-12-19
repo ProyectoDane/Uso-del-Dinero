@@ -163,7 +163,7 @@
     <!-- ID de los textos de componentes de las activities - [Varias Activities]  -->
     <string name="cancel_purchase">CANCELAR COMPRA</string>
     <string name="purchase_payed">COMPRA PAGADA</string>
-    <string name="payment_of_the_purchase">PAGO DE LA COMPRA</string>
+    <string name="total_payment_of_the_purchase">PAGO TOTAL DE LA COMPRA: $</string>
     <string name="help">AYUDA</string>
 
 
