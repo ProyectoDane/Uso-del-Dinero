@@ -119,7 +119,9 @@
     <!-- ID de los textos de componentes de las activities - [ControlChange]  -->
     <string name="add_to_change">AGREGAR AL VUELTO</string>
     <string name="accept_change">ACEPTAR VUELTO</string>
-    <string name="change_amount_zero">VUELTO TOTAL: $ 0.00</string>
+    <string name="total_change">VUELTO TOTAL: $</string>
+    <string name="change_received_amount_zero">VUELTO RECIBIDO: $ 0.00</string>
+    <string name="change_received">VUELTO RECIBIDO: $</string>
 
     <!-- ID de los textos de componentes de las activities - [FinalizePurchase]  -->
     <string name="purchase_finished">COMPRA FINALIZADA</string>
@@ -163,7 +165,7 @@
     <!-- ID de los textos de componentes de las activities - [Varias Activities]  -->
     <string name="cancel_purchase">CANCELAR COMPRA</string>
     <string name="purchase_payed">COMPRA PAGADA</string>
-    <string name="payment_of_the_purchase">PAGO DE LA COMPRA</string>
+    <string name="total_payment_of_the_purchase">PAGO TOTAL DE LA COMPRA: $</string>
     <string name="help">AYUDA</string>
 
 

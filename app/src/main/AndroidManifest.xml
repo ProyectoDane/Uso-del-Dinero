@@ -47,9 +47,18 @@
             android:name=".WalletActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="userLandscape" />
-        <activity android:name=".ConfigurationActivity" />
-        <activity android:name=".NewCurrencyActivity" />
-        <activity android:name=".DeleteCurrencyActivity"></activity>
+        <activity
+            android:name=".ConfigurationActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="userLandscape" />
+        <activity
+            android:name=".NewCurrencyActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="userLandscape" />
+        <activity
+            android:name=".DeleteCurrencyActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="userLandscape" />
     </application>
 
 </manifest>

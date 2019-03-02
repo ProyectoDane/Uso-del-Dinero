@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 public class PayPurchaseActivity extends AppCompatActivity {
@@ -34,6 +36,11 @@ public class PayPurchaseActivity extends AppCompatActivity {
         // Obtengo el intent que inició el activity y extraigo el valor del total
         Intent intent = getIntent();
         totalPurchase = intent.getStringExtra(getString(R.string.tag_total_value));
+
+        // Actualizo el valor de pago total
+        TextView tv_totalPurchase = findViewById(R.id.textView4);
+        String st_totalPurchase = getString(R.string.total_payment_of_the_purchase) + totalPurchase;
+        tv_totalPurchase.setText(st_totalPurchase);
 
         // Calculo todos los valores a usar para pagar
         moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfPayment(this, totalPurchase);

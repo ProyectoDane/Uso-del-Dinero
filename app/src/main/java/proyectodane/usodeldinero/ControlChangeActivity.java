@@ -51,6 +51,11 @@ public class ControlChangeActivity extends AppCompatActivity {
         st_receivedChangeValue = getString(R.string.value_0);
         al_receivedChange = new ArrayList<String>();
 
+        // Actualizo el valor del vuelto total a recibir
+        TextView tv_totalChange = findViewById(R.id.textView15);
+        String st_totalChange = getString(R.string.total_change) + st_changeExpected;
+        tv_totalChange.setText(st_totalChange);
+
         // ArrayList con todos los valores de billetes/monedas existentes. Calculo todos los valores a usar para pagar
         ArrayList<String> moneyValueNames = WalletManager.getInstance().getInstance().obtainMoneyValueNamesOfValidCurrency(this);
 
@@ -105,7 +110,7 @@ public class ControlChangeActivity extends AppCompatActivity {
 
         // Actualizo el texto del importe recibido
         TextView textView = findViewById(R.id.textView5);
-        String st_textViewValue = getString(R.string.change_amount) + st_receivedChangeValue;
+        String st_textViewValue = getString(R.string.change_received) + st_receivedChangeValue;
 
         // Si el vuelto es el total, lo informo
         if(isChangeOK()) {
