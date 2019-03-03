@@ -203,14 +203,12 @@
     <string name="tag_p5_b">t2_img_21_p5</string>
 
 
-
     <!-- ************************* -->
     <!-- Identificadores para tabs -->
     <!-- ************************* -->
     <string name="tab_text_1">Ver</string>
     <string name="tab_text_2">Comprar</string>
     <string name="tab_text_3">Cargar</string>
-
 
 
     <!-- ******************************** -->
@@ -220,16 +218,11 @@
     <string name="action_configuration">Configuración</string>
 
 
-
-
     <!-- ***************************************** -->
     <!-- Identificadores agregados automáticamente -->
     <!-- ***************************************** -->
     <string name="title_activity_tab">TabActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-
-
-
+    <string name="section_format">Este es el Tab nro: %1$d</string>
 
 
 </resources>
