@@ -114,11 +114,11 @@ public class MainTabActivity extends AppCompatActivity {
             for (int i = 0; i < 3; i++){    // Todo: Pasar el valor "3" al archivo strings.xml
                 switch (i) {
                     case 0:
-                        fragments.add(new WalletFragment());
+                        fragments.add(new ViewWalletFragment());
                     case 1:
                         fragments.add(new TabTwoFragment());
                     case 2:
-                        fragments.add(new TabThreeFragment());
+                        fragments.add(new WalletFragment());
                     default:
                         fragments.add(null);
                 }
