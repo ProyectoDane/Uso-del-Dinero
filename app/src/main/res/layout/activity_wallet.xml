@@ -18,13 +18,12 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="32dp"
             android:text="@string/load_and_total_wallet_preview"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,9 +31,9 @@
             android:id="@+id/button12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="100dp"
             android:onClick="cancelLoad"
             android:text="@string/cancel_load"
             android:textAlignment="center"
@@ -49,9 +48,9 @@
             android:id="@+id/button14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="100dp"
             android:onClick="addValueToSubtotal"
             android:text="@string/add"
             android:textAlignment="center"
@@ -66,9 +65,9 @@
             android:id="@+id/button13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="100dp"
             android:onClick="addValuesToWallet"
             android:text="@string/save_in_wallet"
             android:textAlignment="center"
@@ -83,14 +82,14 @@
             android:id="@+id/pager_wallet"
             android:layout_width="500dp"
             android:layout_height="210dp"
-            android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             app:layout_constraintBottom_toTopOf="@+id/button12"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.474"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6"
-            app:layout_constraintVertical_bias="0.502" />
+            app:layout_constraintVertical_bias="0.324" />
 
         <LinearLayout
             android:id="@+id/SliderDots_wallet"
@@ -101,9 +100,10 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/button12"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pager_wallet" />
+            app:layout_constraintTop_toBottomOf="@+id/pager_wallet"
+            app:layout_constraintVertical_bias="0.516" />
 
         <Button
             android:id="@+id/button17"
@@ -117,10 +117,10 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/pager_wallet"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.321"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.498" />
+            app:layout_constraintVertical_bias="0.397" />
 
         <Button
             android:id="@+id/button27"
@@ -132,10 +132,10 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/SliderDots_wallet"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.575"
+            app:layout_constraintHorizontal_bias="0.776"
             app:layout_constraintStart_toEndOf="@+id/pager_wallet"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.652" />
+            app:layout_constraintVertical_bias="0.636" />
 
 
     </android.support.constraint.ConstraintLayout>

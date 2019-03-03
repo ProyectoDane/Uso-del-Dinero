@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
      * Envía a la pantalla de carga de billetera
      **/
     public void sendToLoadWallet(View view) {
-        Intent intent = new Intent(this, WalletActivity.class);
+        //Intent intent = new Intent(this, WalletActivity.class); // Todo: Resolver llamada
+        Intent intent = new Intent(this, MainTabActivity.class);
         startActivity(intent);
     }
 
