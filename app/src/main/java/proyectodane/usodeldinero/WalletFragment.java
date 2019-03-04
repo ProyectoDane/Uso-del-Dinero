@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
 
-public class WalletFragment extends Fragment {
+
+public class WalletFragment extends Fragment implements OnClickListener {
 
     /**
      * Importe total a de la billetera, con la suma de la carga
@@ -72,6 +75,13 @@ public class WalletFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_wallet, container, false);
+
+        // Asigno los botones a escuchar
+        Button addButton = (Button) rootView.findViewById(R.id.button14);
+        addButton.setOnClickListener(this);
+        Button saveButton = (Button) rootView.findViewById(R.id.button13);
+        saveButton.setOnClickListener(this);
+
         return rootView;
     }
 
@@ -108,6 +118,18 @@ public class WalletFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button14:
+                sb.showTextShortOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.add_button_pressed),5);
+                break;
+            case R.id.button13:
+                sb.showTextShortOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.save_button_pressed),5);
+                break;
+        }
+    }
 
 
 // TODO: Verificar si quedan o se sacan las funciones...

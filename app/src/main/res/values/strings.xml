@@ -218,14 +218,20 @@
     <string name="action_configuration">Configuración</string>
 
 
+
+    <!-- ************************************************ -->
+    <!-- Identificadores para uso temporal (borrar luego) -->
+    <!-- ************************************************ -->
+    <string name="add_button_pressed">Botón "Agregar" presionado</string>
+    <string name="save_button_pressed">Botón "Guardar" presionado</string>
+
+
     <!-- ***************************************** -->
     <!-- Identificadores agregados automáticamente -->
     <!-- ***************************************** -->
     <string name="title_activity_tab">TabActivity</string>
     <string name="section_format">Este es el Tab nro: %1$d</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

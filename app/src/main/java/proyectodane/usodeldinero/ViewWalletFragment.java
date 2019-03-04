@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 
@@ -72,7 +71,6 @@ public class ViewWalletFragment extends Fragment {
      * Envía a la pantalla de carga de billetera
      **/
     public void sendToLoadWallet(View view) {
-        //Intent intent = new Intent(this, WalletActivity.class); // Todo: Resolver llamada
         Intent intent = new Intent(getActivity(), MainTabActivity.class);
         startActivity(intent);
     }
