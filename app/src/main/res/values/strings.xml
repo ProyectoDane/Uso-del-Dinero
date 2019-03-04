@@ -46,7 +46,7 @@
     <!-- Identificadores funcionales al código - [Wallet]  -->
     <string name="help_text_wallet">AYUDA:\n[CARGA] Indica el dinero que se va a agregar a la billetera.\n[TOTAL EN BILLETERA] Muestra el dinero total si realizo la carga.\n[Imágenes de billetes y monedas] Se muestran todos los valores a elegir para la carga.\n[CANCELAR] Anula la carga y vuelve a la vista de la billetera.\n[AGREGAR] Carga el billete o moneda actualmente mostrado en imagen.\n[GUARDAR Y FINALIZAR] Ingresa en la billetera todos los valores cargados, volviendo a la vista principal.\n[CONFIGURAR] Permite agregar nuevos valores y eliminar los existentes.</string>
     <string name="value_selected_for_load">Valor seleccionado para cargar: $</string>
-
+    <string name="value_saved">Carga agregada a la billetera</string>
 
     <!-- Identificadores funcionales al código - [Main]  -->
     <string name="help_text_main">AYUDA:\n[DINERO AHORRADO] Muestra todo el ahorro en la billetera.\n[Imágenes de billetes y monedas] Se muestran todos los valores que contiene la billetera.\n[CARGAR BILLETERA] Permite agregar nuevos billetes y monedas a la billetera. También se pueden configurar nuevos valores y eliminar los existentes.\n[INICIAR COMPRA] Permite comprar productos.</string>
@@ -99,7 +99,7 @@
 
 
     <!-- ID de los textos de componentes de las activities - [Main]  -->
-    <string name="saved_money_pesos">DINERO AHORRADO: $</string>
+    <string name="saved_money_pesos">DINERO EN BILLETERA: $</string>
     <string name="start_purchase">INICIAR COMPRA</string>
     <string name="load_wallet">CARGAR BILLETERA</string>
 
@@ -135,7 +135,7 @@
     <string name="total_cash_sign">TOTAL EN BILLETERA: $</string>
     <string name="cancel_load">CANCELAR</string>
     <string name="add">AGREGAR</string>
-    <string name="save_in_wallet">GUARDAR Y FINALIZAR</string>
+    <string name="save_in_wallet">GUARDAR CARGA</string>
     <string name="wallet_configuration">CONFIGURAR</string>
 
 

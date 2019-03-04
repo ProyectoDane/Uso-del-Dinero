@@ -1,6 +1,5 @@
 package proyectodane.usodeldinero;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -46,7 +45,6 @@ public class WalletFragment extends Fragment implements OnClickListener {
      * Vista instanciada
      */
     View rootView;
-
 
     // Todo: Ver si sirve este ejemplo par paso de parámetros. Si no se usa, borrarlo
     //        public WalletFragment() { }
@@ -94,9 +92,7 @@ public class WalletFragment extends Fragment implements OnClickListener {
         newLoadMoneyValueNames = new ArrayList<String>();
 
         // Actualizo el valor del total, inicio el subtotal en cero y muestro en pantalla
-        st_subtotal = getString(R.string.value_0);
-        st_total = WalletManager.getInstance().obtainTotalCreditInWallet(getActivity());
-        refreshSubtotalAndTotal();
+        initializeSubtotalAndLoadTotal();
 
         // Inicio el SnackBarManager para luego crear mensajes emergentes
         sb = new SnackBarManager();
@@ -120,59 +116,51 @@ public class WalletFragment extends Fragment implements OnClickListener {
 
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.button14:
-                sb.showTextShortOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.add_button_pressed),5);
+                addValueToSubtotalTAB(view);
                 break;
             case R.id.button13:
-                sb.showTextShortOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.save_button_pressed),5);
+                addValuesToWallet(view);
                 break;
         }
     }
 
 
+
+    // TODO: Contemplar que habría que volver al estado inicial y refrescar la vista...
+    // TODO: ...si antes se hizo un alta o baja de billetes/monedas
+
+
+
 // TODO: Verificar si quedan o se sacan las funciones...
-// TODO: y en caso de usarse deben pasarse dentro del onClick()
-
-    /**
-     * Cancela la carga en la billetera
-     * */
-    public void cancelLoad(View view) {
-        sendToMain(view);
-    }
-
-
-    /**
-     * Envía a la pantalla principal
-     * */
-    public void sendToMain(View view) {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        startActivity(intent);
-    }
-
-
-    /**
-     * Muestra el texto de ayuda para este activity
-     **/
-    public void showHelp(View view) {
-        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.help_text_wallet),10);
-    }
+// TODO: y en caso de usarse deben usarse dentro del onClick()
 
 
     /**
      * Actualiza el valor de la carga y del total
      **/
-    public void refreshSubtotalAndTotal() {
+    private void refreshSubtotalAndTotal() {
         TextView textView = rootView.findViewById(R.id.textView6);
         textView.setText(getString(R.string.load_cash_sign) + st_subtotal + " - " + getString(R.string.total_cash_sign) + st_total);
     }
 
 
     /**
+     * Inicia los valores en su estado inicial
+     **/
+    private void initializeSubtotalAndLoadTotal(){
+        st_subtotal = getString(R.string.value_0);
+        st_total = WalletManager.getInstance().obtainTotalCreditInWallet(getActivity());
+        refreshSubtotalAndTotal();
+    }
+
+
+    /**
      * Sumo el valor seleccionado al subtotal de carga en billetera
      **/
-    public void addValueToSubtotalTAB (View view) {
+    private void addValueToSubtotalTAB (View view) {
 
         // Obtengo el ID del valor elegido
         String st_valueID = imageSlideManager.getActualValueID();
@@ -193,26 +181,31 @@ public class WalletFragment extends Fragment implements OnClickListener {
 
 
     /**
-     * Agrega la carga de dinero seleccionada en la billetera y luego envía a la pantalla principal
+     * Agrega la carga de dinero seleccionada en la billetera
      * */
-    public void addValuesToWallet (View view){
+    private void addValuesToWallet (View view){
 
         // Guardo todos los valores seleccionados
         for(String currentNewLoadMoneyValueName : newLoadMoneyValueNames) {
             WalletManager.getInstance().addCurrencyInWallet(getActivity(),currentNewLoadMoneyValueName);
         }
 
-        sendToMain(view);
+        // Creo el mensaje para notificar valores guardados
+        sb.showTextShortOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.value_saved),2);
+
+        // Vuelvo al estado inicial
+        initializeSubtotalAndLoadTotal();
     }
 
 
-    /**
-     * Envía a la pantalla de configuración
-     * */
-    public void sendToConfiguration(View view) {
-        Intent intent = new Intent(getActivity(), ConfigurationActivity.class);
-        startActivity(intent);
-    }
+//    //TODO: Confirmar borrado
+//    /**
+//     * Muestra el texto de ayuda para este activity
+//     **/
+//    public void showHelp(View view) {
+//        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.help_text_wallet),10);
+//    }
+
 
 }
 

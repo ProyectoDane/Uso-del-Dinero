@@ -1,9 +1,10 @@
 package proyectodane.usodeldinero;
 
-
-import android.content.Intent;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -14,7 +15,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class ViewWalletFragment extends Fragment {
+public class ViewWalletFragment extends Fragment implements ViewPager.OnPageChangeListener {
+
+    /**
+     * Cantidad de Tabs que tiene la activity
+     */
+    private static final int VIEW_WALLET_FRAGMENT_POSITION = 0;
 
     /**
      * Vista instanciada
@@ -30,19 +36,59 @@ public class ViewWalletFragment extends Fragment {
         return rootView;
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // Verifico inicialización de archivo de valores
-        WalletManager.getInstance().checkFirstRun(getActivity());
+        // Actualizo el texto de valor del total en billetera
+        refreshTotalText();
+
+        // Cargo las imágenes de ls billetes
+        loadImages();
+
+    }
+
+
+    // TODo: Ver si se puede hacer que actualice solo cuando efectivamente cambiaron los datos
+    @Override // Cuando se muestra este tab, actualizo la vista con los últimos datos
+    public void onPageSelected(final int position) {
+        if(position==VIEW_WALLET_FRAGMENT_POSITION){
+
+            // Actualizo el texto de valor del total en billetera
+            refreshTotalText();
+
+            // Cargo las imágenes actualizadas de los billetes
+            //loadImages(); TODO: Buscar alternativa a esto, ya que los billetes se van acumulando, no los sobre escribe
+
+        }
+    }
+
+    @Override // Para cumplir con ViewPager.OnPageChangeListener
+    public void onPageScrolled(final int position, final float positionOffset,
+                               final int positionOffsetPixels) {
+        // No se usa: Llama múltiples veces cuando hago un solo scroll
+    }
+
+    @Override // Para cumplir con ViewPager.OnPageChangeListener
+    public void onPageScrollStateChanged(final int state) {
+        // No se usa: Llama múltiples veces y no tiene la posición
+    }
+
+
+    /**
+     * Actualiza el valor de la carga y del total
+     **/
+    private void refreshTotalText() {
+        String newTotal = WalletManager.getInstance().obtainTotalCreditInWallet(getActivity());
+        TextView textView = rootView.findViewById(R.id.textView1);
+        String newText = getString(R.string.saved_money_pesos) + newTotal;
+        textView.setText(newText);
+    }
+
+    private void loadImages(){
 
         // Calculo todos los valores en la billetera a mostrar
         ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesInWallet(getActivity());
-
-        // Actualizo el valor del total en billetera
-        refreshTotal(WalletManager.getInstance().obtainTotalCreditInWallet(getActivity()));
 
         // Clase que se encarga de manejar lo referido al slide de imágenes y puntos
         // Parámetros:  + (1)Contexto
@@ -59,38 +105,13 @@ public class ViewWalletFragment extends Fragment {
     }
 
 
-    /**
-     * Envía a la pantalla de ingreso de importe de productos al presionar el botón
-     **/
-    public void sendToBasket(View view) {
-        Intent intent = new Intent(getActivity(), BasketActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * Envía a la pantalla de carga de billetera
-     **/
-    public void sendToLoadWallet(View view) {
-        Intent intent = new Intent(getActivity(), MainTabActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * Muestra el texto de ayuda para este activity
-     **/
-    public void showHelp(View view) {
-        SnackBarManager sb = new SnackBarManager();
-        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Main),getString(R.string.help_text_main),7);
-    }
-
-    /**
-     * Actualiza el valor de la carga y del total
-     **/
-    public void refreshTotal(String newTotal) {
-        TextView textView = rootView.findViewById(R.id.textView1);
-        String newText = getString(R.string.saved_money_pesos) + newTotal;
-        textView.setText(newText);
-    }
-
+//    TODO: Ver como se re implementa
+//    /**
+//     * Muestra el texto de ayuda para este activity
+//     **/
+//    public void showHelp(View view) {
+//        SnackBarManager sb = new SnackBarManager();
+//        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Main),getString(R.string.help_text_main),7);
+//    }
 
 }

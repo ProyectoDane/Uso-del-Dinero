@@ -31,9 +31,15 @@ public class MainTabActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     /**
-     * Cantidad de Tab que tiene la activity
+     * El TabLayout que contendrá los tabs generados
+     */
+    TabLayout tabLayout;
+
+    /**
+     * Cantidad de Tabs que tiene la activity
      */
     private static final int NUMBER_OF_TABS = 3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,18 +56,24 @@ public class MainTabActivity extends AppCompatActivity {
         //ActionBar ab = getSupportActionBar();
         //ab.setDisplayHomeAsUpEnabled(true);
 
-        // Crea el SectionsPagerAdapter que devolverá un Fragment por cada una de las secciones
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Seteo el ViewPager con el PagerAdapter obtenido
+        // Identifico el Layout del ViewPager
         mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setOffscreenPageLimit(4);
 
         // Identifico el Layout del Tab
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
 
-        // Seteo los Listener
+        // Crea el SectionsPagerAdapter que devolverá un Fragment por cada una de las secciones
+        // También se ingresan como Listener del ViewPager y TabLayout a cada uno de los fragment que lo necesiten
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        // Seteo en el ViewPager al PagerAdapter
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        // Configuro las páginas fuera de pantalla que deben quedar en memoria,
+        // para que no queden en blanco cuando me voy y vuelvo
+        mViewPager.setOffscreenPageLimit(4);
+
+        // Seteo los Listener de del ViewPager y TabLayout cruzados, para que cuando uno se mueve, el otro lo siga
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
@@ -76,6 +88,7 @@ public class MainTabActivity extends AppCompatActivity {
     }
 
 
+    // TODO: Implementar
     /**
      * Cuando se elige una opción del menú, aquí se maneja el comportamiento
      * a tomar según la opción elegida
@@ -103,8 +116,6 @@ public class MainTabActivity extends AppCompatActivity {
     }
 
 
-
-
     /**
      * Una clase FragmentPagerAdapter que representa cada uno de los tabs dentro de un Fragment
      */
@@ -119,7 +130,9 @@ public class MainTabActivity extends AppCompatActivity {
             for (int i = 0; i < NUMBER_OF_TABS; i++){
                 switch (i) {
                     case 0:
-                        fragments.add(new ViewWalletFragment());
+                        ViewWalletFragment fragment = new ViewWalletFragment();
+                        mViewPager.addOnPageChangeListener(fragment);
+                        fragments.add(fragment);
                     case 1:
                         fragments.add(new TabTwoFragment());
                     case 2:
@@ -131,7 +144,6 @@ public class MainTabActivity extends AppCompatActivity {
         }
 
         // Es llamado para instanciar el fragmento de la posición dada.
-        // Devuelve un fragmento WalletFragment (Definido anteriormente).
         @Override
         public Fragment getItem(int position) {
             return fragments.get(position);
@@ -145,7 +157,6 @@ public class MainTabActivity extends AppCompatActivity {
 
 
     }
-
 
 
 
