@@ -30,6 +30,11 @@ public class MainTabActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    /**
+     * Cantidad de Tab que tiene la activity
+     */
+    private static final int NUMBER_OF_TABS = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,11 +112,11 @@ public class MainTabActivity extends AppCompatActivity {
 
         private ArrayList<Fragment> fragments;
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        private SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
 
             fragments = new ArrayList<>();
-            for (int i = 0; i < 3; i++){    // Todo: Pasar el valor "3" al archivo strings.xml
+            for (int i = 0; i < NUMBER_OF_TABS; i++){
                 switch (i) {
                     case 0:
                         fragments.add(new ViewWalletFragment());
@@ -135,7 +140,7 @@ public class MainTabActivity extends AppCompatActivity {
         // Muestra la cantidad total de tabs en el Adapter.
         @Override
         public int getCount() {
-            return 3; // Todo: Pasar el valor "3" al archivo strings.xml
+            return NUMBER_OF_TABS;
         }
 
 
@@ -159,7 +164,7 @@ public class MainTabActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main_tab, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, 2));
+            textView.setText(getString(R.string.section_format));
             return rootView;
         }
 
