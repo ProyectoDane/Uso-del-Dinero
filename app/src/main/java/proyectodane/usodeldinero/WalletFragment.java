@@ -138,6 +138,10 @@ public class WalletFragment extends Fragment implements OnClickListener {
 // TODO: y en caso de usarse deben usarse dentro del onClick()
 
 
+    // TODO: IMPLEMENTAR BOTÓN DE CANCELAR O sino, CUANDO SALGO DEL TAB VOLVER A CERO LA CARGA
+
+
+
     /**
      * Actualiza el valor de la carga y del total
      **/

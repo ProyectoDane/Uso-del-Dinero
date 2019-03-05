@@ -1,10 +1,7 @@
 package proyectodane.usodeldinero;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -27,6 +24,12 @@ public class ViewWalletFragment extends Fragment implements ViewPager.OnPageChan
      */
     View rootView;
 
+
+    /**
+     * Slide Manager dedicado a mostrar las imágenes de billetes y los puntos indicadores
+     */
+    ImageSlideManager imageSlideManager;
+
     public ViewWalletFragment() { }
 
     @Override
@@ -43,8 +46,8 @@ public class ViewWalletFragment extends Fragment implements ViewPager.OnPageChan
         // Actualizo el texto de valor del total en billetera
         refreshTotalText();
 
-        // Cargo las imágenes de ls billetes
-        loadImages();
+        // Cargo las imágenes de los billetes y la línea de puntos
+        loadNewImages();
 
     }
 
@@ -57,8 +60,8 @@ public class ViewWalletFragment extends Fragment implements ViewPager.OnPageChan
             // Actualizo el texto de valor del total en billetera
             refreshTotalText();
 
-            // Cargo las imágenes actualizadas de los billetes
-            //loadImages(); TODO: Buscar alternativa a esto, ya que los billetes se van acumulando, no los sobre escribe
+            // Actualizo todas las imágenes billetes, monedas y línea de puntos
+            updateImages();
 
         }
     }
@@ -85,7 +88,10 @@ public class ViewWalletFragment extends Fragment implements ViewPager.OnPageChan
         textView.setText(newText);
     }
 
-    private void loadImages(){
+    /**
+     * Cargo por primera vez todas la imágenes a mostrar, instanciando el imageSlideManager
+     **/
+    private void loadNewImages(){
 
         // Calculo todos los valores en la billetera a mostrar
         ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesInWallet(getActivity());
@@ -94,7 +100,30 @@ public class ViewWalletFragment extends Fragment implements ViewPager.OnPageChan
         // Parámetros:  + (1)Contexto
         //              + (2)ViewPager con su (3)FragmentManager y sus (4)moneyValueNames (nombres de las imágenes)
         //              + (5)LinearLayout y sus (6)(7)imágenes representando al punto
-        ImageSlideManager imageSlideManager = new ImageSlideManager(getActivity(),
+        imageSlideManager = new ImageSlideManager(getActivity(),
+                (ViewPager) rootView.findViewById(R.id.pager_main),
+                getActivity().getSupportFragmentManager(),
+                moneyValueNames,
+                (LinearLayout) rootView.findViewById(R.id.SliderDots_main),
+                ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.active_dot),
+                ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.nonactive_dot));
+
+    }
+
+
+    /**
+     * Actualizo todas la imágenes a mostrar del imageSlideManager creado
+     **/
+    private void updateImages(){
+
+        // Calculo todos los valores en la billetera a mostrar
+        ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesInWallet(getActivity());
+
+
+        // Parámetros:  + (1)Contexto
+        //              + (2)ViewPager con su (3)FragmentManager y sus (4)moneyValueNames (nombres de las imágenes)
+        //              + (5)LinearLayout y sus (6)(7)imágenes representando al punto
+        imageSlideManager.setUpImages(getActivity(),
                 (ViewPager) rootView.findViewById(R.id.pager_main),
                 getActivity().getSupportFragmentManager(),
                 moneyValueNames,
