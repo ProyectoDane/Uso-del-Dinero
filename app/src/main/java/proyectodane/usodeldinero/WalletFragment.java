@@ -1,5 +1,6 @@
 package proyectodane.usodeldinero;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -46,6 +47,14 @@ public class WalletFragment extends Fragment implements OnClickListener {
      */
     View rootView;
 
+    /**
+     * Instancia del observador OnFragmentInteractionListener
+     */
+    private OnFragmentInteractionListener listener;
+
+
+
+
     // Todo: Ver si sirve este ejemplo par paso de parámetros. Si no se usa, borrarlo
     //        public WalletFragment() { }
     //
@@ -59,6 +68,17 @@ public class WalletFragment extends Fragment implements OnClickListener {
     //            fragment.setArguments(args);
     //            return fragment;
     //        }
+
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+
+        if( context instanceof OnFragmentInteractionListener) {
+            listener = (OnFragmentInteractionListener) context;
+        }
+
+    }
 
     // Llamado en la parte inicial de la creación del Fragment.
     // Se inicializan objetos no gráficos.
@@ -91,11 +111,50 @@ public class WalletFragment extends Fragment implements OnClickListener {
         // Inicio la lista de valores a cargar en la billetera
         newLoadMoneyValueNames = new ArrayList<String>();
 
+        // Inicio el SnackBarManager para luego crear mensajes emergentes
+        sb = new SnackBarManager();
+
         // Actualizo el valor del total, inicio el subtotal en cero y muestro en pantalla
         initializeSubtotalAndLoadTotal();
 
-        // Inicio el SnackBarManager para luego crear mensajes emergentes
-        sb = new SnackBarManager();
+        // Cargo las imágenes de los billetes y la línea de puntos
+        loadNewImages();
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button14:
+                addValueToSubtotalTAB(view);
+                break;
+            case R.id.button13:
+                if(addValuesToWallet(view)){ listener.updateFragments(2); }
+                break;
+        }
+    }
+
+
+    /**
+     * Actualizo los componentes visuales del fragment
+     */
+    public void updateView(){
+
+        // Actualizo el texto de valor del subtotal y total en billetera
+        initializeSubtotalAndLoadTotal();
+
+        // Actualizo todas las imágenes dentro del Slide
+        updateImages();
+
+    }
+
+    // TODO: IMPLEMENTAR BOTÓN DE CANCELAR O sino, CUANDO SALGO DEL TAB VOLVER A CERO LA CARGA
+
+
+    /**
+     * Cargo por primera vez todas la imágenes a mostrar, instanciando el imageSlideManager
+     **/
+    private void loadNewImages(){
 
         // Obtengo todos los valores a mostrar para la carga de la billetera
         ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfValidCurrency(getActivity());
@@ -115,32 +174,27 @@ public class WalletFragment extends Fragment implements OnClickListener {
     }
 
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.button14:
-                addValueToSubtotalTAB(view);
-                break;
-            case R.id.button13:
-                addValuesToWallet(view);
-                break;
-        }
+    /**
+     * Actualizo todas la imágenes a mostrar del imageSlideManager creado
+     **/
+    private void updateImages() {
+
+        // Obtengo todos los valores a mostrar para la carga de la billetera
+        ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfValidCurrency(getActivity());
+
+        // Cargo el slide de imágenes y puntos indicadores
+        // Parámetros:  + (1)Contexto
+        //              + (2)ViewPager con su (3)FragmentManager y sus (4)moneyValueNames (nombres de las imágenes)
+        //              + (5)LinearLayout y sus (6)(7)imágenes representando al punto
+        imageSlideManager.setUpImages(getActivity(),
+                (ViewPager) rootView.findViewById(R.id.pager_wallet),
+                getActivity().getSupportFragmentManager(),
+                moneyValueNames,
+                (LinearLayout) rootView.findViewById(R.id.SliderDots_wallet),
+                ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.active_dot),
+                ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.nonactive_dot));
+
     }
-
-
-
-    // TODO: Contemplar que habría que volver al estado inicial y refrescar la vista...
-    // TODO: ...si antes se hizo un alta o baja de billetes/monedas
-
-
-
-// TODO: Verificar si quedan o se sacan las funciones...
-// TODO: y en caso de usarse deben usarse dentro del onClick()
-
-
-    // TODO: IMPLEMENTAR BOTÓN DE CANCELAR O sino, CUANDO SALGO DEL TAB VOLVER A CERO LA CARGA
-
-
 
     /**
      * Actualiza el valor de la carga y del total
@@ -155,6 +209,7 @@ public class WalletFragment extends Fragment implements OnClickListener {
      * Inicia los valores en su estado inicial
      **/
     private void initializeSubtotalAndLoadTotal(){
+        newLoadMoneyValueNames.clear();
         st_subtotal = getString(R.string.value_0);
         st_total = WalletManager.getInstance().obtainTotalCreditInWallet(getActivity());
         refreshSubtotalAndTotal();
@@ -187,18 +242,25 @@ public class WalletFragment extends Fragment implements OnClickListener {
     /**
      * Agrega la carga de dinero seleccionada en la billetera
      * */
-    private void addValuesToWallet (View view){
+    private boolean addValuesToWallet (View view){
 
-        // Guardo todos los valores seleccionados
-        for(String currentNewLoadMoneyValueName : newLoadMoneyValueNames) {
-            WalletManager.getInstance().addCurrencyInWallet(getActivity(),currentNewLoadMoneyValueName);
+        if( !newLoadMoneyValueNames.isEmpty() ){
+
+            // Guardo todos los valores seleccionados
+            for(String currentNewLoadMoneyValueName : newLoadMoneyValueNames) {
+                WalletManager.getInstance().addCurrencyInWallet(getActivity(),currentNewLoadMoneyValueName);
+            }
+
+            // Creo el mensaje para notificar valores guardados
+            sb.showTextShortOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.value_saved),2);
+
+            // Vuelvo al estado inicial
+            initializeSubtotalAndLoadTotal();
+
+            return true;
         }
 
-        // Creo el mensaje para notificar valores guardados
-        sb.showTextShortOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.value_saved),2);
-
-        // Vuelvo al estado inicial
-        initializeSubtotalAndLoadTotal();
+        return false;
     }
 
 
@@ -209,6 +271,11 @@ public class WalletFragment extends Fragment implements OnClickListener {
 //    public void showHelp(View view) {
 //        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.help_text_wallet),10);
 //    }
+
+
+    public interface OnFragmentInteractionListener {
+        void updateFragments(int idFragmentCaller);
+    }
 
 
 }

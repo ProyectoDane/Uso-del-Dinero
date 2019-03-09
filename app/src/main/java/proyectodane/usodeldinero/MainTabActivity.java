@@ -1,7 +1,7 @@
 package proyectodane.usodeldinero;
 
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class MainTabActivity extends AppCompatActivity {
+public class MainTabActivity extends AppCompatActivity implements WalletFragment.OnFragmentInteractionListener {
 
     /**
      * Es el PageAdapter que proveerá Fragments por cada una de las secciones (tabs).
@@ -39,6 +39,12 @@ public class MainTabActivity extends AppCompatActivity {
      * Cantidad de Tabs que tiene la activity
      */
     private static final int NUMBER_OF_TABS = 3;
+
+
+    /**
+     * Cantidad de páginas fuera de de la vista de la pantalla que quedan cargadas
+     */
+    private static final int OFF_SCREEN_PAGE_LIMIT = 4;
 
 
     @Override
@@ -71,7 +77,7 @@ public class MainTabActivity extends AppCompatActivity {
 
         // Configuro las páginas fuera de pantalla que deben quedar en memoria,
         // para que no queden en blanco cuando me voy y vuelvo
-        mViewPager.setOffscreenPageLimit(4);
+        mViewPager.setOffscreenPageLimit(OFF_SCREEN_PAGE_LIMIT);
 
         // Seteo los Listener de del ViewPager y TabLayout cruzados, para que cuando uno se mueve, el otro lo siga
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -115,11 +121,17 @@ public class MainTabActivity extends AppCompatActivity {
 
     }
 
+    // Implemento OnFragmentInteractionListener para accionar cuando un fragment avisa sobre cambios
+    @Override
+    public void updateFragments(int idFragmentCaller){
+        mSectionsPagerAdapter.updateSections(idFragmentCaller);
+    }
+
 
     /**
-     * Una clase FragmentPagerAdapter que representa cada uno de los tabs dentro de un Fragment
+     * Una clase FragmentStatePagerAdapter que representa cada uno de los tabs dentro de un Fragment
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         private ArrayList<Fragment> fragments;
 
@@ -130,30 +142,61 @@ public class MainTabActivity extends AppCompatActivity {
             for (int i = 0; i < NUMBER_OF_TABS; i++){
                 switch (i) {
                     case 0:
-                        ViewWalletFragment fragment = new ViewWalletFragment();
-                        mViewPager.addOnPageChangeListener(fragment);
-                        fragments.add(fragment);
+                        fragments.add(new ViewWalletFragment());
                     case 1:
                         fragments.add(new TabTwoFragment());
                     case 2:
                         fragments.add(new WalletFragment());
                     default:
-                        fragments.add(null);
+                        //
                 }
             }
         }
 
         // Es llamado para instanciar el fragmento de la posición dada.
         @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
+        public Fragment getItem(int position) { return fragments.get(position); }
 
         // Muestra la cantidad total de tabs en el Adapter.
         @Override
         public int getCount() {
             return NUMBER_OF_TABS;
         }
+
+        @Override
+        public int getItemPosition(Object object){
+            // TODO: Agregar un "if(...isinstance)..." para actuar en cada uno de los 3 casos de los tabs
+            // En teoría solo necesitaría "return POSITION_NONE" para el caso del tab 2, porque tiene que actualizar el objeto
+            return POSITION_NONE;
+        }
+
+
+        // TODO: Implementar. Según el idFragmentCaller (el fragment que se modificó) hago actualizaciones
+        // Implemento reacción del OnFragmentInteractionListener para accionar cuando un fragment avisa
+        public void updateSections(int idFragmentCaller){
+
+            switch (idFragmentCaller) {
+                case 0:
+                    // No puede realizar cambios que afecten a los demás
+                case 1:
+                    ((ViewWalletFragment)fragments.get(0)).updateView();
+                    ((WalletFragment)fragments.get(2)).updateView();
+                case 2:
+                    ((ViewWalletFragment)fragments.get(0)).updateView();
+                // TODO: Agregar los casos cuando en la configuración (alta/baja de valores) se afecta la billetera
+                default:
+                    //
+            }
+
+
+        }
+
+
+        // TODO: Implementar nuevo update pero para reemplazar un fragment por otro
+        // TODO: ... Para el caso del tab de compra, sirve para instanciar nuevos fragment
+        // TODO: ... Y luego de instanciado se reemplaza en el array de fragment
+        // TODO: ... Luego de todo eso, se usará notifyDataSetChanged(); para que llame a getItemPosition()
+
 
 
     }
@@ -183,3 +226,5 @@ public class MainTabActivity extends AppCompatActivity {
 
 
 }
+
+

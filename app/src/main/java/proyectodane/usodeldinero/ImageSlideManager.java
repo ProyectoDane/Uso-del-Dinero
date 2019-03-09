@@ -177,4 +177,22 @@ public class ImageSlideManager {
 
     }
 
+
+    /**
+     * Llevo el ViewPager al principio
+     * */
+    public void setFirstPage(){
+        // Al inicio seteo la primer página del ViewPager
+            viewPager.setCurrentItem(0);
+    }
+
+
+    /**
+     * Actualizo todas las imágenes
+     * */
+    public void notifyDataChanged(){
+        // Al inicio seteo la primer página del ViewPager
+        pagerAdapter.notifyDataSetChanged();
+    }
+
 }

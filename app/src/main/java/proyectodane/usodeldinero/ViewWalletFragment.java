@@ -12,25 +12,19 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class ViewWalletFragment extends Fragment implements ViewPager.OnPageChangeListener {
-
-    /**
-     * Cantidad de Tabs que tiene la activity
-     */
-    private static final int VIEW_WALLET_FRAGMENT_POSITION = 0;
+public class ViewWalletFragment extends Fragment {
 
     /**
      * Vista instanciada
      */
     View rootView;
 
-
     /**
      * Slide Manager dedicado a mostrar las imágenes de billetes y los puntos indicadores
      */
     ImageSlideManager imageSlideManager;
 
-    public ViewWalletFragment() { }
+    public ViewWalletFragment(){ }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,29 +46,17 @@ public class ViewWalletFragment extends Fragment implements ViewPager.OnPageChan
     }
 
 
-    // TODo: Ver si se puede hacer que actualice solo cuando efectivamente cambiaron los datos
-    @Override // Cuando se muestra este tab, actualizo la vista con los últimos datos
-    public void onPageSelected(final int position) {
-        if(position==VIEW_WALLET_FRAGMENT_POSITION){
+    /**
+     * Actualizo los componentes visuales del fragment
+     */
+    public void updateView(){
 
-            // Actualizo el texto de valor del total en billetera
-            refreshTotalText();
+        // Actualizo el texto de valor del total en billetera
+        refreshTotalText();
 
-            // Actualizo todas las imágenes billetes, monedas y línea de puntos
-            updateImages();
+        // Actualizo todas las imágenes dentro del Slide
+        updateImages();
 
-        }
-    }
-
-    @Override // Para cumplir con ViewPager.OnPageChangeListener
-    public void onPageScrolled(final int position, final float positionOffset,
-                               final int positionOffsetPixels) {
-        // No se usa: Llama múltiples veces cuando hago un solo scroll
-    }
-
-    @Override // Para cumplir con ViewPager.OnPageChangeListener
-    public void onPageScrollStateChanged(final int state) {
-        // No se usa: Llama múltiples veces y no tiene la posición
     }
 
 
@@ -87,6 +69,7 @@ public class ViewWalletFragment extends Fragment implements ViewPager.OnPageChan
         String newText = getString(R.string.saved_money_pesos) + newTotal;
         textView.setText(newText);
     }
+
 
     /**
      * Cargo por primera vez todas la imágenes a mostrar, instanciando el imageSlideManager
