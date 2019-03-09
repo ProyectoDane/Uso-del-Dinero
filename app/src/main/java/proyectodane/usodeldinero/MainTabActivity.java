@@ -46,6 +46,13 @@ public class MainTabActivity extends AppCompatActivity implements WalletFragment
      */
     private static final int OFF_SCREEN_PAGE_LIMIT = 4;
 
+    /**
+     * Constantes para identificar a cada uno de los fragment
+     */
+    public static final int VIEW_WALLET_FRAGMENT_ID = 0;
+    public static final int SHOP_FRAGMENT_ID = 1;
+    public static final int WALLET_FRAGMENT_ID = 2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +101,9 @@ public class MainTabActivity extends AppCompatActivity implements WalletFragment
     }
 
 
-    // TODO: Implementar
+    // TODO: Implementar. Acá se podría Implementar un único botón de Ayuda que reacciona...
+    // TODO: ...según el fragment en vista. Además se podría agregar un botón "Inicio" para que vaya
+    // TODO: ...al sector inicial del tab en donde se encuentra parado (Esto sirve para reemplazar los botones de "Cancelar")
     /**
      * Cuando se elige una opción del menú, aquí se maneja el comportamiento
      * a tomar según la opción elegida
@@ -141,11 +150,11 @@ public class MainTabActivity extends AppCompatActivity implements WalletFragment
             fragments = new ArrayList<>();
             for (int i = 0; i < NUMBER_OF_TABS; i++){
                 switch (i) {
-                    case 0:
+                    case VIEW_WALLET_FRAGMENT_ID:
                         fragments.add(new ViewWalletFragment());
-                    case 1:
-                        fragments.add(new TabTwoFragment());
-                    case 2:
+                    case SHOP_FRAGMENT_ID:
+                        fragments.add(new BasketFragment());
+                    case WALLET_FRAGMENT_ID:
                         fragments.add(new WalletFragment());
                     default:
                         //
@@ -172,18 +181,25 @@ public class MainTabActivity extends AppCompatActivity implements WalletFragment
 
 
         // TODO: Implementar. Según el idFragmentCaller (el fragment que se modificó) hago actualizaciones
+        // TODO: Agregar los casos cuando en la configuración (alta/baja de valores) se afecta la billetera (Podría usarse un nuevo valor, o sino usar)
         // Implemento reacción del OnFragmentInteractionListener para accionar cuando un fragment avisa
         public void updateSections(int idFragmentCaller){
 
             switch (idFragmentCaller) {
-                case 0:
-                    // No puede realizar cambios que afecten a los demás
-                case 1:
-                    ((ViewWalletFragment)fragments.get(0)).updateView();
-                    ((WalletFragment)fragments.get(2)).updateView();
-                case 2:
-                    ((ViewWalletFragment)fragments.get(0)).updateView();
-                // TODO: Agregar los casos cuando en la configuración (alta/baja de valores) se afecta la billetera
+
+                case VIEW_WALLET_FRAGMENT_ID:
+                    // No realiza cambios que afecten a los demás
+
+                case SHOP_FRAGMENT_ID:
+                    ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
+                    ((WalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
+
+                case WALLET_FRAGMENT_ID:
+                    ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
+                    // TODO: Agregar un ((ViewWalletFragment)fragments.get(SHOP_FRAGMENT_ID)).updateView();...
+                    // TODO: ...Se podría preguntar si isInstanceOf del fragment que necesita actualizar o...
+                    // TODO: ...sino que todos los fragment implementen updateView()
+
                 default:
                     //
             }
@@ -196,6 +212,9 @@ public class MainTabActivity extends AppCompatActivity implements WalletFragment
         // TODO: ... Para el caso del tab de compra, sirve para instanciar nuevos fragment
         // TODO: ... Y luego de instanciado se reemplaza en el array de fragment
         // TODO: ... Luego de todo eso, se usará notifyDataSetChanged(); para que llame a getItemPosition()
+        public void changeFragmentInShopTab() {
+            // Ciclo de compra: Basket -> OrderTotal ->
+        }
 
 
 

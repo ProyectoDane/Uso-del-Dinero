@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
 
+import static proyectodane.usodeldinero.MainTabActivity.WALLET_FRAGMENT_ID;
+
 
 public class WalletFragment extends Fragment implements OnClickListener {
 
@@ -53,10 +55,8 @@ public class WalletFragment extends Fragment implements OnClickListener {
     private OnFragmentInteractionListener listener;
 
 
-
-
     // Todo: Ver si sirve este ejemplo par paso de parámetros. Si no se usa, borrarlo
-    //        public WalletFragment() { }
+    //
     //
     //        /**
     //         * Devuelve una nueva instancia del Fragment, dado un número de sección
@@ -69,6 +69,7 @@ public class WalletFragment extends Fragment implements OnClickListener {
     //            return fragment;
     //        }
 
+    public WalletFragment() { }
 
     @Override
     public void onAttach(Context context){
@@ -121,6 +122,11 @@ public class WalletFragment extends Fragment implements OnClickListener {
         loadNewImages();
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
 
     @Override
     public void onClick(View view) {
@@ -129,7 +135,7 @@ public class WalletFragment extends Fragment implements OnClickListener {
                 addValueToSubtotalTAB(view);
                 break;
             case R.id.button13:
-                if(addValuesToWallet(view)){ listener.updateFragments(2); }
+                if(addValuesToWallet(view)){ listener.updateFragments(WALLET_FRAGMENT_ID); }
                 break;
         }
     }
