@@ -1,5 +1,6 @@
 package proyectodane.usodeldinero;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
+import proyectodane.usodeldinero.WalletFragment.OnFragmentInteractionListener;
+import proyectodane.usodeldinero.BasketFragment.OnShopFragmentChangeListener;
 
 
-public class MainTabActivity extends AppCompatActivity implements WalletFragment.OnFragmentInteractionListener {
+public class MainTabActivity extends AppCompatActivity implements OnFragmentInteractionListener, OnShopFragmentChangeListener {
 
     /**
      * Es el PageAdapter que proveerá Fragments por cada una de las secciones (tabs).
@@ -40,7 +43,6 @@ public class MainTabActivity extends AppCompatActivity implements WalletFragment
      */
     private static final int NUMBER_OF_TABS = 3;
 
-
     /**
      * Cantidad de páginas fuera de de la vista de la pantalla que quedan cargadas
      */
@@ -52,6 +54,11 @@ public class MainTabActivity extends AppCompatActivity implements WalletFragment
     public static final int VIEW_WALLET_FRAGMENT_ID = 0;
     public static final int SHOP_FRAGMENT_ID = 1;
     public static final int WALLET_FRAGMENT_ID = 2;
+    public static final int BASKET_FRAGMENT_ID = 10;
+    public static final int ORDER_TOTAL_FRAGMENT_ID = 11;
+    public static final int PAY_PURCHASE_FRAGMENT_ID = 12;
+    public static final int CONTROL_CHANGE_FRAGMENT_ID = 13;
+    public static final int FINALIZE_PURCHASE_FRAGMENT_ID = 14;
 
 
     @Override
@@ -130,12 +137,17 @@ public class MainTabActivity extends AppCompatActivity implements WalletFragment
 
     }
 
-    // Implemento OnFragmentInteractionListener para accionar cuando un fragment avisa sobre cambios
+    // Implemento OnFragmentInteractionListener para accionar cuando un fragment avisa sobre cambios en la visa
     @Override
     public void updateFragments(int idFragmentCaller){
         mSectionsPagerAdapter.updateSections(idFragmentCaller);
     }
 
+    // Implemento OnShopFragmentChangeListener para accionar cuando un fragment avisa sobre cambio de Fragment de shop
+    @Override
+    public void changeFragment(int idNewFragment, Intent intent){
+        mSectionsPagerAdapter.changeFragmentInShopTab(idNewFragment,intent);
+    }
 
     /**
      * Una clase FragmentStatePagerAdapter que representa cada uno de los tabs dentro de un Fragment
@@ -174,7 +186,11 @@ public class MainTabActivity extends AppCompatActivity implements WalletFragment
 
         @Override
         public int getItemPosition(Object object){
-            // TODO: Agregar un "if(...isinstance)..." para actuar en cada uno de los 3 casos de los tabs
+
+            // Casos donde no necesito actualizar
+            if (object instanceof ViewWalletFragment) return POSITION_UNCHANGED;
+            if (object instanceof WalletFragment) return POSITION_UNCHANGED;
+
             // En teoría solo necesitaría "return POSITION_NONE" para el caso del tab 2, porque tiene que actualizar el objeto
             return POSITION_NONE;
         }
@@ -196,12 +212,18 @@ public class MainTabActivity extends AppCompatActivity implements WalletFragment
 
                 case WALLET_FRAGMENT_ID:
                     ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
+
                     // TODO: Agregar un ((ViewWalletFragment)fragments.get(SHOP_FRAGMENT_ID)).updateView();...
                     // TODO: ...Se podría preguntar si isInstanceOf del fragment que necesita actualizar o...
                     // TODO: ...sino que todos los fragment implementen updateView()
+                    Fragment shopFragment = fragments.get(SHOP_FRAGMENT_ID);
+                    if (shopFragment instanceof BasketFragment){
+                        ((BasketFragment)fragments.get(SHOP_FRAGMENT_ID)).updateView();
+                    } // TODO: Continuar con la implementación...
 
                 default:
                     //
+
             }
 
 
@@ -212,11 +234,38 @@ public class MainTabActivity extends AppCompatActivity implements WalletFragment
         // TODO: ... Para el caso del tab de compra, sirve para instanciar nuevos fragment
         // TODO: ... Y luego de instanciado se reemplaza en el array de fragment
         // TODO: ... Luego de todo eso, se usará notifyDataSetChanged(); para que llame a getItemPosition()
-        public void changeFragmentInShopTab() {
-            // Ciclo de compra: Basket -> OrderTotal ->
+        public void changeFragmentInShopTab(int idNewFragment, Intent intent) {
+
+            // Ciclo de compra:
+            // Basket -> OrderTotal -> PayPurchase -> ControlChange -> FinalizePurchase -> Basket
+
+
+            // Hago el reemplazo por el nuevo fragment, según el caso
+            switch (idNewFragment) {
+
+                case BASKET_FRAGMENT_ID:
+                    fragments.set(SHOP_FRAGMENT_ID,new BasketFragment());
+
+                case ORDER_TOTAL_FRAGMENT_ID:
+                    fragments.set(SHOP_FRAGMENT_ID,new TabTwoFragment()); // TODO: Implementar con fragment correspondiente
+
+                case PAY_PURCHASE_FRAGMENT_ID:
+                    //fragments.set(SHOP_FRAGMENT_ID,new ...());
+
+                case CONTROL_CHANGE_FRAGMENT_ID:
+                    //fragments.set(SHOP_FRAGMENT_ID,new ...());
+
+                case FINALIZE_PURCHASE_FRAGMENT_ID:
+                    //fragments.set(SHOP_FRAGMENT_ID,new ...());
+
+                default:
+                    //
+            }
+
+            // Notifico el cambio para que luego se llame a getItemPosition()
+            notifyDataSetChanged();
+
         }
-
-
 
     }
 

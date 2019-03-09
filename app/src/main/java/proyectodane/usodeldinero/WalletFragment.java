@@ -278,11 +278,12 @@ public class WalletFragment extends Fragment implements OnClickListener {
 //        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.help_text_wallet),10);
 //    }
 
-
+    /**
+     * Interface para actualizar las vistas de los fragmentos
+     * */
     public interface OnFragmentInteractionListener {
         void updateFragments(int idFragmentCaller);
     }
-
 
 }
 

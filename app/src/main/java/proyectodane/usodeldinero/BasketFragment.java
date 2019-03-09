@@ -12,7 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
-import proyectodane.usodeldinero.WalletFragment.OnFragmentInteractionListener;
+
+import static proyectodane.usodeldinero.MainTabActivity.ORDER_TOTAL_FRAGMENT_ID;
 
 
 public class BasketFragment extends Fragment implements OnClickListener {
@@ -35,7 +36,7 @@ public class BasketFragment extends Fragment implements OnClickListener {
     /**
      * Instancia del observador OnFragmentInteractionListener
      */
-    private OnFragmentInteractionListener listener;
+    private OnShopFragmentChangeListener listener;
 
     public BasketFragment() { }
 
@@ -44,8 +45,8 @@ public class BasketFragment extends Fragment implements OnClickListener {
     public void onAttach(Context context){
         super.onAttach(context);
 
-        if( context instanceof OnFragmentInteractionListener) {
-            listener = (OnFragmentInteractionListener) context;
+        if( context instanceof OnShopFragmentChangeListener) {
+            listener = (OnShopFragmentChangeListener) context;
         }
 
     }
@@ -56,17 +57,11 @@ public class BasketFragment extends Fragment implements OnClickListener {
 
         rootView = inflater.inflate(R.layout.fragment_basket, container, false);
 
-        // Al iniciar, seteo el total en cero
-        st_total_purchase = getString(R.string.value_0);
-
         // Obtiene el ID del EditText del valor ingresado
         et_productValue = (EditText) rootView.findViewById(R.id.editText);
 
-        // Obtengo el saldo en billetera
-        refreshTotalInWallet();
-
-        // Actualizo el valor de compra total
-        updateTotalPurchase();
+        // Al iniciar, seteo los valores y los muestro e la vista
+        resetValuesAndViews();
 
         // Asigno los botones a escuchar
         Button addProductButton = (Button) rootView.findViewById(R.id.button2);
@@ -91,7 +86,7 @@ public class BasketFragment extends Fragment implements OnClickListener {
                 addToTotal(view);
                 break;
             case R.id.button3:
-                // Implementar
+                sendToOrderTotal();
                 break;
         }
     }
@@ -118,7 +113,7 @@ public class BasketFragment extends Fragment implements OnClickListener {
         if ( WalletManager.getInstance().isGreaterThanTotalWallet(getActivity(),st_newTotal) ) {
 
             // Aviso que el dinero es insuficiente y descarto la suma
-            Snackbar.make(rootView.findViewById(R.id.coordinatorLayout_Basquet),R.string.insufficient_funds,Snackbar.LENGTH_LONG).show();
+            Snackbar.make(rootView.findViewById(R.id.coordinatorLayout_Basket),R.string.insufficient_funds,Snackbar.LENGTH_LONG).show();
 
         } else {
 
@@ -133,9 +128,8 @@ public class BasketFragment extends Fragment implements OnClickListener {
         resetEditTextValue();
 
         // Si el total es mayor a cero, habilito el botón para pagar
-        Button payButton = (Button) rootView.findViewById(R.id.button3);
         if (WalletManager.getInstance().isGreaterThanValueZero(st_total_purchase)) {
-            payButton.setEnabled(true);
+            payButtonSetEnabled(true);
         }
 
     }
@@ -152,14 +146,21 @@ public class BasketFragment extends Fragment implements OnClickListener {
     /**
      * Envía a la pantalla de confirmación de compra
      * */
-    public void sendToOrderTotal(View view) {
+    public void sendToOrderTotal() {
         // En caso de que haya quedado un valor a ingresar, blanquea el valor al irse de la vista
         if (!(et_productValue.getText().toString().isEmpty())) et_productValue.setText(getString(R.string.empty_string));
 
+        // Inhabilito el botón de compra
+        payButtonSetEnabled(false);
+
         Intent intent = new Intent(getActivity(), OrderTotalActivity.class);
         intent.putExtra(getString(R.string.tag_total_value), String.valueOf(st_total_purchase));
-        startActivity(intent);
+
+        // TODO: Terminar de implementar con el ID definitivo
+        listener.changeFragment(ORDER_TOTAL_FRAGMENT_ID,intent);
+
     }
+
 
     /**
      * Blanquea el valor a ingresar en la vista del EditText
@@ -185,5 +186,45 @@ public class BasketFragment extends Fragment implements OnClickListener {
 //        SnackBarManager sb = new SnackBarManager();
 //        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Basquet),getString(R.string.help_text_basket),7);
 //    }
+
+    /**
+     * Interface para cambiar de fragmento en el tab de compra
+     * */
+    private void payButtonSetEnabled(boolean status){
+        Button payButton = (Button) rootView.findViewById(R.id.button3);
+        payButton.setEnabled(status);
+    }
+
+
+    /**
+     * Actualizo los componentes visuales del fragment
+     */
+    public void updateView(){
+        resetValuesAndViews();
+    }
+
+
+    /**
+     * Actualizo los valores y la vista de los mismos
+     */
+    public void resetValuesAndViews(){
+
+        // Seteo el total de compra en cero
+        st_total_purchase = getString(R.string.value_0);
+
+        // Obtengo el saldo en billetera y lo muestro actualizado en la vista
+        refreshTotalInWallet();
+
+        // Actualizo el valor de compra total en la vista
+        updateTotalPurchase();
+    }
+
+
+    /**
+     * Interface para cambiar de fragmento en el tab de compra
+     * */
+    public interface OnShopFragmentChangeListener {
+        void changeFragment(int idNewFragment, Intent intent);
+    }
 
 }
