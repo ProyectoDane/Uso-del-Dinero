@@ -38,7 +38,6 @@ public class BasketFragment extends Fragment implements OnClickListener {
 
     public BasketFragment() { }
 
-
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
@@ -192,14 +191,6 @@ public class BasketFragment extends Fragment implements OnClickListener {
     private void payButtonSetEnabled(boolean status){
         Button payButton = (Button) rootView.findViewById(R.id.button3);
         payButton.setEnabled(status);
-    }
-
-
-    /**
-     * Actualizo los componentes visuales del fragment
-     */
-    public void updateView(){
-        resetValuesAndViews();
     }
 
 

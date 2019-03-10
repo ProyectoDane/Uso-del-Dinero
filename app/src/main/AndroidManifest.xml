@@ -13,6 +13,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainTabActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="userLandscape"
             android:label="@string/title_activity_tab"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -25,10 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".FinalizePurchaseActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape" />
         <activity
             android:name=".ConfigurationActivity"
             android:configChanges="orientation|keyboardHidden"

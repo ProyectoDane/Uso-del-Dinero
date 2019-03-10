@@ -199,13 +199,12 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
             if (object instanceof ViewWalletFragment) return POSITION_UNCHANGED;
             if (object instanceof WalletFragment) return POSITION_UNCHANGED;
 
-            // En teoría solo necesitaría "return POSITION_NONE" para el caso del tab 2, porque tiene que actualizar el objeto
+            // En teoría solo necesitaría "return POSITION_NONE" para el caso del tab shop, porque tiene que actualizar el objeto
             return POSITION_NONE;
         }
 
 
-        // TODO: Implementar. Según el idFragmentCaller (el fragment que se modificó) hago actualizaciones
-        // TODO: Agregar los casos cuando en la configuración (alta/baja de valores) se afecta la billetera (Podría usarse un nuevo valor, o sino usar)
+        // TODO: Agregar los casos cuando en la configuración (alta/baja de valores) se afecta la billetera (Podría usarse un nuevo valor)
         // Implemento reacción del OnFragmentInteractionListener para accionar cuando un fragment avisa
         public void updateSections(int idFragmentCaller){
 
@@ -216,30 +215,18 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                     break;
 
                 case SHOP_FRAGMENT_ID:
+
                     ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
-                    ((WalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
+                    ((WalletFragment)fragments.get(WALLET_FRAGMENT_ID)).updateView();
                     break;
 
                 case WALLET_FRAGMENT_ID:
+
                     ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
 
-
-
-//                    // TODO: Agregar un ((ViewWalletFragment)fragments.get(SHOP_FRAGMENT_ID)).updateView();...
-//                    // TODO: ...Se podría preguntar si isInstanceOf del fragment que necesita actualizar o...
-//                    // TODO: ...sino que todos los fragment implementen updateView()
-//                    Fragment shopFragment = fragments.get(SHOP_FRAGMENT_ID);
-//                    if (shopFragment instanceof BasketFragment){
-//                        ((BasketFragment)fragments.get(SHOP_FRAGMENT_ID)).updateView();
-//                    } // TODO: Continuar con la implementación...
-
-
-
-                    // TODO: Opción que directamente lleva al principio de la compra cuando...
-                    // TODO: ... detecta un cambio en la billetera
+                    // En vez de actualizar la vista en este Tab, directamente instancio desde el principio
                     fragments.set(SHOP_FRAGMENT_ID,new BasketFragment());
                     notifyDataSetChanged();
-
 
                     break;
 
@@ -251,17 +238,11 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
         }
 
-        // TODO: Implementar nuevo update pero para reemplazar un fragment por otro
-        // TODO: ... Para el caso del tab de compra, sirve para instanciar nuevos fragment
-        // TODO: ... Y luego de instanciado se reemplaza en el array de fragment
-        // TODO: ... Luego de todo eso, se usará notifyDataSetChanged(); para que llame a getItemPosition()
+        // Actualizo el fragment perteneciente al Tab shop, según el ID solicitado
+        // Ciclo de compra:
+        // Basket -> OrderTotal -> PayPurchase -> ControlChange -> FinalizePurchase -> Basket
         public void changeFragmentInShopTab(int idNewFragment, Bundle bundle) {
 
-            // Ciclo de compra:
-            // Basket -> OrderTotal -> PayPurchase -> ControlChange -> FinalizePurchase -> Basket
-
-
-            // Hago el reemplazo por el nuevo fragment, según el caso
             switch (idNewFragment) {
 
                 case BASKET_FRAGMENT_ID:
@@ -287,7 +268,9 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                     break;
 
                 case FINALIZE_PURCHASE_FRAGMENT_ID:
-                    fragments.set(SHOP_FRAGMENT_ID,new TabTwoFragment()); // TODO: Implementar con fragment correspondiente
+                    Fragment newFinalizePurchaseFragment = new FinalizePurchaseFragment();
+                    newFinalizePurchaseFragment.setArguments(bundle);
+                    fragments.set(SHOP_FRAGMENT_ID,newFinalizePurchaseFragment);
                     break;
 
                 default:
@@ -298,27 +281,6 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
             // Notifico el cambio para que luego se llame a getItemPosition()
             notifyDataSetChanged();
 
-        }
-
-    }
-
-
-    /**
-     *****************************************************************************************************
-     *****************************************************************************************************
-     *****************************************************************************************************
-     */
-
-    // Todo: Clases temporales. Luego de crear las definitivas, borrarlas
-
-    public static class TabTwoFragment extends Fragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main_tab, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format));
-            return rootView;
         }
 
     }
