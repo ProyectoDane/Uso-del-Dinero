@@ -26,10 +26,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OrderTotalActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape" />
-        <activity
             android:name=".PayPurchaseActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="userLandscape" />

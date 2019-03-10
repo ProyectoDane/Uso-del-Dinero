@@ -1,7 +1,6 @@
 package proyectodane.usodeldinero;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
-
 import static proyectodane.usodeldinero.MainTabActivity.ORDER_TOTAL_FRAGMENT_ID;
 
 
@@ -45,7 +43,7 @@ public class BasketFragment extends Fragment implements OnClickListener {
     public void onAttach(Context context){
         super.onAttach(context);
 
-        if( context instanceof OnShopFragmentChangeListener) {
+        if(context instanceof OnShopFragmentChangeListener) {
             listener = (OnShopFragmentChangeListener) context;
         }
 
@@ -153,11 +151,12 @@ public class BasketFragment extends Fragment implements OnClickListener {
         // Inhabilito el botón de compra
         payButtonSetEnabled(false);
 
-        Intent intent = new Intent(getActivity(), OrderTotalActivity.class);
-        intent.putExtra(getString(R.string.tag_total_value), String.valueOf(st_total_purchase));
+        // Guardo los datos para mandarlo al próximo Fragment
+        Bundle bundle = new Bundle();
+        bundle.putString(getString(R.string.tag_total_value), String.valueOf(st_total_purchase));
 
-        // TODO: Terminar de implementar con el ID definitivo
-        listener.changeFragment(ORDER_TOTAL_FRAGMENT_ID,intent);
+        // Llamo al listener y le envío los datos del fragment a llamar y los datos en el bundle
+        listener.changeFragment(ORDER_TOTAL_FRAGMENT_ID, bundle);
 
     }
 
@@ -224,7 +223,7 @@ public class BasketFragment extends Fragment implements OnClickListener {
      * Interface para cambiar de fragmento en el tab de compra
      * */
     public interface OnShopFragmentChangeListener {
-        void changeFragment(int idNewFragment, Intent intent);
+        void changeFragment(int idNewFragment, Bundle bundle);
     }
 
 }

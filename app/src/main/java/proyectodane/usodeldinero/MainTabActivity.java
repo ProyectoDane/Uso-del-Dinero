@@ -145,8 +145,8 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
     // Implemento OnShopFragmentChangeListener para accionar cuando un fragment avisa sobre cambio de Fragment de shop
     @Override
-    public void changeFragment(int idNewFragment, Intent intent){
-        mSectionsPagerAdapter.changeFragmentInShopTab(idNewFragment,intent);
+    public void changeFragment(int idNewFragment, Bundle bundle){
+        mSectionsPagerAdapter.changeFragmentInShopTab(idNewFragment,bundle);
     }
 
     /**
@@ -164,12 +164,16 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                 switch (i) {
                     case VIEW_WALLET_FRAGMENT_ID:
                         fragments.add(new ViewWalletFragment());
+                        break;
                     case SHOP_FRAGMENT_ID:
                         fragments.add(new BasketFragment());
+                        break;
                     case WALLET_FRAGMENT_ID:
                         fragments.add(new WalletFragment());
+                        break;
                     default:
                         //
+                        break;
                 }
             }
         }
@@ -205,10 +209,12 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
                 case VIEW_WALLET_FRAGMENT_ID:
                     // No realiza cambios que afecten a los demás
+                    break;
 
                 case SHOP_FRAGMENT_ID:
                     ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
                     ((WalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
+                    break;
 
                 case WALLET_FRAGMENT_ID:
                     ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
@@ -220,10 +226,11 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                     if (shopFragment instanceof BasketFragment){
                         ((BasketFragment)fragments.get(SHOP_FRAGMENT_ID)).updateView();
                     } // TODO: Continuar con la implementación...
+                    break;
 
                 default:
                     //
-
+                    break;
             }
 
 
@@ -234,7 +241,7 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
         // TODO: ... Para el caso del tab de compra, sirve para instanciar nuevos fragment
         // TODO: ... Y luego de instanciado se reemplaza en el array de fragment
         // TODO: ... Luego de todo eso, se usará notifyDataSetChanged(); para que llame a getItemPosition()
-        public void changeFragmentInShopTab(int idNewFragment, Intent intent) {
+        public void changeFragmentInShopTab(int idNewFragment, Bundle bundle) {
 
             // Ciclo de compra:
             // Basket -> OrderTotal -> PayPurchase -> ControlChange -> FinalizePurchase -> Basket
@@ -245,21 +252,29 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
                 case BASKET_FRAGMENT_ID:
                     fragments.set(SHOP_FRAGMENT_ID,new BasketFragment());
+                    break;
 
                 case ORDER_TOTAL_FRAGMENT_ID:
-                    fragments.set(SHOP_FRAGMENT_ID,new TabTwoFragment()); // TODO: Implementar con fragment correspondiente
+                    Fragment newFragment = new OrderTotalFragment();
+                    newFragment.setArguments(bundle);
+                    fragments.set(SHOP_FRAGMENT_ID,newFragment);
+                    break;
 
                 case PAY_PURCHASE_FRAGMENT_ID:
-                    //fragments.set(SHOP_FRAGMENT_ID,new ...());
+                    fragments.set(SHOP_FRAGMENT_ID,new TabTwoFragment()); // TODO: Implementar con fragment correspondiente
+                    break;
 
                 case CONTROL_CHANGE_FRAGMENT_ID:
-                    //fragments.set(SHOP_FRAGMENT_ID,new ...());
+                    fragments.set(SHOP_FRAGMENT_ID,new TabTwoFragment()); // TODO: Implementar con fragment correspondiente
+                    break;
 
                 case FINALIZE_PURCHASE_FRAGMENT_ID:
-                    //fragments.set(SHOP_FRAGMENT_ID,new ...());
+                    fragments.set(SHOP_FRAGMENT_ID,new TabTwoFragment()); // TODO: Implementar con fragment correspondiente
+                    break;
 
                 default:
                     //
+                    break;
             }
 
             // Notifico el cambio para que luego se llame a getItemPosition()
