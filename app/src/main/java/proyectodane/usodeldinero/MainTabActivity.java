@@ -1,6 +1,5 @@
 package proyectodane.usodeldinero;
 
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
@@ -137,6 +136,11 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
     }
 
+    @Override
+    public void onBackPressed() {
+        // No realiza acción, para obligar al usuario a tomar la decisión a través de los botones de la aplicación
+    }
+
     // Implemento OnFragmentInteractionListener para accionar cuando un fragment avisa sobre cambios en la visa
     @Override
     public void updateFragments(int idFragmentCaller){
@@ -247,7 +251,6 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
         }
 
-
         // TODO: Implementar nuevo update pero para reemplazar un fragment por otro
         // TODO: ... Para el caso del tab de compra, sirve para instanciar nuevos fragment
         // TODO: ... Y luego de instanciado se reemplaza en el array de fragment
@@ -278,7 +281,9 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                     break;
 
                 case CONTROL_CHANGE_FRAGMENT_ID:
-                    fragments.set(SHOP_FRAGMENT_ID,new TabTwoFragment()); // TODO: Implementar con fragment correspondiente
+                    Fragment newControlChangeFragment = new ControlChangeFragment();
+                    newControlChangeFragment.setArguments(bundle);
+                    fragments.set(SHOP_FRAGMENT_ID,newControlChangeFragment);
                     break;
 
                 case FINALIZE_PURCHASE_FRAGMENT_ID:
