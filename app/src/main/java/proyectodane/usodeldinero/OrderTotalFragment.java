@@ -62,8 +62,8 @@ public class OrderTotalFragment extends Fragment implements OnClickListener {
         tv_wallet.setText(st_wallet);
 
         // Asigno los botones a escuchar
-        Button addProductButton = (Button) rootView.findViewById(R.id.button6);
-        addProductButton.setOnClickListener(this);
+        Button payPurchaseButton = (Button) rootView.findViewById(R.id.button6);
+        payPurchaseButton.setOnClickListener(this);
 
         return rootView;
     }

@@ -208,7 +208,7 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
             switch (idFragmentCaller) {
 
                 case VIEW_WALLET_FRAGMENT_ID:
-                    // No realiza cambios que afecten a los demás
+                    // No realiza cambios que afecten a los demás.
                     break;
 
                 case SHOP_FRAGMENT_ID:
@@ -219,13 +219,24 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                 case WALLET_FRAGMENT_ID:
                     ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
 
-                    // TODO: Agregar un ((ViewWalletFragment)fragments.get(SHOP_FRAGMENT_ID)).updateView();...
-                    // TODO: ...Se podría preguntar si isInstanceOf del fragment que necesita actualizar o...
-                    // TODO: ...sino que todos los fragment implementen updateView()
-                    Fragment shopFragment = fragments.get(SHOP_FRAGMENT_ID);
-                    if (shopFragment instanceof BasketFragment){
-                        ((BasketFragment)fragments.get(SHOP_FRAGMENT_ID)).updateView();
-                    } // TODO: Continuar con la implementación...
+
+
+//                    // TODO: Agregar un ((ViewWalletFragment)fragments.get(SHOP_FRAGMENT_ID)).updateView();...
+//                    // TODO: ...Se podría preguntar si isInstanceOf del fragment que necesita actualizar o...
+//                    // TODO: ...sino que todos los fragment implementen updateView()
+//                    Fragment shopFragment = fragments.get(SHOP_FRAGMENT_ID);
+//                    if (shopFragment instanceof BasketFragment){
+//                        ((BasketFragment)fragments.get(SHOP_FRAGMENT_ID)).updateView();
+//                    } // TODO: Continuar con la implementación...
+
+
+
+                    // TODO: Opción que directamente lleva al principio de la compra cuando...
+                    // TODO: ... detecta un cambio en la billetera
+                    fragments.set(SHOP_FRAGMENT_ID,new BasketFragment());
+                    notifyDataSetChanged();
+
+
                     break;
 
                 default:
@@ -255,13 +266,15 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                     break;
 
                 case ORDER_TOTAL_FRAGMENT_ID:
-                    Fragment newFragment = new OrderTotalFragment();
-                    newFragment.setArguments(bundle);
-                    fragments.set(SHOP_FRAGMENT_ID,newFragment);
+                    Fragment newOrderTotalFragment = new OrderTotalFragment();
+                    newOrderTotalFragment.setArguments(bundle);
+                    fragments.set(SHOP_FRAGMENT_ID,newOrderTotalFragment);
                     break;
 
                 case PAY_PURCHASE_FRAGMENT_ID:
-                    fragments.set(SHOP_FRAGMENT_ID,new TabTwoFragment()); // TODO: Implementar con fragment correspondiente
+                    Fragment newPayPurchaseFragment = new PayPurchaseFragment();
+                    newPayPurchaseFragment.setArguments(bundle);
+                    fragments.set(SHOP_FRAGMENT_ID,newPayPurchaseFragment);
                     break;
 
                 case CONTROL_CHANGE_FRAGMENT_ID:
@@ -285,13 +298,11 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
     }
 
 
-
     /**
      *****************************************************************************************************
      *****************************************************************************************************
      *****************************************************************************************************
      */
-
 
     // Todo: Clases temporales. Luego de crear las definitivas, borrarlas
 
