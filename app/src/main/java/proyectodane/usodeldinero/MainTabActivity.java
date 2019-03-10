@@ -8,12 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import java.util.ArrayList;
 import proyectodane.usodeldinero.WalletFragment.OnFragmentInteractionListener;
 import proyectodane.usodeldinero.BasketFragment.OnShopFragmentChangeListener;
@@ -58,6 +54,7 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
     public static final int PAY_PURCHASE_FRAGMENT_ID = 12;
     public static final int CONTROL_CHANGE_FRAGMENT_ID = 13;
     public static final int FINALIZE_PURCHASE_FRAGMENT_ID = 14;
+    public static final int EXTERNAL_TO_TAB_ID = 20;
 
 
     @Override
@@ -119,14 +116,38 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
         // Obtengo el ID del item elegido, Verifico el ID y acciono en consecuencia
         switch (item.getItemId()) {
-            case R.id.action_version_info:
-                // Ejecuto según el caso
+
+            case R.id.action_update:
+
+                // Genero un bundle vacío, solo para cumplir con ChangeFragment()
+                Bundle emptyBundle = new Bundle();
+
+                // Llamo al fragment Basket, dentro del Tab shop
+                changeFragment(BASKET_FRAGMENT_ID, emptyBundle);
+
+                // Actualizo los fragments en cada tab
+                updateFragments(EXTERNAL_TO_TAB_ID);
+
                 return true;
 
-            // Mas casos...
-            //case R.id.action_favorite:
-            // En caso de tener una acción "favoritos", ejecuto según el caso
-            //    return true;
+            case R.id.action_help:
+                SnackBarManager sb0 = new SnackBarManager();
+                sb0.showTextShortOnClickActionDisabled(findViewById(R.id.container),getString(R.string.help_info_button_pressed),7);
+                return true;
+
+            case R.id.action_configuration:
+                SnackBarManager sb1 = new SnackBarManager();
+                sb1.showTextShortOnClickActionDisabled(findViewById(R.id.container),getString(R.string.version_info_button_pressed),7);
+                return true;
+
+            case R.id.action_version_info:
+                SnackBarManager sb2 = new SnackBarManager();
+                sb2.showTextShortOnClickActionDisabled(findViewById(R.id.container),getString(R.string.configuration_info_button_pressed),7);
+                return true;
+
+
+
+
 
             // Si llega acá, la acción del usuario no fue reconocida.
             // Invoca a la super clase para manejarlo
@@ -227,7 +248,17 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                     // En vez de actualizar la vista en este Tab, directamente instancio desde el principio
                     fragments.set(SHOP_FRAGMENT_ID,new BasketFragment());
                     notifyDataSetChanged();
+                    break;
 
+
+                case EXTERNAL_TO_TAB_ID:
+
+                    ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
+                    ((WalletFragment)fragments.get(WALLET_FRAGMENT_ID)).updateView();
+
+                    // En vez de actualizar la vista en este Tab, directamente instancio desde el principio
+                    fragments.set(SHOP_FRAGMENT_ID,new BasketFragment());
+                    notifyDataSetChanged();
                     break;
 
                 default:

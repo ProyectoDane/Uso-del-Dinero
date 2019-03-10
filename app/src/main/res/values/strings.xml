@@ -94,17 +94,17 @@
 
 
     <!-- ************************************************* -->
-    <!-- ID de los textos de componentes de las activities -->
+    <!-- ID de los textos de componentes de los fragment -->
     <!-- ************************************************* -->
 
 
-    <!-- ID de los textos de componentes de las activities - [Main]  -->
+    <!-- ID de los textos de componentes de los fragment - [Main]  -->
     <string name="saved_money_pesos">DINERO EN BILLETERA: $</string>
     <string name="start_purchase">INICIAR COMPRA</string>
     <string name="load_wallet">CARGAR BILLETERA</string>
 
 
-    <!-- ID de los textos de componentes de las activities - [Basket]  -->
+    <!-- ID de los textos de componentes de los fragment - [Basket]  -->
     <string name="buy">COMPRAR</string>
     <string name="enter_price">INGRESAR PRECIO</string>
     <string name="add_product">AGREGAR</string>
@@ -112,24 +112,24 @@
     <string name="cancel">CANCELAR</string>
 
 
-    <!-- ID de los textos de componentes de las activities - [PayPurchase]  -->
+    <!-- ID de los textos de componentes de los fragment - [PayPurchase]  -->
     <string name="pay_purchase">PAGAR COMPRA</string>
 
 
-    <!-- ID de los textos de componentes de las activities - [ControlChange]  -->
+    <!-- ID de los textos de componentes de los fragment - [ControlChange]  -->
     <string name="add_to_change">AGREGAR AL VUELTO</string>
     <string name="accept_change">ACEPTAR VUELTO</string>
     <string name="total_change">VUELTO TOTAL: $</string>
     <string name="change_received_amount_zero">VUELTO RECIBIDO: $ 0.00</string>
     <string name="change_received">VUELTO RECIBIDO: $</string>
 
-    <!-- ID de los textos de componentes de las activities - [FinalizePurchase]  -->
+    <!-- ID de los textos de componentes de los fragment - [FinalizePurchase]  -->
     <string name="purchase_finished">COMPRA FINALIZADA</string>
     <string name="dont_save_change">NO GUARDAR VUELTO</string>
     <string name="save_change">GUARDAR VUELTO</string>
 
 
-    <!-- ID de los textos de componentes de las activities - [Wallet]  -->
+    <!-- ID de los textos de componentes de los fragment - [Wallet]  -->
     <string name="load_and_total_wallet_preview">CARGA: $ - TOTAL EN BILLETERA: $</string>
     <string name="load_cash_sign">CARGA: $</string>
     <string name="total_cash_sign">TOTAL EN BILLETERA: $</string>
@@ -139,7 +139,7 @@
     <string name="wallet_configuration">CONFIGURAR</string>
 
 
-    <!-- ID de los textos de componentes de las activities - [Configuration]  -->
+    <!-- ID de los textos de componentes de los fragment - [Configuration]  -->
     <string name="currency_configuration">CONFIGURACIÓN DE VALORES</string>
     <string name="delete_currency">BORRAR VALOR</string>
     <string name="new_currency">NUEVO VALOR</string>
@@ -147,7 +147,7 @@
     <string name="empty_wallet">VACIAR BILLETERA</string>
     <string name="confirm_empty_wallet">CONFIRMAR VACIAR BILLETERA</string>
 
-    <!-- ID de los textos de componentes de las activities - [NewCurrency]  -->
+    <!-- ID de los textos de componentes de los fragment - [NewCurrency]  -->
     <string name="new_currency_load">CARGA DE NUEVO VALOR</string>
     <string name="bill">BILLETE</string>
     <string name="coin">MONEDA</string>
@@ -156,13 +156,13 @@
     <string name="save_new_value">GUARDAR NUEVO VALOR</string>
 
 
-    <!-- ID de los textos de componentes de las activities - [DeleteCurrency]  -->
+    <!-- ID de los textos de componentes de los fragment - [DeleteCurrency]  -->
     <string name="delete_existing_currency">ELIMINAR VALOR</string>
     <string name="selected_value">SELECCIONADO: -</string>
     <string name="select_value">SELECCIONAR</string>
     <string name="confirm_delete">CONFIRMAR ELIMINADO</string>
 
-    <!-- ID de los textos de componentes de las activities - [Varias Activities]  -->
+    <!-- ID de los textos de componentes de los fragment - [Varias Activities]  -->
     <string name="cancel_purchase">CANCELAR COMPRA</string>
     <string name="purchase_payed">COMPRA PAGADA</string>
     <string name="total_payment_of_the_purchase">PAGO TOTAL DE LA COMPRA: $</string>
@@ -170,7 +170,7 @@
 
 
     <!-- ************************************************************* -->
-    <!-- ID de los textos de componentes de las activities y en código -->
+    <!-- ID de los textos de componentes de los fragment y en código -->
     <!-- ************************************************************* -->
     <string name="total_purchase">COMPRA TOTAL: $</string>
     <string name="value_0">0.00</string>
@@ -216,6 +216,8 @@
     <!-- ******************************** -->
     <string name="action_version_info">Información de la Versión</string>
     <string name="action_configuration">Configuración</string>
+    <string name="action_update">Ir a inicio</string>
+    <string name="action_help">Ayuda</string>
 
 
     <!-- ************************************************ -->
@@ -223,6 +225,10 @@
     <!-- ************************************************ -->
     <string name="add_button_pressed">Botón "Agregar" presionado</string>
     <string name="save_button_pressed">Botón "Guardar" presionado</string>
+    <string name="version_info_button_pressed">Botón "Información de la Versión" presionado</string>
+    <string name="configuration_info_button_pressed">Botón "Configuración" presionado</string>
+    <string name="help_info_button_pressed">Botón "Ayuda" presionado</string>
+
 
 
     <!-- ***************************************** -->

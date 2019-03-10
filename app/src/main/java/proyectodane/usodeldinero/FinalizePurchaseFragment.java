@@ -138,7 +138,7 @@ public class FinalizePurchaseFragment extends Fragment implements OnClickListene
         // Llamo al shopFragmentChangeListener y le envío los datos del fragment a llamar con el bundle vacío
         shopFragmentChangeListener.changeFragment(BASKET_FRAGMENT_ID, emptyBundle);
 
-        // Llamo al shopFragmentChangeListener y le envío los datos del fragment a llamar con el bundle vacío
+        // Llamo al fragmentInteractionListener y le envío los datos del fragment a llamar con el bundle vacío
         fragmentInteractionListener.updateFragments(SHOP_FRAGMENT_ID);
     }
 
