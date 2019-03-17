@@ -192,7 +192,6 @@ public class NewCurrencyActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .show();
 
-
     }
 
     /**

@@ -3,14 +3,17 @@ package proyectodane.usodeldinero;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import java.util.ArrayList;
 import proyectodane.usodeldinero.WalletFragment.OnFragmentInteractionListener;
 import proyectodane.usodeldinero.BasketFragment.OnShopFragmentChangeListener;
@@ -142,13 +145,8 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                 return true;
 
             case R.id.action_version_info:
-                SnackBarManager sb2 = new SnackBarManager();
-                sb2.showTextShortOnClickActionDisabled(findViewById(R.id.container),getString(R.string.configuration_info_button_pressed),7);
+                showVersionInfo();
                 return true;
-
-
-
-
 
             // Si llega acá, la acción del usuario no fue reconocida.
             // Invoca a la super clase para manejarlo
@@ -174,6 +172,17 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
     public void changeFragment(int idNewFragment, Bundle bundle){
         mSectionsPagerAdapter.changeFragmentInShopTab(idNewFragment,bundle);
     }
+
+
+    /**
+     * AlertDialog que muestra la versión de la aplicación
+     */
+    private void showVersionInfo(){
+        new AlertDialog.Builder(this)
+                .setView(getLayoutInflater().inflate(R.layout.layout_version_info,null))
+                .show();
+    }
+
 
     /**
      * Una clase FragmentStatePagerAdapter que representa cada uno de los tabs dentro de un Fragment

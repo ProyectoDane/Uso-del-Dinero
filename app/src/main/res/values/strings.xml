@@ -46,9 +46,6 @@
     <string name="value_selected_for_load">Valor seleccionado para cargar: $</string>
     <string name="value_saved">Carga agregada a la billetera</string>
 
-    <!-- Identificadores funcionales al código - [Main]  -->
-    <string name="help_text_main">AYUDA:\n[DINERO AHORRADO] Muestra todo el ahorro en la billetera.\n[Imágenes de billetes y monedas] Se muestran todos los valores que contiene la billetera.\n[CARGAR BILLETERA] Permite agregar nuevos billetes y monedas a la billetera. También se pueden configurar nuevos valores y eliminar los existentes.\n[INICIAR COMPRA] Permite comprar productos.</string>
-
 
     <!-- Identificadores funcionales al código - [PayPurchase]  -->
     <string name="help_text_pay_purchase">AYUDA:\n[Imágenes de billetes y monedas] Se muestran todos los valores a retirar de la billetera para el pago.\n[CANCELAR COMPRA] Anula la carga y vuelve a la vista de la billetera.\n[COMPRA PAGADA] Confirma el pago y envía a la pantalla de recepción de vuelto (si es necesario).</string>
@@ -82,6 +79,14 @@
     <string name="error_on_file_delete_last_value">ERROR AL ELIMINAR: ÉSTE ES EL ÚLTIMO VALOR, EL MISMO NO PUEDE SER ELIMINADO.</string>
 
 
+    <!-- Identificadores funcionales al código - [MainTabActivity]  -->
+    <string name="title_version_information">SELECCIONADO: $</string>
+
+
+    <!-- Identificadores funcionales al código - [MainTabActivity]  -->
+    <string name="msg_version_information">Uso del Dinero\nVersión 0.6.0\n\nProyecto DANE</string>
+
+
 
     <!-- ************************************************* -->
     <!-- ID de los textos de componentes de los fragment -->
@@ -104,6 +109,7 @@
     <string name="total_change">VUELTO TOTAL: $</string>
     <string name="change_received_amount_zero">VUELTO RECIBIDO: $ 0.00</string>
     <string name="change_received">VUELTO RECIBIDO: $</string>
+
 
     <!-- ID de los textos de componentes de los fragment - [FinalizePurchase]  -->
     <string name="purchase_finished">COMPRA FINALIZADA</string>
@@ -133,6 +139,7 @@
     <string name="selected_value">SELECCIONADO: -</string>
     <string name="select_value">SELECCIONAR</string>
     <string name="confirm_delete">CONFIRMAR ELIMINADO</string>
+
 
     <!-- ID de los textos de componentes de los fragment - [Fragment Varios]  -->
     <string name="purchase_payed">COMPRA PAGADA</string>
