@@ -1,8 +1,8 @@
 package proyectodane.usodeldinero;
 
-import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.io.File;
 import java.util.ArrayList;
+
 
 public class DeleteCurrencyActivity extends AppCompatActivity {
 
@@ -48,14 +49,24 @@ public class DeleteCurrencyActivity extends AppCompatActivity {
                 (LinearLayout) findViewById(R.id.SliderDots_deleteCurrency),
                 ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot),
                 ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
+
+        setupActionBar();
     }
 
-    /**
-     * Envía a la pantalla principal
-     * */
-    public void sendToMain(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+
+            //Muestro la flecha atrás en el actionbar
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     /**
@@ -120,17 +131,10 @@ public class DeleteCurrencyActivity extends AppCompatActivity {
 
         // Envío mensaje de confirmación
         SnackBarManager sb = new SnackBarManager();
-        sb.showTextIndefiniteOnClickActionStartActivity(findViewById(R.id.coordinatorLayout_deleteCurrency),getString(R.string.msg_value_deleted),5,MainActivity.class,this);
+        sb.showTextIndefiniteOnClickActionStartActivity(findViewById(R.id.coordinatorLayout_deleteCurrency),getString(R.string.msg_value_deleted),5,MainTabActivity.class,this);
 
     }
 
-    /**
-     * Muestra el texto de ayuda para este activity
-     **/
-    public void showHelp(View view) {
-        SnackBarManager sb = new SnackBarManager();
-        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_deleteCurrency),getString(R.string.help_text_delete_currency),10);
-    }
 
     /**
      * Inhabilito el botón para seleccionar y el botón para eliminar el valor
@@ -141,5 +145,13 @@ public class DeleteCurrencyActivity extends AppCompatActivity {
         Button confirmButton = (Button) findViewById(R.id.button26);
         confirmButton.setEnabled(false);
     }
+
+//    /**
+//     * Muestra el texto de ayuda para este activity
+//     **/
+//    public void showHelp(View view) {
+//        SnackBarManager sb = new SnackBarManager();
+//        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_deleteCurrency),getString(R.string.help_text_delete_currency),10);
+//    }
 
 }

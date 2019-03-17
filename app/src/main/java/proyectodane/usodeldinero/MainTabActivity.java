@@ -1,5 +1,6 @@
 package proyectodane.usodeldinero;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
@@ -136,8 +137,8 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                 return true;
 
             case R.id.action_configuration:
-                SnackBarManager sb1 = new SnackBarManager();
-                sb1.showTextShortOnClickActionDisabled(findViewById(R.id.container),getString(R.string.version_info_button_pressed),7);
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 return true;
 
             case R.id.action_version_info:

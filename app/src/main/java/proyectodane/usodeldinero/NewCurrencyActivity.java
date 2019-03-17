@@ -2,8 +2,11 @@ package proyectodane.usodeldinero;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.ThumbnailUtils;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -72,6 +75,23 @@ public class NewCurrencyActivity extends AppCompatActivity {
         im = new ImageManager();
         imageLoaded = false;
         selectedImage = null;
+        setupActionBar();
+    }
+
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+
+            //Muestro la flecha atrás en el actionbar
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     /**
@@ -154,8 +174,25 @@ public class NewCurrencyActivity extends AppCompatActivity {
         Button exitButton = (Button) findViewById(R.id.button24);
         exitButton.setEnabled(false);
 
-        SnackBarManager sb = new SnackBarManager();
-        sb.showTextIndefiniteOnClickActionStartActivity(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.msg_value_saved),5,MainActivity.class,this);
+        // Envío mensaje de información
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.msg_value_saved))
+
+                // Especifico un Listener para permitir llevar a cabo acciones cuando se acepta
+                .setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent intent = new Intent(getApplicationContext(), MainTabActivity.class);
+                        startActivity(intent);
+
+                    }
+                })
+
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setCancelable(false)
+                .show();
+
+
     }
 
     /**
@@ -169,25 +206,18 @@ public class NewCurrencyActivity extends AppCompatActivity {
         return simpleDateFormat.format(date);
     }
 
-    /**
-     * Envía a la pantalla principal
-     * */
-    public void sendToMain(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * Muestra el texto de ayuda para este activity
-     **/
-    public void showHelp(View view) {
-        SnackBarManager sb = new SnackBarManager();
-        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.help_text_new_currency),10);
-    }
 
     public static float dipToPixels(Context context, float dipValue) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, displayMetrics);
     }
+
+//    /**
+//     * Muestra el texto de ayuda para este activity
+//     **/
+//    public void showHelp(View view) {
+//        SnackBarManager sb = new SnackBarManager();
+//        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.help_text_new_currency),10);
+//    }
 
 }

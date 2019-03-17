@@ -1,0 +1,12 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="@string/pref_key_add_value"
+        android:title="@string/pref_title_add_value" />
+
+    <Preference
+        android:key="@string/pref_key_remove_value"
+        android:title="@string/pref_title_remove_value" />
+
+
+</PreferenceScreen>

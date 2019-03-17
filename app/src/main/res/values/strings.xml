@@ -21,14 +21,12 @@
 
     <!-- Identificadores funcionales al código - [Basket]  -->
     <string name="empty_string"></string>
-    <string name="total_value">VALOR TOTAL: $</string>
     <string name="insufficient_funds">DINERO INSUFICIENTE PARA AGREGAR ESTE PRODUCTO</string>
     <string name="help_text_basket">AYUDA:\n(1) Usar [INGRESAR PRECIO] para ingresar el valor del producto.\n(2) Luego tocar [AGREGAR] para sumarlo a la compra.\n(3) Reiterar (1) y (2) para comprar varios productos.\n[VALOR TOTAL] Muestra el valor de todos los productos acumulados.\n[CANCELAR] Anula la compra y vuelve a la vista de la billetera.\n[COMPRAR] Envía a la pantalla de confirmación de la compra.</string>
 
 
     <!-- Identificadores funcionales al código - [ControlChange]  -->
     <string name="change_OK"> - VUELTO CORRECTO</string>
-    <string name="change_amount">VUELTO TOTAL: $</string>
     <string name="help_text_control_change">AYUDA:\n[VUELTO TOTAL] Indica el todo el vuelto recibido.\n[Imágenes de billetes y monedas] Se muestran todos los valores para seleccionar el vuelto que se recibe.\n[AGREGAR VUELTO] Agrega el valor mostrado en imagen al vuelto y lo suma al acumulado.\n[ACEPTAR VUELTO] Confirma la recepción del vuelto y envía a la pantalla de finalización.</string>
 
 
@@ -66,19 +64,14 @@
     <string name="finalize_purchase">Finalizar Compra</string>
     <string name="no_change_received">Compra sin vuelto</string>
 
-    <!-- Identificadores funcionales al código - [Config]  -->
-    <string name="msg_confirm_wallet_empty">¿Está seguro de vaciar la billetera? Para vaciarla, presionar el botón \"CONFIRMAR VACIAR BILLETERA\"</string>
-    <string name="msg_wallet_emptied">Billetera vaciada.</string>
-
 
     <!-- Identificadores funcionales al código - [NewCurrencyActivity]  -->
     <string name="select_app">Seleccione la Aplicación</string>
     <string name="error_img_not_found">ERROR: IMAGEN NO ENCONTRADA</string>
     <string name="error_img_not_selected">ERROR: IMAGEN NO SELECCIONADA</string>
-    <string name="image_loaded">IMAGEN CARGADA OK</string>
     <string name="enter_value">INGRESE VALOR</string>
     <string name="error_value_not_selected">ERROR: VALOR NO SELECCIONADO</string>
-    <string name="msg_value_saved">NUEVO VALOR GUARDADO. PRESIONE \"LISTO\" PARA VOLVER A LA PANTALLA PRINCIPAL</string>
+    <string name="msg_value_saved">NUEVO VALOR GUARDADO</string>
     <string name="help_text_new_currency">AYUDA:\n[BILLETE/MONEDA] Se elige el tipo de valor.\n[CARGAR IMAGEN] Selecciona la imagen para el nuevo valor.\n[VALOR ASIGNADO] Se asigna el importe al nuevo valor.\n[SALIR] Vuelve a la pantalla principal.\n[GUARDAR NUEVO VALOR] Guarda el nuevo valor en la aplicación.</string>
 
     <!-- Identificadores funcionales al código - [DeleteCurrencyActivity]  -->
@@ -89,27 +82,16 @@
     <string name="error_on_file_delete_last_value">ERROR AL ELIMINAR: ÉSTE ES EL ÚLTIMO VALOR, EL MISMO NO PUEDE SER ELIMINADO.</string>
 
 
-    <!-- Identificadores funcionales al código - [Varias Activities]  -->
-    <string name="exit">SALIR</string>
-
 
     <!-- ************************************************* -->
     <!-- ID de los textos de componentes de los fragment -->
     <!-- ************************************************* -->
 
 
-    <!-- ID de los textos de componentes de los fragment - [Main]  -->
-    <string name="saved_money_pesos">DINERO EN BILLETERA: $</string>
-    <string name="start_purchase">INICIAR COMPRA</string>
-    <string name="load_wallet">CARGAR BILLETERA</string>
-
-
     <!-- ID de los textos de componentes de los fragment - [Basket]  -->
     <string name="buy">COMPRAR</string>
     <string name="enter_price">INGRESAR PRECIO</string>
     <string name="add_product">AGREGAR</string>
-    <string name="total_value_zero">VALOR TOTAL: $0.0</string>
-    <string name="cancel">CANCELAR</string>
 
 
     <!-- ID de los textos de componentes de los fragment - [PayPurchase]  -->
@@ -133,19 +115,9 @@
     <string name="load_and_total_wallet_preview">CARGA: $ - TOTAL EN BILLETERA: $</string>
     <string name="load_cash_sign">CARGA: $</string>
     <string name="total_cash_sign">TOTAL EN BILLETERA: $</string>
-    <string name="cancel_load">CANCELAR</string>
     <string name="add">AGREGAR</string>
     <string name="save_in_wallet">GUARDAR CARGA</string>
-    <string name="wallet_configuration">CONFIGURAR</string>
 
-
-    <!-- ID de los textos de componentes de los fragment - [Configuration]  -->
-    <string name="currency_configuration">CONFIGURACIÓN DE VALORES</string>
-    <string name="delete_currency">BORRAR VALOR</string>
-    <string name="new_currency">NUEVO VALOR</string>
-    <string name="wallet_config">CONFIGURACIÓN DE BILLETERA</string>
-    <string name="empty_wallet">VACIAR BILLETERA</string>
-    <string name="confirm_empty_wallet">CONFIRMAR VACIAR BILLETERA</string>
 
     <!-- ID de los textos de componentes de los fragment - [NewCurrency]  -->
     <string name="new_currency_load">CARGA DE NUEVO VALOR</string>
@@ -162,11 +134,11 @@
     <string name="select_value">SELECCIONAR</string>
     <string name="confirm_delete">CONFIRMAR ELIMINADO</string>
 
-    <!-- ID de los textos de componentes de los fragment - [Varias Activities]  -->
-    <string name="cancel_purchase">CANCELAR COMPRA</string>
+    <!-- ID de los textos de componentes de los fragment - [Fragment Varios]  -->
     <string name="purchase_payed">COMPRA PAGADA</string>
     <string name="total_payment_of_the_purchase">PAGO TOTAL DE LA COMPRA: $</string>
-    <string name="help">AYUDA</string>
+    <string name="saved_money_pesos">DINERO EN BILLETERA: $</string>
+
 
 
     <!-- ************************************************************* -->
@@ -174,7 +146,6 @@
     <!-- ************************************************************* -->
     <string name="total_purchase">COMPRA TOTAL: $</string>
     <string name="value_0">0.00</string>
-    <string name="value_20">20.00</string>
 
 
     <!-- *************************************************** -->
@@ -206,6 +177,7 @@
     <!-- ************************* -->
     <!-- Identificadores para tabs -->
     <!-- ************************* -->
+    <string name="title_activity_tab">TabActivity</string>
     <string name="tab_text_1">Ver</string>
     <string name="tab_text_2">Comprar</string>
     <string name="tab_text_3">Cargar</string>
@@ -220,12 +192,35 @@
     <string name="action_help">Ayuda</string>
 
 
+
+    <!-- *********************************************** -->
+    <!-- Identificadores para el sector de configuración -->
+    <!-- *********************************************** -->
+    <string name="title_activity_settings">Configuración</string>
+
+    <!-- Configuración: Vaciar Billetera -->
+    <string name="pref_header_wallet_configuration">Configuración de Billetera</string>
+    <string name="pref_key_empty_wallet">empty_wallet_preference</string>
+    <string name="pref_title_empty_wallet">Vaciar contenido de la Billetera</string>
+    <string name="msg_question_empty_wallet">¿Vaciar la billetera?</string>
+    <string name="msg_confirm_wallet_empty">Confirme que desea vaciar todo el contenido de la billetera</string>
+    <string name="msg_empty_wallet">Vaciar</string>
+    <string name="msg_wallet_emptied">Billetera vaciada</string>
+
+    <!-- Configuración: Alta/Baja de valores -->
+    <string name="pref_header_add_remove_value">Configuración de Valores en circulación (Billete/Moneda)</string>
+        <!-- Alta de valores -->
+    <string name="pref_key_add_value">add_value_preference</string>
+    <string name="pref_title_add_value">Agregar Valor nuevo</string>
+        <!-- Baja de valores -->
+    <string name="pref_key_remove_value">remove_value_preference</string>
+    <string name="pref_title_remove_value">Eliminar Valor existente</string>
+
+
+
     <!-- ************************************************ -->
     <!-- Identificadores para uso temporal (borrar luego) -->
     <!-- ************************************************ -->
-    <string name="add_button_pressed">Botón "Agregar" presionado</string>
-    <string name="save_button_pressed">Botón "Guardar" presionado</string>
-    <string name="version_info_button_pressed">Botón "Información de la Versión" presionado</string>
     <string name="configuration_info_button_pressed">Botón "Configuración" presionado</string>
     <string name="help_info_button_pressed">Botón "Ayuda" presionado</string>
 
@@ -234,7 +229,8 @@
     <!-- ***************************************** -->
     <!-- Identificadores agregados automáticamente -->
     <!-- ***************************************** -->
-    <string name="title_activity_tab">TabActivity</string>
-    <string name="section_format">Este es el Tab donde se realiza la compra.</string>
+
+
+
 
 </resources>

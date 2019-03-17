@@ -12,10 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainTabActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="proyectodane.usodeldinero.MainTabActivity" />
+        </activity>
+        <activity
             android:name=".MainTabActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape"
             android:label="@string/title_activity_tab"
+            android:screenOrientation="userLandscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
@@ -24,13 +32,10 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ConfigurationActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape" />
         <activity
             android:name=".NewCurrencyActivity"
             android:configChanges="orientation|keyboardHidden"
