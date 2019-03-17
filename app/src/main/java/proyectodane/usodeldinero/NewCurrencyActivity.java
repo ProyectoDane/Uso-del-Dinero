@@ -188,7 +188,7 @@ public class NewCurrencyActivity extends AppCompatActivity {
                     }
                 })
 
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(android.R.drawable.ic_dialog_info)
                 .setCancelable(false)
                 .show();
 

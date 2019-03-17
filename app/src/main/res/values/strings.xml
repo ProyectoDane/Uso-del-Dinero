@@ -70,13 +70,17 @@
     <string name="error_value_not_selected">ERROR: VALOR NO SELECCIONADO</string>
     <string name="msg_value_saved">NUEVO VALOR GUARDADO</string>
     <string name="help_text_new_currency">AYUDA:\n[BILLETE/MONEDA] Se elige el tipo de valor.\n[CARGAR IMAGEN] Selecciona la imagen para el nuevo valor.\n[VALOR ASIGNADO] Se asigna el importe al nuevo valor.\n[SALIR] Vuelve a la pantalla principal.\n[GUARDAR NUEVO VALOR] Guarda el nuevo valor en la aplicación.</string>
+    <string name="question_save_new_value">¿GUARDAR NUEVO VALOR?</string>
+
 
     <!-- Identificadores funcionales al código - [DeleteCurrencyActivity]  -->
-    <string name="value_selected">SELECCIONADO: $</string>
-    <string name="msg_value_deleted">VALOR ELIMINADO. PRESIONE \"LISTO\" PARA VOLVER A LA PANTALLA PRINCIPAL</string>
+    <string name="value_selected">VALOR SELECCIONADO: $</string>
+    <string name="msg_value_deleted">VALOR ELIMINADO</string>
     <string name="error_on_file_delete">ERROR AL ELIMINAR EL VALOR</string>
     <string name="help_text_delete_currency">AYUDA:\n[SALIR] Vuelve a la pantalla principal.\n[SELECCIONAR] Selecciona el valor a eliminar.\n[CONFIRMAR ELIMINADO] Borra el valor seleccionado.\n***NOTA***: Si existían billetes/monedas en la billetera del valor que se está borrando, los mismos también serán retirados. </string>
     <string name="error_on_file_delete_last_value">ERROR AL ELIMINAR: ÉSTE ES EL ÚLTIMO VALOR, EL MISMO NO PUEDE SER ELIMINADO.</string>
+    <string name="question_delete_value_selected">¿BORRAR EL VALOR SELECCIONADO?</string>
+    <string name="delete_value">BORRAR</string>
 
 
     <!-- Identificadores funcionales al código - [MainTabActivity]  -->
@@ -126,7 +130,7 @@
 
 
     <!-- ID de los textos de componentes de los fragment - [NewCurrency]  -->
-    <string name="new_currency_load">CARGA DE NUEVO VALOR</string>
+    <string name="new_currency_load">AGREGAR VALOR NUEVO</string>
     <string name="bill">BILLETE</string>
     <string name="coin">MONEDA</string>
     <string name="load_image">CARGAR IMAGEN</string>
@@ -135,10 +139,10 @@
 
 
     <!-- ID de los textos de componentes de los fragment - [DeleteCurrency]  -->
-    <string name="delete_existing_currency">ELIMINAR VALOR</string>
-    <string name="selected_value">SELECCIONADO: -</string>
+    <string name="delete_existing_currency">ELIMINAR VALOR EXISTENTE</string>
+    <string name="selected_value">SELECCIONADO: - </string>
     <string name="select_value">SELECCIONAR</string>
-    <string name="confirm_delete">CONFIRMAR ELIMINADO</string>
+    <string name="confirm_delete">ELIMINAR</string>
 
 
     <!-- ID de los textos de componentes de los fragment - [Fragment Varios]  -->
