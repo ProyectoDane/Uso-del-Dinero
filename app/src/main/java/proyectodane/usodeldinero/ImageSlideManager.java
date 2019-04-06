@@ -47,44 +47,8 @@ public class ImageSlideManager {
 
     public ImageSlideManager(Context activityContext, ViewPager viewPagerSelected, FragmentManager fragmentManagerSelected, ArrayList<String> listImageNames, LinearLayout linearLayoutSelected, final Drawable drawableActiveDot, final Drawable drawableNonActiveDot){
 
-        // Cargo todos los Fragment que alimentarán al PagerAdapter
-        fragments = buildFragments(activityContext,listImageNames);
-
-        // Instancio el ViewPager y el PagerAdapter, para deslizar las imágenes
-        viewPager = viewPagerSelected;
-        pagerAdapter = new ScreenSlidePagerAdapter(fragmentManagerSelected,fragments);
-        viewPager.setAdapter(pagerAdapter);
-
-        // En el estado inicial, la primer imagen será la seleccionada (Si al menos tiene una imagen). Elijo el fragment.
-        if(pagerAdapter.getCount()>0) {
-            actualPageFragment = (ScreenSlidePageFragment) ((ScreenSlidePagerAdapter) pagerAdapter).getItem(0);
-        }
-        // Instancio un LinearLayout, para representar los puntos debajo de las imágenes
-        sliderDotsPanel = linearLayoutSelected;
-
-        // Seteo la cantidad de puntos (imágenes) y el arreglo de ImageView para luego instanciar a cada uno de ellos
-        dotsCount = pagerAdapter.getCount();
-        dots = new ImageView[dotsCount];
-
-        // Cargo la imagen para cada punto en el estado inicial
-        for(int i = 0; i < dotsCount; i++){
-
-            // Instancia el ImageView y setea la imagen
-            dots[i] = new ImageView(activityContext);
-            dots[i].setImageDrawable(drawableNonActiveDot);
-
-            // Prepara los parámetros de la imagen de los puntos
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(8, 0, 8, 0);
-
-            // Setea los parámetros de la imagen de los puntos
-            sliderDotsPanel.addView(dots[i], params);
-        }
-
-        // En el estado inicial, el primer punto será el seleccionado (Si al menos tiene una imagen). Seteo la imagen.
-        if(pagerAdapter.getCount()>0) {
-            dots[0].setImageDrawable(drawableActiveDot);
-        }
+        // Cargo todas las imágenes en cada una de las estructuras
+        setUpImages(activityContext,viewPagerSelected,fragmentManagerSelected,listImageNames,linearLayoutSelected,drawableActiveDot,drawableNonActiveDot);
 
         // Agrego un listener que será invocado cuando la imagen cambie y actualizará las imágenes de los puntos
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -115,8 +79,8 @@ public class ImageSlideManager {
             public void onPageScrollStateChanged(int state) {
                 /* Llamado cuando el Scroll cambia de posición (Sin uso actualmente) */
             }
-        });
 
+        });
 
     }
 
@@ -165,6 +129,70 @@ public class ImageSlideManager {
      * */
     public String getActualValueID(){
         return actualPageFragment.getValueID();
+    }
+
+    public void setUpImages(Context activityContext, ViewPager viewPagerSelected, FragmentManager fragmentManagerSelected, ArrayList<String> listImageNames, LinearLayout linearLayoutSelected, final Drawable drawableActiveDot, final Drawable drawableNonActiveDot){
+
+        // Cargo todos los Fragment que alimentarán al PagerAdapter
+        fragments = buildFragments(activityContext,listImageNames);
+
+        // Instancio el ViewPager y el PagerAdapter, para deslizar las imágenes
+        viewPager = viewPagerSelected;
+        pagerAdapter = new ScreenSlidePagerAdapter(fragmentManagerSelected,fragments);
+        viewPager.setAdapter(pagerAdapter);
+
+        // En el estado inicial, la primer imagen será la seleccionada (Si al menos tiene una imagen). Elijo el fragment.
+        if(pagerAdapter.getCount()>0) {
+            actualPageFragment = (ScreenSlidePageFragment) ((ScreenSlidePagerAdapter) pagerAdapter).getItem(0);
+        }
+
+        // Instancio un LinearLayout, para representar los puntos debajo de las imágenes
+        // Remueve datos pre existentes (si hubieran)
+        sliderDotsPanel = linearLayoutSelected;
+        sliderDotsPanel.removeAllViews();
+
+        // Seteo la cantidad de puntos (imágenes) y el arreglo de ImageView para luego instanciar a cada uno de ellos
+        dotsCount = pagerAdapter.getCount();
+        dots = new ImageView[dotsCount];
+
+        // Cargo la imagen para cada punto en el estado inicial
+        for(int i = 0; i < dotsCount; i++){
+
+            // Instancia el ImageView y setea la imagen
+            dots[i] = new ImageView(activityContext);
+            dots[i].setImageDrawable(drawableNonActiveDot);
+
+            // Prepara los parámetros de la imagen de los puntos
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(8, 0, 8, 0);
+
+            // Setea los parámetros de la imagen de los puntos
+            sliderDotsPanel.addView(dots[i], params);
+        }
+
+        // En el estado inicial, el primer punto será el seleccionado (Si al menos tiene una imagen). Seteo la imagen.
+        if(pagerAdapter.getCount()>0) {
+            dots[0].setImageDrawable(drawableActiveDot);
+        }
+
+    }
+
+
+    /**
+     * Llevo el ViewPager al principio
+     * */
+    public void setFirstPage(){
+        // Al inicio seteo la primer página del ViewPager
+            viewPager.setCurrentItem(0);
+    }
+
+
+    /**
+     * Actualizo todas las imágenes
+     * */
+    public void notifyDataChanged(){
+        // Al inicio seteo la primer página del ViewPager
+        pagerAdapter.notifyDataSetChanged();
     }
 
 }

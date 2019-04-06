@@ -1,10 +1,16 @@
 package proyectodane.usodeldinero;
 
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.ThumbnailUtils;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+
 
 public class NewCurrencyActivity extends AppCompatActivity {
 
@@ -43,14 +50,14 @@ public class NewCurrencyActivity extends AppCompatActivity {
     Bitmap selectedImage;
 
     /**
-     * Ancho de la vista previa de la imagen cargada
+     * Ancho de la imagen cargada
      ***/
-    final int IMAGE_SIZE_WIDTH = 1000;
+    final int DIP_IMAGE_SIZE_WIDTH = 500;
 
     /**
-     * Ancho de la vista previa de la imagen cargada
+     * Ancho de la imagen cargada
      ***/
-    final int IMAGE_SIZE_HEIGHT = 420;
+    final int DIP_IMAGE_SIZE_HEIGHT = 210;
 
     /**
      * Ancho de la vista previa de la imagen cargada
@@ -62,6 +69,7 @@ public class NewCurrencyActivity extends AppCompatActivity {
      ***/
     final int THUMBNAIL_SIZE_HEIGHT = 84;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +77,27 @@ public class NewCurrencyActivity extends AppCompatActivity {
         im = new ImageManager();
         imageLoaded = false;
         selectedImage = null;
+        setupActionBar();
     }
+
+
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+
+            //Muestro la flecha atrás en el actionbar
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+        }
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
     /**
      * Cargo la imagen seleccionada por el usuario
@@ -80,6 +108,7 @@ public class NewCurrencyActivity extends AppCompatActivity {
         startActivityForResult(loadImageIntent.createChooser(loadImageIntent,getString(R.string.select_app)),RESULT_LOAD_IMAGE);
     }
 
+
     /**
      * Guardo la imagen en un archivo del almacenamiento interno
      * */
@@ -88,11 +117,12 @@ public class NewCurrencyActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             try {
+
                 // Cargo la imagen
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 Bitmap originalImage = BitmapFactory.decodeStream(imageStream);
-                selectedImage = Bitmap.createScaledBitmap(originalImage, IMAGE_SIZE_WIDTH, IMAGE_SIZE_HEIGHT, false);
+                selectedImage = Bitmap.createScaledBitmap(originalImage,(int)dipToPixels(this,DIP_IMAGE_SIZE_WIDTH),(int)dipToPixels(this,DIP_IMAGE_SIZE_HEIGHT),false);
                 imageLoaded = true;
 
                 // Cargo una miniatura para que el usuario pueda verificar la imagen seleccionada
@@ -108,10 +138,13 @@ public class NewCurrencyActivity extends AppCompatActivity {
             }
 
         }else{
+
             SnackBarManager sb = new SnackBarManager();
             sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.error_img_not_selected),5);
+
         }
     }
+
 
     /**
      * Guardo la imagen previamente seleccionada y cargada
@@ -151,9 +184,26 @@ public class NewCurrencyActivity extends AppCompatActivity {
         Button exitButton = (Button) findViewById(R.id.button24);
         exitButton.setEnabled(false);
 
-        SnackBarManager sb = new SnackBarManager();
-        sb.showTextIndefiniteOnClickActionStartActivity(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.msg_value_saved),5,MainActivity.class,this);
+        // Envío mensaje de información
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.msg_value_saved))
+
+                // Especifico un Listener para permitir llevar a cabo acciones cuando se acepta
+                .setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent intent = new Intent(getApplicationContext(), MainTabActivity.class);
+                        startActivity(intent);
+
+                    }
+                })
+
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setCancelable(false)
+                .show();
+
     }
+
 
     /**
      * Cargo la imagen seleccionada por el usuario
@@ -166,20 +216,20 @@ public class NewCurrencyActivity extends AppCompatActivity {
         return simpleDateFormat.format(date);
     }
 
-    /**
-     * Envía a la pantalla principal
-     * */
-    public void sendToMain(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+
+    public static float dipToPixels(Context context, float dipValue) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, displayMetrics);
     }
 
-    /**
-     * Muestra el texto de ayuda para este activity
-     **/
-    public void showHelp(View view) {
-        SnackBarManager sb = new SnackBarManager();
-        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.help_text_new_currency),10);
-    }
+
+    // TODO: ver si se usa
+//    /**
+//     * Muestra el texto de ayuda para este activity
+//     **/
+//    public void showHelp(View view) {
+//        SnackBarManager sb = new SnackBarManager();
+//        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.help_text_new_currency),10);
+//    }
 
 }

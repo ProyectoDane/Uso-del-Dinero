@@ -1,73 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.design.widget.CoordinatorLayout xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinatorLayout_deleteCurrency"
+    android:id="@+id/coordinatorLayout_Main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorVeryLightBlue">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".DeleteCurrencyActivity">
+        tools:context="proyectodane.usodeldinero.MainActivity">
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/delete_existing_currency"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/saved_money_pesos"
             android:textAlignment="center"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/pager_deleteCurrency"
+            android:textSize="36sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button26"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="true"
-            android:onClick="deleteSelectedValue"
-            android:text="@string/confirm_delete"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SliderDots_deleteCurrency" />
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/pager_deleteCurrency"
+            android:id="@+id/pager_main"
             android:layout_width="500dp"
             android:layout_height="210dp"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="64dp"
             android:layout_marginEnd="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/SliderDots_deleteCurrency"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
         <LinearLayout
-            android:id="@+id/SliderDots_deleteCurrency"
+            android:id="@+id/SliderDots_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/pager_deleteCurrency"
+            android:layout_below="@+id/pager_main"
+            android:layout_marginTop="52dp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/button26"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pager_deleteCurrency" />
+            app:layout_constraintTop_toBottomOf="@+id/pager_main" />
 
     </android.support.constraint.ConstraintLayout>
-
 
 </android.support.design.widget.CoordinatorLayout>

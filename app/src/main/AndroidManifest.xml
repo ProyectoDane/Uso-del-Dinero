@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="proyectodane.usodeldinero">
-
     <!-- Agregado para lectura de imágenes agregadas por el usuario para nuevos valores -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainTabActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="proyectodane.usodeldinero.MainTabActivity" />
+        </activity>
+        <activity
+            android:name=".MainTabActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_tab"
+            android:screenOrientation="userLandscape"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -24,32 +37,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BasketActivity"
+            android:name=".NewCurrencyActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="userLandscape" />
         <activity
-            android:name=".OrderTotalActivity"
+            android:name=".DeleteCurrencyActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="userLandscape" />
-        <activity
-            android:name=".PayPurchaseActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape" />
-        <activity
-            android:name=".ControlChangeActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape" />
-        <activity
-            android:name=".FinalizePurchaseActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape" />
-        <activity
-            android:name=".WalletActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape" />
-        <activity android:name=".ConfigurationActivity" />
-        <activity android:name=".NewCurrencyActivity" />
-        <activity android:name=".DeleteCurrencyActivity"></activity>
     </application>
 
 </manifest>
