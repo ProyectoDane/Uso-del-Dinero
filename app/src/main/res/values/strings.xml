@@ -232,7 +232,6 @@
     <!-- ************************************************ -->
     <!-- Identificadores para uso temporal (borrar luego) -->
     <!-- ************************************************ -->
-    <string name="configuration_info_button_pressed">Botón "Configuración" presionado</string>
     <string name="help_info_button_pressed">Botón "Ayuda" presionado</string>
 
 

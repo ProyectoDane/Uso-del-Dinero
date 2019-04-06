@@ -14,9 +14,10 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
 
-        // Verifico inicialización de archivo de valores
+        // Verifico inicialización de archivo de valores (Billetera)
         WalletManager.getInstance().checkFirstRun(this);
 
+        // Inicio pantalla principal con tabs
         Intent intent = new Intent(this, MainTabActivity.class);
         startActivity(intent);
 

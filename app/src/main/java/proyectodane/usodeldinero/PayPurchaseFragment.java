@@ -14,9 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import java.util.ArrayList;
-import static proyectodane.usodeldinero.MainTabActivity.CONTROL_CHANGE_FRAGMENT_ID;
-import static proyectodane.usodeldinero.MainTabActivity.FINALIZE_PURCHASE_FRAGMENT_ID;
-
+import static proyectodane.usodeldinero.MainTabActivity.SHOP_CONTROL_CHANGE_FRAGMENT_ID;
+import static proyectodane.usodeldinero.MainTabActivity.SHOP_FINALIZE_PURCHASE_FRAGMENT_ID;
 
 
 public class PayPurchaseFragment extends Fragment implements OnClickListener{
@@ -105,6 +104,7 @@ public class PayPurchaseFragment extends Fragment implements OnClickListener{
         listener = null;
     }
 
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -115,9 +115,10 @@ public class PayPurchaseFragment extends Fragment implements OnClickListener{
         }
     }
 
+
     /**
      *  Envía a la pantalla de control de vuelto.
-     *  Si no corresponde vuelto, envía directamente a finalizar
+     *  Si no corresponde vuelto, envía directamente a finalizar la compra
      **/
     public void sendToControlChange() {
 
@@ -128,12 +129,15 @@ public class PayPurchaseFragment extends Fragment implements OnClickListener{
             bundle.putString(getString(R.string.tag_total_value),totalPurchase);
 
             // Llamo al listener y le envío los datos del fragment a llamar y los datos en el bundle
-            listener.changeFragment(CONTROL_CHANGE_FRAGMENT_ID, bundle);
+            listener.changeFragment(SHOP_CONTROL_CHANGE_FRAGMENT_ID, bundle);
 
         } else {
+
             sendToFinalizePurchase();
+
         }
     }
+
 
     /**
      *  Envía a la pantalla de finalización de la compra (para los casos donde el vuelto es nulo)
@@ -149,10 +153,12 @@ public class PayPurchaseFragment extends Fragment implements OnClickListener{
         bundle.putString(getString(R.string.tag_total_value),totalPurchase);
 
         // Llamo al listener y le envío los datos del fragment a llamar y los datos en el bundle
-        listener.changeFragment(FINALIZE_PURCHASE_FRAGMENT_ID, bundle);
+        listener.changeFragment(SHOP_FINALIZE_PURCHASE_FRAGMENT_ID, bundle);
 
     }
 
+
+    // TODO: Ver si se usa
 //    /**
 //     * Muestra el texto de ayuda para este activity
 //     **/

@@ -1,5 +1,6 @@
 package proyectodane.usodeldinero;
 
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,9 +20,6 @@ import java.util.List;
 
 /**
  * Un PreferenceActivity que representa un conjunto de opciones de aplicación.
- * En dispositivos "de mano" las opciones están presentadas como una lista simple.
- * En tablets las opciones están divididas por categoría, mostrando su encabezado a la izquierda
- * de la lista de opciones.
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
@@ -33,10 +31,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * Un listener de cambio de valores que actualiza el resumen de preferencias con el nuevo valor
      */
     private static Preference.OnPreferenceClickListener sBindPreferenceClickListener = new Preference.OnPreferenceClickListener() {
+
         @Override
         public boolean onPreferenceClick(final Preference preference) {
-
-            Log.d("debug","Se hizo click en el preference: |"+preference+"| con key: |"+preference.getKey()+"|");
 
             if( preference.getKey().equals(context.getString(R.string.pref_key_empty_wallet)) ){
 
@@ -112,6 +109,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     }
 
+
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         int id = item.getItemId();
@@ -124,10 +122,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         return super.onMenuItemSelected(featureId, item);
     }
 
+
     @Override
     public boolean onIsMultiPane() {
         return isXLargeTablet(this);
     }
+
 
     /**
      * Cargo los headers desde el archivo xml, luego desde aquí se cargan los fragment vinculados
@@ -204,7 +204,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             return super.onOptionsItemSelected(item);
         }
     }
-
 
 
 }

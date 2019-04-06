@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
-
 import static proyectodane.usodeldinero.MainTabActivity.WALLET_FRAGMENT_ID;
 
 
@@ -55,22 +54,10 @@ public class WalletFragment extends Fragment implements OnClickListener {
     private OnFragmentInteractionListener listener;
 
 
-    // Todo: Ver si sirve este ejemplo par paso de parámetros. Si no se usa, borrarlo
-    //
-    //
-    //        /**
-    //         * Devuelve una nueva instancia del Fragment, dado un número de sección
-    //         */
-    //        public static WalletFragment newInstance(int sectionNumber) {
-    //            WalletFragment fragment = new WalletFragment();
-    //            Bundle args = new Bundle();
-    //            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-    //            fragment.setArguments(args);
-    //            return fragment;
-    //        }
-
     public WalletFragment() { }
 
+
+    // Agrego el Listener
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
@@ -80,6 +67,7 @@ public class WalletFragment extends Fragment implements OnClickListener {
         }
 
     }
+
 
     // Llamado en la parte inicial de la creación del Fragment.
     // Se inicializan objetos no gráficos.
@@ -122,11 +110,13 @@ public class WalletFragment extends Fragment implements OnClickListener {
         loadNewImages();
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
         listener = null;
     }
+
 
     @Override
     public void onClick(View view) {
@@ -153,8 +143,6 @@ public class WalletFragment extends Fragment implements OnClickListener {
         updateImages();
 
     }
-
-    // TODO: IMPLEMENTAR BOTÓN DE CANCELAR O sino, CUANDO SALGO DEL TAB VOLVER A CERO LA CARGA
 
 
     /**
@@ -203,7 +191,7 @@ public class WalletFragment extends Fragment implements OnClickListener {
     }
 
     /**
-     * Actualiza el valor de la carga y del total
+     * Actualiza en la vista el valor de la carga y del total
      **/
     private void refreshSubtotalAndTotal() {
         TextView textView = rootView.findViewById(R.id.textView6);
@@ -212,7 +200,7 @@ public class WalletFragment extends Fragment implements OnClickListener {
 
 
     /**
-     * Inicia los valores en su estado inicial
+     * Setea los valores en su estado inicial
      **/
     private void initializeSubtotalAndLoadTotal(){
         newLoadMoneyValueNames.clear();
@@ -270,6 +258,14 @@ public class WalletFragment extends Fragment implements OnClickListener {
     }
 
 
+    /**
+     * Declaración de Interface para actualizar las vistas de los fragmentos
+     * */
+    public interface OnFragmentInteractionListener {
+        void updateFragments(int idFragmentCaller);
+    }
+
+
 //    //TODO: Confirmar borrado
 //    /**
 //     * Muestra el texto de ayuda para este activity
@@ -278,12 +274,6 @@ public class WalletFragment extends Fragment implements OnClickListener {
 //        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.help_text_wallet),10);
 //    }
 
-    /**
-     * Interface para actualizar las vistas de los fragmentos
-     * */
-    public interface OnFragmentInteractionListener {
-        void updateFragments(int idFragmentCaller);
-    }
 
 }
 

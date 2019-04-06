@@ -13,10 +13,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
-
 import java.util.ArrayList;
-
-import static proyectodane.usodeldinero.MainTabActivity.FINALIZE_PURCHASE_FRAGMENT_ID;
+import static proyectodane.usodeldinero.MainTabActivity.SHOP_FINALIZE_PURCHASE_FRAGMENT_ID;
 
 
 public class ControlChangeFragment extends Fragment implements OnClickListener{
@@ -60,6 +58,7 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
 
     public ControlChangeFragment() { }
 
+
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
@@ -69,6 +68,7 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
         }
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,9 +88,8 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
         String st_totalChange = getString(R.string.total_change) + st_changeExpected;
         tv_totalChange.setText(st_totalChange);
 
-
-        // ArrayList con todos los valores de billetes/monedas existentes. Calculo todos los valores a usar para pagar
-        ArrayList<String> moneyValueNames = WalletManager.getInstance().getInstance().obtainMoneyValueNamesOfValidCurrency(getActivity());
+        // Cargo el arrayList con todos los valores de billetes/monedas existentes. Calculo todos los valores a usar para pagar
+        ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfValidCurrency(getActivity());
 
         // Cargo el slide de imágenes y puntos indicadores
         // Parámetros:  + (1)Contexto
@@ -120,6 +119,7 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
         listener = null;
     }
 
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -144,7 +144,7 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
         bundle.putString(getString(R.string.tag_total_value),st_totalPurchase);
 
         // Llamo al listener y le envío los datos del fragment a llamar y los datos en el bundle
-        listener.changeFragment(FINALIZE_PURCHASE_FRAGMENT_ID, bundle);
+        listener.changeFragment(SHOP_FINALIZE_PURCHASE_FRAGMENT_ID, bundle);
     }
 
 
@@ -193,6 +193,8 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
         return changeOk;
     }
 
+
+    // TODO: Ver si se usa
 //    /**
 //     * Muestra el texto de ayuda para este activity
 //     **/

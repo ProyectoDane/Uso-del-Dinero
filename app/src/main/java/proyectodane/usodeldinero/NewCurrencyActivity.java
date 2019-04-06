@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+
 public class NewCurrencyActivity extends AppCompatActivity {
 
     /**
@@ -68,6 +69,7 @@ public class NewCurrencyActivity extends AppCompatActivity {
      ***/
     final int THUMBNAIL_SIZE_HEIGHT = 84;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +79,7 @@ public class NewCurrencyActivity extends AppCompatActivity {
         selectedImage = null;
         setupActionBar();
     }
+
 
     private void setupActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -88,11 +91,13 @@ public class NewCurrencyActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
 
     /**
      * Cargo la imagen seleccionada por el usuario
@@ -103,6 +108,7 @@ public class NewCurrencyActivity extends AppCompatActivity {
         startActivityForResult(loadImageIntent.createChooser(loadImageIntent,getString(R.string.select_app)),RESULT_LOAD_IMAGE);
     }
 
+
     /**
      * Guardo la imagen en un archivo del almacenamiento interno
      * */
@@ -111,6 +117,7 @@ public class NewCurrencyActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             try {
+
                 // Cargo la imagen
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
@@ -131,10 +138,13 @@ public class NewCurrencyActivity extends AppCompatActivity {
             }
 
         }else{
+
             SnackBarManager sb = new SnackBarManager();
             sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_newCurrency),getString(R.string.error_img_not_selected),5);
+
         }
     }
+
 
     /**
      * Guardo la imagen previamente seleccionada y cargada
@@ -194,6 +204,7 @@ public class NewCurrencyActivity extends AppCompatActivity {
 
     }
 
+
     /**
      * Cargo la imagen seleccionada por el usuario
      * */
@@ -211,6 +222,8 @@ public class NewCurrencyActivity extends AppCompatActivity {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, displayMetrics);
     }
 
+
+    // TODO: ver si se usa
 //    /**
 //     * Muestra el texto de ayuda para este activity
 //     **/

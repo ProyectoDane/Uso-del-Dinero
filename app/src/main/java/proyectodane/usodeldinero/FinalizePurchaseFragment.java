@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import java.util.ArrayList;
-import static proyectodane.usodeldinero.MainTabActivity.BASKET_FRAGMENT_ID;
+import static proyectodane.usodeldinero.MainTabActivity.SHOP_BASKET_FRAGMENT_ID;
 import static proyectodane.usodeldinero.MainTabActivity.SHOP_FRAGMENT_ID;
 
 
@@ -41,7 +41,9 @@ public class FinalizePurchaseFragment extends Fragment implements OnClickListene
      */
     private WalletFragment.OnFragmentInteractionListener fragmentInteractionListener;
 
+
     public FinalizePurchaseFragment() { }
+
 
     @Override
     public void onAttach(Context context){
@@ -56,6 +58,7 @@ public class FinalizePurchaseFragment extends Fragment implements OnClickListene
         }
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,11 +94,13 @@ public class FinalizePurchaseFragment extends Fragment implements OnClickListene
         return rootView;
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
         shopFragmentChangeListener = null;
     }
+
 
     @Override
     public void onClick(View view) {
@@ -109,6 +114,7 @@ public class FinalizePurchaseFragment extends Fragment implements OnClickListene
         }
     }
 
+
     /**
      * Concreta el pago, descartando los valores correspondientes de la billetera y regresa a la pantalla principal
      * */
@@ -117,9 +123,10 @@ public class FinalizePurchaseFragment extends Fragment implements OnClickListene
         sendToBasket();
     }
 
+
     /**
-     * Concreta el pago, descartando los valores correspondientes de la billetera,
-     * guarda todos los valores recibidos en concepto de vuelto y regresa a la pantalla principal
+     * Concreta el pago, descartando los valores correspondientes de la billetera.
+     * Además guarda todos los valores recibidos en concepto de vuelto y regresa a la pantalla principal
      * */
     private void saveToWallet() {
         WalletManager.getInstance().removeFromWalletCurrencyUsedToPay(getActivity(),st_totalPurchase);
@@ -127,8 +134,9 @@ public class FinalizePurchaseFragment extends Fragment implements OnClickListene
         sendToBasket();
     }
 
+
     /**
-     * Envío cambio al fragment Basket
+     * Envía a la pantalla inicial de compra
      * */
     private void sendToBasket(){
 
@@ -136,7 +144,7 @@ public class FinalizePurchaseFragment extends Fragment implements OnClickListene
         Bundle emptyBundle = new Bundle();
 
         // Llamo al shopFragmentChangeListener y le envío los datos del fragment a llamar con el bundle vacío
-        shopFragmentChangeListener.changeFragment(BASKET_FRAGMENT_ID, emptyBundle);
+        shopFragmentChangeListener.changeFragment(SHOP_BASKET_FRAGMENT_ID, emptyBundle);
 
         // Llamo al fragmentInteractionListener y le envío los datos del fragment a llamar con el bundle vacío
         fragmentInteractionListener.updateFragments(SHOP_FRAGMENT_ID);

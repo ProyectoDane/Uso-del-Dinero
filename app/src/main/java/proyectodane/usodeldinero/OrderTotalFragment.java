@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import proyectodane.usodeldinero.BasketFragment.OnShopFragmentChangeListener;
-import static proyectodane.usodeldinero.MainTabActivity.PAY_PURCHASE_FRAGMENT_ID;
+import static proyectodane.usodeldinero.MainTabActivity.SHOP_PAY_PURCHASE_FRAGMENT_ID;
 
 
 public class OrderTotalFragment extends Fragment implements OnClickListener {
@@ -31,6 +31,7 @@ public class OrderTotalFragment extends Fragment implements OnClickListener {
      */
     private OnShopFragmentChangeListener listener;
 
+
     public OrderTotalFragment() { }
 
 
@@ -43,6 +44,7 @@ public class OrderTotalFragment extends Fragment implements OnClickListener {
         }
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,11 +70,13 @@ public class OrderTotalFragment extends Fragment implements OnClickListener {
         return rootView;
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
         listener = null;
     }
+
 
     @Override
     public void onClick(View view) {
@@ -95,7 +99,7 @@ public class OrderTotalFragment extends Fragment implements OnClickListener {
         bundle.putString(getString(R.string.tag_total_value), total);
 
         // Llamo al listener y le envío los datos del fragment a llamar y los datos en el bundle
-        listener.changeFragment(PAY_PURCHASE_FRAGMENT_ID, bundle);
+        listener.changeFragment(SHOP_PAY_PURCHASE_FRAGMENT_ID, bundle);
 
     }
 

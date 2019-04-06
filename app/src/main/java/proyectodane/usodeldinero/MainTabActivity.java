@@ -42,8 +42,9 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
     /**
      * Cantidad de páginas fuera de de la vista de la pantalla que quedan cargadas
+     * Con (NUMBER_OF_TABS - 1) todas las pantallas restantes no vistas, quedan cargadas
      */
-    private static final int OFF_SCREEN_PAGE_LIMIT = 4;
+    private static final int OFF_SCREEN_PAGE_LIMIT = NUMBER_OF_TABS - 1;
 
     /**
      * Constantes para identificar a cada uno de los fragment
@@ -51,16 +52,17 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
     public static final int VIEW_WALLET_FRAGMENT_ID = 0;
     public static final int SHOP_FRAGMENT_ID = 1;
     public static final int WALLET_FRAGMENT_ID = 2;
-    public static final int BASKET_FRAGMENT_ID = 10;
-    public static final int ORDER_TOTAL_FRAGMENT_ID = 11;
-    public static final int PAY_PURCHASE_FRAGMENT_ID = 12;
-    public static final int CONTROL_CHANGE_FRAGMENT_ID = 13;
-    public static final int FINALIZE_PURCHASE_FRAGMENT_ID = 14;
+    public static final int SHOP_BASKET_FRAGMENT_ID = 10;
+    public static final int SHOP_ORDER_TOTAL_FRAGMENT_ID = 11;
+    public static final int SHOP_PAY_PURCHASE_FRAGMENT_ID = 12;
+    public static final int SHOP_CONTROL_CHANGE_FRAGMENT_ID = 13;
+    public static final int SHOP_FINALIZE_PURCHASE_FRAGMENT_ID = 14;
     public static final int EXTERNAL_TO_TAB_ID = 20;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_tab);
 
@@ -69,10 +71,6 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
         // Establece la barra de herramientas como la barra de app de la actividad
         setSupportActionBar(toolbar);
-
-        // Ver si hace falta. Activa el botón "up" (hay que setear el " android:parentActivityName" para usar esto)
-        //ActionBar ab = getSupportActionBar();
-        //ab.setDisplayHomeAsUpEnabled(true);
 
         // Identifico el Layout del ViewPager
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -91,7 +89,7 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
         // para que no queden en blanco cuando me voy y vuelvo
         mViewPager.setOffscreenPageLimit(OFF_SCREEN_PAGE_LIMIT);
 
-        // Seteo los Listener de del ViewPager y TabLayout cruzados, para que cuando uno se mueve, el otro lo siga
+        // Seteo los Listener de del ViewPager y TabLayout cruzados, para que cuando uno se mueve el otro lo siga
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
@@ -107,8 +105,8 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
 
     // TODO: Implementar. Acá se podría Implementar un único botón de Ayuda que reacciona...
-    // TODO: ...según el fragment en vista. Además se podría agregar un botón "Inicio" para que vaya
-    // TODO: ...al sector inicial del tab en donde se encuentra parado (Esto sirve para reemplazar los botones de "Cancelar")
+    // TODO: ...según el fragment en vista (Si es necesario, sino directamente no agregarlo).
+    // TODO: También se debería agregar un botón de "salir de la aplicación" para finalizarla
     /**
      * Cuando se elige una opción del menú, aquí se maneja el comportamiento
      * a tomar según la opción elegida
@@ -119,15 +117,12 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
         // Obtengo el ID del item elegido, Verifico el ID y acciono en consecuencia
         switch (item.getItemId()) {
 
-            case R.id.action_update:
+            case R.id.action_home:
 
-                // Genero un bundle vacío, solo para cumplir con ChangeFragment()
-                Bundle emptyBundle = new Bundle();
+                // Llamo al fragment Basket, dentro del Tab shop. Agrego un bundle vacío, solo para cumplir con ChangeFragment()
+                changeFragment(SHOP_BASKET_FRAGMENT_ID, new Bundle());
 
-                // Llamo al fragment Basket, dentro del Tab shop
-                changeFragment(BASKET_FRAGMENT_ID, emptyBundle);
-
-                // Actualizo los fragments en cada tab
+                // Actualizo todos los fragments de cada tab
                 updateFragments(EXTERNAL_TO_TAB_ID);
 
                 return true;
@@ -146,18 +141,19 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                 showVersionInfo();
                 return true;
 
-            // Si llega acá, la acción del usuario no fue reconocida.
-            // Invoca a la super clase para manejarlo
+            // Si llega acá, la acción del usuario no fue reconocida. Invoca a la super clase para manejarlo
             default:
                 return super.onOptionsItemSelected(item);
         }
 
     }
 
+
     @Override
     public void onBackPressed() {
         // No realiza acción, para obligar al usuario a tomar la decisión a través de los botones de la aplicación
     }
+
 
     // Implemento OnFragmentInteractionListener para accionar cuando un fragment avisa sobre cambios en la visa
     @Override
@@ -165,7 +161,9 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
         mSectionsPagerAdapter.updateSections(idFragmentCaller);
     }
 
-    // Implemento OnShopFragmentChangeListener para accionar cuando un fragment avisa sobre cambio de Fragment de shop
+
+    // Implemento OnShopFragmentChangeListener para accionar cuando un
+    // fragment avisa sobre cambios en el tab de compra
     @Override
     public void changeFragment(int idNewFragment, Bundle bundle){
         mSectionsPagerAdapter.changeFragmentInShopTab(idNewFragment,bundle);
@@ -182,6 +180,15 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
     }
 
 
+
+
+
+    /**
+     * ********************************************
+     * ********* FragmentStatePageAdapter *********
+     * ********************************************
+     */
+
     /**
      * Una clase FragmentStatePagerAdapter que representa cada uno de los tabs dentro de un Fragment
      */
@@ -193,6 +200,7 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
             super(fm);
 
             fragments = new ArrayList<>();
+
             for (int i = 0; i < NUMBER_OF_TABS; i++){
                 switch (i) {
                     case VIEW_WALLET_FRAGMENT_ID:
@@ -205,15 +213,19 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                         fragments.add(new WalletFragment());
                         break;
                     default:
-                        //
+
                         break;
                 }
             }
         }
 
+
         // Es llamado para instanciar el fragmento de la posición dada.
         @Override
-        public Fragment getItem(int position) { return fragments.get(position); }
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
 
         // Muestra la cantidad total de tabs en el Adapter.
         @Override
@@ -221,20 +233,22 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
             return NUMBER_OF_TABS;
         }
 
+
+        // Usado para identificar los casos donde se debe actualizar las vistas de los tab,
+        // según el fragment dado. getItemPosition() es llamado por notifyDataSetChanged()
         @Override
         public int getItemPosition(Object object){
 
-            // Casos donde no necesito actualizar
+            // Casos donde no necesito actualizar la vista
             if (object instanceof ViewWalletFragment) return POSITION_UNCHANGED;
             if (object instanceof WalletFragment) return POSITION_UNCHANGED;
 
-            // En teoría solo necesitaría "return POSITION_NONE" para el caso del tab shop, porque tiene que actualizar el objeto
+            // Solo necesito "return POSITION_NONE" para el caso del tab shop, porque tiene que actualizar el fragment
             return POSITION_NONE;
         }
 
 
-        // TODO: Agregar los casos cuando en la configuración (alta/baja de valores) se afecta la billetera (Podría usarse un nuevo valor)
-        // Implemento reacción del OnFragmentInteractionListener para accionar cuando un fragment avisa
+        // Implemento reacción del OnFragmentInteractionListener para accionar cuando un fragment avisa sobre cambios
         public void updateSections(int idFragmentCaller){
 
             switch (idFragmentCaller) {
@@ -270,12 +284,13 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                     break;
 
                 default:
-                    //
+
                     break;
             }
 
 
         }
+
 
         // Actualizo el fragment perteneciente al Tab shop, según el ID solicitado
         // Ciclo de compra:
@@ -284,36 +299,36 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
             switch (idNewFragment) {
 
-                case BASKET_FRAGMENT_ID:
+                case SHOP_BASKET_FRAGMENT_ID:
                     fragments.set(SHOP_FRAGMENT_ID,new BasketFragment());
                     break;
 
-                case ORDER_TOTAL_FRAGMENT_ID:
+                case SHOP_ORDER_TOTAL_FRAGMENT_ID:
                     Fragment newOrderTotalFragment = new OrderTotalFragment();
                     newOrderTotalFragment.setArguments(bundle);
                     fragments.set(SHOP_FRAGMENT_ID,newOrderTotalFragment);
                     break;
 
-                case PAY_PURCHASE_FRAGMENT_ID:
+                case SHOP_PAY_PURCHASE_FRAGMENT_ID:
                     Fragment newPayPurchaseFragment = new PayPurchaseFragment();
                     newPayPurchaseFragment.setArguments(bundle);
                     fragments.set(SHOP_FRAGMENT_ID,newPayPurchaseFragment);
                     break;
 
-                case CONTROL_CHANGE_FRAGMENT_ID:
+                case SHOP_CONTROL_CHANGE_FRAGMENT_ID:
                     Fragment newControlChangeFragment = new ControlChangeFragment();
                     newControlChangeFragment.setArguments(bundle);
                     fragments.set(SHOP_FRAGMENT_ID,newControlChangeFragment);
                     break;
 
-                case FINALIZE_PURCHASE_FRAGMENT_ID:
+                case SHOP_FINALIZE_PURCHASE_FRAGMENT_ID:
                     Fragment newFinalizePurchaseFragment = new FinalizePurchaseFragment();
                     newFinalizePurchaseFragment.setArguments(bundle);
                     fragments.set(SHOP_FRAGMENT_ID,newFinalizePurchaseFragment);
                     break;
 
                 default:
-                    //
+
                     break;
             }
 

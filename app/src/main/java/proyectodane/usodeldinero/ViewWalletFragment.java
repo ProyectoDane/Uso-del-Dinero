@@ -24,7 +24,9 @@ public class ViewWalletFragment extends Fragment {
      */
     ImageSlideManager imageSlideManager;
 
+
     public ViewWalletFragment(){ }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,11 +35,12 @@ public class ViewWalletFragment extends Fragment {
         return rootView;
     }
 
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // Actualizo el texto de valor del total en billetera
+        // Actualizo los componentes visuales del fragment
         refreshTotalText();
 
         // Cargo las imágenes de los billetes y la línea de puntos
@@ -117,7 +120,7 @@ public class ViewWalletFragment extends Fragment {
     }
 
 
-//    TODO: Ver como se re implementa
+//    TODO: Ver si se usará
 //    /**
 //     * Muestra el texto de ayuda para este activity
 //     **/

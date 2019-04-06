@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
-import static proyectodane.usodeldinero.MainTabActivity.ORDER_TOTAL_FRAGMENT_ID;
+import static proyectodane.usodeldinero.MainTabActivity.SHOP_ORDER_TOTAL_FRAGMENT_ID;
 
 
 public class BasketFragment extends Fragment implements OnClickListener {
@@ -36,7 +36,9 @@ public class BasketFragment extends Fragment implements OnClickListener {
      */
     private OnShopFragmentChangeListener listener;
 
+
     public BasketFragment() { }
+
 
     @Override
     public void onAttach(Context context){
@@ -47,6 +49,7 @@ public class BasketFragment extends Fragment implements OnClickListener {
         }
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,6 +78,7 @@ public class BasketFragment extends Fragment implements OnClickListener {
         super.onDetach();
         listener = null;
     }
+
 
     @Override
     public void onClick(View view) {
@@ -131,6 +135,7 @@ public class BasketFragment extends Fragment implements OnClickListener {
 
     }
 
+
     /**
      * Actualiza la vista de "compra total"
      * */
@@ -144,18 +149,13 @@ public class BasketFragment extends Fragment implements OnClickListener {
      * Envía a la pantalla de confirmación de compra
      * */
     public void sendToOrderTotal() {
-        // En caso de que haya quedado un valor a ingresar, blanquea el valor al irse de la vista
-        if (!(et_productValue.getText().toString().isEmpty())) et_productValue.setText(getString(R.string.empty_string));
-
-        // Inhabilito el botón de compra
-        payButtonSetEnabled(false);
 
         // Guardo los datos para mandarlo al próximo Fragment
         Bundle bundle = new Bundle();
         bundle.putString(getString(R.string.tag_total_value), String.valueOf(st_total_purchase));
 
         // Llamo al listener y le envío los datos del fragment a llamar y los datos en el bundle
-        listener.changeFragment(ORDER_TOTAL_FRAGMENT_ID, bundle);
+        listener.changeFragment(SHOP_ORDER_TOTAL_FRAGMENT_ID, bundle);
 
     }
 
@@ -167,6 +167,7 @@ public class BasketFragment extends Fragment implements OnClickListener {
         et_productValue.setText(getString(R.string.empty_string));
     }
 
+
     /**
      * Actualiza el valor total ahorrado en la billetera
      **/
@@ -176,14 +177,6 @@ public class BasketFragment extends Fragment implements OnClickListener {
         textView.setText(newText);
     }
 
-    // TODO: Ver implementación
-//    /**
-//     * Muestra el texto de ayuda para este activity
-//     **/
-//    public void showHelp(View view) {
-//        SnackBarManager sb = new SnackBarManager();
-//        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Basquet),getString(R.string.help_text_basket),7);
-//    }
 
     /**
      * Interface para cambiar de fragmento en el tab de compra
@@ -211,10 +204,20 @@ public class BasketFragment extends Fragment implements OnClickListener {
 
 
     /**
-     * Interface para cambiar de fragmento en el tab de compra
+     * Declaración de Interface para cambiar de fragmento en el tab de compra
      * */
     public interface OnShopFragmentChangeListener {
         void changeFragment(int idNewFragment, Bundle bundle);
     }
+
+
+    // TODO: Ver si se usa
+//    /**
+//     * Muestra el texto de ayuda para este activity
+//     **/
+//    public void showHelp(View view) {
+//        SnackBarManager sb = new SnackBarManager();
+//        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Basquet),getString(R.string.help_text_basket),7);
+//    }
 
 }
