@@ -3,6 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorVeryLightBlue">#dfe3ee</color>
+    <color name="colorLightBlue">#8b9dc3</color>
+    <color name="colorAlmostWhite">#f7f7f7</color>
+    <color name="colorVeryLightGreen">#e4edf2</color>
+
 
     <color name="black_overlay">#66000000</color>
 </resources>

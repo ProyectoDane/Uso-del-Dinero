@@ -67,7 +67,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button29"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         <EditText
@@ -127,33 +127,6 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
         </RadioGroup>
-
-        <Button
-            android:id="@+id/button28"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:onClick="showHelp"
-            android:text="@string/help"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView8"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/button29"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="sendToMain"
-            android:text="@string/exit"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button24"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     </android.support.constraint.ConstraintLayout>
 

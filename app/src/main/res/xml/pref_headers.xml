@@ -1,0 +1,13 @@
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <header
+        android:fragment="proyectodane.usodeldinero.SettingsActivity$EmptyWalletPreferenceFragment"
+        android:title="@string/pref_header_wallet_configuration"
+        />
+
+    <header
+        android:fragment="proyectodane.usodeldinero.SettingsActivity$AddRemoveValuePreferenceFragment"
+        android:title="@string/pref_header_add_remove_value"
+        />
+
+</preference-headers>
