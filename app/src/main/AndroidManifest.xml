@@ -39,11 +39,11 @@
         <activity
             android:name=".NewCurrencyActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape" />
+            android:screenOrientation="userLandscape"/>
         <activity
             android:name=".DeleteCurrencyActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="userLandscape" />
+            android:screenOrientation="userLandscape"/>
     </application>
 
 </manifest>

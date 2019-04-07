@@ -142,6 +142,10 @@ public class WalletFragment extends Fragment implements OnClickListener {
         // Actualizo todas las imágenes dentro del Slide
         updateImages();
 
+        // Inhabilito el botón de carga
+        Button saveButton = (Button) rootView.findViewById(R.id.button13);
+        saveButton.setEnabled(false);
+
     }
 
 
@@ -226,6 +230,14 @@ public class WalletFragment extends Fragment implements OnClickListener {
         st_subtotal = WalletManager.getInstance().addValues(st_value,st_subtotal);
         st_total = WalletManager.getInstance().addValues(st_value,st_total);
         refreshSubtotalAndTotal();
+
+        // Habilito el botón para la carga según tenga salgo preparado para cargar
+        Button saveButton = (Button) rootView.findViewById(R.id.button13);
+        if (WalletManager.getInstance().isGreaterThanValueZero(st_subtotal)) {
+            saveButton.setEnabled(true);
+        } else {
+            saveButton.setEnabled(false);
+        }
 
         // Creo el mensaje para notificar el valor seleccionado a sumar a la billetera y lo muestro
         String st_snackBarText = getString(R.string.value_selected_for_load) + st_value;
