@@ -99,7 +99,7 @@
 
     <!-- ID de los textos de componentes de los fragment - [Basket]  -->
     <string name="buy">COMPRAR</string>
-    <string name="enter_price">INGRESAR PRECIO</string>
+    <string name="enter_price">PRECIO DEL PRODUCTO</string>
     <string name="add_product">AGREGAR</string>
 
 
@@ -122,7 +122,7 @@
 
 
     <!-- ID de los textos de componentes de los fragment - [Wallet]  -->
-    <string name="load_and_total_wallet_preview">CARGA: $ - TOTAL EN BILLETERA: $</string>
+    <string name="load_and_total_wallet_preview">CARGA: $  |  TOTAL EN BILLETERA: $</string>
     <string name="load_cash_sign">CARGA: $</string>
     <string name="total_cash_sign">TOTAL EN BILLETERA: $</string>
     <string name="add">AGREGAR</string>

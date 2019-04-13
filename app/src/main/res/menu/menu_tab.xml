@@ -7,14 +7,15 @@
         android:id="@+id/action_home"
         android:orderInCategory="1"
         android:title="@string/action_update"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/home"/>
 
     <item
         android:id="@+id/action_help"
         android:orderInCategory="2"
         android:title="@string/action_help"
-        app:showAsAction="ifRoom" />
-
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/help"/>
 
 
     <item
