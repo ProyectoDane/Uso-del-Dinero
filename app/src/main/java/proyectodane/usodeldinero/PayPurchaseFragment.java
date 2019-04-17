@@ -3,6 +3,8 @@ package proyectodane.usodeldinero;
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -158,14 +160,17 @@ public class PayPurchaseFragment extends Fragment implements OnClickListener{
     }
 
 
-    // TODO: Ver si se usa
-//    /**
-//     * Muestra el texto de ayuda para este activity
-//     **/
-//    public void showHelp(View view) {
-//        SnackBarManager sb = new SnackBarManager();
-//        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_PayPurchase),getString(R.string.help_text_pay_purchase),10);
-//    }
+    /**
+     * Muestra el texto de ayuda para este fragment
+     **/
+    public void showHelp() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.pay_purchase_fragment_title_help))
+                .setMessage(R.string.pay_purchase_fragment_help)
+                .setPositiveButton(getString(android.R.string.ok),null)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
+    }
 
 
 }

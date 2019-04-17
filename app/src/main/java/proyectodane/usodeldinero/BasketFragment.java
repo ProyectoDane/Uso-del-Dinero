@@ -3,6 +3,8 @@ package proyectodane.usodeldinero;
 import android.content.Context;
 import android.os.Bundle;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -211,13 +213,16 @@ public class BasketFragment extends Fragment implements OnClickListener {
     }
 
 
-    // TODO: Ver si se usa
-//    /**
-//     * Muestra el texto de ayuda para este activity
-//     **/
-//    public void showHelp(View view) {
-//        SnackBarManager sb = new SnackBarManager();
-//        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Basquet),getString(R.string.help_text_basket),7);
-//    }
+    /**
+     * Muestra el texto de ayuda para este fragment
+     **/
+    public void showHelp() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.basket_fragment_title_help))
+                .setMessage(R.string.basket_fragment_help)
+                .setPositiveButton(getString(android.R.string.ok),null)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
+    }
 
 }

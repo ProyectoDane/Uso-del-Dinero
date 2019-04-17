@@ -128,8 +128,9 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                 return true;
 
             case R.id.action_help:
-                SnackBarManager sb0 = new SnackBarManager();
-                sb0.showTextShortOnClickActionDisabled(findViewById(R.id.container),getString(R.string.help_info_button_pressed),7);
+
+                // Muestro la ayuda según la posición actual del ViewPager
+                mSectionsPagerAdapter.showHelp(mViewPager.getCurrentItem());
                 return true;
 
             case R.id.action_configuration:
@@ -336,6 +337,38 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
             notifyDataSetChanged();
 
         }
+
+
+        public void showHelp(int position){
+
+            Fragment fragment = fragments.get(position);
+
+            switch (position) {
+
+                case VIEW_WALLET_FRAGMENT_ID:
+                    ((ViewWalletFragment)fragment).showHelp();
+                    break;
+
+                case SHOP_FRAGMENT_ID:
+
+                    if (fragment instanceof BasketFragment) ((BasketFragment)fragment).showHelp();
+                    if (fragment instanceof OrderTotalFragment) ((OrderTotalFragment)fragment).showHelp();
+                    if (fragment instanceof PayPurchaseFragment) ((PayPurchaseFragment)fragment).showHelp();
+                    if (fragment instanceof ControlChangeFragment) ((ControlChangeFragment)fragment).showHelp();
+                    if (fragment instanceof FinalizePurchaseFragment) ((FinalizePurchaseFragment)fragment).showHelp();
+                    break;
+
+                case WALLET_FRAGMENT_ID:
+                    ((WalletFragment)fragment).showHelp();
+                    break;
+
+                default:
+                    break;
+            }
+
+
+        }
+
 
     }
 

@@ -3,6 +3,8 @@ package proyectodane.usodeldinero;
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -148,6 +150,19 @@ public class FinalizePurchaseFragment extends Fragment implements OnClickListene
 
         // Llamo al fragmentInteractionListener y le envío los datos del fragment a llamar con el bundle vacío
         fragmentInteractionListener.updateFragments(SHOP_FRAGMENT_ID);
+    }
+
+
+    /**
+     * Muestra el texto de ayuda para este fragment
+     **/
+    public void showHelp() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.finalize_purchase_fragment_title_help))
+                .setMessage(R.string.finalize_purchase_fragment_help)
+                .setPositiveButton(getString(android.R.string.ok),null)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
     }
 
 }

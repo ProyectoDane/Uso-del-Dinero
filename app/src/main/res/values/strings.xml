@@ -22,7 +22,6 @@
     <!-- Identificadores funcionales al código - [Basket]  -->
     <string name="empty_string"></string>
     <string name="insufficient_funds">DINERO INSUFICIENTE PARA AGREGAR ESTE PRODUCTO</string>
-    <string name="help_text_basket">AYUDA:\n(1) Usar [INGRESAR PRECIO] para ingresar el valor del producto.\n(2) Luego tocar [AGREGAR] para sumarlo a la compra.\n(3) Reiterar (1) y (2) para comprar varios productos.\n[VALOR TOTAL] Muestra el valor de todos los productos acumulados.\n[CANCELAR] Anula la compra y vuelve a la vista de la billetera.\n[COMPRAR] Envía a la pantalla de confirmación de la compra.</string>
 
 
     <!-- Identificadores funcionales al código - [ControlChange]  -->
@@ -42,7 +41,7 @@
 
 
     <!-- Identificadores funcionales al código - [Wallet]  -->
-    <string name="help_text_wallet">AYUDA:\n[CARGA] Indica el dinero que se va a agregar a la billetera.\n[TOTAL EN BILLETERA] Muestra el dinero total si realizo la carga.\n[Imágenes de billetes y monedas] Se muestran todos los valores a elegir para la carga.\n[CANCELAR] Anula la carga y vuelve a la vista de la billetera.\n[AGREGAR] Carga el billete o moneda actualmente mostrado en imagen.\n[GUARDAR Y FINALIZAR] Ingresa en la billetera todos los valores cargados, volviendo a la vista principal.\n[CONFIGURAR] Permite agregar nuevos valores y eliminar los existentes.</string>
+    <string name="help_text_wallet">aaa</string>
     <string name="value_selected_for_load">Valor seleccionado para cargar: $</string>
     <string name="value_saved">Carga agregada a la billetera</string>
 
@@ -93,7 +92,7 @@
 
 
     <!-- ************************************************* -->
-    <!-- ID de los textos de componentes de los fragment -->
+    <!-- ID de los textos de componentes de los fragment   -->
     <!-- ************************************************* -->
 
 
@@ -203,6 +202,24 @@
     <string name="action_help">Ayuda</string>
 
 
+    <!-- ****************************************** -->
+    <!-- Identificadores para los mensajes de ayuda -->
+    <!-- ****************************************** -->
+    <string name="view_wallet_fragment_title_help">Ayuda: Ver billetera</string>
+    <string name="view_wallet_fragment_help">Indica la cantidad total de dinero en la billetera y las imágenes de cada uno los valores</string>
+    <string name="wallet_fragment_title_help">Ayuda: Cargar billetera</string>
+    <string name="wallet_fragment_help">Elegir el valor deseado según la imagen y presionar el botón [AGREGAR]. Repetir para cargar varios valores. \nPresionar [GUARDAR CARGA] para ingresar en la billetera todos los valores elegidos.</string>
+    <string name="basket_fragment_title_help">Ayuda: Compra -> Ingresar productos</string>
+    <string name="basket_fragment_help">Ingresar el precio del producto y presionar [AGREGAR] por cada uno. \nPresionar [COMPRAR] luego de ingresar todos los productos deseados.</string>
+    <string name="order_total_fragment_title_help">Ayuda: Compra -> Revisar total</string>
+    <string name="order_total_fragment_help">Revisar el valor total de la compra y luego presionar [PAGAR COMPRA] para presentar el pago.</string>
+    <string name="pay_purchase_fragment_title_help">Ayuda: Compra -> Pago</string>
+    <string name="pay_purchase_fragment_help">Revisar los valores mostrados en las imágenes y pagar con los valores guardados en la billetera. \nLuego de pagar, presionar [COMPRA PAGADA].</string>
+    <string name="control_change_fragment_title_help">Ayuda: Compra -> Recibir vuelto</string>
+    <string name="control_change_fragment_help">Por cada valor de vuelto recibido, seleccionar su imagen y presionar [AGREGAR AL VUELTO]. \nAl terminar de recibir el vuelto presionar [ACEPTAR VUELTO].</string>
+    <string name="finalize_purchase_fragment_title_help">Ayuda: Compra -> Finalizar</string>
+    <string name="finalize_purchase_fragment_help">En caso de recibir vuelto, se puede agregar el mismo a la billetera presionando el botón [GUARDAR VUELTO]. \nEn caso contrario presionar [NO GUARDAR VUELTO]</string>
+
 
     <!-- *********************************************** -->
     <!-- Identificadores para el sector de configuración -->
@@ -232,7 +249,6 @@
     <!-- ************************************************ -->
     <!-- Identificadores para uso temporal (borrar luego) -->
     <!-- ************************************************ -->
-    <string name="help_info_button_pressed">Botón "Ayuda" presionado</string>
 
 
 
