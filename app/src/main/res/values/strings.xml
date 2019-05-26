@@ -196,10 +196,11 @@
     <!-- ******************************** -->
     <!-- Identificadores para el menú tab -->
     <!-- ******************************** -->
-    <string name="action_version_info">Información de la Versión</string>
-    <string name="action_configuration">Configuración</string>
     <string name="action_update">Ir a inicio</string>
     <string name="action_help">Ayuda</string>
+    <string name="action_empty_wallet">Vaciar billetera&#8230;</string>
+    <string name="action_configuration">Configuración</string>
+    <string name="action_version_info">Información de la Versión</string>
 
 
     <!-- ****************************************** -->
@@ -208,7 +209,7 @@
     <string name="view_wallet_fragment_title_help">Ayuda: Ver billetera</string>
     <string name="view_wallet_fragment_help">Indica la cantidad total de dinero en la billetera y las imágenes de cada uno los valores</string>
     <string name="wallet_fragment_title_help">Ayuda: Cargar billetera</string>
-    <string name="wallet_fragment_help">Elegir el valor deseado según la imagen y presionar el botón [AGREGAR]. Repetir para cargar varios valores. \nPresionar [GUARDAR CARGA] para ingresar en la billetera todos los valores elegidos.</string>
+    <string name="wallet_fragment_help">Elegir el valor deseado según la imagen y presionar el botón [AGREGAR]. Repetir para cargar varios valores. \nPresionar [GUARDAR CARGA] para ingresar en la billetera todos los valores elegidos. \nSe puede cancelar la carga presionando el botón "Inicio" del menú.</string>
     <string name="basket_fragment_title_help">Ayuda: Compra -> Ingresar productos</string>
     <string name="basket_fragment_help">Ingresar el precio del producto y presionar [AGREGAR] por cada uno. \nPresionar [COMPRAR] luego de ingresar todos los productos deseados.</string>
     <string name="order_total_fragment_title_help">Ayuda: Compra -> Revisar total</string>
@@ -226,10 +227,7 @@
     <!-- *********************************************** -->
     <string name="title_activity_settings">Configuración</string>
 
-    <!-- Configuración: Vaciar Billetera -->
-    <string name="pref_header_wallet_configuration">Configuración de Billetera</string>
-    <string name="pref_key_empty_wallet">empty_wallet_preference</string>
-    <string name="pref_title_empty_wallet">Vaciar contenido de la Billetera</string>
+    <!-- Configuración: Vaciar Billetera -->ing>
     <string name="msg_question_empty_wallet">¿Vaciar la billetera?</string>
     <string name="msg_confirm_wallet_empty">Confirme que desea vaciar todo el contenido de la billetera</string>
     <string name="msg_empty_wallet">Vaciar</string>

@@ -1,5 +1,7 @@
 package proyectodane.usodeldinero;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -133,6 +135,12 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                 mSectionsPagerAdapter.showHelp(mViewPager.getCurrentItem());
                 return true;
 
+            case R.id.action_empty_wallet:
+
+                // Inicio el proceso de vaciado de billetera
+                emptyWallet();
+                return true;
+
             case R.id.action_configuration:
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
@@ -156,7 +164,8 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
     }
 
 
-    // Implemento OnFragmentInteractionListener para accionar cuando un fragment avisa sobre cambios en la visa
+    // Implemento OnFragmentInteractionListener para accionar cuando un fragment...
+    // ...avisa sobre cambios en la vista
     @Override
     public void updateFragments(int idFragmentCaller){
         mSectionsPagerAdapter.updateSections(idFragmentCaller);
@@ -164,7 +173,7 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
 
     // Implemento OnShopFragmentChangeListener para accionar cuando un
-    // fragment avisa sobre cambios en el tab de compra
+    // ...fragment avisa sobre cambios en el tab de compra
     @Override
     public void changeFragment(int idNewFragment, Bundle bundle){
         mSectionsPagerAdapter.changeFragmentInShopTab(idNewFragment,bundle);
@@ -178,6 +187,42 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
         new AlertDialog.Builder(this)
                 .setView(getLayoutInflater().inflate(R.layout.layout_version_info,null))
                 .show();
+    }
+
+
+    /**
+     * AlertDialog usado para vaciar la billetera, previa confirmación.
+     */
+    private void emptyWallet(){
+
+        final Context context = this;
+
+        new AlertDialog.Builder(context)
+                .setTitle(getString(R.string.msg_question_empty_wallet))
+                .setMessage(getString(R.string.msg_confirm_wallet_empty))
+
+                // Especifico un Listener para permitir llevar a cabo acciones cuando se acepta
+                .setPositiveButton(getString(R.string.msg_empty_wallet), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Vacío la billetera
+                        WalletManager.getInstance().removeAllCurrencyFromWallet(context);
+
+                        // Luego de vaciar, actualizo la vista de todos los fragment
+                        updateFragments(EXTERNAL_TO_TAB_ID);
+
+                        // Envío mensaje de información
+                        new AlertDialog.Builder(context)
+                                .setTitle(context.getString(R.string.msg_wallet_emptied))
+                                .setPositiveButton(android.R.string.ok,null)
+                                .setIcon(android.R.drawable.ic_dialog_info)
+                                .show();
+                    }
+                })
+
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
     }
 
 

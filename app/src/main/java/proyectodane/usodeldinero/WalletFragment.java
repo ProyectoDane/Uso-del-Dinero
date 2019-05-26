@@ -261,8 +261,8 @@ public class WalletFragment extends Fragment implements OnClickListener {
             // Creo el mensaje para notificar valores guardados
             sb.showTextShortOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.value_saved),2);
 
-            // Vuelvo al estado inicial
-            initializeSubtotalAndLoadTotal();
+            // Vuelvo al estado visual inicial
+            updateView();
 
             return true;
         }
