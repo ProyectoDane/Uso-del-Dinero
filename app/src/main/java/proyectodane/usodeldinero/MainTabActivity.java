@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import com.google.android.material.tabs.TabLayout;
+
+import androidx.core.view.MenuCompat;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +13,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
+
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+
 import java.util.ArrayList;
 import proyectodane.usodeldinero.WalletFragment.OnFragmentInteractionListener;
 import proyectodane.usodeldinero.BasketFragment.OnShopFragmentChangeListener;
@@ -51,9 +60,9 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
     /**
      * Constantes para identificar a cada uno de los fragment
      */
-    public static final int VIEW_WALLET_FRAGMENT_ID = 0;
-    public static final int SHOP_FRAGMENT_ID = 1;
-    public static final int WALLET_FRAGMENT_ID = 2;
+    public static final int WALLET_FRAGMENT_ID = 0;
+    public static final int VIEW_WALLET_FRAGMENT_ID = 1;
+    public static final int SHOP_FRAGMENT_ID = 2;
     public static final int SHOP_BASKET_FRAGMENT_ID = 10;
     public static final int SHOP_ORDER_TOTAL_FRAGMENT_ID = 11;
     public static final int SHOP_PAY_PURCHASE_FRAGMENT_ID = 12;
@@ -61,6 +70,8 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
     public static final int SHOP_FINALIZE_PURCHASE_FRAGMENT_ID = 14;
     public static final int EXTERNAL_TO_TAB_ID = 20;
 
+
+    public static final float OPACITY_FACTOR = 0.65f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +98,9 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
         // Seteo en el ViewPager al PagerAdapter
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        // Aplico color a cada uno de los tabs
+        setTabLayoutColours(tabLayout);
+
         // Configuro las páginas fuera de pantalla que deben quedar en memoria,
         // para que no queden en blanco cuando me voy y vuelvo
         mViewPager.setOffscreenPageLimit(OFF_SCREEN_PAGE_LIMIT);
@@ -102,6 +116,9 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_tab, menu);
+
+        // Activa los separadores según los distintos grupos que existan
+        MenuCompat.setGroupDividerEnabled(menu, true);
         return true;
     }
 
@@ -119,7 +136,7 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
         // Obtengo el ID del item elegido, Verifico el ID y acciono en consecuencia
         switch (item.getItemId()) {
 
-            case R.id.action_home:
+            case R.id.action_cancel:
 
                 // Llamo al fragment Basket, dentro del Tab shop. Agrego un bundle vacío, solo para cumplir con ChangeFragment()
                 changeFragment(SHOP_BASKET_FRAGMENT_ID, new Bundle());
@@ -148,6 +165,10 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
             case R.id.action_version_info:
                 showVersionInfo();
+                return true;
+
+            case R.id.action_exit:
+                exitApp();
                 return true;
 
             // Si llega acá, la acción del usuario no fue reconocida. Invoca a la super clase para manejarlo
@@ -226,10 +247,57 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
     }
 
 
+    /**
+     * Colorea los fondos de cada uno de los tabs de un TabLayout
+     */
+    private void setTabLayoutColours(TabLayout tabLayout){
 
+        LinearLayout tabStrip = (LinearLayout) tabLayout.getChildAt(0);
+        for (int i = 0; i < tabStrip.getChildCount(); i++) {
+            View tabView = tabStrip.getChildAt(i);
+            if (tabView != null){
+
+                switch (i) {
+
+                    case 0:
+                        tabView.setBackgroundColor(getResources().getColor(R.color.colorCyan));
+                        break;
+
+                    case 1:
+                        tabView.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        break;
+
+                    case 2:
+                        tabView.setBackgroundColor(getResources().getColor(R.color.colorLime));
+                        break;
+
+                    default:
+                        tabView.setBackgroundColor(Color.TRANSPARENT);
+                        break;
+                }
+
+                // Aplico transparencia al color ya que el mismo tapa al TabIndicator
+                tabView.setAlpha(OPACITY_FACTOR);
+            }
+        }
+
+    }
 
 
     /**
+     * Sale de la aplicación
+     */
+    private void exitApp(){
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+
+
+
+    /*
      * ********************************************
      * ********* FragmentStatePageAdapter *********
      * ********************************************
@@ -249,14 +317,14 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
             for (int i = 0; i < NUMBER_OF_TABS; i++){
                 switch (i) {
+                    case WALLET_FRAGMENT_ID:
+                        fragments.add(new WalletFragment());
+                        break;
                     case VIEW_WALLET_FRAGMENT_ID:
                         fragments.add(new ViewWalletFragment());
                         break;
                     case SHOP_FRAGMENT_ID:
                         fragments.add(new BasketFragment());
-                        break;
-                    case WALLET_FRAGMENT_ID:
-                        fragments.add(new WalletFragment());
                         break;
                     default:
 
@@ -299,16 +367,6 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
             switch (idFragmentCaller) {
 
-                case VIEW_WALLET_FRAGMENT_ID:
-                    // No realiza cambios que afecten a los demás.
-                    break;
-
-                case SHOP_FRAGMENT_ID:
-
-                    ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
-                    ((WalletFragment)fragments.get(WALLET_FRAGMENT_ID)).updateView();
-                    break;
-
                 case WALLET_FRAGMENT_ID:
 
                     ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
@@ -318,6 +376,15 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                     notifyDataSetChanged();
                     break;
 
+                case VIEW_WALLET_FRAGMENT_ID:
+                    // No realiza cambios que afecten a los demás.
+                    break;
+
+                case SHOP_FRAGMENT_ID:
+
+                    ((ViewWalletFragment)fragments.get(VIEW_WALLET_FRAGMENT_ID)).updateView();
+                    ((WalletFragment)fragments.get(WALLET_FRAGMENT_ID)).updateView();
+                    break;
 
                 case EXTERNAL_TO_TAB_ID:
 
@@ -390,6 +457,10 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
             switch (position) {
 
+                case WALLET_FRAGMENT_ID:
+                    ((WalletFragment)fragment).showHelp();
+                    break;
+
                 case VIEW_WALLET_FRAGMENT_ID:
                     ((ViewWalletFragment)fragment).showHelp();
                     break;
@@ -401,10 +472,6 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
                     if (fragment instanceof PayPurchaseFragment) ((PayPurchaseFragment)fragment).showHelp();
                     if (fragment instanceof ControlChangeFragment) ((ControlChangeFragment)fragment).showHelp();
                     if (fragment instanceof FinalizePurchaseFragment) ((FinalizePurchaseFragment)fragment).showHelp();
-                    break;
-
-                case WALLET_FRAGMENT_ID:
-                    ((WalletFragment)fragment).showHelp();
                     break;
 
                 default:

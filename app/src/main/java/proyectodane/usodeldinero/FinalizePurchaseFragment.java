@@ -78,8 +78,7 @@ public class FinalizePurchaseFragment extends Fragment implements OnClickListene
 
             // Dejo inhabilitado el botón de "Guardar vuelto" y aclaro que no hubo vuelto
             Button saveToWalletButton = (Button) rootView.findViewById(R.id.button13);
-            saveToWalletButton.setEnabled(false);
-            saveToWalletButton.setText(getString(R.string.no_change_received));
+            saveToWalletButton.setVisibility(View.GONE);
 
             // Pongo un nuevo texto para finalizar la compra
             Button doNotSaveToWalletButton = (Button) rootView.findViewById(R.id.button11);
