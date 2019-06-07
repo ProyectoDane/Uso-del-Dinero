@@ -10,4 +10,8 @@
     <color name="colorGreen">#1b5e20</color>
     <color name="colorLime">#827717</color>
 
+    <color name="colorLightCyan">#ebfeff</color>
+    <color name="colorLightGreen">#e8f8e9</color>
+    <color name="colorLightLime">#fcfbee</color>
+
 </resources>

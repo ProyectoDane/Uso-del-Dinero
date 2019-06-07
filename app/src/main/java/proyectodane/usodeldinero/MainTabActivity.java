@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import com.google.android.material.tabs.TabLayout;
-
 import androidx.core.view.MenuCompat;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.appcompat.app.AlertDialog;
@@ -13,16 +12,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
-
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import java.util.ArrayList;
 import proyectodane.usodeldinero.WalletFragment.OnFragmentInteractionListener;
 import proyectodane.usodeldinero.BasketFragment.OnShopFragmentChangeListener;
@@ -137,9 +132,6 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
         switch (item.getItemId()) {
 
             case R.id.action_cancel:
-
-                // Llamo al fragment Basket, dentro del Tab shop. Agrego un bundle vacío, solo para cumplir con ChangeFragment()
-                changeFragment(SHOP_BASKET_FRAGMENT_ID, new Bundle());
 
                 // Actualizo todos los fragments de cada tab
                 updateFragments(EXTERNAL_TO_TAB_ID);
@@ -259,15 +251,15 @@ public class MainTabActivity extends AppCompatActivity implements OnFragmentInte
 
                 switch (i) {
 
-                    case 0:
+                    case WALLET_FRAGMENT_ID:
                         tabView.setBackgroundColor(getResources().getColor(R.color.colorCyan));
                         break;
 
-                    case 1:
+                    case VIEW_WALLET_FRAGMENT_ID:
                         tabView.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                         break;
 
-                    case 2:
+                    case SHOP_FRAGMENT_ID:
                         tabView.setBackgroundColor(getResources().getColor(R.color.colorLime));
                         break;
 

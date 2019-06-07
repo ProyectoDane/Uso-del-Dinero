@@ -9,10 +9,12 @@
 
     </style>
 
+
     <!-- Para la pantalla splash -->
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
+
 
     <!-- Para la vista de MainTabActivity -->
     <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -24,13 +26,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <!-- Para la vista de AppBarLayout -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
+
     <!-- Para la vista de Toolbar -->
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
-
-
 
 
     <!-- Para la vista de MainTabActivity -->

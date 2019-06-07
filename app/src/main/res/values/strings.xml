@@ -98,8 +98,21 @@
 
     <!-- ID de los textos de componentes de los fragment - [Basket]  -->
     <string name="buy">COMPRAR</string>
-    <string name="enter_price">PRECIO DEL PRODUCTO</string>
+    <string name="product_price">PRECIO DEL PRODUCTO: $</string>
     <string name="add_product">AGREGAR</string>
+    <string name="number_0">0</string>
+    <string name="number_1">1</string>
+    <string name="number_2">2</string>
+    <string name="number_3">3</string>
+    <string name="number_4">4</string>
+    <string name="number_5">5</string>
+    <string name="number_6">6</string>
+    <string name="number_7">7</string>
+    <string name="number_8">8</string>
+    <string name="number_9">9</string>
+    <string name="decimal_separator">.</string>
+    <string name="erase_number">c</string>
+    <string name="value_money_zero">0.00</string>
 
 
     <!-- ID de los textos de componentes de los fragment - [PayPurchase]  -->
@@ -109,7 +122,7 @@
     <!-- ID de los textos de componentes de los fragment - [ControlChange]  -->
     <string name="add_to_change">AGREGAR AL VUELTO</string>
     <string name="accept_change">ACEPTAR VUELTO</string>
-    <string name="total_change">VUELTO TOTAL A RECIBIR: $</string>
+    <string name="pending_change">VUELTO PENDIENTE A RECIBIR: $</string>
     <string name="change_received_amount_zero">VUELTO RECIBIDO HASTA EL MOMENTO: $ 0.00</string>
     <string name="change_received">VUELTO RECIBIDO HASTA EL MOMENTO: $</string>
 
@@ -208,25 +221,25 @@
     <!-- Identificadores para los mensajes de ayuda -->
     <!-- ****************************************** -->
     <string name="wallet_fragment_title_help">Ayuda: CARGAR</string>
-    <string name="wallet_fragment_help">> Elegir el valor deseado según la imagen y presionar el botón <b>[AGREGAR]</b>. Repetir para cargar varios valores. \nLuego presionar <b>[GUARDAR CARGA]</b> para ingresar en la billetera todos los valores elegidos. \n\n> Se puede cancelar la carga presionando <b>Cancelar acción</b> en el menú.</string>
+    <string name="wallet_fragment_help">> Elegir el valor deseado según la imagen y presionar el botón <b><u>[AGREGAR]</u></b>. Repetir para cargar varios valores. \nLuego presionar <b><u>[GUARDAR CARGA]</u></b> para ingresar en la billetera todos los valores elegidos. \n\n> Se puede cancelar la carga presionando <b>Cancelar acción actual</b> en el menú.</string>
 
     <string name="view_wallet_fragment_title_help">Ayuda: TENGO $</string>
     <string name="view_wallet_fragment_help">> Indica la cantidad total de dinero en la billetera y las imágenes de cada uno los valores</string>
 
     <string name="basket_fragment_title_help">Ayuda: COMPRAR &#8212; Ingresar productos</string>
-    <string name="basket_fragment_help">> Ingresar el precio del producto y presionar <b>[AGREGAR]</b> por cada uno. \nPresionar <b>[COMPRAR]</b> luego de ingresar todos los productos deseados. \n\n> Se puede cancelar toda la compra actual presionando <b>Cancelar acción</b> en el menú.</string>
+    <string name="basket_fragment_help">> Ingresar el precio del producto en el teclado y presionar <b><u>[AGREGAR]</u></b> por cada uno de ellos. \nPresionar <b><u>[COMPRAR]</u></b> luego de ingresar todos los productos deseados. \n\n> Se puede cancelar toda la compra actual presionando <b>Cancelar acción actual</b> en el menú.</string>
 
     <string name="order_total_fragment_title_help">Ayuda: COMPRAR &#8212; Revisar total</string>
-    <string name="order_total_fragment_help">> Revisar el valor total de la compra y luego presionar <b>[PAGAR COMPRA]</b> para presentar el pago. \n\n> Se puede cancelar toda la compra actual presionando <b>Cancelar acción</b> en el menú.</string>
+    <string name="order_total_fragment_help">> Revisar el valor total de la compra y luego presionar <b><u>[PAGAR COMPRA]</u></b> para presentar el pago. \n\n> Se puede cancelar toda la compra actual presionando <b><u>Cancelar acción actual</u></b> en el menú.</string>
 
     <string name="pay_purchase_fragment_title_help">Ayuda: COMPRAR &#8212; Pago</string>
-    <string name="pay_purchase_fragment_help">> Revisar los valores mostrados en las imágenes y pagar con los valores guardados en la billetera. \nLuego de pagar, presionar <b>[COMPRA PAGADA]</b>. \n\n> Se puede cancelar toda la compra actual presionando <b>Cancelar acción</b> en el menú.</string>
+    <string name="pay_purchase_fragment_help">> Revisar los valores mostrados en las imágenes y pagar con los valores guardados en la billetera. \nLuego de pagar, presionar <b><u>[COMPRA PAGADA]</u></b>. \n\n> Se puede cancelar toda la compra actual presionando <b>Cancelar acción actual</b> en el menú.</string>
 
     <string name="control_change_fragment_title_help">Ayuda: COMPRAR &#8212; Recibir vuelto</string>
-    <string name="control_change_fragment_help">> Por cada valor de vuelto recibido, seleccionar su imagen y presionar <b>[AGREGAR AL VUELTO]</b>. \nAl terminar de recibir el vuelto presionar <b>[ACEPTAR VUELTO]</b>. \n\n> Se puede cancelar toda la compra actual presionando <b>Cancelar acción</b> en el menú.</string>
+    <string name="control_change_fragment_help">> Por cada valor de vuelto recibido, seleccionar su imagen y presionar <b><u>[AGREGAR AL VUELTO]</u></b>. \nAl terminar de recibir el vuelto presionar <b><u>[ACEPTAR VUELTO]</u></b>. \n\n> Se puede cancelar toda la compra actual presionando <b>Cancelar acción actual</b> en el menú.</string>
 
     <string name="finalize_purchase_fragment_title_help">Ayuda: COMPRAR &#8212; Finalizar</string>
-    <string name="finalize_purchase_fragment_help">> En caso de recibir vuelto, se puede agregar el mismo a la billetera presionando el botón <b>[GUARDAR VUELTO]</b>. \nEn caso contrario presionar <b>[NO GUARDAR VUELTO]</b>. \n\n > En caso de no corresponder vuelto, directamente se habilitará el botón <b>[FINALIZAR COMPRA]</b>. \n\n> Se puede cancelar toda la compra actual presionando <b>Cancelar acción</b> en el menú.</string>
+    <string name="finalize_purchase_fragment_help">> En caso de recibir vuelto, se puede agregar el mismo a la billetera presionando el botón <b><u>[GUARDAR VUELTO]</u></b>. \nEn caso contrario presionar <b><u>[NO GUARDAR VUELTO]</u></b>. \n\n > En caso de no corresponder vuelto, directamente se habilitará el botón <b><u>[FINALIZAR COMPRA]</u></b>. \n\n> Se puede cancelar toda la compra actual presionando <b>Cancelar acción actual</b> en el menú.</string>
 
 
 

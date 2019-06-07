@@ -38,6 +38,11 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
     private String st_receivedChangeValue;
 
     /**
+     * Vuelto recibido de la compra (importe)
+     */
+    private String st_pendingChange;
+
+    /**
      * Vuelto recibido de la compra (todos los ID de cada uno de los valores)
      */
     private ArrayList<String> al_receivedChange;
@@ -85,10 +90,10 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
         st_receivedChangeValue = getString(R.string.value_0);
         al_receivedChange = new ArrayList<String>();
 
-        // Actualizo el valor del vuelto total a recibir
-        TextView tv_totalChange = rootView.findViewById(R.id.textView15);
-        String st_totalChange = getString(R.string.total_change) + st_changeExpected;
-        tv_totalChange.setText(st_totalChange);
+        // Actualizo el valor del vuelto pendiente
+        TextView tv_pendingChange = rootView.findViewById(R.id.textView15);
+        st_pendingChange = getString(R.string.pending_change) + st_changeExpected;
+        tv_pendingChange.setText(st_pendingChange);
 
         // Cargo el arrayList con todos los valores de billetes/monedas existentes. Calculo todos los valores a usar para pagar
         ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfValidCurrency(getActivity());
@@ -163,17 +168,29 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
         String st_value = WalletManager.getInstance().obtainValueFormID(getActivity(),st_valueID);
         st_receivedChangeValue = WalletManager.getInstance().addValues(st_receivedChangeValue,st_value);
 
+        // Obtengo el valor del vuelto pendiente. Si es negativo (por recibir vuelto mayor) lo redondeo en cero.
+        st_pendingChange = WalletManager.getInstance().subtractValues(st_changeExpected,st_receivedChangeValue);
+        if( !WalletManager.getInstance().isGreaterThanValueZero(st_pendingChange) ){
+            st_pendingChange = getString(R.string.value_0);
+        }
+
         // Actualizo el texto del importe recibido
         TextView textView = rootView.findViewById(R.id.textView5);
         String st_textViewValue = getString(R.string.change_received) + st_receivedChangeValue;
+
+        // Actualizo el valor del vuelto pendiente
+        TextView tv_pendingChange = rootView.findViewById(R.id.textView15);
+        String st_pendingChangeText = getString(R.string.pending_change) + st_pendingChange;
+
 
         // Si el vuelto es el total, lo informo
         if (isChangeOK()) {
             st_textViewValue = st_textViewValue + " " + getString(R.string.change_OK);
         }
 
-        // Reflejo el cambio en el TextView
+        // Reflejo los cambios en los TextView
         textView.setText(st_textViewValue);
+        tv_pendingChange.setText(st_pendingChangeText);
 
     }
 

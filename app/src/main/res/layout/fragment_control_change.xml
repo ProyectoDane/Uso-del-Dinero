@@ -81,7 +81,7 @@
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/total_change"
+            android:text="@string/pending_change"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/pager_change"
             app:layout_constraintEnd_toEndOf="parent"
