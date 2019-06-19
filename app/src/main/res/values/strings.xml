@@ -211,7 +211,7 @@
     <!-- ******************************** -->
     <string name="action_cancel">Cancelar acción actual</string>
     <string name="action_help">Ayuda</string>
-    <string name="action_empty_wallet">Vaciar billetera&#8230;</string>
+    <string name="action_empty_wallet">Vaciar billetera</string>
     <string name="action_configuration">Configuración</string>
     <string name="action_version_info">Información de la Versión</string>
     <string name="action_exit">Salir de la aplicación</string>
