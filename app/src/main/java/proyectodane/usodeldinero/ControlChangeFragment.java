@@ -3,9 +3,11 @@ package proyectodane.usodeldinero;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,11 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
      * Vuelto recibido de la compra (importe)
      */
     private String st_receivedChangeValue;
+
+    /**
+     * Vuelto recibido de la compra (importe)
+     */
+    private String st_pendingChange;
 
     /**
      * Vuelto recibido de la compra (todos los ID de cada uno de los valores)
@@ -83,10 +90,10 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
         st_receivedChangeValue = getString(R.string.value_0);
         al_receivedChange = new ArrayList<String>();
 
-        // Actualizo el valor del vuelto total a recibir
-        TextView tv_totalChange = rootView.findViewById(R.id.textView15);
-        String st_totalChange = getString(R.string.total_change) + st_changeExpected;
-        tv_totalChange.setText(st_totalChange);
+        // Actualizo el valor del vuelto pendiente
+        TextView tv_pendingChange = rootView.findViewById(R.id.textView15);
+        st_pendingChange = getString(R.string.pending_change) + st_changeExpected;
+        tv_pendingChange.setText(st_pendingChange);
 
         // Cargo el arrayList con todos los valores de billetes/monedas existentes. Calculo todos los valores a usar para pagar
         ArrayList<String> moneyValueNames = WalletManager.getInstance().obtainMoneyValueNamesOfValidCurrency(getActivity());
@@ -161,17 +168,29 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
         String st_value = WalletManager.getInstance().obtainValueFormID(getActivity(),st_valueID);
         st_receivedChangeValue = WalletManager.getInstance().addValues(st_receivedChangeValue,st_value);
 
+        // Obtengo el valor del vuelto pendiente. Si es negativo (por recibir vuelto mayor) lo redondeo en cero.
+        st_pendingChange = WalletManager.getInstance().subtractValues(st_changeExpected,st_receivedChangeValue);
+        if( !WalletManager.getInstance().isGreaterThanValueZero(st_pendingChange) ){
+            st_pendingChange = getString(R.string.value_0);
+        }
+
         // Actualizo el texto del importe recibido
         TextView textView = rootView.findViewById(R.id.textView5);
         String st_textViewValue = getString(R.string.change_received) + st_receivedChangeValue;
+
+        // Actualizo el valor del vuelto pendiente
+        TextView tv_pendingChange = rootView.findViewById(R.id.textView15);
+        String st_pendingChangeText = getString(R.string.pending_change) + st_pendingChange;
+
 
         // Si el vuelto es el total, lo informo
         if (isChangeOK()) {
             st_textViewValue = st_textViewValue + " " + getString(R.string.change_OK);
         }
 
-        // Reflejo el cambio en el TextView
+        // Reflejo los cambios en los TextView
         textView.setText(st_textViewValue);
+        tv_pendingChange.setText(st_pendingChangeText);
 
     }
 
@@ -194,14 +213,17 @@ public class ControlChangeFragment extends Fragment implements OnClickListener{
     }
 
 
-    // TODO: Ver si se usa
-//    /**
-//     * Muestra el texto de ayuda para este activity
-//     **/
-//    public void showHelp(View view) {
-//        SnackBarManager sb = new SnackBarManager();
-//        sb.showTextIndefiniteOnClickActionDisabled(findViewById(R.id.coordinatorLayout_ControlChange),getString(R.string.help_text_control_change),10);
-//    }
+    /**
+     * Muestra el texto de ayuda para este fragment
+     **/
+    public void showHelp() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.control_change_fragment_title_help))
+                .setMessage(R.string.control_change_fragment_help)
+                .setPositiveButton(getString(android.R.string.ok),null)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
+    }
 
 
 }

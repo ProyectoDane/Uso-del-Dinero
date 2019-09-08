@@ -1,9 +1,11 @@
 package proyectodane.usodeldinero;
 
+
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,13 +122,17 @@ public class ViewWalletFragment extends Fragment {
     }
 
 
-//    TODO: Ver si se usará
-//    /**
-//     * Muestra el texto de ayuda para este activity
-//     **/
-//    public void showHelp(View view) {
-//        SnackBarManager sb = new SnackBarManager();
-//        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Main),getString(R.string.help_text_main),7);
-//    }
+    /**
+     * Muestra el texto de ayuda para este fragment
+     **/
+    public void showHelp() {
+
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.view_wallet_fragment_title_help))
+                .setMessage(R.string.view_wallet_fragment_help)
+                .setPositiveButton(getString(android.R.string.ok),null)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
+    }
 
 }

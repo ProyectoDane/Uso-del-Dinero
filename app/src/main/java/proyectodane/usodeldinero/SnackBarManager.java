@@ -2,7 +2,7 @@ package proyectodane.usodeldinero;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
+import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,7 +29,7 @@ public class SnackBarManager {
 
         // Obtengo el view del Snackbar para luego setear la cantidad máxima de líneas de texto permitidas
         View snackBarView = snackbar.getView();
-        TextView snackBarTextView = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_text);
+        TextView snackBarTextView = (TextView) snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);
         snackBarTextView.setMaxLines(maxLines);
 
         // Muestro el Snackbar
@@ -56,7 +56,7 @@ public class SnackBarManager {
 
         // Obtengo el view del Snackbar para luego setear la cantidad máxima de líneas de texto permitidas
         View snackBarView = snackbar.getView();
-        TextView snackBarTextView = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_text);
+        TextView snackBarTextView = (TextView) snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);
         snackBarTextView.setMaxLines(maxLines);
 
         // Muestro el Snackbar

@@ -638,7 +638,8 @@ public class WalletManager {
      * */
     public String obtainTotalCreditInWallet(Context context){
 
-        String total = BigDecimal.ZERO.toPlainString();
+        // Inicializo en cero, con formato decimal
+        String total = addValues(BigDecimal.ZERO.toPlainString(),BigDecimal.ZERO.toPlainString());
 
         // Recorro el ArrayList sumando todos los valores de cada billete/moneda
         ArrayList<String> idInWallet = obtainMoneyValueNamesInWallet(context);
