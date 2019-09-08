@@ -3,7 +3,9 @@ package proyectodane.usodeldinero;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +103,19 @@ public class OrderTotalFragment extends Fragment implements OnClickListener {
         // Llamo al listener y le envío los datos del fragment a llamar y los datos en el bundle
         listener.changeFragment(SHOP_PAY_PURCHASE_FRAGMENT_ID, bundle);
 
+    }
+
+
+    /**
+     * Muestra el texto de ayuda para este fragment
+     **/
+    public void showHelp() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.order_total_fragment_title_help))
+                .setMessage(R.string.order_total_fragment_help)
+                .setPositiveButton(getString(android.R.string.ok),null)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
     }
 
 }

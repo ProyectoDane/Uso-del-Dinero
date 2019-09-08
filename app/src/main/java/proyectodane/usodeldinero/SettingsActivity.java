@@ -9,12 +9,12 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.support.v7.app.ActionBar;
+import androidx.appcompat.app.ActionBar;
 import android.preference.PreferenceFragment;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
+import androidx.core.app.NavUtils;
 import java.util.List;
 
 
@@ -23,9 +23,7 @@ import java.util.List;
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
-
     private static Context context;
-
 
     /**
      * Un listener de cambio de valores que actualiza el resumen de preferencias con el nuevo valor
@@ -35,43 +33,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public boolean onPreferenceClick(final Preference preference) {
 
-            if( preference.getKey().equals(context.getString(R.string.pref_key_empty_wallet)) ){
-
-                // TODO: Pasar esto a una clase distinta o a una función apartada
-                new AlertDialog.Builder(context)
-                        .setTitle(context.getString(R.string.msg_question_empty_wallet))
-                        .setMessage(context.getString(R.string.msg_confirm_wallet_empty))
-
-                        // Especifico un Listener para permitir llevar a cabo acciones cuando se acepta
-                        .setPositiveButton(context.getString(R.string.msg_empty_wallet), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                Log.d("debug","Se aceptó borrar la billetera");
-
-                                // Vacío la billetera
-                                WalletManager.getInstance().removeAllCurrencyFromWallet(context);
-
-                                // Envío mensaje de información
-                                new AlertDialog.Builder(context)
-                                        .setTitle(context.getString(R.string.msg_wallet_emptied))
-                                        .setPositiveButton(android.R.string.ok,null)
-                                        .setIcon(android.R.drawable.ic_dialog_info)
-                                        .show();
-
-
-                            }
-                        })
-
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-
-
-            } else if( preference.getKey().equals(context.getString(R.string.pref_key_add_value)) ){
+            if( preference.getKey().equals(context.getString(R.string.pref_key_add_value)) ){
 
                 Intent intent = new Intent(context, NewCurrencyActivity.class);
                 context.startActivity(intent);
 
-            } else if( preference.getKey().equals(context.getString(R.string.pref_key_remove_value)) ){
+            }
+            else if( preference.getKey().equals(context.getString(R.string.pref_key_remove_value)) ){
 
                 Intent intent = new Intent(context, DeleteCurrencyActivity.class);
                 context.startActivity(intent);
@@ -144,38 +112,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      */
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
-                || EmptyWalletPreferenceFragment.class.getName().equals(fragmentName)
                 || AddRemoveValuePreferenceFragment.class.getName().equals(fragmentName);
     }
 
-
-    /**
-     * PreferenceFragment dedicado al vaciado de la billetera
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class EmptyWalletPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_empty_wallet);
-            setHasOptionsMenu(true);
-
-            // Vinculo cada Preference que necesite ser escuchado cuando se realiza un click sobre el
-            findPreference(context.getString(R.string.pref_key_empty_wallet)).setOnPreferenceClickListener(sBindPreferenceClickListener); // Acá pongo el "key" declarado en el xml pref_empty_wallet
-
-        }
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;
-            }
-            return super.onOptionsItemSelected(item);
-        }
-
-    }
 
 
     /**

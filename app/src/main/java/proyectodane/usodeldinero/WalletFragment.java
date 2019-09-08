@@ -1,9 +1,10 @@
 package proyectodane.usodeldinero;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -142,6 +143,10 @@ public class WalletFragment extends Fragment implements OnClickListener {
         // Actualizo todas las imágenes dentro del Slide
         updateImages();
 
+        // Inhabilito el botón de carga
+        Button saveButton = (Button) rootView.findViewById(R.id.button13);
+        saveButton.setEnabled(false);
+
     }
 
 
@@ -195,7 +200,7 @@ public class WalletFragment extends Fragment implements OnClickListener {
      **/
     private void refreshSubtotalAndTotal() {
         TextView textView = rootView.findViewById(R.id.textView6);
-        textView.setText(getString(R.string.load_cash_sign) + st_subtotal + " - " + getString(R.string.total_cash_sign) + st_total);
+        textView.setText(getString(R.string.load_cash_sign) + st_subtotal + "   -   " + getString(R.string.total_cash_sign) + st_total);
     }
 
 
@@ -227,6 +232,14 @@ public class WalletFragment extends Fragment implements OnClickListener {
         st_total = WalletManager.getInstance().addValues(st_value,st_total);
         refreshSubtotalAndTotal();
 
+        // Habilito el botón para la carga según tenga salgo preparado para cargar
+        Button saveButton = (Button) rootView.findViewById(R.id.button13);
+        if (WalletManager.getInstance().isGreaterThanValueZero(st_subtotal)) {
+            saveButton.setEnabled(true);
+        } else {
+            saveButton.setEnabled(false);
+        }
+
         // Creo el mensaje para notificar el valor seleccionado a sumar a la billetera y lo muestro
         String st_snackBarText = getString(R.string.value_selected_for_load) + st_value;
         sb.showTextShortOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),st_snackBarText,2);
@@ -248,8 +261,8 @@ public class WalletFragment extends Fragment implements OnClickListener {
             // Creo el mensaje para notificar valores guardados
             sb.showTextShortOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.value_saved),2);
 
-            // Vuelvo al estado inicial
-            initializeSubtotalAndLoadTotal();
+            // Vuelvo al estado visual inicial
+            updateView();
 
             return true;
         }
@@ -266,13 +279,17 @@ public class WalletFragment extends Fragment implements OnClickListener {
     }
 
 
-//    //TODO: Confirmar borrado
-//    /**
-//     * Muestra el texto de ayuda para este activity
-//     **/
-//    public void showHelp(View view) {
-//        sb.showTextIndefiniteOnClickActionDisabled(rootView.findViewById(R.id.coordinatorLayout_Wallet),getString(R.string.help_text_wallet),10);
-//    }
+    /**
+     * Muestra el texto de ayuda para este fragment
+     **/
+    public void showHelp() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.wallet_fragment_title_help))
+                .setMessage(R.string.wallet_fragment_help)
+                .setPositiveButton(getString(android.R.string.ok),null)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
+    }
 
 
 }
